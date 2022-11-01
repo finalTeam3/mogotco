@@ -10,7 +10,7 @@ import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.service.PurchaseService;
 
 @SpringBootTest
-class GetAllItem {
+class GetAllPurchase {
 
 	@Autowired
 	PurchaseService service;

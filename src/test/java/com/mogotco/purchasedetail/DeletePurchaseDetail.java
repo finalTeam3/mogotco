@@ -1,28 +1,25 @@
-package com.mogotco.purchase;
+package com.mogotco.purchasedetail;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.PurchaseDTO;
-import com.mogotco.service.PurchaseService;
+import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class GetItem {
+class DeletePurchaseDetail {
 
 	@Autowired
-	PurchaseService service;
+	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		PurchaseDTO purchase = null;
 		try {
-			purchase = service.get(601);
+			service.remove(704);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(purchase);
 	}
 
 }
