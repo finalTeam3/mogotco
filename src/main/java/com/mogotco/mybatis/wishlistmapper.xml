@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.WishlistMapper">
+
+	<select id="select" parameterType="Integer" resultType="WishlistDTO">
+		SELECT * FROM wishlist WHERE wishlistid=#{wishlistid}
+	</select>
+	
+	<select id="selectAll" resultType="WishlistDTO">
+		SELECT * FROM wishlist
+	</select>
+	
+	<insert id="insert" parameterType="WishlistDTO">
+		INSERT INTO wishlist VALUES (NULL,#{userid},#{mentorid})
+	</insert>
+	
+	<update id="update" parameterType="WishlistDTO">
+		UPDATE wishlist SET userid=#{userid},mentorid=#{mentorid} WHERE wishlistid=#{wishlistid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM wishlist WHERE wishlistid=#{wishlistid}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+

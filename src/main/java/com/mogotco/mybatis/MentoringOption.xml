@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.MentoringOptionMapper">
+	
+	<select id="select" parameterType="Integer" resultType="MentoringOptionDTO">
+		SELECT * FROM mentoringoption WHERE moptionid=#{moptionid}
+	</select>
+	
+	<select id="selectAll" resultType="MentoringOptionDTO">
+		SELECT * FROM mentoringoption
+	</select>
+	
+	<insert id="insert" parameterType="MentoringOptionDTO">
+		INSERT INTO mentoringoption VALUES (NULL,#{mentoringid},#{moptiontime},#{moptionstock})
+	</insert>
+	
+	<update id="update" parameterType="MentoringOptionDTO">
+		UPDATE mentoringoption SET mentoringid=#{mentoringid}, moptionid=#{moptionid}, moptionstock=#{moptionstock} WHERE moptionid=#{moptionid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM mentoringoption WHERE moptionid=#{moptionid}
+	</delete>
+	
+</mapper>
