@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.MentoringmemberMapper">
+
+	<select id="select" parameterType="Integer" resultType="MentoringmemberDTO">
+		SELECT * FROM mentoringmember WHERE mmemberid=#{mmemberid}
+	</select>
+	<select id="selectAll" resultType="MentoringmemberDTO">
+		SELECT * FROM mentoringmember
+	</select>
+	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
+	<insert id="insert" parameterType="MentoringmemberDTO">
+		INSERT INTO mentoringmember VALUES (NULL,#{mentoringid},#{userid})
+	</insert>
+	<update id="update" parameterType="MentoringmemberDTO">
+		UPDATE mentoringmember SET mentoringid=#{mentoringid},userid=#{userid} WHERE mmemberid=#{mmemberid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM mentoringmember WHERE mmemberid=#{mmemberid}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+

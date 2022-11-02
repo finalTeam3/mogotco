@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.PurchaseDetailMapper">
+
+	<select id="select" parameterType="Integer" resultType="PurchaseDetailDTO">
+		SELECT * FROM purchasedetail WHERE purchasedetailid=#{purchasedetailid}
+	</select>
+	<select id="selectAll" resultType="PurchaseDetailDTO">
+		SELECT * FROM purchasedetail
+	</select>
+	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
+	<insert id="insert" parameterType="PurchaseDetailDTO">
+		INSERT INTO purchasedetail VALUES (NULL,#{mentoringid},#{purchaseid})
+	</insert>
+	
+	<!-- 아마 update,delete가 필요 없을 듯 -->
+	<update id="update" parameterType="PurchaseDetailDTO">
+		UPDATE purchasedetail SET mentoringid=#{mentoringid},purchaseid=#{purchaseid} WHERE purchasedetailid=#{purchasedetailid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM purchasedetail WHERE purchasedetailid=#{purchasedetailid}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
