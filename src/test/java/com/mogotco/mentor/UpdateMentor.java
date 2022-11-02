@@ -16,7 +16,7 @@ class UpdateMentor {
 	
 	@Test
 	void contextLoads() {
-		MentorDTO mentor = new MentorDTO(104, "user06", "admin06", "F회사", "user06 멘토입니다", "profile06.jpg", "mcard06.jpg", 1, null);
+		MentorDTO mentor = new MentorDTO(104, "user06", "admin06", "F회사", "user06 멘토입니다", "profile06.jpg", "mcard06.jpg", 1, null, 2);
 		try {
 			service.modify(mentor);
 		} catch (Exception e) {
