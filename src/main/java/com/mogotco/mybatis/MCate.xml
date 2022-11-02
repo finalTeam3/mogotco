@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.MCateMapper">
+
+	
+ 	<select id="select" parameterType="Integer" resultType="MCateDTO">
+		SELECT * FROM mcate WHERE mcateid=#{mcateid}
+	</select> 
+	
+	<select id="selectAll" resultType="MCateDTO">
+		SELECT * FROM mcate
+	</select>
+
+	<insert id="insert" parameterType="MCateDTO">
+		INSERT INTO mcate VALUES (#{mcateid},#{mname})
+	</insert> 	
+	
+	<update id="update" parameterType="MCateDTO">
+		UPDATE mcate SET mname=#{mname} WHERE mcateid=#{mcateid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM mcate WHERE mcateid=#{mcateid}
+	</delete> 
+	
+</mapper>
