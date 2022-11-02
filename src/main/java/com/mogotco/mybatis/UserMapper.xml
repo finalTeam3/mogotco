@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.UserMapper">
+	
+	<insert id="insert" parameterType="userDTO">
+		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, userpoint, naverid, kakaoid, googleid, usergen) 
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{userpoint}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen})
+	</insert> 
+	
+	<update id="update" parameterType="userDTO">
+		UPDATE user SET userpwd = #{userpwd}, username = #{username}, useraddr = #{useraddr}, usertel = #{usertel}, useremail = #{useremail}, 
+		withdraw = #{withdraw}, userbirth = #{userbirth}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}
+		WHERE userid = #{userid}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM user WHERE userid = #{userid}
+	</delete> 
+	
+	<select id="select" parameterType="String" resultType="userDTO">
+		SELECT * FROM user WHERE userid = #{userid}
+	</select>
+	
+	<select id="selectAll" resultType="userDTO">
+		SELECT * FROM user
+	</select>
+
+</mapper>

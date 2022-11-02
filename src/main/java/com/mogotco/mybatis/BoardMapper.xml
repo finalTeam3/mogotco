@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.BoardMapper">
+	
+	<insert id="insert" parameterType="boardDTO">
+		INSERT INTO board VALUES(NULL, #{adminid}, sysdate(), #{boardtitle}, #{boardcontent}, #{boardtype})
+	</insert> 
+	
+	<update id="update" parameterType="boardDTO">
+		UPDATE board SET boardtitle = #{boardtitle}, boardcontent = #{boardcontent}, boardtype = #{boardtype}
+		WHERE boardid = #{boardid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM board WHERE boardid = #{boardid}
+	</delete> 
+	
+	<select id="select" parameterType="Integer" resultType="boardDTO">
+		SELECT * FROM board WHERE boardid = #{boardid}
+	</select>
+	
+	<select id="selectAll" resultType="boardDTO">
+		SELECT * FROM board
+	</select>
+
+</mapper>
