@@ -23,5 +23,5 @@ public class MentorDTO {
 	private String mcardimg;
 	private int mentorok;
 	private Date mentordate;
-	
+	private int cancelmentoring;
 }
