@@ -15,6 +15,7 @@ public class PurchaseDetailDTO {
 	private int purchasedetailid;
 	private int mentoringid;
 	private int purchaseid;
+	private int cancelpur;
 	
 
 }
