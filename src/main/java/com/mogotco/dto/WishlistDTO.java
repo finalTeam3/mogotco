@@ -15,4 +15,11 @@ public class WishlistDTO {
 	private int wishlistid;
 	private String userid;
 	private int mentorid;
+	
+	private String user_username;
+	private String mentor_mentorimg;
+	private String mentor_mentorcom;
+	private String mentoring_mtitle;
+	private String mentoring_mentoringimg;
+	private String mentoring_mentoringdate;
 }
