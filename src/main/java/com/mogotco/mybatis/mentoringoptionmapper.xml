@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="MentoringOptionDTO">
-		INSERT INTO mentoringoption VALUES (NULL,#{mentoringid},#{moptiontime},#{moptionstock})
+		INSERT INTO mentoringoption VALUES (NULL,#{mentoringtimeid},#{moptionstock})
 	</insert>
 	
 	<update id="update" parameterType="MentoringOptionDTO">
-		UPDATE mentoringoption SET mentoringid=#{mentoringid}, moptionid=#{moptionid}, moptionstock=#{moptionstock} WHERE moptionid=#{moptionid}
+		UPDATE mentoringoption SET mentoringtimeid=#{mentoringtimeid}, moptionstock=#{moptionstock} WHERE moptionid=#{moptionid}
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

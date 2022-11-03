@@ -11,9 +11,10 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class MentoringOptionDTO {
-	private int moptionid;
+public class MentoringTimeDTO {
 	private int mentoringtimeid;
-	private int moptionstock;
+	private int mentoringid;
+	private String mentoringtime;
+	
 
 }
