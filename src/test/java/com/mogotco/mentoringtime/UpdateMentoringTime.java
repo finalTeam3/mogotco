@@ -1,24 +1,26 @@
-package com.mogotco.mentoringoption;
+package com.mogotco.mentoringtime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.service.MentoringOptionService;
+import com.mogotco.dto.MentoringTimeDTO;
+import com.mogotco.service.MentoringTimeService;
 
 @SpringBootTest
-	class DeleteMentoringOption {
-	
+	class UpdateMentoringTime {
 	@Autowired
-	MentoringOptionService service;
+	MentoringTimeService service;
 	
 	@Test
 	void contextLoads() {
+		MentoringTimeDTO mtime = new MentoringTimeDTO(1214,205,"09:00");
 		try {
-			service.remove(405);
+			service.modify(mtime);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 
 }
