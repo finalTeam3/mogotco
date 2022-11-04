@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mw.mwishcateid, mw.mentorid, mw.mcateid, mc.mname as mcate_mname 
 		FROM mwishcate mw
 		INNER JOIN mcate mc ON mc.mcateid = mw.mcateid
-		WHERE mentorid = #{mentorid};
+		WHERE mentorid = #{mentorid}
 	</select>
 
 	<select id="select" parameterType="Integer" resultType="MWishcateDTO">

@@ -40,7 +40,7 @@ public class WishlistService implements MyService<Integer, WishlistDTO>{
 		return mapper.selectAll();
 	}
 	
-	public WishlistDTO wmentor(String userid) throws Exception {
+	public List<WishlistDTO> wmentor(String userid) throws Exception {
 		return mapper.wmentor(userid);
 	}	
 

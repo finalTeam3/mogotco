@@ -5,12 +5,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mogotco.mapper.MentorMapper">
 
 	<select id="mentorAll" parameterType="Integer" resultType="MentorDTO">
-		SELECT m.mentorid, m.userid, m.mentorcom, m.mentorcon, m.mentorimg, 
-		m.mcardimg, m.mentorcareer, m.mentorok, m.mentordate, m.cancelmentoring,
-		mr.mtitle as mentoring_mtitle, mr.mentoringimg as mentoring_mentoringimg, 
+		SELECT * FROM mentor WHERE m.userid=#{userid}
+	</select>
+
+	<select id="mentoritem" parameterType="Integer" resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, mr.mtitle as mentoring_mtitle, mr.mentoringimg as mentoring_mentoringimg, 
 		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
-		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
-		WHERE m.mentorid=#{mentorid}
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid 
+		WHERE m.userid=#{userid}
 	</select>
 
 	<select id="select" parameterType="Integer" resultType="MentorDTO">

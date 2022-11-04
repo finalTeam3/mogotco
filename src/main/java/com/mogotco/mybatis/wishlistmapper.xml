@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		FROM wishlist w
 		INNER JOIN mentor m ON m.mentorid = w.mentorid
 		INNER JOIN user u ON u.userid = m.userid
-		WHERE w.userid= #{userid};
+		WHERE w.userid= #{userid}
 	</select>
 
 	<select id="select" parameterType="Integer" resultType="WishlistDTO">

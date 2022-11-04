@@ -12,4 +12,5 @@ import com.mogotco.frame.MyMapper;
 @Mapper
 public interface MentorMapper extends MyMapper<Integer, MentorDTO>{
 	public MentorDTO mentorAll(Integer k) throws Exception;
+	public List<MentorDTO> mentoritem(Integer k) throws Exception;
 }

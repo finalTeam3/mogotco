@@ -1,5 +1,7 @@
 package com.mogotco.wishlist;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,14 +17,14 @@ class WmentorWishlist {
 	
 	@Test
 	void contextLoads() {
-		WishlistDTO wishlist = null;
+		List<WishlistDTO> list = null;
 		try {
-			wishlist = service.wmentor("rlaaudgml4321");
+			list = service.wmentor("rlaaudgml4321");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(wishlist);
+		System.out.println(list);
 	}
 
 }
