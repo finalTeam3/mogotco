@@ -1,5 +1,7 @@
 package com.mogotco.purchasedetail;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,21 +10,21 @@ import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class UpdatePurchaseDetail {
+class Remotedetail {
 
 	@Autowired
 	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(704, 408, 604,0,0, null, 0, null, null, null, null, null, null, null, 0);
+		List<PurchaseDetailDTO> list = null;
 		try {
-			service.modify(purchase);
+			list = service.remotedetail("rlaaudgml4321");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(list);
 	}
 
 }
-

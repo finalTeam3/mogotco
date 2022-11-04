@@ -13,6 +13,7 @@ import com.mogotco.frame.MyMapper;
 @Repository
 @Mapper
 public interface PurchaseDetailMapper extends MyMapper<Integer, PurchaseDetailDTO> {
-	public List<PurchaseDetailDTO> facedetail(String custid) throws Exception;
-	public List<PurchaseDetailDTO> remotedetail(String custid) throws Exception;
+	public List<PurchaseDetailDTO> facedetail(String purchase_userid) throws Exception;
+	public List<PurchaseDetailDTO> remotedetail(String purchase_userid) throws Exception;
+	public PurchaseDetailDTO groupcount(Integer mentoringoption_mentoringoptionid) throws Exception;
 }

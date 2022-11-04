@@ -8,21 +8,21 @@ import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class UpdatePurchaseDetail {
+class Groupcount {
 
 	@Autowired
 	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(704, 408, 604,0,0, null, 0, null, null, null, null, null, null, null, 0);
+		PurchaseDetailDTO purchase = null;
 		try {
-			service.modify(purchase);
+			purchase = service.groupcount(404);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(purchase);
 	}
 
 }
-

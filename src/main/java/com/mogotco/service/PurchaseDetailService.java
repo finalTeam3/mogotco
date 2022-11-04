@@ -39,5 +39,17 @@ public class PurchaseDetailService implements MyService<Integer,PurchaseDetailDT
 	public List<PurchaseDetailDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public List<PurchaseDetailDTO> facedetail(String purchase_userid) throws Exception{
+		return mapper.facedetail(purchase_userid);
+	}
+	
+	public List<PurchaseDetailDTO> remotedetail(String purchase_userid) throws Exception{
+		return mapper.remotedetail(purchase_userid);
+	}
+	
+	public PurchaseDetailDTO groupcount(Integer mentoringoption_mentoringoptionid) throws Exception{
+		return mapper.groupcount(mentoringoption_mentoringoptionid);
+	}
 
 }
