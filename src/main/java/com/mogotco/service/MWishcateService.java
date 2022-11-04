@@ -40,6 +40,9 @@ public class MWishcateService implements MyService<Integer, MWishcateDTO>{
 		return mapper.selectAll();
 	}
 	
+	public List<MWishcateDTO> mwcate(Integer k) throws Exception{
+		return mapper.mwcate(k);
+	}
 	
 
 }
