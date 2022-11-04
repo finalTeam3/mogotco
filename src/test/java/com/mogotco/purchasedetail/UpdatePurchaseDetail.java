@@ -15,7 +15,7 @@ class UpdatePurchaseDetail {
 	
 	@Test
 	void contextLoads() {
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(704, 201, 604);
+		PurchaseDetailDTO purchase = new PurchaseDetailDTO(704, 201, 604,1);
 		try {
 			service.modify(purchase);
 		} catch (Exception e) {

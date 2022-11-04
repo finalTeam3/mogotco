@@ -8,14 +8,13 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @ToString
-public class PurchaseDetailDTO {
-	private int purchasedetailid;
+public class MentoringTimeDTO {
+	private int mentoringtimeid;
 	private int mentoringid;
-	private int purchaseid;
-	private int cancelpur;
+	private String mentoringtime;
 	
 
 }
