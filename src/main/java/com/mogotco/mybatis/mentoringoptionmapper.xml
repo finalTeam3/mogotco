@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mogotco.mapper.MentoringOptionMapper">
 	
 	<select id="select" parameterType="Integer" resultType="MentoringOptionDTO">
-		SELECT * FROM mentoringoption WHERE moptionid=#{moptionid}
+		SELECT * FROM mentoringoption WHERE mentoringoptionid=#{mentoringoptionid}
 	</select>
 	
 	<select id="selectAll" resultType="MentoringOptionDTO">
@@ -13,15 +13,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="MentoringOptionDTO">
-		INSERT INTO mentoringoption VALUES (NULL,#{mentoringtimeid},#{moptionstock})
+		INSERT INTO mentoringoption VALUES (NULL,#{mentoringid},#{mentoringtime},#{moptionstock})
 	</insert>
 	
 	<update id="update" parameterType="MentoringOptionDTO">
-		UPDATE mentoringoption SET mentoringtimeid=#{mentoringtimeid}, moptionstock=#{moptionstock} WHERE moptionid=#{moptionid}
+		UPDATE mentoringoption SET mentoringid=#{mentoringid},mentoringtime=#{mentoringtime},moptionstock=#{moptionstock} WHERE mentoringoptionid=#{mentoringoptionid}
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM mentoringoption WHERE moptionid=#{moptionid}
+		DELETE FROM mentoringoption WHERE mentoringoptionid=#{mentoringoptionid}
 	</delete>
 	
 </mapper>
