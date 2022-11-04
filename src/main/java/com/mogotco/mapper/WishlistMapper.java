@@ -9,5 +9,5 @@ import com.mogotco.frame.MyMapper;
 @Repository
 @Mapper
 public interface WishlistMapper extends MyMapper<Integer, WishlistDTO>{
-
+	public WishlistDTO wmentor(String userid) throws Exception;
 }

@@ -39,5 +39,9 @@ public class WishlistService implements MyService<Integer, WishlistDTO>{
 	public List<WishlistDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public WishlistDTO wmentor(String userid) throws Exception {
+		return mapper.wmentor(userid);
+	}	
 
 }

@@ -4,26 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.MentorcardDTO;
 import com.mogotco.dto.WishlistDTO;
 import com.mogotco.service.WishlistService;
 
 @SpringBootTest
-class UpdateWishlist {
+class WmentorWishlist {
 
 	@Autowired
 	WishlistService service;
 	
 	@Test
 	void contextLoads() {
-		WishlistDTO wishlist = new WishlistDTO( 904, "user06", 105, null, null, null);
+		WishlistDTO wishlist = null;
 		try {
-			service.modify(wishlist);
+			wishlist = service.wmentor("rlaaudgml4321");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(wishlist);
 	}
 
 }
-

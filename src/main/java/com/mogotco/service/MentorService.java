@@ -40,4 +40,10 @@ public class MentorService implements MyService<Integer, MentorDTO> {
 		return mapper.selectAll();
 	}
 
+	
+	public MentorDTO mentorAll(Integer k) throws Exception {
+		return mapper.mentorAll(k);
+	}
+	
+
 }
