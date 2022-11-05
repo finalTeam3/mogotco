@@ -4,23 +4,68 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.PurchaseMapper">
 
-	<select id="select" parameterType="Integer" resultType="PurchaseDTO">
+	<select id="select" parameterType="Integer"
+		resultType="PurchaseDTO">
 		SELECT * FROM purchase WHERE purchaseid=#{purchaseid}
 	</select>
 	<select id="selectAll" resultType="PurchaseDTO">
 		SELECT * FROM purchase
 	</select>
+
+	<!-- 구매페이지-멘토링번호, 멘토제목, 멘토이름, 멘토링날짜, 시간, 대면장소, 모집정원(멘토링 테이블에서 끌고오기), 가격(멘토링테이블에 
+		있는 가격에서 x1을 함->controller에서)(purprice), 결제방법 입력칸 -->
+	<select id="purchasepage" parameterType="Integer"
+		resultType="PurchaseDTO">
+		SELECT mentoring.mentoringid AS mentoring_mentoringid,
+		mentoring.mtitle AS mentoring_mtitle, u.username AS user_username,
+		mentoring.mentoringdate AS mentoring_mentoringdate,
+		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
+		mentoring.mplace AS mentoring_mplace, mentoring.mmemberidcnt AS
+		mentoring_mmemberidcnt,(mentoring.mentoringprice*1) AS purprice
+		FROM purchasedetail purde
+		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
+		INNER JOIN mentoringoption mentoringoption ON
+		purde.mentoringoptionid=mentoringoption.mentoringoptionid
+		INNER JOIN mentoring mentoring ON
+		mentoringoption.mentoringid=mentoring.mentoringid
+		INNER JOIN mentor mentor ON mentoring.mentorid=mentor.mentorid
+		INNER JOIN user u ON mentor.userid=u.userid
+		WHERE pur.purchaseid=#{purchaseid}
+	</select>
+
+	<!-- 구매완료페이지-멘토링번호, 멘토제목,멘토링날짜, 시간,대면장소,최종결제금액,구매날짜,결제방법 -->
+	<select id="purchasefinishpage" parameterType="Integer"
+		resultType="PurchaseDTO">
+		SELECT mentoring.mentoringid AS mentoring_mentoringid,
+		mentoring.mtitle AS mentoring_mtitle, mentoring.mentoringdate AS
+		mentoring_mentoringdate,
+		mentoringoption.mentoringtime AS mentoringoption_mentoringtime, mentoring.mplace AS
+		mentoring_mplace, pur.purprice AS purprice,
+		pur.purdate AS purdate, pur.purpay AS purpay FROM purchasedetail purde
+		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
+		INNER JOIN mentoringoption mentoringoption ON
+		purde.mentoringoptionid=mentoringoption.mentoringoptionid
+		INNER JOIN mentoring mentoring ON
+		mentoringoption.mentoringid=mentoring.mentoringid
+		WHERE pur.purchaseid=#{purchaseid}
+	</select>
+
+
 	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
 	<insert id="insert" parameterType="PurchaseDTO">
-		INSERT INTO purchase VALUES (NULL,#{userid},#{purprice},SYSDATE(),#{purpay})
+		INSERT INTO purchase VALUES
+		(NULL,#{userid},#{purprice},SYSDATE(),#{purpay})
 	</insert>
-	
-	<!-- purchase에는 update, delete는 필요 없을 듯-->
+
+	<!-- purchase에는 update, delete는 필요 없을 듯 -->
 	<update id="update" parameterType="PurchaseDTO">
-		UPDATE purchase SET userid=#{userid},purprice=#{purprice},purpay=#{purpay} WHERE purchaseid=#{purchaseid}
+		UPDATE purchase SET
+		userid=#{userid},purprice=#{purprice},purpay=#{purpay} WHERE
+		purchaseid=#{purchaseid}
 	</update>
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM purchase WHERE purchaseid=#{purchaseid}
+		DELETE FROM purchase WHERE
+		purchaseid=#{purchaseid}
 	</delete>
 
 </mapper>

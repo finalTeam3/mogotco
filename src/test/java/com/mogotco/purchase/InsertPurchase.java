@@ -16,7 +16,7 @@ class InsertPurchase {
 	@Test
 	void contextLoads() {
 		//id는 자동증가이므로 초기화값인 아무것들만 넣어주면됨
-		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이");
+		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", 0, null, null, null, null, null, 0);
 		try {
 			service.register(purchase);
 		} catch (Exception e) {

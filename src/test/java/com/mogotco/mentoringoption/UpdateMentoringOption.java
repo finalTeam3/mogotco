@@ -14,7 +14,7 @@ import com.mogotco.service.MentoringOptionService;
 	
 	@Test
 	void contextLoads() {
-		MentoringOptionDTO moption = new MentoringOptionDTO(405,205,10);
+		MentoringOptionDTO moption = new MentoringOptionDTO(416,203,"10:00",2);
 		try {
 			service.modify(moption);
 		} catch (Exception e) {

@@ -1,28 +1,30 @@
-package com.mogotco.purchase;
+package com.mogotco.purchasedetail;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.PurchaseDTO;
-import com.mogotco.service.PurchaseService;
+import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class UpdatePurchase {
+class Remotedetail {
 
 	@Autowired
-	PurchaseService service;
+	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		PurchaseDTO purchase = new PurchaseDTO(604, "qkrtjdgns1234", 20000, null, "카카오페이", 0, null, null, null, null, null, 0); 
+		List<PurchaseDetailDTO> list = null;
 		try {
-			service.modify(purchase);
+			list = service.remotedetail("rlaaudgml4321");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(list);
 	}
 
 }
-

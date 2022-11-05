@@ -1,31 +1,30 @@
-package com.mogotco.mentoringtime;
+package com.mogotco.purchasedetail;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.MentoringTimeDTO;
-import com.mogotco.service.MentoringTimeService;
+import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-	class GetAllIMentoringTime {
+class Facedetail {
+
 	@Autowired
-	MentoringTimeService service;
+	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		List<MentoringTimeDTO> mtime = null;
+		List<PurchaseDetailDTO> list = null;
 		try {
-			mtime = service.get();
+			list = service.facedetail("whdlsdud4321");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		for(MentoringTimeDTO c:mtime) {
-			System.out.println(c);
-		}
+		System.out.println(list);
 	}
 
 }
