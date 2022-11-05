@@ -45,7 +45,6 @@ $(document).ready(function()
 	});
 
 	initMenu();
-	initHeaderSearch();
 	initAccordions();
 	initVideo();
 	initMilestones();
@@ -123,25 +122,11 @@ $(document).ready(function()
 
 	/* 
 
+
 	4. Init Header Search
 
-	*/
-
-	function initHeaderSearch()
-	{
-		if($('.search_button').length)
-		{
-			$('.search_button').on('click', function()
-			{
-				if($('.header_search_container').length)
-				{
-					$('.header_search_container').toggleClass('active');
-				}
-			});
-		}
-	}
-
-	/* 
+	
+	
 
 	6. Init Accordions
 

@@ -1426,15 +1426,15 @@ section
 {
 	margin-top: 16px;
 }
-.feature:not(:last-child)
+.feature_course:not(:last-child)
 {
 	margin-bottom: 21px;
 }
-.feature_title
+.feature_course_title
 {
 	padding-left: 31px;
 }
-.feature_title i
+.feature_course_title i
 {
 	position: absolute;
 	top: calc(50% - 1px);
