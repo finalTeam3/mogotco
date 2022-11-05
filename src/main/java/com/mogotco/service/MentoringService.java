@@ -42,5 +42,9 @@ public class MentoringService implements MyService<Integer, MentoringDTO> {
 	public List<MentoringDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public List<MentoringDTO> selectMentoringAll(int mcateid) throws Exception {
+		return mapper.selectMentoringAll(mcateid);
+	}
 
 }

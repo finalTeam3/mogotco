@@ -12,15 +12,23 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM mentoring
 	</select>
 	
+	<select id="selectMentoringAll" parameterType="Integer" resultType="MentoringDTO">
+		SELECT mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt FROM mentoring mt
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		WHERE mcateid = #{mcateid};
+	</select>
+	
 	<insert id="insert" parameterType="MentoringDTO">
 		INSERT INTO mentoring VALUES (NULL,#{mentorid},#{mcateid},#{mentoringprice},#{mentoringdate},
-		#{mentoringimg},#{mentorurl},#{mmemberidcnt},sysdate(),#{mplace},#{mcontents})
+		#{mentoringimg},#{mentorurl},#{mmemberidcnt},sysdate(),#{mplace},#{mcontents},#{mtitle},#{mcaring})
 	</insert>
 	
 	<update id="update" parameterType="MentoringDTO">
 		UPDATE mentoring SET mentorid=#{mentorid}, mcateid=#{mcateid}, mentoringprice=#{mentoringprice}, 
 		mentoringdate=#{mentoringdate}, mentoringimg=#{mentoringimg}, mentorurl=#{mentorurl}, 
-		mmemberidcnt=#{mmemberidcnt}, mrdate=sysdate(), mplace=#{mplace}, mcontents=#{mcontents} 
+		mmemberidcnt=#{mmemberidcnt}, mrdate=sysdate(), mplace=#{mplace}, mcontents=#{mcontents},
+		mtitle=#{mtitle}, mcaring=#{mcaring} 
 		WHERE mentoringid=#{mentoringid}
 	</update>
 	
