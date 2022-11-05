@@ -22,11 +22,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentoring.mtitle AS mentoring_mtitle, u.username AS
 		user_mentorname,mentoring.mentoringdate AS mentoring_mentoringdate,
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
-		mentoring.mplace AS mentoring_mplace, purde.progresspur FROM
+		mentoring.mplace AS mentoring_mplace, purde.progresspur
+		,mentoring.mcaring AS mentoring_mcaring FROM
 		purchasedetail purde
-		INNER JOIN purchase pur ON
+		INNER
+		JOIN purchase pur ON
 		purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption
+		INNER JOIN
+		mentoringoption
 		mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid
 		INNER JOIN
@@ -49,11 +52,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentoring.mtitle AS mentoring_mtitle, u.username AS
 		user_mentorname,mentoring.mentoringdate AS mentoring_mentoringdate,
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
-		mentoring.mentorurl AS mentoring_mentorurl, purde.progresspur FROM
+		mentoring.mentorurl AS mentoring_mentorurl, purde.progresspur
+		,mentoring.mcaring AS mentoring_mcaring FROM
 		purchasedetail purde
-		INNER JOIN purchase pur ON
+		INNER
+		JOIN purchase pur ON
 		purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption
+		INNER JOIN
+		mentoringoption
 		mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid
 		INNER JOIN
@@ -65,13 +71,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentor.userid=u.userid
 		WHERE pur.userid=#{userid}
 	</select>
-	
+
 	<!-- 현재 멘토링 멤버 상황 -->
 	<select id="groupcount" parameterType="Integer"
 		resultType="PurchaseDetailDTO">
-		SELECT COUNT(mentoringmember.mmemberid) AS mentoringmembercnt FROM
+		SELECT COUNT(mentoringmember.mmemberid) AS
+		mentoringmembercnt FROM
 		mentoringmember
-		WHERE mentoringmember.mentoringoptionid=#{mentoringoptionid}
+		WHERE
+		mentoringmember.mentoringoptionid=#{mentoringoptionid}
 	</select>
 
 	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
