@@ -1,28 +1,31 @@
-package com.mogotco.review;
+package com.mogotco.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.ReviewDTO;
-import com.mogotco.service.ReviewService;
+import com.mogotco.dto.UserDTO;
+import com.mogotco.service.UserService;
 
 @SpringBootTest
-class InsertReview {
+class GetMypageUser {
 	
 	@Autowired
-	ReviewService service;
+	UserService service;
 	
 	@Test
 	void contextLoads() {
 		
-		ReviewDTO review = new ReviewDTO(0, 200, "qkrgPwjd1541", 1, "넘조아써", null,null);
+		UserDTO user = null;
 		try {
-			service.register(review);
+			user = service.getMypage("qkrgPwjd1541");
 			System.out.println("OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(user);
+		
 	}
 	
 }

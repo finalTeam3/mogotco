@@ -820,7 +820,7 @@ section
 }
 .blog_post
 {
-	width: calc((100% - 60px) / 3);
+	width: 290px;
 	border-radius: 6px;
 	overflow: hidden;
 	box-shadow: 0px 1px 10px rgba(29,34,47,0.1);

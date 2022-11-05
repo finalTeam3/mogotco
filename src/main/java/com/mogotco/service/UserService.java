@@ -39,5 +39,10 @@ public class UserService implements MyService<String, UserDTO>{
 	public List<UserDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public UserDTO getMypage(String k) throws Exception {
+		return mapper.selectMypage(k);
+	}
+
 
 }

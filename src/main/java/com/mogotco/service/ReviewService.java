@@ -39,5 +39,10 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 	public List<ReviewDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public List<ReviewDTO> getmentorreview(String userid) throws Exception {
+	      return mapper.getmentorreview(userid);
+	   }
+
 
 }
