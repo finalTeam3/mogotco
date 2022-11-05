@@ -8,22 +8,21 @@ import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class InsertPurchaseDetail {
+class Groupcount {
 
 	@Autowired
 	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		//id는 자동증가이므로 초기화값인 아무것들만 넣어주면됨
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(0, 202, 403,0,0, null, 0, null, null, null, null, null, null, null, 0,0) ;
+		PurchaseDetailDTO purchase = null;
 		try {
-			service.register(purchase);
+			purchase = service.groupcount(404);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(purchase);
 	}
 
 }
-

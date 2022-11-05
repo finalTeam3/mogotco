@@ -26,5 +26,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="userDTO">
 		SELECT * FROM user
 	</select>
+	
+	<select id="selectMypage" parameterType="String" resultType="userDTO">
+		SELECT u.userid, u.userpwd, u.username, m.mentorok, u.useraddr, u.usertel, u.useremail, u.userbirth, u.userpoint, u.usergen FROM user u  
+		INNER JOIN mentor m ON u.userid = m.userid
+		WHERE u.userid = #{userid}
+	</select>
 
 </mapper>

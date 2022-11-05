@@ -8,21 +8,21 @@ import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.service.PurchaseService;
 
 @SpringBootTest
-class UpdatePurchase {
+class Purchasefinishpage {
 
 	@Autowired
 	PurchaseService service;
 	
 	@Test
 	void contextLoads() {
-		PurchaseDTO purchase = new PurchaseDTO(604, "qkrtjdgns1234", 20000, null, "카카오페이", 0, null, null, null, null, null, 0,0); 
+		PurchaseDTO purchase = null;
 		try {
-			service.modify(purchase);
+			purchase = service.purchasefinishpage(603);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(purchase);
 	}
 
 }
-
