@@ -77,8 +77,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
 	<insert id="insert" parameterType="PurchaseDetailDTO">
 		INSERT INTO purchasedetail
-		(purchasedetailid, mentoringid, purchaseid)VALUES
-		(NULL,#{mentoringid},#{purchaseid})
+		(purchasedetailid, mentoringoptionid, purchaseid)VALUES
+		(NULL,#{mentoringoptionid},#{purchaseid})
 	</insert>
 
 	<!-- 아마 update,delete가 필요 없을 듯 -->

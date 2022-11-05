@@ -15,7 +15,7 @@ class UpdatePurchase {
 	
 	@Test
 	void contextLoads() {
-		PurchaseDTO purchase = new PurchaseDTO(604, "qkrtjdgns1234", 20000, null, "카카오페이", 0, null, null, null, null, null, 0); 
+		PurchaseDTO purchase = new PurchaseDTO(604, "qkrtjdgns1234", 20000, null, "카카오페이", 0, null, null, null, null, null, 0,0); 
 		try {
 			service.modify(purchase);
 		} catch (Exception e) {

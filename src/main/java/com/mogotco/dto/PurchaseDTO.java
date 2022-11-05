@@ -24,11 +24,14 @@ public class PurchaseDTO {
 	//구매완료페이지-멘토링번호, 멘토제목,멘토링날짜, 시간,대면장소,최종결제금액,구매날짜,결제방법
 	private int mentoring_mentoringid;
 	private String mentoring_mtitle;
-	private String user_username;
+	private String user_mentorname;
 	private Date mentoring_mentoringdate;
 	private String mentoringoption_mentoringtime;
 	private String mentoring_mplace;
 	private int mentoring_mmemberidcnt;
+	
+	//mentoringmember을 insert할 때 필요함(구매화면단에 있어야함(보이지 않은 상태로))
+	private int mentoringoption_mentoringoptionid;
 	
 
 }

@@ -55,14 +55,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="PurchaseDTO">
 		INSERT INTO purchase VALUES
 		(NULL,#{userid},#{purprice},SYSDATE(),#{purpay})
+		<selectKey keyProperty="purchaseid" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
-
-	<!-- purchase에는 update, delete는 필요 없을 듯 -->
+	
 	<update id="update" parameterType="PurchaseDTO">
 		UPDATE purchase SET
 		userid=#{userid},purprice=#{purprice},purpay=#{purpay} WHERE
 		purchaseid=#{purchaseid}
 	</update>
+	<!-- purchase에는 delete는 필요 없을 듯 -->
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM purchase WHERE
 		purchaseid=#{purchaseid}
