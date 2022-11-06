@@ -29,8 +29,10 @@ public class MentoringDTO {
 	private String mtitle;
 	private int mcaring;
 	
+	// 등록된 멘토링 리스트를 출력해주기 위한 dto추가
 	private String mentor_mentorcom;
 	private String user_userid;
+	
 	
 	
 	

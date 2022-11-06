@@ -43,6 +43,7 @@ public class MentoringService implements MyService<Integer, MentoringDTO> {
 		return mapper.selectAll();
 	}
 	
+	// 등록된 멘토링의 리스트 출력을 위한 service추가
 	public List<MentoringDTO> selectMentoringAll(int mcateid) throws Exception {
 		return mapper.selectMentoringAll(mcateid);
 	}
