@@ -13,6 +13,7 @@ import com.mogotco.service.MentoringOptionService;
 	@Autowired
 	MentoringOptionService service;
 	
+	// 멘토링 옵션 시간과 재고를 동시에 출력 대비(화면출력 대비)
 	@Test
 	void contextLoads() {
 		List<MentoringOptionDTO> moption = null;

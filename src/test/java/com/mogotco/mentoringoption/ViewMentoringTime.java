@@ -13,6 +13,7 @@ import com.mogotco.service.MentoringOptionService;
 	@Autowired
 	MentoringOptionService service;
 	
+	// 멘토링옵션 시간만 따로 리스트로 출력하는 경우 대비
 	@Test
 	void contextLoads() {
 		List<MentoringOptionDTO> moption = null;

@@ -13,6 +13,7 @@ import com.mogotco.service.MentoringOptionService;
 	@Autowired
 	MentoringOptionService service;
 	
+	// 멘토링 옵션 재고만 따로 출력대비(일단 group by형태로 출력하지만 추후 변경할 수 도)
 	@Test
 	void contextLoads() {
 		List<MentoringOptionDTO> moption = null;
