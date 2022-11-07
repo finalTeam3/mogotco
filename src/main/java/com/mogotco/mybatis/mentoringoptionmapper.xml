@@ -24,4 +24,26 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM mentoringoption WHERE mentoringoptionid=#{mentoringoptionid}
 	</delete>
 	
+	<!-- 멘토링 옵션의 시간 출력 -->
+	<select id="viewMentorigTime" parameterType="Integer" resultType="MentoringOptionDTO">
+		SELECT mto.mentoringtime FROM mentoringoption mto
+		INNER JOIN mentoring mt ON mto.mentoringid = mt.mentoringid
+		WHERE mto.mentoringid=#{mentoringid}
+	</select>
+	
+	<!-- 멘토링 옵션의 재고 출력 -->
+	<select id="viewMentoringStock" parameterType="Integer" resultType="MentoringOptionDTO">
+		SELECT mto.moptionstock FROM mentoringoption mto
+		INNER JOIN mentoring mt ON mto.mentoringid = mt.mentoringid
+		WHERE mto.mentoringid=#{mentoringid}
+		GROUP BY mto.moptionstock
+	</select>
+	
+		<!-- 멘토링 옵션의 시간,재고 함께 출력 -->
+	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringOptionDTO">
+		SELECT mto.mentoringtime, mto.moptionstock FROM mentoringoption mto
+		INNER JOIN mentoring mt ON mto.mentoringid = mt.mentoringid
+		WHERE mto.mentoringid = #{mentoringid}
+	</select>
+	
 </mapper>
