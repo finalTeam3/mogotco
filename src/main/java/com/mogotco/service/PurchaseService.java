@@ -39,5 +39,12 @@ public class PurchaseService implements MyService<Integer,PurchaseDTO>{
 	public List<PurchaseDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public PurchaseDTO purchasepage(Integer purchaseid) throws Exception{
+		return mapper.purchasepage(purchaseid);
+	}
 
+	public PurchaseDTO purchasefinishpage(Integer purchaseid) throws Exception{
+		return mapper.purchasefinishpage(purchaseid);
+	}
 }

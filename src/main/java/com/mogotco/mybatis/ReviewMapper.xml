@@ -24,5 +24,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="reviewDTO">
 		SELECT * FROM review
 	</select>
+	
+	<select id="getmentorreview" parameterType="String" resultType="reviewDTO">
+		SELECT m.userid AS mentor_userid, r.userid, r.rating, r.reviewcon, r.reviewdate FROM review r
+		INNER JOIN mentoring ming ON r.mentoringid = ming.mentoringid
+		INNER JOIN mentor m ON ming.mentorid = m.mentorid
+		WHERE m.userid = #{userid}
+	</select>
 
 </mapper>

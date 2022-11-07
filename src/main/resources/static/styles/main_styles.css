@@ -47,6 +47,10 @@
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
+.maincenter
+{
+	padding : 0px;
+}
 body
 {
 	font-family: 'Roboto', sans-serif;
@@ -291,6 +295,7 @@ section
 .top_bar_contact_list li
 {
 	display: inline-block;
+	margin-top: 10px;
 }
 .question
 {

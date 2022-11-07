@@ -12,9 +12,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MentoringOptionDTO {
-	private int moptionid;
+	private int mentoringoptionid;
 	private int mentoringid;
-	private String moptiontime;
+	private String mentoringtime;
 	private int moptionstock;
 
 }

@@ -4,6 +4,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.WishlistMapper">
 
+	<select id="wmentor" parameterType="String" resultType="WishlistDTO">
+		SELECT w.wishlistid, w.userid, w.mentorid, u.username as user_mentorname,
+		m.mentorimg as mentor_mentorimg,m.mentorcom as mentor_mentorcom 
+		FROM wishlist w
+		INNER JOIN mentor m ON m.mentorid = w.mentorid
+		INNER JOIN user u ON u.userid = m.userid
+		WHERE w.userid= #{userid}
+	</select>
+
 	<select id="select" parameterType="Integer" resultType="WishlistDTO">
 		SELECT * FROM wishlist WHERE wishlistid=#{wishlistid}
 	</select>

@@ -20,4 +20,6 @@ public class ReviewDTO {
 	private int rating;
 	private String reviewcon;
 	private Date reviewdate;
+	
+	private String mentor_userid;
 }

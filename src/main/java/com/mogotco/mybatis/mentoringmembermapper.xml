@@ -10,9 +10,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="MentoringmemberDTO">
 		SELECT * FROM mentoringmember
 	</select>
-	<!-- id,pwd를 끄집어낼 때는 get,set으로 입력받고 나오게 될것 -->
 	<insert id="insert" parameterType="MentoringmemberDTO">
-		INSERT INTO mentoringmember VALUES (NULL,#{mentoringid},#{userid})
+		INSERT INTO mentoringmember VALUES (NULL,#{mentoringoptionid},#{userid})
+		<selectKey keyProperty="mmemberid" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	<update id="update" parameterType="MentoringmemberDTO">
 		UPDATE mentoringmember SET mentoringid=#{mentoringid},userid=#{userid} WHERE mmemberid=#{mmemberid}

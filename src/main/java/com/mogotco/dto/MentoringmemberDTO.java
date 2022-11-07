@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class MentoringmemberDTO {
 	private int mmemberid;
-	private int mentoringid;
+	private int mentoringoptionid;
 	private String userid;
 
 }

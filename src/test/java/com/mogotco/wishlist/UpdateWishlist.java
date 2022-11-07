@@ -16,7 +16,7 @@ class UpdateWishlist {
 	
 	@Test
 	void contextLoads() {
-		WishlistDTO wishlist = new WishlistDTO(904, "user06", 105);
+		WishlistDTO wishlist = new WishlistDTO( 908, "user06", 103, null, null, null);
 		try {
 			service.modify(wishlist);
 		} catch (Exception e) {

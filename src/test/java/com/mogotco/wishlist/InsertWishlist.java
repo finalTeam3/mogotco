@@ -16,7 +16,7 @@ class InsertWishlist {
 	
 	@Test
 	void contextLoads() {
-		WishlistDTO wishlist = new WishlistDTO(0, "user05", 104);
+		WishlistDTO wishlist = new WishlistDTO(0, "user05", 101, null, null, null);
 		try {
 			service.register(wishlist);
 		} catch (Exception e) {

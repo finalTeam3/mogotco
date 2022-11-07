@@ -3,8 +3,6 @@ package com.mogotco.dto;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +26,19 @@ public class MentoringDTO {
 	private Date mrdate;
 	private String mplace;
 	private String mcontents;
+	private String mtitle;
+	private int mcaring;
+	
+	// 등록된 멘토링 리스트를 출력해주기 위한 dto추가
+	private String mentor_mentorcom;
+	private String user_userid;
+	
+	// 멘토링 옵션 화면 출력을 위한 dto추가
+	private String mentor_mentorimg;
+	
+	
+	
+	
 	
 	
 	
