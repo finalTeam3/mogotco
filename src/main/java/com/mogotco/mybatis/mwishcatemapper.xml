@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.MWishcateMapper">
+
+	<select id="mwcate" parameterType="String" resultType="MWishcateDTO">
+		SELECT mw.mwishcateid, mw.mentorid, mw.mcateid, mc.mname as mcate_mname,
+		m.userid as mentor_userid FROM mwishcate mw
+		INNER JOIN mcate mc ON mc.mcateid = mw.mcateid
+		INNER JOIN mentor m ON m.mentorid = mw.mentorid
+		WHERE m.userid = #{userid}
+	</select>
+
+	<select id="select" parameterType="Integer" resultType="MWishcateDTO">
+		SELECT * FROM mwishcate WHERE mwishcateid=#{mwishcateid}
+	</select>
+	
+	<select id="selectAll" resultType="MWishcateDTO">
+		SELECT * FROM mwishcate
+	</select>
+	
+	<insert id="insert" parameterType="MWishcateDTO">
+		INSERT INTO mwishcate VALUES (NULL,#{mcateid},#{mentorid})
+	</insert>
+	
+	<update id="update" parameterType="MWishcateDTO">
+		UPDATE mwishcate SET mcateid=#{mcateid}, mentorid=#{mentorid} WHERE mwishcateid=#{mwishcateid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM mwishcate WHERE mwishcateid=#{mwishcateid}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ class DeleteWishlist {
 	@Test
 	void contextLoads() {
 		try {
-			service.remove(904);
+			service.remove(908);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

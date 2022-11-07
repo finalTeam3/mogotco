@@ -4,6 +4,17 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.MentorMapper">
 
+	<select id="mentorAll" parameterType="String" resultType="MentorDTO">
+		SELECT * FROM mentor WHERE userid=#{userid}
+	</select>
+
+	<select id="mentoritem" parameterType="String" resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, mr.mtitle as mentoring_mtitle, mr.mentoringimg as mentoring_mentoringimg, 
+		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
+		WHERE m.userid=#{userid}
+	</select>
+
 	<select id="select" parameterType="Integer" resultType="MentorDTO">
 		SELECT * FROM mentor WHERE mentorid=#{mentorid}
 	</select>
@@ -13,7 +24,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="MentorDTO">
-		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentordate) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},SYSDATE())
+		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentordate, mentorcareer) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},SYSDATE(),#{mentorcareer})
 	</insert>
 	
 	<update id="update" parameterType="MentorDTO">

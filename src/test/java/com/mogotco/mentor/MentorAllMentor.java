@@ -1,29 +1,36 @@
-package com.mogotco.wishlist;
+package com.mogotco.mentor;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.MentorcardDTO;
-import com.mogotco.dto.WishlistDTO;
-import com.mogotco.service.WishlistService;
+import com.mogotco.dto.MentorDTO;
+import com.mogotco.service.MentorService;
 
 @SpringBootTest
-class UpdateWishlist {
+class MentorAllMentor {
 
 	@Autowired
-	WishlistService service;
+	MentorService service;
 	
 	@Test
 	void contextLoads() {
-		WishlistDTO wishlist = new WishlistDTO( 908, "user06", 103, null, null, null);
+		MentorDTO mentor = null;
 		try {
-			service.modify(wishlist);
+			mentor = service.mentorAll("qkrtjdgns1234");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println(mentor);
+		
 	}
 
 }
+
+
+
 
