@@ -19,7 +19,7 @@ class MentorAllMentor {
 	void contextLoads() {
 		MentorDTO mentor = null;
 		try {
-			mentor = service.mentorAll(100);
+			mentor = service.mentorAll("qkrtjdgns1234");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

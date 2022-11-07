@@ -1,28 +1,38 @@
-package com.mogotco.mwishcate;
+package com.mogotco.mentor;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.MWishcateDTO;
-import com.mogotco.service.MWishcateService;
+import com.mogotco.dto.MentorDTO;
+import com.mogotco.service.MentorService;
 
 @SpringBootTest
-class InsertMWishcate {
+class MentoritemMentor {
 
 	@Autowired
-	MWishcateService service;
+	MentorService service;
 	
 	@Test
 	void contextLoads() {
-		MWishcateDTO mwishcate = new MWishcateDTO(0, 50, 104, null, null);
+		List<MentorDTO> list = null;
 		try {
-			service.register(mwishcate);
+			list = service.mentoritem("qkrtjdgns1234");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		for(MentorDTO c:list) {
+			System.out.println(c);
+		}
+		
 	}
 
 }
+
+
+
 

@@ -15,7 +15,7 @@ class DeleteMWishcate {
 	@Test
 	void contextLoads() {
 		try {
-			service.remove(904);
+			service.remove(1108);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

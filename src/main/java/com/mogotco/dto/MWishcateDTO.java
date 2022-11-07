@@ -17,4 +17,5 @@ public class MWishcateDTO {
 	private int mentorid; // 희망 분야를 선택한 멘토의 테이블 id
 	
 	private String mcate_mname; // 희망 분야 이름
+	private String mentor_userid;
 }
