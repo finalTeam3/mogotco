@@ -13,6 +13,7 @@ import com.mogotco.service.MentoringService;
 	@Autowired
 	MentoringService service;
 	
+	// 멘토링 옵션 인서트된 옵션들을 화면에 출력
 	@Test
 	void contextLoads() {
 		List<MentoringDTO> mlist = null;

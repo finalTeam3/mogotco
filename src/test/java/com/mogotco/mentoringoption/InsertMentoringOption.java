@@ -14,6 +14,7 @@ import com.mogotco.service.MentoringOptionService;
 	@Autowired
 	MentoringOptionService service;
 	
+	// 멘토링 옵션에 시간과 재고를 배열의 크기로 insert(멘토의 시간 선택이 여러개이기 때문)
 
 	@Test
 	void contextLoads() {
