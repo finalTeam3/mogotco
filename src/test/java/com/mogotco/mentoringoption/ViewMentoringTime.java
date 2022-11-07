@@ -9,7 +9,7 @@ import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.service.MentoringOptionService;
 
 @SpringBootTest
-	class GetAllIMentoringOption {
+	class ViewMentoringTime {
 	@Autowired
 	MentoringOptionService service;
 	
@@ -17,9 +17,8 @@ import com.mogotco.service.MentoringOptionService;
 	void contextLoads() {
 		List<MentoringOptionDTO> moption = null;
 		try {
-			moption = service.get();
+			moption = service.viewMentorigTime(200);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
