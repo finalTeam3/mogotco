@@ -17,7 +17,16 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt FROM mentoring mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
-		WHERE mcateid = #{mcateid};
+		WHERE mt.mcateid = #{mcateid}
+	</select>
+	
+	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringDTO">
+		SELECT mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
+		mt.mentoringimg, mt.mentoringprice, mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
+		FROM mentoring mt
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		WHERE mt.mentoringid = #{mentoringid}
 	</select>
 	
 	<insert id="insert" parameterType="MentoringDTO">

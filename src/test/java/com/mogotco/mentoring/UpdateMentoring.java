@@ -17,7 +17,7 @@ import com.mogotco.service.MentoringService;
 	
 	@Test
 	void contextLoads() {
-		MentoringDTO mentoring = new MentoringDTO(204,103,30,70000,mdate,"f.jpg",null,1,null,"테스트","테스트3","이직관련상담",1,null,null);
+		MentoringDTO mentoring = new MentoringDTO(204,103,30,70000,mdate,"f.jpg",null,1,null,"테스트","테스트3","이직관련상담",1,null,null,null);
 		try {
 			service.modify(mentoring);
 		} catch (Exception e) {

@@ -33,6 +33,11 @@ public class MentoringDTO {
 	private String mentor_mentorcom;
 	private String user_userid;
 	
+	// 멘토링 옵션 화면 출력을 위한 dto추가
+	private String mentor_mentorimg;
+	
+	
+	
 	
 	
 	
