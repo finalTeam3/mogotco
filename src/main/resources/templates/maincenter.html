@@ -135,7 +135,7 @@
 				<!-- Features Item -->
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="/images/icon_1.png" alt=""></div>
+						<div class="feature_icon"><img th:src="@{/images/icon_1.png}" alt=""></div>
 						<h3 class="feature_title">The Experts</h3>
 						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
 					</div>
@@ -144,7 +144,7 @@
 				<!-- Features Item -->
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="/images/icon_2.png" alt=""></div>
+						<div class="feature_icon"><img th:src="@{/images/icon_2.png}" alt=""></div>
 						<h3 class="feature_title">Book & Library</h3>
 						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
 					</div>
@@ -153,7 +153,7 @@
 				<!-- Features Item -->
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="/images/icon_3.png" alt=""></div>
+						<div class="feature_icon"><img th:src="@{/images/icon_3.png}" alt=""></div>
 						<h3 class="feature_title">Best Courses</h3>
 						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
 					</div>
@@ -162,7 +162,7 @@
 				<!-- Features Item -->
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="/images/icon_4.png" alt=""></div>
+						<div class="feature_icon"><img th:src="@{/images/icon_4.png}" alt=""></div>
 						<h3 class="feature_title">Award & Reward</h3>
 						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
 					</div>
@@ -190,9 +190,9 @@
 				<!-- Course -->
 				<div class="col-lg-4 course_col">
 					<div class="course">
-						<div class="course_image"><img src="/images/course_1.jpg" alt=""></div>
+						<div class="course_image"><img th:src="@{/images/course_1.jpg}" alt=""></div>
 						<div class="course_body">
-							<h3 class="course_title"><a href="course.html">Software Training</a></h3>
+							<h3 class="course_title"><a th:href="@{/courses/course}">Software Training</a></h3>
 							<div class="course_teacher">Mr. John Taylor</div>
 							<div class="course_text">
 								<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
@@ -217,9 +217,9 @@
 				<!-- Course -->
 				<div class="col-lg-4 course_col">
 					<div class="course">
-						<div class="course_image"><img src="/images/course_2.jpg" alt=""></div>
+						<div class="course_image"><img th:src="@{/images/course_2.jpg}" alt=""></div>
 						<div class="course_body">
-							<h3 class="course_title"><a href="/course.html">Developing Mobile Apps</a></h3>
+							<h3 class="course_title"><a  th:href="@{/courses/course}">Developing Mobile Apps</a></h3>
 							<div class="course_teacher">Ms. Lucius</div>
 							<div class="course_text">
 								<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
@@ -244,9 +244,9 @@
 				<!-- Course -->
 				<div class="col-lg-4 course_col">
 					<div class="course">
-						<div class="course_image"><img src="/images/course_3.jpg" alt=""></div>
+						<div class="course_image"><img th:src="@{/images/course_3.jpg}" alt=""></div>
 						<div class="course_body">
-							<h3 class="course_title"><a href="/course.html">Starting a Startup</a></h3>
+							<h3 class="course_title"><a  th:href="@{/courses/course}">Starting a Startup</a></h3>
 							<div class="course_teacher">Mr. Charles</div>
 							<div class="course_text">
 								<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
@@ -362,7 +362,7 @@
 				<!-- Event -->
 				<div class="col-lg-4 event_col">
 					<div class="event event_left">
-						<div class="event_image"><img src="/images/event_1.jpg" alt=""></div>
+						<div class="event_image"><img th:src="@{/images/event_1.jpg}" alt=""></div>
 						<div class="event_body d-flex flex-row align-items-start justify-content-start">
 							<div class="event_date">
 								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
@@ -387,7 +387,7 @@
 				<!-- Event -->
 				<div class="col-lg-4 event_col">
 					<div class="event event_mid">
-						<div class="event_image"><img src="/images/event_2.jpg" alt=""></div>
+						<div class="event_image"><img th:src="{/images/event_2.jpg}" alt=""></div>
 						<div class="event_body d-flex flex-row align-items-start justify-content-start">
 							<div class="event_date">
 								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
@@ -412,7 +412,7 @@
 				<!-- Event -->
 				<div class="col-lg-4 event_col">
 					<div class="event event_right">
-						<div class="event_image"><img src="/images/event_3.jpg" alt=""></div>
+						<div class="event_image"><img th:src="@{/images/event_3.jpg}" alt=""></div>
 						<div class="event_body d-flex flex-row align-items-start justify-content-start">
 							<div class="event_date">
 								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
