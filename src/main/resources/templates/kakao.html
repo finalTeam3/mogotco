@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MOGOTCO</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Unicat project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/responsive.css}">
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/styles/bootstrap4/popper.js}"></script>
+<script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/greensock/TweenMax.min.js}"></script>
+<script th:src="@{/plugins/greensock/TimelineMax.min.js}"></script>
+<script th:src="@{/plugins/scrollmagic/ScrollMagic.min.js}"></script>
+<script th:src="@{/plugins/greensock/animation.gsap.min.js}"></script>
+<script th:src="@{/plugins/greensock/ScrollToPlugin.min.js}"></script>
+<script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script th:src="@{/plugins/easing/easing.js}"></script>
+<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        var IMP = window.IMP; 
+        IMP.init("imp82873338"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'kakaopay',
+                merchant_uid: "IMP"+makeMerchantUid, 
+                name : '당근 10kg',
+                amount : 1004,
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : '아임포트 기술지원팀',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    console.log(rsp);
+                } else {
+                    console.log(rsp);
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div class="super_container">
+
+
+
+
+
+   
+
+    <button th:onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
+
+</div>
+
+ 
+   
+</body>
+
+</html>
