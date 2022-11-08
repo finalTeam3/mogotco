@@ -11,6 +11,10 @@ public class MainController {
 	public String main() {
 		return "index";
 	}
+	@RequestMapping("/MtService")
+	public String mtservice() {
+		return "main";
+	}
 	
 	@RequestMapping("/courses")
 	public String courses(Model model) {

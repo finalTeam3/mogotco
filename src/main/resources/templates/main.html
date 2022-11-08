@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>ConnectLive 화상회의</title>
+			<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk/dist/connectlive-web-sdk.min.js"></script>
+			<script>
+			let localMedia = null;
+			let room = null;
+			let remoteParticipants = [];
+			let roomId = '';
+
+			const buttonGroupHost = document.querySelector('#button-group-host');
+			const connectButtonHost = document.querySelector('#connect-host');
+			const disconnectButtonHost = document.querySelector('#disconnect-host');
+			const buttonGroupGuest = document.querySelector('#button-group-guest');
+			const connectButtonGuest = document.querySelector('#connect-guest');
+			const disconnectButtonGuest = document.querySelector('#disconnect-guest');
+			const hostRoomId = document.querySelector('#host-room-id');
+			const guestRoomId = document.querySelector('#guest-room-id');
+			const status = document.querySelector('#status');
+			const log = document.querySelector('#log');
+
+			// METHODs
+			const createConferenceHostOptions = (room) => {
+			  room.on('participantEntered', (evt) => {
+			    addLog(`${evt.remoteParticipant.id} joined`);
+			  });
+
+			  room.on('participantLeft', (evt) => {
+			    addLog(`${evt.remoteParticipantId} left`);
+			  });
+			};
+
+			const createConferenceGuestOptions = async (room) => {
+			  room.on('connected', async (evt) => {
+			    if (!evt.remoteParticipants.length) {
+			      disConnect.conference();
+			      disConnect.user();
+			      disConnect.buttonStatus();
+			      alert('No webinar starts yet');
+			    }
+
+			    evt.remoteParticipants.forEach(async (participant) => {
+			      let videos = [];
+			      const unsubscribedVideos = participant.getUnsubscribedVideos();
+
+			      if (unsubscribedVideos.length) {
+			        const videoIds = unsubscribedVideos.map((video) => video.getVideoId());
+			        videos = await room.subscribe(videoIds);
+			      }
+
+			      remoteParticipants.push({ participant, videos });
+			      remoteParticipants.forEach((remoteParticipant) => {
+			        const isSameId = remoteParticipant.participant.id === participant.id;
+			        if (isSameId) addRemoteVideoNode(participant.videos);
+			      });
+			    });
+			  });
+
+			  room.on('remoteVideoPublished', async (evt) => {
+			    const videos = await room.subscribe([evt.remoteVideo.videoId]);
+
+			    if (videos.length) {
+			      const preJoinedParticipant = remoteParticipants.find(
+			        (item) => item.participant.id === evt.remoteParticipant.id
+			      );
+
+			      if (preJoinedParticipant) {
+			        preJoinedParticipant.videos =
+			          preJoinedParticipant.videos.concat(videos);
+			      }
+			    }
+
+			    addRemoteVideoNode(videos);
+			  });
+
+			  room.on('remoteVideoUnpublished', (evt) => {
+			    const participantToRemove = remoteParticipants.find(
+			      (item) => item.participant.id === evt.remoteParticipant.id
+			    );
+
+			    if (participantToRemove) {
+			      participantToRemove.videos = participantToRemove.videos.filter(
+			        (video) => video.videoId !== evt.remoteVideo.videoId
+			      );
+			    }
+
+			    disConnect.conference();
+			    disConnect.remoteParticipants();
+			    disConnect.user();
+			    activateButton();
+			    changeStatus('Disconnected');
+			    addLog(`${evt.remoteParticipant.id} Left`);
+			  });
+			};
+
+			// DOM CONTROLS
+			const activateButton = () => {
+			  connectButtonHost.disabled = connectButtonGuest.disabled = false;
+			  connectButtonHost.className = connectButtonGuest.className = 'cursor-pointer';
+			};
+
+			const disableButton = () => {
+			  connectButtonHost.disabled = connectButtonGuest.disabled = true;
+			  connectButtonHost.className = connectButtonGuest.className = 'cursor-wait';
+			};
+
+			const changeStatus = (text) => {
+			  status.innerHTML = text;
+			};
+
+			const addLocalVideoNode = (localMedia) => {
+			  const localContainer = document.querySelector('#local-container');
+
+			  const videoItem = document.createElement('li');
+			  videoItem.id = 'local-video-item';
+
+			  const videoHeader = document.createElement('h3');
+			  videoHeader.innerHTML = `Presenter`;
+
+			  const localVideo = localMedia.video?.attach();
+			  localVideo.id = 'local-video';
+
+			  videoItem.appendChild(videoHeader);
+			  videoItem.appendChild(localVideo);
+			  localContainer.appendChild(videoItem);
+			};
+
+			const addRemoteVideoNode = (videos) => {
+			  const remoteContainer = document.querySelector('#remote-container');
+
+			  videos.forEach((video) => {
+			    const videoItem = document.createElement('li');
+			    videoItem.id = video.participantId;
+
+			    const videoHeader = document.createElement('h3');
+			    videoHeader.innerHTML = `Presenter`;
+			    addLog(`Join the webinar`);
+
+			    const remoteVideo = video.attach();
+			    remoteVideo.id = 'remote-video';
+
+			    videoItem.appendChild(videoHeader);
+			    videoItem.appendChild(remoteVideo);
+			    remoteContainer.appendChild(videoItem);
+			  });
+			};
+
+			const removeLocalVideoNode = () => {
+			  const videoItem = document.querySelector('#local-video-item');
+			  videoItem?.remove();
+			};
+
+			const removeRemoteVideoAll = () => {
+			  const remoteContainer = document.querySelector('#remote-container');
+			  remoteContainer.innerHTML = '';
+			};
+
+			const addLog = (text) => {
+			  const logNode = document.createElement('li');
+			  logNode.innerHTML = text;
+			  log.appendChild(logNode);
+			};
+
+			const resetLog = () => {
+			  log.innerHTML = '';
+			};
+
+			// EVENTs
+			const inputRoomId = (event) => {
+			  const {
+			    value,
+			    dataset: { id },
+			  } = event.target;
+			  const isHost = id === 'host';
+
+			  roomId = value;
+
+			  value.length
+			    ? isHost
+			      ? (buttonGroupGuest.className = 'invisible')
+			      : (buttonGroupHost.className = 'invisible')
+			    : (buttonGroupHost.className = buttonGroupGuest.className = 'visible');
+			};
+
+			const connectConference = async (event) => {
+			  try {
+			    const {
+			      dataset: { id },
+			    } = event.target;
+			    const isHost = id === 'host';
+
+			    resetLog();
+			    disableButton();
+			    changeStatus('Connecting...');
+
+			    // Provisioning
+			    await ConnectLive.signIn({
+			      serviceId: 'ICLEXMPLPUBL',
+			      serviceSecret: 'ICLEXMPLPUBL0KEY:YOUR0SRVC0SECRET',
+			    });
+			    addLog('User Signed In');
+
+			    // Create LocalMedia
+			    if (isHost) {
+			      localMedia = await ConnectLive.createLocalMedia({
+			        audio: true,
+			        video: true,
+			      });
+			      addLog('Local Host Media Created');
+			    }
+
+			    // Create Conference
+			    room = ConnectLive.createRoom();
+			    isHost
+			      ? createConferenceHostOptions(room)
+			      : createConferenceGuestOptions(room);
+			    addLog(`Conference ${isHost ? 'Host' : 'Guest'} Created`);
+
+			    if (!roomId) throw new Error('No Conference to Connect');
+
+			    await room.connect(roomId);
+			    if (isHost && localMedia) {
+			      await room.publish([localMedia]);
+			      addLog('Video Connected');
+
+			      addLocalVideoNode(localMedia);
+			      addLog('Participant Showed');
+			    }
+
+			    changeStatus('Connected');
+			  } catch (error) {
+			    console.error(error);
+			    disConnect.conference();
+			    disConnect.localMedia();
+			    disConnect.remoteParticipants();
+			    disConnect.user();
+			    disConnect.buttonStatus();
+			    changeStatus('Failed to Connect');
+			    alert('Failed to Start Service');
+			  }
+			};
+
+			const disConnectConference = (event) => {
+			  try {
+			    changeStatus('Disconnecting...');
+
+			    const {
+			      dataset: { id },
+			    } = event.target;
+			    const isHost = id === 'host';
+
+			    if (!room || !roomId) throw new Error('No Conference to Stop');
+
+			    disConnect.conference();
+
+			    if (isHost && localMedia) disConnect.localMedia();
+
+			    disConnect.remoteParticipants();
+			    disConnect.user();
+			    disConnect.buttonStatus();
+			  } catch (error) {
+			    console.error(error);
+			    changeStatus('Failed to Disconnect');
+			  }
+			};
+
+			const disConnect = {
+			  conference() {
+			    room?.disconnect();
+			    addLog('Conference Disconnected');
+			  },
+			  localMedia() {
+			    localMedia?.stop();
+			    localMedia = null;
+			    removeLocalVideoNode();
+			    addLog('Video Disconnected');
+			  },
+			  remoteParticipants() {
+			    remoteParticipants = [];
+			    removeRemoteVideoAll();
+			    addLog('Participants Cleared');
+			  },
+			  user() {
+			    ConnectLive.signOut();
+			    addLog('User Signed Out');
+			  },
+			  buttonStatus() {
+			    activateButton();
+			    changeStatus('Disconnected');
+			  },
+			};
+
+			connectButtonHost.onclick = connectButtonGuest.onclick = connectConference;
+			disconnectButtonHost.onclick = disconnectButtonGuest.onclick =
+			  disConnectConference;
+			guestRoomId.onkeyup = hostRoomId.onkeyup = inputRoomId;
+
+			</script>
+			<style>
+				:root {
+				  --tw-bg-opacity: 1;
+				  --tw-text-opacity: 1;
+				  --tw-scale-x: -1;
+				}
+				
+				body {
+				  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+				    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				}
+				
+				main {
+				  position: fixed;
+				  top: 0;
+				  right: 0;
+				  bottom: 0;
+				  left: 0;
+				  display: flex;
+				  justify-content: center;
+				  align-items: center;
+				  overflow: auto;
+				}
+				
+				section {
+				  width: 80%;
+				  margin: auto;
+				}
+				
+				h1 {
+				  text-align: center;
+				  line-height: 2.5rem;
+				  font-size: 2.25rem;
+				}
+				
+				h2 {
+				  text-align: center;
+				}
+				
+				#host-room-id,
+				#guest-room-id {
+				  margin-bottom: 0.75rem;
+				  padding: 0.25rem;
+				  outline: 2px solid transparent;
+				  border: 0;
+				  text-align: center;
+				  border-bottom: 2px solid black;
+				  outline-offset: 2px;
+				}
+				
+				#button-group-host,
+				#button-group-guest {
+				  margin-top: 2.5rem;
+				  margin-bottom: 2.5rem;
+				  text-align: center;
+				}
+				
+				#connect-host,
+				#connect-guest {
+				  padding: 0.5rem;
+				  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+				  color: white;
+				  border: 0;
+				  cursor: pointer;
+				}
+				
+				#disconnect-host,
+				#disconnect-guest {
+				  padding: 0.5rem;
+				  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+				  color: white;
+				  border: 0;
+				  cursor: pointer;
+				}
+				
+				#status {
+				  margin-top: 2rem;
+				  margin-bottom: 2rem;
+				  color: rgb(202 138 4 / var(--tw-text-opacity));
+				  text-align: center;
+				  line-height: 2rem;
+				  font-size: 0.8rem;
+				}
+				
+				#video-list {
+				  display: flex;
+				  flex-direction: column;
+				  justify-content: center;
+				  align-items: center;
+				  margin-top: 2.5rem;
+				  margin-bottom: 2.5rem;
+				}
+				
+				#local-container,
+				#remote-container {
+				  color: rgb(156 163 175 / var(--tw-text-opacity));
+				  text-align: center;
+				  list-style: none;
+				}
+				
+				#local-container {
+				  margin-top: 1.25rem;
+				  margin-bottom: 1.25rem;
+				  padding: 0;
+				  line-height: 1.25rem;
+				  font-size: 0.875rem;
+				}
+				
+				#remote-container {
+				  width: 80vw;
+				  margin-top: 0.5rem;
+				  margin-bottom: 0.5rem;
+				  padding: 0;
+				  line-height: 0.95rem;
+				  font-size: 0.65rem;
+				}
+				
+				#remote-container > li {
+				  display: inline-block;
+				}
+				
+				#local-video {
+				  width: 320px;
+				  margin-bottom: 1.25rem;
+				  transform: scaleY(var(--tw-scale-y));
+				}
+				
+				#remote-video {
+				  width: 160px;
+				  margin-right: 0.5rem;
+				}
+				
+				#log-list {
+				  text-align: center;
+				}
+				
+				#log {
+				  padding: 0;
+				  color: rgb(156 163 175 / var(--tw-text-opacity));
+				  line-height: 1rem;
+				  font-size: 0.75rem;
+				  list-style: none;
+				}
+				
+				.cursor-wait {
+				  cursor: wait !important;
+				}
+				
+				.cursor-pointer {
+				  cursor: pointer;
+				}
+				
+				.visible {
+				  display: block;
+				}
+				
+				.invisible {
+				  display: none;
+				}
+							
+							
+			
+			</style>
+    </head>
+    <body>
+        <main>
+		  <section>
+		    <h2>Kakao i Connect Live</h2>
+		    <h1>Video Cast</h1>
+		
+		    <div id="button-group-host">
+		      <h3 class="">Hosting the webinar</h3>
+		      <input
+		        id="host-room-id"
+		        data-id="host"
+		        type="text"
+		        name="roomId"
+		        placeholder="Type room ID"
+		      />
+		      <div>
+		        <button id="connect-host" data-id="host">Host</button>
+		        <button id="disconnect-host" data-id="host">Stop</button>
+		      </div>
+		    </div>
+		
+		    <div id="button-group-guest">
+		      <h3>Joining the webinar</h3>
+		      <input
+		        id="guest-room-id"
+		        data-id="guest"
+		        type="text"
+		        name="roomId"
+		        placeholder="Type room ID"
+		      />
+		      <div>
+		        <button id="connect-guest" data-id="guest">Join</button>
+		        <button id="disconnect-guest" data-id="guest">Leave</button>
+		      </div>
+		    </div>
+		
+		    <div id="status">Disconnected</div>
+		
+		    <div id="video-list">
+		      <ul id="local-container"></ul>
+		      <ul id="remote-container"></ul>
+		    </div>
+		
+		    <div id="log-list">
+		      <h3>Log</h3>
+		      <ul id="log">
+		        <li>Ready to connect</li>
+		      </ul>
+		    </div>
+		  </section>
+		</main>
+    </body>
+</html>
