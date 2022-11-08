@@ -1,29 +1,29 @@
-package com.mogotco.mentoring;
+package com.mogotco.mentoringoption;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mogotco.dto.MentoringDTO;
-import com.mogotco.service.MentoringService;
+import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.service.MentoringOptionService;
 
 @SpringBootTest
-	class ViewMentoringOp {
+	class GetAllMentoringOption {
 	@Autowired
-	MentoringService service;
+	MentoringOptionService service;
 	
-	// 멘토링 옵션 인서트된 옵션들을 화면에 출력
 	@Test
 	void contextLoads() {
-		List<MentoringDTO> mlist = null;
+		List<MentoringOptionDTO> moption = null;
 		try {
-			mlist = service.viewMentoringOp(200);
+			moption = service.get();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		for(MentoringDTO c:mlist) {
+		for(MentoringOptionDTO c:moption) {
 			System.out.println(c);
 		}
 	}

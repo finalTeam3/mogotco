@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE mt.mcateid = #{mcateid}
 	</select>
 	
+	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
 	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringDTO">
 		SELECT mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
 		mt.mentoringimg, mt.mentoringprice, mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
@@ -32,6 +33,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="MentoringDTO">
 		INSERT INTO mentoring VALUES (NULL,#{mentorid},#{mcateid},#{mentoringprice},#{mentoringdate},
 		#{mentoringimg},#{mentorurl},#{mmemberidcnt},sysdate(),#{mplace},#{mcontents},#{mtitle},#{mcaring})
+		<selectKey keyProperty="mentoringid" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<update id="update" parameterType="MentoringDTO">
