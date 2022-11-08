@@ -12,12 +12,6 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/courses")
-	public String courses(Model model) {
-		model.addAttribute("center", "courses");
-		return "index";
-	}
-	
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("center", "about");
