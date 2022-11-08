@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/styles/about.css">
-<link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
-<script src="/plugins/colorbox/jquery.colorbox-min.js"></script>
-<script src="/js/about.js"></script>
+<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/about.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/about_responsive.css}">
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/js/about.js}"></script>
 </head>
 
 
@@ -21,7 +21,7 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a th:href="@{/}">Home</a></li>
 								<li>About</li>
 							</ul>
 						</div>
@@ -48,7 +48,7 @@
 				<!-- About Item -->
 				<div class="col-lg-4 about_col about_col_left">
 					<div class="about_item">
-						<div class="about_item_image"><img src="images/about_1.jpg" alt=""></div>
+						<div class="about_item_image"><img th:src="@{/images/about_1.jpg}" alt=""></div>
 						<div class="about_item_title"><a href="#">Our Stories</a></div>
 						<div class="about_item_text">
 							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
@@ -59,7 +59,7 @@
 				<!-- About Item -->
 				<div class="col-lg-4 about_col about_col_middle">
 					<div class="about_item">
-						<div class="about_item_image"><img src="images/about_2.jpg" alt=""></div>
+						<div class="about_item_image"><img th:src="@{/images/about_2.jpg}" alt=""></div>
 						<div class="about_item_title"><a href="#">Our Mission</a></div>
 						<div class="about_item_text">
 							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
@@ -70,7 +70,7 @@
 				<!-- About Item -->
 				<div class="col-lg-4 about_col about_col_right">
 					<div class="about_item">
-						<div class="about_item_image"><img src="images/about_3.jpg" alt=""></div>
+						<div class="about_item_image"><img th:src="@{/images/about_3.jpg}" alt=""></div>
 						<div class="about_item_title"><a href="#">Our Vision</a></div>
 						<div class="about_item_text">
 							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
@@ -85,7 +85,7 @@
 	<!-- Feature -->
 
 	<div class="feature">
-		<div class="feature_background" style="background-image:url(images/courses_background.jpg)"></div>
+		<div class="feature_background" th:style="'background-image:url(' + @{/images/courses_background.jpg} + ')'"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -143,9 +143,9 @@
 				<!-- Feature Video -->
 				<div class="col-lg-6 feature_col">
 					<div class="feature_video d-flex flex-column align-items-center justify-content-center">
-						<div class="feature_video_background" style="background-image:url(images/video.jpg)"></div>
+						<div class="feature_video_background" th:style="'background-image:url(' + @{/images/video.jpg} + ')'"></div>
 						<a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
-							<img src="images/play.png" alt="">
+							<img th:src="@{/images/play.png}" alt="">
 						</a>
 					</div>
 				</div>
@@ -170,7 +170,7 @@
 				<!-- Team Item -->
 				<div class="col-lg-3 col-md-6 team_col">
 					<div class="team_item">
-						<div class="team_image"><img src="images/team_1.jpg" alt=""></div>
+						<div class="team_image"><img th:src="@{/images/team_1.jpg}" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">Jacke Masito</a></div>
 							<div class="team_subtitle">Marketing & Management</div>
@@ -188,7 +188,7 @@
 				<!-- Team Item -->
 				<div class="col-lg-3 col-md-6 team_col">
 					<div class="team_item">
-						<div class="team_image"><img src="images/team_2.jpg" alt=""></div>
+						<div class="team_image"><img th:src="@{/images/team_2.jpg}" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">William James</a></div>
 							<div class="team_subtitle">Designer & Website</div>
@@ -206,7 +206,7 @@
 				<!-- Team Item -->
 				<div class="col-lg-3 col-md-6 team_col">
 					<div class="team_item">
-						<div class="team_image"><img src="images/team_3.jpg" alt=""></div>
+						<div class="team_image"><img th:src="@{/images/team_3.jpg}" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">John Tyler</a></div>
 							<div class="team_subtitle">Quantum mechanics</div>
@@ -224,7 +224,7 @@
 				<!-- Team Item -->
 				<div class="col-lg-3 col-md-6 team_col">
 					<div class="team_item">
-						<div class="team_image"><img src="images/team_4.jpg" alt=""></div>
+						<div class="team_image"><img th:src="@{/images/team_4.jpg}" alt=""></div>
 						<div class="team_body">
 							<div class="team_title"><a href="#">Veronica Vahn</a></div>
 							<div class="team_subtitle">Math & Physics</div>
@@ -246,7 +246,7 @@
 	<!-- Counter -->
 
 	<div class="counter">
-		<div class="counter_background" style="background-image:url(images/counter_background.jpg)"></div>
+		<div class="counter_background" th:style="'background-image:url(' + @{/images/counter_background.jpg} + ')'"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
@@ -321,22 +321,22 @@
 						<div class="owl-carousel owl-theme partners_slider">
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_1.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_1.png}" alt=""></div>
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_2.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_2.png}" alt=""></div>
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_3.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_3.png}" alt=""></div>
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_4.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_4.png}" alt=""></div>
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_5.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_5.png}" alt=""></div>
 
 							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img src="images/partner_6.png" alt=""></div>
+							<div class="owl-item partner_item"><img th:src="@{/images/partner_6.png}" alt=""></div>
 
 						</div>
 					</div>
