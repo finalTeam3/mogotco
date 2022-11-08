@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" type="text/css" href="/styles/contact.css">
-<link rel="stylesheet" type="text/css" href="/styles/contact_responsive.css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
-<script src="plugins/marker_with_label/marker_with_label.js"></script>
-<script src="js/contact.js"></script>
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
 </head>
 
 	
@@ -18,7 +18,7 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a th:href="@{/}">Home</a></li>
 								<li>Contact</li>
 							</ul>
 						</div>
@@ -111,7 +111,7 @@
 	<!-- Newsletter -->
 
 	<div class="newsletter">
-		<div class="newsletter_background" style="background-image:url(images/newsletter_background.jpg)"></div>
+		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
