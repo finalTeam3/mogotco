@@ -12,11 +12,6 @@ public class ChoController {
 		return "order";
 	}
 	
-	@RequestMapping("/kakao")
-	public String kakao() {
-		return "kakao";
-	}
-	
 	@RequestMapping("/kg")
 	public String kg() {
 		return "kg";
