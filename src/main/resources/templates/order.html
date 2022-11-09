@@ -1,284 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>MOGOTCO</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Unicat project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
-<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/main_styles.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/responsive.css}">
-<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{/styles/bootstrap4/popper.js}"></script>
-<script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
-<script th:src="@{/plugins/greensock/TweenMax.min.js}"></script>
-<script th:src="@{/plugins/greensock/TimelineMax.min.js}"></script>
-<script th:src="@{/plugins/scrollmagic/ScrollMagic.min.js}"></script>
-<script th:src="@{/plugins/greensock/animation.gsap.min.js}"></script>
-<script th:src="@{/plugins/greensock/ScrollToPlugin.min.js}"></script>
-<script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
-<script th:src="@{/plugins/easing/easing.js}"></script>
-<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
-<script th:src="@{/js/custom.js}"></script>
 
+<head>
+    <meta charset="utf-8">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+        <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+    <!-- Contact Javascript File -->
+    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{/mail/contact.js}"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
 </head>
 
-   <!-- Header -->
-
-   <header class="header">
-         
-      <!-- Top Bar -->
-      <div class="top_bar">
-         <div class="top_bar_container">
-            <div class="container">
-               <div class="row">
-                  <div class="col">
-                     <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                        <ul class="top_bar_contact_list">
-                           <li><div class="question">Have any questions?</div></li>
-                           <li>
-                              <i class="fa fa-phone" aria-hidden="true"></i>
-                              <div>010-4009-1541</div>
-                           </li>
-                           <li>
-                              <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                              <div>info.mogotco@gmail.com</div>
-                           </li>
-                        </ul>
-                        <div class="top_bar_login ml-auto">
-                           <div class="login_button"><a th:href="@{/login}">Register or Login</a></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>            
-      </div>
-
-      <!-- Header Content -->
-      <div class="header_container">
-         <div class="container">
-            <div class="row">
-               <div class="col">
-                  <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                     <div class="logo_container">
-                        <a th:href="@{/}">
-                           <div class="logo_text">MOGOT<span>CO</span></div>
-                        </a>
-                     </div>
-                     <nav class="main_nav_contaner ml-auto">
-                        <ul class="main_nav">
-                           <li class="active"><a th:href="@{/}">Home</a></li>
-                           <li><a th:href="@{/about}">About</a></li>
-                           <li><a th:href="@{/courses}">Courses</a></li>
-                           <li><a th:href="@{/blog}">Blog</a></li>
-                           <li><a th:href="@{/contact}">Contact</a></li>
-                        </ul>
-                        <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
-
-                        <!-- Hamburger -->
-
-                        <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                        <div class="hamburger menu_mm">
-                           <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
-                        </div>
-                     </nav>
-
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-	
-      <!-- Header Search Panel -->
-      <div class="header_search_container">
-         <div class="container">
-            <div class="row">
-               <div class="col">
-                  <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
-                     <form action="#" class="header_search_form">
-                        <input type="search" class="search_input" placeholder="Search" required="required">
-                        <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
-                           <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>         
-      </div>       
-      
-         <!-- Menu -->
-
-   <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
-      <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
-      <div class="search">
-         <form action="#" class="header_search_form menu_mm">
-            <input type="search" class="search_input menu_mm" placeholder="Search" required="required">
-            <button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-               <i class="fa fa-search menu_mm" aria-hidden="true"></i>
-            </button>
-         </form>
-      </div>
-      <nav class="menu_nav">
-         <ul class="menu_mm">
-            <li class="menu_mm"><a th:href="@{/}">Home</a></li>
-            <li class="menu_mm"><a th:href="@{/about}">About</a></li>
-            <li class="menu_mm"><a th:href="@{/courses}">Courses</a></li>
-            <li class="menu_mm"><a th:href="@{/blog}">Blog</a></li>
-            <li class="menu_mm"><a th:href="@{/contack}">Contact</a></li>
-         </ul>
-      </nav>
-   </div>
-        
-   </header>
-   
 <body>
-
-<div class="super_container">
-
-   <!-- Maincenter ------------------------------------------------------------------------------------>
-
-   
-   <!-- Home -->
-
-
-   <!-- Features -->
-
-
-   <!-- Popular Courses -->
-
-
-   <!-- Counter -->
-
-
-   <!-- Events -->
-
-
-   <!-- Team -->
-
-
-   <!-- Latest News -->
-
-
-   <!-- Newsletter -->
-
-
-</div>
-
-   <!-- Footer -->
-
-   <footer class="footer">
-      <div class="footer_background" style="background-image:url(images/footer_background.png)"></div>
-      <div class="container">
-         <div class="row footer_row">
-            <div class="col">
-               <div class="footer_content">
-                  <div class="row">
-
-                     <div class="col-lg-3 footer_col">
-               
-                        <!-- Footer About -->
-                        <div class="footer_section footer_about">
-                           <div class="footer_logo_container">
-                              <a href="#">
-                                 <div class="footer_logo_text">MOGOT<span>CO</span></div>
-                              </a>
-                           </div>
-                           <div class="footer_about_text">
-                              <p>모두 같이 코딩</p>
-                           </div>
-                           <div class="footer_social">
-                              <ul>
-                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                              </ul>
-                           </div>
-                        </div>
-                        
-                     </div>
-
-                     <div class="col-lg-3 footer_col">
-               
-                        <!-- Footer Contact -->
-                        <div class="footer_section footer_contact">
-                           <div class="footer_title">Contact Us</div>
-                           <div class="footer_contact_info">
-                              <ul>
-                                 <li>Email: Info.mogotco@gmail.com</li>
-                                 <li>Phone:  +(82) 010 4009 1541</li>
-                                 <li>428, Seolleung-ro, Gangnam-gu, Seoul, Republic of Korea</li>
-                              </ul>
-                           </div>
-                        </div>
-                        
-                     </div>
-
-                     <div class="col-lg-3 footer_col">
-               
-                        <!-- Footer links -->
-                        <div class="footer_section footer_links">
-                           <div class="footer_title">Contact Us</div>
-                           <div class="footer_links_container">
-                              <ul>
-                                 <li><a th:href="@{/}">Home</a></li>
-                                 <li><a th:href="@{/about}">About</a></li>
-                                 <li><a th:href="@{/contact}">Contact</a></li>
-                                 <li><a href="#">Features</a></li>
-                                 <li><a th:href="@{/courses}">Courses</a></li>
-                                 <li><a href="#">Events</a></li>
-                                 <li><a href="#">Gallery</a></li>
-                                 <li><a href="#">FAQs</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                        
-                     </div>
-
-                     <div class="col-lg-3 footer_col clearfix">
-               
-                        <!-- Footer links -->
-                        <div class="footer_section footer_mobile">
-                           <div class="footer_title">Mobile</div>
-                           <div class="footer_mobile_content">
-                              <div class="footer_image"><a href="#"><img th:src="@{/images/mobile_1.png}" alt=""></a></div>
-                              <div class="footer_image"><a href="#"><img th:src="@{/images/mobile_2.png}" alt=""></a></div>
-                           </div>
-                        </div>
-                        
-                     </div>
-
-                  </div>
-               </div>
+	<div class="courses"></div>
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Checkout</span>
+                </nav>
             </div>
-         </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
 
-         <div class="row copyright_row">
-            <div class="col">
-               <div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
-                  <div class="cr_text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">상부3조</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-                  <div class="ml-lg-auto cr_links">
-                     <ul class="cr_list">
-                        <li><a href="#">Copyright notification</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                     </ul>
-                  </div>
-               </div>
+
+    <!-- Checkout Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>First Name</label>
+                            <input class="form-control" type="text" placeholder="John">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" type="text" placeholder="Doe">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text" placeholder="example@email.com">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" placeholder="+123 456 789">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line 1</label>
+                            <input class="form-control" type="text" placeholder="123 Street">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line 2</label>
+                            <input class="form-control" type="text" placeholder="123 Street">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Country</label>
+                            <select class="custom-select">
+                                <option selected>United States</option>
+                                <option>Afghanistan</option>
+                                <option>Albania</option>
+                                <option>Algeria</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" placeholder="New York">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" placeholder="New York">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" placeholder="123">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="newaccount">
+                                <label class="custom-control-label" for="newaccount">Create an account</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="shipto">
+                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse mb-5" id="shipping-address">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="John">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Doe">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="text" placeholder="example@email.com">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label>
+                                <input class="form-control" type="text" placeholder="123 Street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 2</label>
+                                <input class="form-control" type="text" placeholder="123 Street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <select class="custom-select">
+                                    <option selected>United States</option>
+                                    <option>Afghanistan</option>
+                                    <option>Albania</option>
+                                    <option>Algeria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City</label>
+                                <input class="form-control" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="text" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </footer>
-   
-</body>
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+                        <h6 class="mb-3">Products</h6>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 1</p>
+                            <p>$150</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 2</p>
+                            <p>$150</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name 3</p>
+                            <p>$150</p>
+                        </div>
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6>$150</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">$10</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <h5>$160</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                                <label class="custom-control-label" for="paypal">Paypal</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
+                                <label class="custom-control-label" for="directcheck">Direct Check</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
+                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
 
-</html>
+    </body>
+    </html>

@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChoController {
 	
 	@RequestMapping("/order")
-	public String order() {
-		return "order";
+	public String order(Model model) {
+		model.addAttribute("center", "order");
+		return "index";
 	}
 	
 	@RequestMapping("/kg")

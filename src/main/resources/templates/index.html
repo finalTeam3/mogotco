@@ -25,9 +25,14 @@
 <script th:src="@{/plugins/easing/easing.js}"></script>
 <script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
-
 </head>
 
+
+        
+ 
+   
+
+<body>
    <!-- Header -->
 
    <header class="header">
@@ -112,7 +117,7 @@
             </div>
          </div>         
       </div>       
-      
+    </header>    
          <!-- Menu -->
 
    <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
@@ -135,15 +140,10 @@
          </ul>
       </nav>
    </div>
-        
-   </header>
-   
-<body>
 
-<div class="super_container">
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
-	<div class="maincenter col-sm-12 text-left" th:insert = "${center} ? ${center} : maincenter"></div>
+<div class="super_container"th:insert = "${center} ? ${center} : maincenter">
    
    <!-- Home -->
 
@@ -169,8 +169,9 @@
    <!-- Newsletter -->
 
 
-</div>
 
+ </div>  
+</body>
    <!-- Footer -->
 
    <footer class="footer">
@@ -278,7 +279,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          </div>
       </div>
    </footer>
-   
-</body>
 
 </html>
