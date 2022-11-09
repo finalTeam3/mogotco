@@ -17,4 +17,9 @@ public class ChoController {
 		return "kakao";
 	}
 	
+	@RequestMapping("/kg")
+	public String kg() {
+		return "kg";
+	}
+	
 }
