@@ -5,12 +5,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class CourseController {
+public class ChoController {
 	
-	@RequestMapping("/course")
-	public String courses(Model model) {
-		model.addAttribute("center", "course");
+	@RequestMapping("/order")
+	public String order(Model model) {
+		model.addAttribute("center", "order");
 		return "index";
+	}
+	
+	@RequestMapping("/kg")
+	public String kg() {
+		return "kg";
 	}
 	
 }

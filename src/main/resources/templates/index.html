@@ -25,9 +25,14 @@
 <script th:src="@{/plugins/easing/easing.js}"></script>
 <script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
-
 </head>
 
+
+        
+ 
+   
+
+<body>
    <!-- Header -->
 
    <header class="header">
@@ -112,7 +117,7 @@
             </div>
          </div>         
       </div>       
-      
+    </header>    
          <!-- Menu -->
 
    <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
@@ -135,15 +140,10 @@
          </ul>
       </nav>
    </div>
-        
-   </header>
-   
-<body>
 
-<div class="super_container">
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
-	<div class="maincenter col-sm-12 text-left" th:insert = "${center} ? ${center} : maincenter"></div>
+<div class="super_container"th:insert = "${center} ? ${center} : maincenter">
    
    <!-- Home -->
 
@@ -169,8 +169,9 @@
    <!-- Newsletter -->
 
 
-</div>
 
+ </div>  
+</body>
    <!-- Footer -->
 
    <footer class="footer">
@@ -186,7 +187,7 @@
                         <!-- Footer About -->
                         <div class="footer_section footer_about">
                            <div class="footer_logo_container">
-                              <a href="#">
+                              <a th:href="@{/}">
                                  <div class="footer_logo_text">MOGOT<span>CO</span></div>
                               </a>
                            </div>
@@ -195,10 +196,10 @@
                            </div>
                            <div class="footer_social">
                               <ul>
-                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                 <li><a href="https://ko-kr.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                 <li><a href="https://www.google.com/"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                 <li><a href="https://www.instagram.com/7lsehdwns/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                 <li><a href="https://twitter.com/?lang=ko"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                               </ul>
                            </div>
                         </div>
@@ -278,7 +279,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          </div>
       </div>
    </footer>
-   
-</body>
 
 </html>
