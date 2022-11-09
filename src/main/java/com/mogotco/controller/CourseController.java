@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CourseController {
 	
 	@RequestMapping("/course")
-	public String course(Model model) {
+	public String courses(Model model) {
 		model.addAttribute("center", "course");
 		return "index";
 	}
