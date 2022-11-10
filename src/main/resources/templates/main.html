@@ -6,7 +6,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>ConnectLive 화상회의</title>
-		<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk/dist/connectlive-web-sdk.min.js"></script>
     	<script>
     		
     		//Data
@@ -25,6 +24,17 @@
 			const guestRoomId = document.querySelector('#guest-room-id');
 			const status = document.querySelector('#status');
 			const log = document.querySelector('#log');
+			
+			// 커넥트 라이브 내부 인증 alert 테스트
+			ConnectLive.signIn({
+			    serviceId: 'IH9V9FUXPHSR',
+			    serviceSecret: 'IH9V9FUXPHSRUKYA:KzURF9fInik5g1BK'
+			}).then(()=>{
+			    alert('인증에 성공했습니다.');
+			}).catch(()=>{
+			    alert('인증에 실패했습니다.');
+			});
+			
 
 			// METHODs
 			const createConferenceHostOptions = (room) => {
