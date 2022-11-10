@@ -71,8 +71,7 @@
 	var makeMerchantUid = hours + minutes + seconds + milliseconds;
 
 	//order시에 필요한 값들 변수로 다 선언해주기
-	
-	
+
 	function requestPay() {
 		IMP.request_pay({
 			pg : 'html5_inicis',
@@ -87,15 +86,15 @@
 			buyer_postcode : '123-456'
 		}, function(rsp) { // callback
 			if (rsp.success) {
-	              $.ajax({
-	                  type: "POST", 
-	                  url: "/kgorder", //ajax kgorder
-	                  data: {
-	                	  //order일때 필요한 것 다 들어감
-	                      "amount" : 1004,
-	                      "pay_method" : 'card'
-	                  }
-	              });
+				$.ajax({
+					type : "POST",
+					url : "/kgorder", //ajax kgorder
+					data : {
+						//order일때 필요한 것 다 들어감
+						"amount" : 1004,
+						"pay_method" : 'card'
+					}
+				});
 			} else {
 				console.log(rsp);
 			}
@@ -148,6 +147,10 @@
 								type="text" placeholder="조윤영" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
+							<label>Mentor Email</label> <input class="form-control"
+								type="text" placeholder="whdbsdud@naver.com" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
 							<label>Mentoring date</label> <input class="form-control"
 								type="text" placeholder="2022-11-10" readonly="readonly">
 						</div>
@@ -184,10 +187,10 @@
 					<div class="bg-light p-30">
 						<div class="row">
 							<div class="col-md-6 form-group">
-							<!-- session에서 cust의 poinr값을 가지고옴 -->
-								<label>My Point</label> <input class="form-control"
-									type="text" placeholder="3000">
-									<button class="submit ">submit</button>
+								<!-- session에서 cust의 poinr값을 가지고옴 -->
+								<label>My Point</label> <input class="form-control" type="text"
+									placeholder="3000">
+								<button class="submit ">submit</button>
 							</div>
 						</div>
 					</div>
@@ -220,7 +223,8 @@
 						<span class="bg-secondary pr-3">Payment</span>
 					</h5>
 
-					<button class="btn btn-block btn-primary font-weight-bold py-3" th:onclick="requestPay()">Payment</button>
+					<button class="btn btn-block btn-primary font-weight-bold py-3"
+						th:onclick="requestPay()">Payment</button>
 
 				</div>
 			</div>
