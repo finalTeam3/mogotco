@@ -25,9 +25,28 @@
 <script th:src="@{/plugins/easing/easing.js}"></script>
 <script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>	 
 </head>
 
+<script>
+var stompClient = null;
 
+
+function wsconnect() {
+	var socket = new SockJS('http://127.0.0.1/mogotco/wss');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {
+		console.log('Connected: ' + frame);
+		stompClient.subscribe('/broadcast', function(msg) {
+			$("#m1").text(JSON.parse(msg.body).content1);
+			$("#m2").text(JSON.parse(msg.body).content2);
+		});
+
+	});
+}; 
+</script>
         
  
    

@@ -1,8 +1,8 @@
-package com.mogotco.purchase;
+package com.mogotco.controller;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
@@ -15,9 +15,10 @@ import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
 
-@SpringBootTest
-class InsertPurchase {
 
+@RestController
+public class ChoAjaxController {
+	
 	@Autowired
 	PurchaseService service;
 	
@@ -32,10 +33,14 @@ class InsertPurchase {
 	
 	@Autowired
 	MentoringOptionService service4;
-	
-	@Test
-	void contextLoads() {
+
+
+	@RequestMapping("/kgorder")
+	public Object kgorder(PurchaseDTO pur) {
 		//결제완료 버튼을 눌렀을 때
+		
+		//purchase부분에 point생성
+		
 		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", 202, "공부법 상담 해드립니다.", null,null , "09:00", null,3 ,408,100);
 		try {
 			//구매 내용을 등록하고
@@ -63,11 +68,15 @@ class InsertPurchase {
 						purchase.getMentoring_mentoringid(), purchase.getMentoringoption_mentoringtime(), beforementoringoption.getMoptionstock()-1);
 			service4.modify(aftermentoringoption);
 			
+			//point값 수정
+			//session정보를 가지고와서 수정함
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
+		return "";
 	}
 
 }
-
