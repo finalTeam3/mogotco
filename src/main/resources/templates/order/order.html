@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 
 <head>
-    <meta charset="utf-8">
-        <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/ordercss/style.css}" rel="stylesheet">
-    
-	<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<meta charset="utf-8">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/ordercss/style.css}" rel="stylesheet">
+
 <style>
-.home
-{
+.home {
 	width: 100%;
 	height: 182px;
 	background: #f2f4f5;
 	border-bottom: solid 1px #edeff0;
 }
-.breadcrumbs_container
-{
+
+.breadcrumbs_container {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -24,13 +22,13 @@
 	padding-bottom: 1px;
 	padding-left: 3px;
 }
-.breadcrumbs ul li
-{
+
+.breadcrumbs ul li {
 	display: inline-block;
 	position: relative;
 }
-.breadcrumbs ul li:not(:last-child)::after
-{
+
+.breadcrumbs ul li:not(:last-child)::after {
 	display: inline-block;
 	font-family: 'FontAwesome';
 	content: '\f105';
@@ -38,8 +36,8 @@
 	margin-right: 4px;
 	color: #384158;
 }
-.breadcrumbs ul li a
-{
+
+.breadcrumbs ul li a {
 	font-size: 14px;
 	font-weight: 400;
 	color: #384158;
@@ -49,12 +47,63 @@
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.breadcrumbs ul li a:hover
-{
+
+.breadcrumbs ul li a:hover {
 	color: #14bdee;
-	}
+}
 </style>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script>
+	var IMP = window.IMP;
+	IMP.init("imp82873338");
+
+	var today = new Date();
+	var hours = today.getHours(); // 시
+	var minutes = today.getMinutes(); // 분
+	var seconds = today.getSeconds(); // 초
+	var milliseconds = today.getMilliseconds();
+	var makeMerchantUid = hours + minutes + seconds + milliseconds;
+
+	//order시에 필요한 값들 변수로 다 선언해주기
+	
+	
+	function requestPay() {
+		IMP.request_pay({
+			pg : 'html5_inicis',
+			pay_method : 'card',
+			merchant_uid : "IMP" + makeMerchantUid,
+			name : '당근 10kg',
+			amount : 1004,
+			buyer_email : 'Iamport@chai.finance',
+			buyer_name : '아임포트 기술지원팀',
+			buyer_tel : '010-1234-5678',
+			buyer_addr : '서울특별시 강남구 삼성동',
+			buyer_postcode : '123-456'
+		}, function(rsp) { // callback
+			if (rsp.success) {
+	              $.ajax({
+	                  type: "POST", 
+	                  url: "/kgorder", //ajax kgorder
+	                  data: {
+	                	  //order일때 필요한 것 다 들어감
+	                      "amount" : 1004,
+	                      "pay_method" : 'card'
+	                  }
+	              });
+			} else {
+				console.log(rsp);
+			}
+		});
+	}
+</script>
 </head>
+
 
 <body>
 	<div class="home">
@@ -66,201 +115,118 @@
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
 								<li><a th:href="@{/courses}">courses</a></li>
-								<li><a th:href="@{/course}">course</a></li>							
-								<li>Order</li>
+								<li><a th:href="@{/course}">course</a></li>
+								<li>order</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>			
+		</div>
 	</div>
-  <!-- Checkout Start -->
+	<!-- Checkout Start -->
 
-		<div class="container">
--- 구매페이지-멘토링번호, 멘토제목, 멘토이름, 멘토링날짜, 시간, 대면장소, 모집정원(멘토링 테이블에서 끌고오기), 가격(멘토링테이블에 있는 가격에서 x1을 함->controller에서)(purprice), 결제방법 입력칸  
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
-                <div class="bg-light p-30 mb-5">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>mentoring no</label>
-                            <input class="form-control" type="text">
-                        </div>
+	<div class="container">
+		<div class="row px-xl-5">
+			<div class="col-lg-8">
+				<h5 class="section-title position-relative text-uppercase mb-3">
+					<span class="bg-secondary pr-3">Billing Address</span>
+				</h5>
+				<div class="bg-light p-30 mb-5">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label>Mentoring no</label> <input class="form-control"
+								type="text" placeholder="203" readonly="readonly">
+						</div>
 
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="collapse mb-5" id="shipping-address">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="John">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Last Name</label>
-                                <input class="form-control" type="text" placeholder="Doe">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="example@email.com">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="+123 456 789">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 1</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 2</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="123">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
-                <div class="bg-light p-30 mb-5">
-                    <div class="border-bottom">
-                        <h6 class="mb-3">Products</h6>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 1</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 2</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 3</p>
-                            <p>$150</p>
-                        </div>
-                    </div>
-                    <div class="border-bottom pt-3 pb-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h6>Subtotal</h6>
-                            <h6>$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>$160</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                            </div>
-                        </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring title</label> <input class="form-control"
+								type="text" placeholder="이직 상담 신청하세요." readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentor name</label> <input class="form-control"
+								type="text" placeholder="조윤영" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring date</label> <input class="form-control"
+								type="text" placeholder="2022-11-10" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring time</label> <input class="form-control"
+								type="text" placeholder="11:00" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring place</label> <input class="form-control"
+								type="text" placeholder="서울강북구 4.19로 105" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring member</label> <input class="form-control"
+								type="text" placeholder="4" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring Price</label> <input class="form-control"
+								type="text" placeholder="25000원" readonly="readonly">
+						</div>
+						<div class="col-md-12">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="shipto">
+								<label class="custom-control-label" for="shipto"
+									data-toggle="collapse" data-target="#shipping-address">Select
+									Point</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="collapse mb-5" id="shipping-address">
+					<h5 class="section-title position-relative text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Point</span>
+					</h5>
+					<div class="bg-light p-30">
+						<div class="row">
+							<div class="col-md-6 form-group">
+							<!-- session에서 cust의 poinr값을 가지고옴 -->
+								<label>My Point</label> <input class="form-control"
+									type="text" placeholder="3000">
+									<button class="submit ">submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<h5 class="section-title position-relative text-uppercase mb-3">
+					<span class="bg-secondary pr-3">Order Total</span>
+				</h5>
+				<div class="bg-light p-30 mb-5">
+					<div class="border-bottom">
+						<div class="d-flex justify-content-between">
+							<p>Mentoring Price</p>
+							<p>25000원</p>
+						</div>
+						<div class="d-flex justify-content-between">
+							<p>Point</p>
+							<p>-3000원</p>
+						</div>
+					</div>
+					<div class="pt-2">
+						<div class="d-flex justify-content-between mt-2">
+							<h5>Total</h5>
+							<h5>22000원</h5>
+						</div>
+					</div>
+				</div>
+				<div class="mb-5">
+					<h5 class="section-title position-relative text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Payment</span>
+					</h5>
 
-    <!-- Checkout End -->
-</div>
+					<button class="btn btn-block btn-primary font-weight-bold py-3" th:onclick="requestPay()">Payment</button>
 
-    </body>
-    </html>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

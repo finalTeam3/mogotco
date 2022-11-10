@@ -15,11 +15,6 @@ public class ChoController {
 		return "index";
 	}
 	
-	@RequestMapping("/kg")
-	public String kg() {
-		return order+"kg";
-	}
-	
 	@RequestMapping("/main")
 	public String main() {
 		

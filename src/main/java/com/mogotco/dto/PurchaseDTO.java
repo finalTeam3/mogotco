@@ -33,5 +33,8 @@ public class PurchaseDTO {
 	//mentoringmember을 insert할 때 필요함(구매화면단에 있어야함(보이지 않은 상태로))
 	private int mentoringoption_mentoringoptionid;
 	
+	//cust의 point값 가져오기
+	private int user_userpoint;
+	
 
 }
