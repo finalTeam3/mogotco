@@ -18,4 +18,10 @@ public class ChoController {
 		return "kg";
 	}
 	
+	@RequestMapping("/main")
+	public String main() {
+		
+		return "main";
+	}
+	
 }

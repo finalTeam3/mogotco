@@ -3,53 +3,82 @@
 
 <head>
     <meta charset="utf-8">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
+        <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
-        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script th:src="@{/lib/easing/easing.min.js}"></script>
-    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
-
-    <!-- Contact Javascript File -->
-    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
-    <script th:src="@{/mail/contact.js}"></script>
-
-    <!-- Template Javascript -->
-    <script th:src="@{/js/main.js}"></script>
+    
+	<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<style>
+.home
+{
+	width: 100%;
+	height: 182px;
+	background: #f2f4f5;
+	border-bottom: solid 1px #edeff0;
+}
+.breadcrumbs_container
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding-bottom: 1px;
+	padding-left: 3px;
+}
+.breadcrumbs ul li
+{
+	display: inline-block;
+	position: relative;
+}
+.breadcrumbs ul li:not(:last-child)::after
+{
+	display: inline-block;
+	font-family: 'FontAwesome';
+	content: '\f105';
+	margin-left: 7px;
+	margin-right: 4px;
+	color: #384158;
+}
+.breadcrumbs ul li a
+{
+	font-size: 14px;
+	font-weight: 400;
+	color: #384158;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.breadcrumbs ul li a:hover
+{
+	color: #14bdee;
+	}
+</style>
 </head>
 
 <body>
-	<div class="courses"></div>
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Checkout</span>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/courses}">courses</a></li>
+								<li><a th:href="@{/course}">course</a></li>							
+								<li>Order</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+  <!-- Checkout Start -->
+	<div class="about"></div>
+		<div class="container">
 
-
-    <!-- Checkout Start -->
-    <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-8">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
@@ -59,6 +88,7 @@
                             <label>First Name</label>
                             <input class="form-control" type="text" placeholder="John">
                         </div>
+
                         <div class="col-md-6 form-group">
                             <label>Last Name</label>
                             <input class="form-control" type="text" placeholder="Doe">
@@ -228,8 +258,9 @@
                 </div>
             </div>
         </div>
-    </div>
+
     <!-- Checkout End -->
+</div>
 
     </body>
     </html>
