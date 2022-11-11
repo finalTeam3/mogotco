@@ -36,13 +36,13 @@ public class UserController {
 		try {
 			user = user_service.get(id);
 			if(user == null) {
-				model.addAttribute("center", "login");
+				model.addAttribute("center", dir + "login");
 			} else {
 				if(pwd.equals(user.getUserpwd())) {
 					session.setAttribute("loginuser", user);
 					maincenter(model);
 				} else {
-					model.addAttribute("center", "login");
+					model.addAttribute("center", dir + "login");
 				}
 			}
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class UserController {
 		if(session != null) {
 			session.invalidate();
 		}
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping("/logintest")
