@@ -73,12 +73,14 @@ class ChatbotTest {
 				JSONObject json = (JSONObject)jsonparser.parse(jsonString);
 				JSONArray bubblesArray = (JSONArray)json.get("bubbles");
 				JSONObject bubbles = (JSONObject)bubblesArray.get(0);
-				JSONObject data = (JSONObject)bubbles.get("data");
+				JSONObject data = (JSONObject)bubbles.get(1); // bubbles 배열 안의 객체 안의 "type" 다음 "data"
+				JSONObject cover = (JSONObject)bubbles.get(0); // "data"안의 "cover"
+				JSONObject dataa = (JSONObject)cover.get(3); 
+				JSONObject dataac = (JSONObject)dataa.get("description"); 
 				
-				JSONObject dataa = (JSONObject)data.get(0);
 				
 				String description = "";
-				description = (String)data.get("description");
+				description = (String)dataac.get("description");
 				chatMessage = description;
 				
 				
