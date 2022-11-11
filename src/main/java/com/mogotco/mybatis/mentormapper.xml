@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="update" parameterType="MentorDTO">
-		UPDATE mentor SET userid=#{userid},adminid=#{adminid},mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},mentorok=#{mentorok},cancelmentoring=#{cancelmentoring} WHERE mentorid=#{mentorid}
+		UPDATE mentor SET userid=#{userid},adminid=#{adminid},mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},mentorok=#{mentorok},mentordate=sysdate(),cancelmentoring=#{cancelmentoring} WHERE mentorid=#{mentorid}
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

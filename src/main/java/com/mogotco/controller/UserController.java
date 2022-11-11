@@ -13,16 +13,19 @@ import com.mogotco.service.UserService;
 @Controller
 public class UserController {
 	
+	String dir = "user/";
+	
 	@Autowired
 	UserService user_service;
 	
-	@RequestMapping("/logintest")
-	public String logintest(Model model) {
-		model.addAttribute("center", "logintest");
-		return "index";
+	public void maincenter(Model model) {
 	}
 	
-	public void maincenter(Model model) {
+	//로그인페이지
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("center", dir+"login");
+		return "main";
 	}
 	
 	@RequestMapping("/loginimpl")
@@ -45,17 +48,43 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		
 		if(session != null) {
 			session.invalidate();
 		}
-		
 		return "index";
 	}
+	
+	@RequestMapping("/logintest")
+	public String logintest(Model model) {
+		model.addAttribute("center", "logintest");
+		return "main";
+	}
+	
+	//마이페에지
+	@RequestMapping("/mypage")
+	public String mypage(Model model) {
+		model.addAttribute("center", dir+"mypage");
+		return "main";
+	}
+	
+	//회원가입페이지
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("center", dir+"register");
+		return "main";
+	}
+	
+	//회원정보수정페이지
+	@RequestMapping("/usermodify")
+	public String usermodify(Model model) {
+		model.addAttribute("center", dir+"usermodify");
+		return "main";
+	}
+
 	
 }
