@@ -71,18 +71,31 @@ class ChatbotTest {
 //				JSONObject data = (JSONObject)bubbles.get("data");
 
 				JSONObject json = (JSONObject)jsonparser.parse(jsonString);
-				JSONArray bubblesArray = (JSONArray)json.get("bubbles");
-				JSONObject bubbles = (JSONObject)bubblesArray.get(0);
-				JSONObject data = (JSONObject)bubbles.get(1); // bubbles 배열 안의 객체 안의 "type" 다음 "data"
-				JSONObject cover = (JSONObject)bubbles.get(0); // "data"안의 "cover"
-				JSONObject dataa = (JSONObject)cover.get(3); 
-				JSONObject dataac = (JSONObject)dataa.get("description"); 
+				JSONArray bubblesArray = (JSONArray)json.get("bubbles");//bubbles
+				JSONObject bubbles1 = (JSONObject)bubblesArray.get(0);//bubbles의 첫번째
+				JSONObject data = (JSONObject)bubbles1.get("data");//bubbles->data
+				JSONObject cover = (JSONObject)data.get("cover");//data->cover
+				JSONObject datac = (JSONObject)cover.get("data");//cover->data
+				JSONObject description = (JSONObject)datac.get(0);//data->desciption
+ 
 				
 				
-				String description = "";
-				description = (String)dataac.get("description");
-				chatMessage = description;
+				//String descriptionvalue = "";
+				//descriptionvalue = (String)datac.get("description");
+				//chatMessage=descriptionvalue;
+
+
+
+
+
+				JSONArray contentTable = (JSONArray)data.get("contentTable");//data->contenTable
+				JSONArray contentTable1 = (JSONArray)contentTable.get(1);//data->contenTable
+				JSONObject contenTable2 = (JSONObject)contentTable1.get(0);//contenTable의 첫번째
+				JSONObject datacc = (JSONObject)contenTable2.get("data");//contenTable의 첫번째->data
 				
+				String contentvalue = "";
+				contentvalue = (String)datacc.get("title");
+				chatMessage=contentvalue;
 				
 				
 			} catch (Exception e) {
