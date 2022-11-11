@@ -42,4 +42,10 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/mypage")
+	public String mypage(Model model) {
+		model.addAttribute("center", "mypage");
+		return "index";
+	}
+	
 }
