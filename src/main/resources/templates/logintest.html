@@ -37,41 +37,36 @@
     <!-- Template Javascript -->
     <script th:src="@{/styles/login/main.js}"></script>
     
-   <!-- login -->
-    <script>
-    $(document).ready(function(){
-    	$('#login_form > button').click(function(){
-    		$('#login_form').attr(
-    			{
-    				'action' : '[[@{/loginimpl}]]',
-    				'method' : 'post'
-    			}
-    		);
-    		$('#login_form').submit();
-    	});
-    });
-    </script>
-</head>
-
-<body>
-
- <!-- kakao login API script -->
+     <!-- kakao login API script -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
+	integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
     
-  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
-<script>
-  Kakao.init('55853051e0e17f0cf365c5e0e10b7216'); // 사용하려는 앱의 JavaScript 키 입력
-</script>
-
-<script>
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://127.0.0.1/mogotco/logintest',
-      scope : 'account_email, gender, age_range, birthday, openid'
-    });
-  }
-  
-  
+    <script>
+		Kakao.init('55853051e0e17f0cf365c5e0e10b7216'); // 사용하려는 앱의 JavaScript 키 입력
+		console.log(Kakao.isInitialized()); // 초기화여부, 정상 : true
+	</script>
+	
+    <!-- KAKAO login -->
+    <script>
+	Kakao.API.request({
+		url: '/v2/user/me',
+	})
+		.then(function(response) {
+			console.log(response);
+		})
+  		.catch(function(error) {
+    		console.log(error);
+  		});
+	
+	  function loginWithKakao() {
+		    Kakao.Auth.authorize({
+		      redirectUri: 'http://127.0.0.1/mogotco/logintest',
+		      scope : 'account_email, gender, age_range, birthday, openid'
+		    });
+		  }
+	</script>
+    
+    <script>
   // 아래는 데모를 위한 UI 코드입니다.
   displayToken()
   function displayToken() {
@@ -97,6 +92,30 @@
     if (parts.length === 2) { return parts[1].split(';')[0]; }
   }
 </script>
+
+   <!-- login -->
+    <script>
+    $(document).ready(function(){
+    	$('#login_form > button').click(function(){
+    		$('#login_form').attr(
+    			{
+    				'action' : '[[@{/loginimpl}]]',
+    				'method' : 'post'
+    			}
+    		);
+    		$('#login_form').submit();
+    	});
+    });
+    </script>
+
+</head>
+
+<body>
+
+
+
+
+
 
 
     <div class="container-xxl position-relative bg-white d-flex p-0">
