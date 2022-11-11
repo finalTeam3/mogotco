@@ -12,6 +12,11 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/mservice")
+	public String mservice() {
+		return "mservice";
+	}
+	
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("center", "about");
