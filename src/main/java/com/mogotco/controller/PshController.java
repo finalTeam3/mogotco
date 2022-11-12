@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class BlogController {
+public class PshController {
 	
-	@RequestMapping("/blog_single")
-	public String blog_single(Model model) {
-		model.addAttribute("center", "blog_single");
+	@RequestMapping("/chatbot")
+	public String chatbot(Model model) {
+		model.addAttribute("center", "chatbot");
 		return "index";
 	}
 	

@@ -17,7 +17,7 @@ import com.mogotco.service.PurchaseService;
 
 
 @RestController
-public class ChoAjaxController {
+public class AjaxController {
 	
 	@Autowired
 	PurchaseService service;
@@ -40,7 +40,7 @@ public class ChoAjaxController {
 		//결제완료 버튼을 눌렀을 때
 		
 		//purchase부분에 point생성
-		
+		//purchase부분 넘길때 받아올 것들
 		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", 202, "공부법 상담 해드립니다.", null,null , "09:00", null,3 ,408,100);
 		try {
 			//구매 내용을 등록하고
