@@ -70,12 +70,42 @@ class ChatbotTest {
 				JSONArray bubblesArray = (JSONArray)json.get("bubbles");//json객체 -> bubbles 배열
 				JSONObject bubbles = (JSONObject)bubblesArray.get(0);//bubbles 배열의 0번째 객체
 				JSONObject data = (JSONObject)bubbles.get("data");//bubbles 0번째 객체-> data 객체
-				JSONObject cover = (JSONObject)data.get("cover");//data 객체 -> cover 객체
-				JSONObject coverdata = (JSONObject)cover.get("data");//cover 객체-> data 객체
-				JSONObject description = (JSONObject)coverdata.get(0);//data 객체->0번째 key값 desciption
- 
-//				String descriptionvalue = "";
-//				descriptionvalue = (String)datac.get("description");
+				
+				
+				String descriptionvalue = "";
+				descriptionvalue = (String)data.get("description");
+				
+				if(chatMessage == "문의" || chatMessage == "결제" || chatMessage == "계정" || chatMessage == "자주 묻는 질문") {
+					JSONObject cover = (JSONObject)data.get("cover");//data 객체 -> cover 객체
+					JSONObject coverdata = (JSONObject)cover.get("data");//cover 객체-> data 객체
+					JSONObject description = (JSONObject)coverdata.get(0);//data 객체->0번째 key값 desciption
+					descriptionvalue = (String)coverdata.get("description");					
+					System.out.println(descriptionvalue);
+					
+					JSONArray contentTable = (JSONArray)data.get("contentTable");//data->contenTable
+					JSONArray cm = new JSONArray();
+					for(int i = 0; i < contentTable.size(); i++) {
+						JSONObject co = new JSONObject();
+						
+						JSONArray contentTable1 = (JSONArray)contentTable.get(i);//data->contenTable
+						JSONObject contenTable2 = (JSONObject)contentTable1.get(0);//contenTable의 첫번째
+						JSONObject contentdata = (JSONObject)contenTable2.get("data");//contenTable의 첫번째->data
+						String contentvalue = "";
+						contentvalue = (String)contentdata.get("title");
+						chatMessage = descriptionvalue +" "+ contentvalue;
+						
+						co.put("button", contentvalue);
+						cm.add(co);
+						
+						//System.out.println(contentvalue);
+					}
+					System.out.println(cm);
+					
+				}
+					
+				chatMessage = descriptionvalue;	
+					
+		
 				
 //				JSONArray contentTable = (JSONArray)data.get("contentTable");//data->contenTable
 //				JSONArray contentTable1 = (JSONArray)contentTable.get(0);//data->contenTable
@@ -85,24 +115,6 @@ class ChatbotTest {
 //				String contentvalue = "";
 //				contentvalue = (String)contentdata.get("title");
 //				chatMessage= contentvalue;
-				
-				
-				JSONArray contentTable = (JSONArray)data.get("contentTable");//data->contenTable
-				JSONArray contentTable1 = (JSONArray)contentTable.get(0);//data->contenTable
-				
-//				for(int i = 0; i < contenTable1.length(); i++) {
-//					
-//				}
-				
-				JSONObject contenTable2 = (JSONObject)contentTable1.get(0);//contenTable의 첫번째
-				JSONObject contentdata = (JSONObject)contenTable2.get("data");//contenTable의 첫번째->data
-				
-				String contentvalue = "";
-				contentvalue = (String)contentdata.get("title");
-				chatMessage= contentvalue;				
-				
-				
-				
 				
 				
 				
