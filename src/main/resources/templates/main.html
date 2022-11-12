@@ -74,9 +74,19 @@ function wsconnect() {
                               <div>info.mogotco@gmail.com</div>
                            </li>
                         </ul>
-                        <div class="top_bar_login ml-auto">
-                           <div class="login_button"><a th:href="@{/login}">Register or Login</a></div>
+                        
+                        <div th:if = "${session.loginuser != null}" class="userdetail">
+                        		<a th:href="@{/mypage(id = ${session.loginuser.userid})}" th:text = "${session.loginuser.userid}">userdetail</a>
+                        	</div>
+                        
+                        <div th:if = "${session.loginuser == null}" class="top_bar_login ml-auto">
+                           <div class="login_button"><a th:href="@{/login}">LOGIN</a></div>
                         </div>
+                        
+                        <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
+                           <div class="login_button"><a th:href="@{/logout}">LOGOUT</a></div>
+                        </div>
+                        
                      </div>
                   </div>
                </div>
@@ -99,10 +109,9 @@ function wsconnect() {
                         <ul class="main_nav">
                            <li class="active"><a th:href="@{/}">Home</a></li>
                            <li><a th:href="@{/about}">About</a></li>
-                           <li><a th:href="@{/courses}">Courses</a></li>
-                           <li><a th:href="@{/blog}">Blog</a></li>
+                           <li><a th:href="@{/courses}">Mentoring</a></li>
+                           <li th:if = "${session.loginuser != null}"><a th:href="@{/blog(id = ${session.loginuser.userid})}">WishList</a></li>
                            <li><a th:href="@{/contact}">Contact</a></li>
-                           <li><a th:href="@{/mservice}">MentoringService</a></li> 
                         </ul>
                         <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 

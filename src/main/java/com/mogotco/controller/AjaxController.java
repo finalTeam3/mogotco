@@ -17,7 +17,7 @@ import com.mogotco.service.PurchaseService;
 
 
 @RestController
-public class ChoAjaxController {
+public class AjaxController {
 	
 	@Autowired
 	PurchaseService service;

@@ -9,42 +9,21 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main() {
-		return "index";
+		return "main";
 	}
 	
-	@RequestMapping("/mservice")
-	public String mservice() {
-		return "mservice";
+	//자주 묻는 질문 페이지
+	@RequestMapping("/faq")
+	public String faq(Model model) {
+		model.addAttribute("center", "faq");
+		return "main";
 	}
 	
-	@RequestMapping("/about")
-	public String about(Model model) {
-		model.addAttribute("center", "about");
-		return "index";
-	}
-	
-	@RequestMapping("/blog")
+	//공지사항
+	@RequestMapping("/notice")
 	public String blog(Model model) {
-		model.addAttribute("center", "blog");
-		return "index";
-	}
-	
-	@RequestMapping("/courses")
-	public String courses(Model model) {
-		model.addAttribute("center", "courses");
-		return "index";
-	}
-	
-	@RequestMapping("/contact")
-	public String contact(Model model) {
-		model.addAttribute("center", "contact");
-		return "index";
-	}
-	
-	@RequestMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("center", "login");
-		return "index";
+		model.addAttribute("center", "notice");
+		return "main";
 	}
 	
 }
