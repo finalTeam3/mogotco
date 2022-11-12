@@ -76,11 +76,11 @@ function wsconnect() {
                         </ul>
                         
                         <div th:if = "${session.loginuser != null}" class="userdetail">
-                        		<a th:href="@{/mypage(id = ${session.loginuser.userid})}" th:text = "${session.loginuser.userid}">userdetail</a>
+                        		<a th:href="@{/user/mypage(id = ${session.loginuser.userid})}" th:text = "${session.loginuser.userid}">userdetail</a>
                         	</div>
                         
                         <div th:if = "${session.loginuser == null}" class="top_bar_login ml-auto">
-                           <div class="login_button"><a th:href="@{/login}">LOGIN</a></div>
+                           <div class="login_button"><a th:href="@{/user/login}">LOGIN</a></div>
                         </div>
                         
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">

@@ -60,9 +60,9 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping("/logintest")
-	public String logintest(Model model) {
-		model.addAttribute("center", "logintest");
+	@RequestMapping("/kakaologin")
+	public String kakaologin(Model model) {
+		model.addAttribute("center", "kakaologin");
 		return "main";
 	}
 	
