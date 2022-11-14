@@ -37,6 +37,16 @@
     <!-- Template Javascript -->
     <script th:src="@{/styles/login/main.js}"></script>
     
+    <!-- KAKAO login -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+		integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+	
+	<!-- KAKAO login JavaScript SDK -->
+	<script>
+		Kakao.init('55853051e0e17f0cf365c5e0e10b7216'); // 사용하려는 앱의 JavaScript 키 입력
+		console.log(Kakao.isInitialized());
+	</script>
+    
     <!-- login -->
     <script>
     $(document).ready(function(){
@@ -50,7 +60,29 @@
     		$('#login_form').submit();
     	});
     });
-    </script>
+    
+	function loginWithKakao() {
+    	Kakao.Auth.authorize({
+      		redirectUri: 'http://127.0.0.1/mogotco/user/kakaologin',
+      		scope: 'account_email,gender,age_range,birthday'
+    	});
+	}
+    	Kakao.API.request({
+    		  url: '/v2/user/me',
+    		  success: function (response) {
+    			  $.ajax({
+    			        type: "POST",
+    			        url: "/loginWithKakao",
+    			        data: {
+    		  			},
+    	      fail: function (error) {
+    	            console.log(error)
+    	          }
+    				})
+    		  }
+    	})
+	
+      </script>
 </head>
 
 <body>
@@ -93,6 +125,12 @@
                         </div> -->
                         
                         <button class="btn btn-primary py-3 w-100 mb-4">LOGIN</button>
+                        
+                        <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+ 						 <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+				  			  alt="카카오 로그인 버튼" />
+						</a>
+						
                         </form>
                         
                         <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>

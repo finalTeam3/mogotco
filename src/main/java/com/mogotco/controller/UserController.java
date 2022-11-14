@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mogotco.dto.UserDTO;
+import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -18,6 +21,9 @@ public class UserController {
 	
 	@Autowired
 	UserService user_service;
+	
+	@Autowired
+	KakaologinAPI kakao_service;
 	
 	public void maincenter(Model model) {
 	}
@@ -60,9 +66,19 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping("/kakaologin")
-	public String kakaologin(Model model) {
-		model.addAttribute("center", "kakaologin");
+	@RequestMapping("/kakaologinpage")
+	public String kakaologinpage(Model model) {
+		model.addAttribute("center", dir + "kakaologinpage");
+		return "main";
+	}
+	
+	@RequestMapping(value = "/kakaologin", method = RequestMethod.GET)
+	public String kakaologin(@RequestParam(value = "code", required = false) String kakaocode) throws Exception {
+		System.out.println(kakaocode);
+		String accessToken = kakao_service.getAccessToken(kakaocode);
+		System.out.println("kakao access token : " + accessToken);
+		
+		
 		return "main";
 	}
 	
