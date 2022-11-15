@@ -1,92 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 
 <head>
-    <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/ordercss/style.css}" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+<style>
+.home {
+	width: 100%;
+	height: 182px;
+	background: #f2f4f5;
+	border-bottom: solid 1px #edeff0;
+}
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+.breadcrumbs_container {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding-bottom: 1px;
+	padding-left: 3px;
+}
 
-    <!-- Libraries Stylesheet -->
-    <link href="/styles/login/owl.carousel.min.css" rel="stylesheet">
-    <link href="/styles/login/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+.breadcrumbs ul li {
+	display: inline-block;
+	position: relative;
+}
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/styles/login/bootstrap.min.css" rel="stylesheet">
+.breadcrumbs ul li:not(:last-child)::after {
+	display: inline-block;
+	font-family: 'FontAwesome';
+	content: '\f105';
+	margin-left: 7px;
+	margin-right: 4px;
+	color: #384158;
+}
 
-    <!-- Template Stylesheet -->
-    <link href="/styles/login/style.css" rel="stylesheet">
+.breadcrumbs ul li a {
+	font-size: 14px;
+	font-weight: 400;
+	color: #384158;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+
+.breadcrumbs ul li a:hover {
+	color: #14bdee;
+}
+</style>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+<script>
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
+	}
+</script>
 </head>
 
+
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/courses}">courses</a></li>
+								<li><a th:href="@{/course}">course</a></li>
+								<li>order</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Checkout Start -->
 
+	<div class="container">
+		<div class="row px-xl-5">
+			<div class="col-lg-8" style="float: none; margin:0 auto;" >
+				<h5 class="section-title position-relative text-uppercase mb-3">
+					<span class="bg-secondary pr-3">Register</span>
+				</h5>
+				<div class="bg-light p-30 shadow mb-5">
+					<div class="row">
+					
+						<input type="file" onchange="readURL(this);"> 
+						<img id="preview" />
+											
+<!-- 						<img id="previewimg">
+						<div class="col-md-12 form-group">
+							<label>profile img</label> <input class="form-control"
+								type="file" id="profileimg" accept="img/*" onchange="readURL(this)">
+						</div> -->
+											
+						<div class="col-md-12 form-group">
+							<label>mentorid</label> <input class="form-control"
+								type="text" placeholder="101" readonly="readonly">
+						</div>
 
-        <!-- Sign In Start -->
-        <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
-                    
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>MGC</h3>
-                            </a>
-                            <h3>Register</h3>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">ID</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">register~ Password</label>
-                        </div>
-                        
-                       <!--  <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="">Forgot Password</a>
-                        </div> -->
-                        
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Sign In End -->
-    </div>
+						<div class="col-md-12 form-group">
+							<label>이름</label> <input class="form-control"
+								type="text" placeholder="박성훈" readonly="readonly">
+						</div>
+						
+						<div class="col-md-12 form-group">
+							<label>명함 등록</label> <input class="form-control"
+								type="text" placeholder="" readonly="readonly">
+						</div>
+						<div class="col-md-12 form-group">
+							<label>회사</label> <input class="form-control"
+								type="text" placeholder="" readonly="readonly">
+						</div>
+						<div class="col-md-12 form-group">
+							<label>소개</label> <input class="form-control"
+								type="text" placeholder="" readonly="readonly">
+						</div>
+						<div class="col-md-12 form-group">
+							<label>희망분야</label> <input class="form-control"
+								type="text" placeholder="" readonly="readonly">
+						</div>
+ 						<div class="col-md-12 form-group">
+							<label>경력</label> <input class="form-control"
+								type="text" placeholder="" readonly="readonly">
+  						</div>
+<!--						<div class="col-md-6 form-group">
+							<label>Mentoring member</label> <input class="form-control"
+								type="text" placeholder="4" readonly="readonly">
+						</div>
+						<div class="col-md-6 form-group">
+							<label>Mentoring Price</label> <input class="form-control"
+								type="text" placeholder="25000원" readonly="readonly">
+						</div> -->
+						<div class="col-md-12">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="shipto">
+								<label class="custom-control-label" for="shipto"
+									data-toggle="collapse" data-target="#shipping-address">Select
+									Point</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="collapse mb-5" id="shipping-address">
+					<h5 class="section-title position-relative text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Point</span>
+					</h5>
+					<div class="bg-light p-30">
+						<div class="row">
+							<div class="col-md-6 form-group">
+								<!-- session에서 cust의 poinr값을 가지고옴 -->
+								<label>My Point</label> <input class="form-control" type="text"
+									placeholder="3000">
+								<button class="submit ">submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+<!-- 			<div class="col-lg-4">
+				<h5 class="section-title position-relative text-uppercase mb-3">
+					<span class="bg-secondary pr-3">Order Total</span>
+				</h5>
+				<div class="bg-light p-30 mb-5">
+					<div class="border-bottom">
+						<div class="d-flex justify-content-between">
+							<p>Mentoring Price</p>
+							<p>25000원</p>
+						</div>
+						<div class="d-flex justify-content-between">
+							<p>Point</p>
+							<p>-3000원</p>
+						</div>
+					</div>
+					<div class="pt-2">
+						<div class="d-flex justify-content-between mt-2">
+							<h5>Total</h5>
+							<h5>22000원</h5>
+						</div>
+					</div>
+				</div>
+				<div class="mb-5">
+					<h5 class="section-title position-relative text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Payment</span>
+					</h5>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-   <!--  <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script> -->
+					<button class="btn btn-block btn-primary font-weight-bold py-3"
+						th:onclick="requestPay()">Payment</button>
 
-    <!-- Template Javascript -->
-    <script src="/styles/login/main.js"></script>
+				</div>
+			</div> -->
+			
+		</div>
+
+	</div>
+
 </body>
-
 </html>
