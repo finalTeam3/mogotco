@@ -84,7 +84,7 @@ function wsconnect() {
                         </div>
                         
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
-                           <div class="login_button"><a th:href="@{/logout}">LOGOUT</a></div>
+                           <div class="login_button"><a th:href="@{/user/logout}">LOGOUT</a></div>
                         </div>
                         
                      </div>
@@ -108,8 +108,8 @@ function wsconnect() {
                      <nav class="main_nav_contaner ml-auto">
                         <ul class="main_nav">
                            <li class="active"><a th:href="@{/}">Home</a></li>
-                           <li><a th:href="@{/about}">About</a></li>
-                           <li><a th:href="@{/courses}">Mentoring</a></li>
+                           <li><a th:href="@{/notice}">Notice</a></li>
+                           <li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/blog(id = ${session.loginuser.userid})}">WishList</a></li>
                            <li><a th:href="@{/contact}">Contact</a></li>
                         </ul>
@@ -162,8 +162,8 @@ function wsconnect() {
       <nav class="menu_nav">
          <ul class="menu_mm">
             <li class="menu_mm"><a th:href="@{/}">Home</a></li>
-            <li class="menu_mm"><a th:href="@{/about}">About</a></li>
-            <li class="menu_mm"><a th:href="@{/courses}">Courses</a></li>
+            <li class="menu_mm"><a th:href="@{/notice}">Notice</a></li>
+            <li class="menu_mm"><a th:href="@{/mentoring}">Mentoring</a></li>
             <li class="menu_mm"><a th:href="@{/blog}">Blog</a></li>
             <li class="menu_mm"><a th:href="@{/contack}">Contact</a></li>
          </ul>
@@ -204,7 +204,7 @@ function wsconnect() {
    <!-- Footer -->
 
    <footer class="footer">
-      <div class="footer_background" style="background-image:url(/mogotco/images/footer_background.png)"></div>
+      <div class="footer_background" style="background-image:url(images/footer_background.png)"></div>
       <div class="container">
          <div class="row footer_row">
             <div class="col">
@@ -259,10 +259,10 @@ function wsconnect() {
                            <div class="footer_links_container">
                               <ul>
                                  <li><a th:href="@{/}">Home</a></li>
-                                 <li><a th:href="@{/about}">About</a></li>
+                                 <li><a th:href="@{/about}">Notice</a></li>
                                  <li><a th:href="@{/contact}">Contact</a></li>
                                  <li><a href="#">Features</a></li>
-                                 <li><a th:href="@{/courses}">Courses</a></li>
+                                 <li><a th:href="@{/courses}">Mentoring</a></li>
                                  <li><a href="#">Events</a></li>
                                  <li><a href="#">Gallery</a></li>
                                  <li><a href="#">FAQs</a></li>
