@@ -109,7 +109,7 @@ function wsconnect() {
                         <ul class="main_nav">
                            <li class="active"><a th:href="@{/}">Home</a></li>
                            <li><a th:href="@{/about}">About</a></li>
-                           <li><a th:href="@{/courses}">Mentoring</a></li>
+                           <li><a th:href="@{/mentoring}">Mentoring</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/blog(id = ${session.loginuser.userid})}">WishList</a></li>
                            <li><a th:href="@{/contact}">Contact</a></li>
                         </ul>
