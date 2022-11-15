@@ -39,7 +39,6 @@ public class PurchaseController {
 			//detailmember = purchasedetailservice.groupcount(mentoringmembercnt);
 			model.addAttribute("list", detail);
 			//model.addAttribute("member", detailmember);
-			//System.out.println(mentoringmembercnt);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

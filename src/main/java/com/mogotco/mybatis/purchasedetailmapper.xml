@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 전체구매이력(구매번호,구매날짜,가격,결제방법,멘토링제목,멘토이름,멘토링 날짜,시간,대면장소, 비대면 url,진행여부,케어유무) -->
 	<select id="wholedetail" parameterType="String"
 		resultType="PurchaseDetailDTO">
-		SELECT purde.purchasedetailid, pur.purdate AS purchase_purdate, pur.purprice
+		SELECT purde.purchaseid, pur.purdate AS purchase_purdate, pur.purprice
 		AS purchase_purprice,pur.purpay AS purchase_purpay,
 		mentoring.mtitle AS mentoring_mtitle, u.username AS
 		user_mentorname,mentoring.mentoringdate AS mentoring_mentoringdate,
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 대면구매이력(구매번호,구매날짜,가격,결제방법,멘토링제목,멘토이름,멘토링 날짜,시간,대면장소, 진행여부) -->
 	<select id="facedetail" parameterType="String"
 		resultType="PurchaseDetailDTO">
-		SELECT purde.purchasedetailid, pur.purdate AS
+		SELECT purde.purchaseid, pur.purdate AS
 		purchase_purdate, pur.purprice AS purchase_purprice,pur.purpay AS
 		purchase_purpay,
 		mentoring.mtitle AS mentoring_mtitle, u.username AS
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 비대면구매이력(구매번호,구매날짜,가격,결제방법,멘토링제목,멘토이름,멘토링 날짜,시간,비대면영상 url, 진행여부) -->
 	<select id="remotedetail" parameterType="String"
 		resultType="PurchaseDetailDTO">
-		SELECT purde.purchasedetailid, pur.purdate AS
+		SELECT purde.purchaseid, pur.purdate AS
 		purchase_purdate, pur.purprice
 		AS purchase_purprice,pur.purpay AS
 		purchase_purpay,
