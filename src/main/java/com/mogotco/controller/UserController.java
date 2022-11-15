@@ -1,5 +1,7 @@
 package com.mogotco.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,19 +68,24 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping("/kakaologinpage")
-	public String kakaologinpage(Model model) {
-		model.addAttribute("center", dir + "kakaologinpage");
-		return "main";
-	}
-	
 	@RequestMapping(value = "/kakaologin", method = RequestMethod.GET)
-	public String kakaologin(@RequestParam(value = "code", required = false) String kakaocode) throws Exception {
+	public String kakaologin(@RequestParam(value = "code", required = false) String kakaocode, Model model, HttpSession session) throws Exception {
+		model.addAttribute("center", dir + "kakaologin");
 		System.out.println(kakaocode);
 		String accessToken = kakao_service.getAccessToken(kakaocode);
 		System.out.println("kakao access token : " + accessToken);
 		
+		HashMap<String, Object> userInfo = kakao_service.getUserInfo(accessToken);
+		System.out.println("access Token : " + accessToken);
+		System.out.println("nickname : " + userInfo.get("profile_nickname"));
+		System.out.println("email : " + userInfo.get("account_email"));
 		
+		
+//		  if(userInfo.get("account_email") != null) { 
+//			  session.setAttribute("userId", userInfo.get("account_email")); 
+//			  session.setAttribute("accessToken", accessToken); 
+//			}
+		 
 		return "main";
 	}
 	

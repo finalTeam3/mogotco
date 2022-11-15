@@ -9,13 +9,14 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
@@ -47,7 +48,7 @@ public class KakaologinAPI {
             System.out.println("responseCode : " + responseCode);
             
             BufferedReader br = new BufferedReader(new InputStreamReader(hucon.getInputStream()));
-            String line = null;
+            String line = "";
             String result = "";
             
             while ((line = br.readLine()) != null) {
@@ -70,13 +71,54 @@ public class KakaologinAPI {
             br.close();
             bw.close();
             
-            
 		} catch (IOException  e) {
 			e.printStackTrace();
 		}
 		
-		
 		return accessToken;
 	}
 	
+	public HashMap<String, Object> getUserInfo (String accessToken) throws Exception{
+	       
+        HashMap<String, Object> userInfo = new HashMap<>();
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+       
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection hucon = (HttpURLConnection) url.openConnection();
+            hucon.setRequestMethod("GET");
+           
+            hucon.setRequestProperty("Authorization", "Bearer " + accessToken);
+           
+            int responseCode = hucon.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+           
+            BufferedReader br = new BufferedReader(new InputStreamReader(hucon.getInputStream()));
+            String line = "";
+            String result = "";
+           
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+           
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+           
+//          JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+           
+            JsonObject profile = kakao_account.getAsJsonObject().get("profile").getAsJsonObject();
+            String nickname = profile.getAsJsonObject().get("nickname").getAsString();
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+           
+            System.out.println();
+//          userInfo.put("nickname", nickname);
+//          userInfo.put("email", email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userInfo;
+    }
+
 }
