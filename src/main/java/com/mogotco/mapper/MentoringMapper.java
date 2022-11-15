@@ -11,6 +11,8 @@ import com.mogotco.frame.MyMapper;
 @Repository
 @Mapper
 public interface MentoringMapper extends MyMapper<Integer, MentoringDTO> {
+	// 등록된 모든 멘토링을 출력하기 위한 mapper추가
+	public List<MentoringDTO> viewMentoringAll() throws Exception;
 	// 등록된 멘토링 리스트 출력을 위한 mapper추가
 	public List<MentoringDTO> selectMentoringAll(int mcateid) throws Exception;
 	// 멘토링 옵션 출력을 위한 mapper 추가
