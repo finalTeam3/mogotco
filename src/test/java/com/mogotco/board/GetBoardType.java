@@ -1,5 +1,7 @@
 package com.mogotco.board;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +10,7 @@ import com.mogotco.dto.BoardDTO;
 import com.mogotco.service.BoardService;
 
 @SpringBootTest
-class GetBoard {
+class GetBoardType {
 	
 	@Autowired
 	BoardService service;
@@ -16,16 +18,17 @@ class GetBoard {
 	@Test
 	void contextLoads() {
 		
-		BoardDTO board = null;
+		List<BoardDTO> list = null;
 		try {
-			board = service.get(801);
+			list = service.selectboardtype(2);
 			System.out.println("OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println(board);
-		
+		for(BoardDTO b:list) {
+			System.out.println(b);
+		}
 	}
 	
 }
