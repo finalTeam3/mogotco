@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/purchase")
 public class PurchaseController {
 	
 	String purchase = "purchase/";

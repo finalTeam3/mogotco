@@ -11,6 +11,7 @@ import com.mogotco.dto.UserDTO;
 import com.mogotco.service.UserService;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
 	String dir = "user/";
