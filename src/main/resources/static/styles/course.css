@@ -941,9 +941,13 @@ section
 	background: #14bdee;
 	color: #FFFFFF;
 }
-.tab_panels
+.faq_panels
 {
 	
+}
+.tab_panels
+{
+	padding-top: 10px;
 }
 .tab_panel
 {

@@ -60,12 +60,6 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping("/logintest")
-	public String logintest(Model model) {
-		model.addAttribute("center", "logintest");
-		return "main";
-	}
-	
 	//마이페에지
 	@RequestMapping("/mypage")
 	public String mypage(Model model) {
