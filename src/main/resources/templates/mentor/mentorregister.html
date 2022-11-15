@@ -51,6 +51,9 @@
 .breadcrumbs ul li a:hover {
 	color: #14bdee;
 }
+
+textarea{
+}
 </style>
 <!-- jQuery -->
 <script type="text/javascript"
@@ -58,17 +61,80 @@
 
 
 <script>
-function readURL(input) {
-	  if (input.files && input.files[0]) {
+
+function display(data) {
+	var name = data.images[0].fields[0].inferText
+	var position = data.images[0].fields[1].inferText
+	var company = data.images[0].fields[2].inferText
+	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
+	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
+	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
+	//JSNO 형태로 가격정보 출력 : data.images[0].fields[3].inferText - 10,000
+	//JSNO 형태로 프로젝트명 출력 : data.images[0].fields[4].inferText
+	//JSNO 형태로 바코드번호 출력 : data.images[0].fields[5].inferText
+
+	alert(name);
+	alert(position);
+	alert(company);
+
+
+}
+
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
 	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('preview').src = e.target.result;
+
+	    reader.onload = function(event) {
+	    	$('#uploadprofile').attr('src',event.target.result);
 	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('preview').src = "";
+	    reader.readAsDataURL(event.target.files[0]);
 	  }
+
+function previewimg(event) {// 명함 이미지 미리 보여주기
+/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	
+	$('#context').hide(); */
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$('#uploadimg').attr('src',event.target.result);
+    	$('#uploadimg').attr('style','width:200px; hight:200px;');
+    	
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    //alert('reader.readAsDataURL : ' + event.target.files[0]);
+  }
+
+function upload() {
+	const imageInput = $("#mcf")[0];
+	console.log("mcf: ", imageInput.files)
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
 	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+
+	
+/* 		for (var value of formData.values()) {
+	   console.log(value);
+	} */
+
+	$.ajax({
+		type : "POST",
+		url : 'ocrresult',
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
+
 </script>
 </head>
 
@@ -83,8 +149,7 @@ function readURL(input) {
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
 								<li><a th:href="@{/courses}">courses</a></li>
-								<li><a th:href="@{/course}">course</a></li>
-								<li>order</li>
+								<li>register</li>
 							</ul>
 						</div>
 					</div>
@@ -103,8 +168,8 @@ function readURL(input) {
 				<div class="bg-light p-30 shadow mb-5">
 					<div class="row">
 					
-						<input type="file" onchange="readURL(this);"> 
-						<img id="preview" />
+						<input type="file" onchange="previewprofile(event);"> 
+						<img id="uploadprofile" >
 											
 <!-- 						<img id="previewimg">
 						<div class="col-md-12 form-group">
@@ -122,17 +187,29 @@ function readURL(input) {
 								type="text" placeholder="박성훈" readonly="readonly">
 						</div>
 						
+						<div class="col-md-6 form-group">
+							<form id="uploadForm" enctype="multipart/form-data">
+							<label for="mcf">명함 등록</label> 
+							<input type="file" name="mcf" id="mcf"  onchange="previewimg(event);">
+							</form>
+						</div>
+						<div class="col-md-6 form-group">
+						<button onclick="upload()">등록</button>
+						</div>
 						<div class="col-md-12 form-group">
-							<label>명함 등록</label> <input class="form-control"
+						<img id="uploadimg">
+						</div>						
+												
+						<div class="col-md-12 form-group">
+							<label>회사명</label> <input class="form-control"
 								type="text" placeholder="" readonly="readonly">
 						</div>
 						<div class="col-md-12 form-group">
-							<label>회사</label> <input class="form-control"
+							<label>직급</label> <input class="form-control"
 								type="text" placeholder="" readonly="readonly">
 						</div>
 						<div class="col-md-12 form-group">
-							<label>소개</label> <input class="form-control"
-								type="text" placeholder="" readonly="readonly">
+							<label>소개</label> <textarea class="form-control"></textarea>
 						</div>
 						<div class="col-md-12 form-group">
 							<label>희망분야</label> <input class="form-control"
@@ -142,14 +219,17 @@ function readURL(input) {
 							<label>경력</label> <input class="form-control"
 								type="text" placeholder="" readonly="readonly">
   						</div>
-<!--						<div class="col-md-6 form-group">
+
+					<button class="btn btn-block btn-dark font-weight-bold py-3">신청하기</button>
+
+<!-- 						<div class="col-md-6 form-group">
 							<label>Mentoring member</label> <input class="form-control"
 								type="text" placeholder="4" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring Price</label> <input class="form-control"
 								type="text" placeholder="25000원" readonly="readonly">
-						</div> -->
+						</div>
 						<div class="col-md-12">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="shipto">
@@ -157,27 +237,27 @@ function readURL(input) {
 									data-toggle="collapse" data-target="#shipping-address">Select
 									Point</label>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
-				<div class="collapse mb-5" id="shipping-address">
+<!-- 				<div class="collapse mb-5" id="shipping-address">
 					<h5 class="section-title position-relative text-uppercase mb-3">
 						<span class="bg-secondary pr-3">Point</span>
 					</h5>
 					<div class="bg-light p-30">
 						<div class="row">
 							<div class="col-md-6 form-group">
-								<!-- session에서 cust의 poinr값을 가지고옴 -->
+								session에서 cust의 poinr값을 가지고옴
 								<label>My Point</label> <input class="form-control" type="text"
 									placeholder="3000">
 								<button class="submit ">submit</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
-<!-- 			<div class="col-lg-4">
+<!--  			<div class="col-lg-4">
 				<h5 class="section-title position-relative text-uppercase mb-3">
 					<span class="bg-secondary pr-3">Order Total</span>
 				</h5>
