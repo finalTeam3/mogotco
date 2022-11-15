@@ -78,7 +78,7 @@
 			pay_method : 'card',
 			merchant_uid : "IMP" + makeMerchantUid,
 			name : '당근 10kg',
-			amount : 1004,
+			amount : 100,
 			buyer_email : 'Iamport@chai.finance',
 			buyer_name : '아임포트 기술지원팀',
 			buyer_tel : '010-1234-5678',
@@ -91,7 +91,7 @@
 					url : "/kgorder", //ajax kgorder
 					data : {
 						//order일때 필요한 것 다 들어감
-						"amount" : 1004,
+						"amount" : 1,
 						"pay_method" : 'card'
 					}
 				});
@@ -115,7 +115,7 @@
 								<li><a th:href="@{/}">Home</a></li>
 								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
 								<li><a th:href="@{/mentoring/mentoringdetail}">Mentoringdetail</a></li>
-								<li>order</li>
+								<li>Purchase</li>
 							</ul>
 						</div>
 					</div>
