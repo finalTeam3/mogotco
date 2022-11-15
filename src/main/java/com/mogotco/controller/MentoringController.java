@@ -1,18 +1,36 @@
 package com.mogotco.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MentoringDTO;
+import com.mogotco.service.MentoringService;
+
 @Controller
 public class MentoringController {
+	
+	@Autowired
+	MentoringService mservice;
 	
 	String mentoring = "mentoring/";
 	
 	//멘토링목록
 	@RequestMapping("/mentoring")
 	public String mentoring(Model model) {
-		model.addAttribute("center", mentoring+"mentoring");
+		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
+		try {
+			mlist = mservice.viewMentoringAll();
+			model.addAttribute("mtr", mlist);
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		return "main";
 	}
 	
