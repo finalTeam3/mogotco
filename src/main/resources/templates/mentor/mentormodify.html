@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link th:href="@{/plugins/video-js/video-js.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog_responsive.css}">
-<script th:src="@{/plugins/masonry/masonry.js}"></script>
-<script th:src="@{/plugins/video-js/video.min.js}"></script>
-<script th:src="@{/js/blog.js}"></script>
+<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/js/course.js}"></script>
 </head>
+
+<script>
+$(document).ready(function(){
+	$('#update_btn').click(function(){
+		$('#mentor_form').attr({
+			'method':'post',
+			'action':'[[@{/mentor/modifyimpl}]]'
+		});
+		$('#mentor_form').submit();
+	});
+});
+</script>
+
 	
 	<!-- Home -->
 
@@ -19,7 +31,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Blog</li>
+								<li>mentormodify</li>
 							</ul>
 						</div>
 					</div>
@@ -28,182 +40,96 @@
 		</div>			
 	</div>
 
-	<!-- Blog -->
+	<!-- Course -->
 
-	<div class="blog">
+	<div class="course">
 		<div class="container">
 			<div class="row">
-				<div class="col">
-					<div class="blog_post_container">
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_1.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
+				<!-- Course -->
+				<div class="col-lg-12">
+					<div class="course_container">
+						<div class="course_title">mentor modify</div>
+
+						<!-- Course Tabs -->
+						<div class="course_tabs_container">
+
+						<!-- Curriculum -->
+						<div class="tab_panel active tab_panel_2" >
+						
+					<form id="mentor_form">
+						<div class="col-md-12 form-group">
+							<label for="mentorid">테이블id</label> <input class="form-control"
+								type="text" readonly="readonly" th:value="${m.mentorid}" name="mentorid" id="mentorid">
 						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
+						<div class="col-md-12 form-group">
+							<label for="userid">멘토id</label> <input class="form-control"
+								type="text" readonly="readonly" th:value="${m.userid}" name="userid" id="userid">
 						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_2.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
+						
+						<div class="col-md-12 form-group" style="display:none">
+							<label for="adminid">담당 관리자id</label> <input class="form-control"
+								type="text" readonly="readonly" th:value="${m.adminid}" name="adminid" id="adminid">
 						</div>
+					
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_3.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Law Schools Debate a Contentious Testing Alternative</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
+<!-- 						<div class="col-md-12 form-group">
+							<form id="uploadForm" enctype="multipart/form-data">
+							<label for="mcf">명함 등록 
+							<div class="uploadbox">
+								<img id="uploadimg">
 							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_4.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_5.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center">
-					<div class="load_more trans_200"><a href="#">load more</a></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
+							</label>
+							<input type="file" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
 							</form>
+						</div>											
+						<div class="col-md-12 form-group">
+						<button th:onclick="upload()">등록</button>
+						</div> -->
+												
+						<div class="col-md-12 form-group">
+							<label for="mentorcom">회사명</label> <input class="form-control" th:value="${m.mentorcom}" type="text" id="mentorcom" name="mentorcom">
 						</div>
+<!-- 						<div class="col-md-12 form-group">
+							<label>직급</label> <input class="form-control"
+								type="text" >
+						</div> -->
+						<div class="col-md-12 form-group">
+							<label for="mentorcon">소개</label> <textarea class="form-control" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
+						</div>
+<!-- 						<div class="col-md-12 form-group">
+							<label>희망분야</label> <input class="form-control"
+								type="text" placeholder="" >
+						</div> -->
+						
+ 						<div class="col-md-12 form-group" style="display:none">
+							<label for="mentorimg">프로필 이미지</label> <input class="form-control"
+								type="text" th:value="${m.mentorimg}" name="mentorimg" id="mentorimg">
+						</div>						
 
+						<div class="col-md-12 form-group">
+							<label for="mentorok">멘토 승인 여부</label> <input class="form-control"
+								type="text" readonly="readonly" th:value="${m.mentorok}" name="mentorok" id="mentorok">
+						</div>
+						<div class="col-md-12 form-group">
+							<label for="cancelmentoring">멘토링 취소 가능 횟수</label> <input class="form-control"
+								type="text" readonly="readonly" th:value="${m.cancelmentoring}" name="cancelmentoring" id="cancelmentoring">
+						</div>																		
+						<div class="col-md-12 form-group">
+							<label for="mentorcareer">경력</label> <textarea class="form-control" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
+						</div>
+					</form>	
+
+					      <button type="submit" id="update_btn" class="btn btn-dark">수정하기</button>
+
+							</div>
+						</div>
 					</div>
 				</div>
+
+				<!-- Course Sidebar -->
 			</div>
 		</div>
 	</div>
-
-
 

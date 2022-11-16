@@ -54,6 +54,14 @@
 
 textarea{
 }
+
+.uploadbox{
+  width: 300px;
+  border: 1px solid;
+}
+
+
+
 </style>
 <!-- jQuery -->
 <script type="text/javascript"
@@ -85,6 +93,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 
 	    reader.onload = function(event) {
 	    	$('#uploadprofile').attr('src',event.target.result);
+	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
 	    };
 	    reader.readAsDataURL(event.target.files[0]);
 	  }
@@ -97,7 +106,7 @@ function previewimg(event) {// 명함 이미지 미리 보여주기
 
     reader.onload = function(event) {
     	$('#uploadimg').attr('src',event.target.result);
-    	$('#uploadimg').attr('style','width:200px; hight:200px;');
+    	$('#uploadimg').attr('style','width:300px; hight:300px;');
     	
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -167,9 +176,17 @@ function upload() {
 				</h5>
 				<div class="bg-light p-30 shadow mb-5">
 					<div class="row">
-					
-						<input type="file" onchange="previewprofile(event);"> 
-						<img id="uploadprofile" >
+						<div class="col-md-12 form-group">
+							<form id="uploadForm" enctype="multipart/form-data">
+							<label for="pupload">프로필 이미지 
+							<div class="uploadbox">
+								<img id="uploadprofile">
+							</div>
+							</label>
+							<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+							</form>
+						</div>											
+
 											
 <!-- 						<img id="previewimg">
 						<div class="col-md-12 form-group">
@@ -187,18 +204,19 @@ function upload() {
 								type="text" placeholder="박성훈" readonly="readonly">
 						</div>
 						
-						<div class="col-md-6 form-group">
-							<form id="uploadForm" enctype="multipart/form-data">
-							<label for="mcf">명함 등록</label> 
-							<input type="file" name="mcf" id="mcf"  onchange="previewimg(event);">
-							</form>
-						</div>
-						<div class="col-md-6 form-group">
-						<button onclick="upload()">등록</button>
-						</div>
 						<div class="col-md-12 form-group">
-						<img id="uploadimg">
-						</div>						
+							<form id="uploadForm" enctype="multipart/form-data">
+							<label for="mcf">명함 등록 
+							<div class="uploadbox">
+								<img id="uploadimg">
+							</div>
+							</label>
+							<input type="file" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+							</form>
+						</div>											
+						<div class="col-md-12 form-group">
+						<button th:onclick="upload()">등록</button>
+						</div>
 												
 						<div class="col-md-12 form-group">
 							<label>회사명</label> <input class="form-control"
@@ -215,10 +233,9 @@ function upload() {
 							<label>희망분야</label> <input class="form-control"
 								type="text" placeholder="" readonly="readonly">
 						</div>
- 						<div class="col-md-12 form-group">
-							<label>경력</label> <input class="form-control"
-								type="text" placeholder="" readonly="readonly">
-  						</div>
+						<div class="col-md-12 form-group">
+							<label>경력</label> <textarea class="form-control"></textarea>
+						</div>
 
 					<button class="btn btn-block btn-dark font-weight-bold py-3">신청하기</button>
 
