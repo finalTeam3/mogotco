@@ -30,5 +30,4 @@ class GetBoardType {
 			System.out.println(b);
 		}
 	}
-	
 }
