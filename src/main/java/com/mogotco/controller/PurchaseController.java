@@ -24,7 +24,7 @@ public class PurchaseController {
 	
 	//구매페이지
 	@RequestMapping("")
-	public String purchase(Model model) {
+	public String purchase(Model model, HttpSession session) {
 		model.addAttribute("center", purchase+"purchase");
 		return "main";
 	}

@@ -14,15 +14,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<!-- 등록된 멘토링 리스트 출력을 위한 mybatis 연동 -->
 	<select id="selectMentoringAll" parameterType="Integer" resultType="MentoringDTO">
-		SELECT mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt FROM mentoring mt
+		SELECT mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mt.mcateid = #{mcateid}
 	</select>
 	
+	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
+	<select id="viewMentoringAll" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+	</select>
+	
 	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
 	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringDTO">
-		SELECT mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
+		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
 		mt.mentoringimg, mt.mentoringprice, mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
 		FROM mentoring mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
