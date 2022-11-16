@@ -9,21 +9,23 @@ import com.mogotco.dto.MentoringDTO;
 import com.mogotco.service.MentoringService;
 
 @SpringBootTest
-	class ViewMentoringOp {
+	class viewMentoringAll {
 	@Autowired
 	MentoringService service;
 	
-	// 멘토링 옵션 인서트된 옵션들을 화면에 출력
 	@Test
 	void contextLoads() {
-		MentoringDTO mto = null;
+		List<MentoringDTO> metoring = null;
 		try {
-			mto = service.viewMentoringOp(200);
+			metoring = service.viewMentoringAll();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			System.out.println(mto);
+		
+		for(MentoringDTO c:metoring) {
+			System.out.println(c);
 		}
 	}
 
-
+}
