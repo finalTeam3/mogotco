@@ -52,6 +52,27 @@
 .breadcrumbs ul li a:hover {
 	color: #14bdee;
 }
+
+/* button */
+.comment_button1
+{
+	width: 100px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button1:hover
+{
+	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+}
 </style>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
@@ -64,6 +85,14 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
+	if($('#progresspur').val()==0){
+		$('#progresspuresult').val("x");
+		console.log($('#progresspuresult').val());
+	}
+	else{
+		$('#progresspuresult').val("o");
+		console.log($('#progresspuresult').val());
+	};	
 </script>
 </head>
 
@@ -96,17 +125,17 @@
 		<table id="otb" class="table">
 			<thead>
 				<tr class="active">
-					<th>구매번호</th>
-					<th>구매날짜</th>
-					<th>가격</th>
-					<th>결제방법</th>
-					<th>멘토링제목</th>
-					<th>멘토링날짜</th>
-					<!-- <th>현재 멘토링 멤버 명수 상황</th> -->
-					<th>비대면 url</th>
-					<th>대면장소</th>
-					<th>진행여부</th>
-					<th>케어유무</th>
+					<th>Purchaseid</th>
+					<th>Purchasedate</th>
+					<th>Price</th>
+					<th>Purchasepay</th>
+					<th>Mentoringtitle</th>
+					<th>Mentoringdate</th>
+					<th>Member</th>
+					<th>MentoringUrl</th>
+					<th>Mentoringplace</th>
+					<th>Progress</th>
+					<th>Caring</th>
 
 				</tr>
 			</thead>
@@ -118,14 +147,27 @@
 					<td th:text="${c.purchase_purpay}"></td>
 					<td th:text="${c.mentoring_mtitle}"></td>
 					<td th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
-					<!-- <td th:text="${member.mentoringmembercnt}"></td> -->
-					<td th:text="${c.mentoring_mentorurl}"></td>
+					<td th:text="${4}"></td>
+					<td th:text="${'www.3jo3.com'}"></td>
 					<td th:text="${c.mentoring_mplace}"></td>
-					<td th:text="${c.progresspur}"></td>
+					<td id="progresspuresult"></td>
 					<td th:text="${c.mentoring_mcaring}"></td>
+					<td>
+						<button th:onclick="review([[${c.purchaseid}]]);" type="submit" class="comment_button1">Review</button>
+					</td>
+					<input type="hidden" id="progresspur" th:text="${c.progresspur}" >
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </body>
+<script>
+function review(purchaseid) {
+	var c = confirm('리뷰를 작성하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/review/review?id=}]]' + purchaseid;
+	}
+};
+
+</script>
 </html>
