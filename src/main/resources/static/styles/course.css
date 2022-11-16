@@ -1159,15 +1159,16 @@ section
 }
 .dropdown_item_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family: 'FontAwesome';
 	font-size: 16px;
 	font-weight: 700;
 	color: #384158;
 	padding-left: 24px;
 }
-.dropdown_item_title span
+.dropdown_item_title a
 {
-	font-size: 18px;
+	font-family: 'FontAwesome';
+	color : black;
 }
 .dropdown_item_title::before
 {

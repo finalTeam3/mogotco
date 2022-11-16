@@ -849,7 +849,7 @@ section
 }
 .contact_info_container
 {
-	margin-top: 100px;
+	margin-top: 30px;
 }
 .contact_info_title
 {
@@ -862,9 +862,40 @@ section
 {
 	padding-right: 10px;
 }
+.register_form
+{
+	margin-top: 35px;
+}
 .comment_form
 {
 	margin-top: 35px;
+}
+.userid
+{
+	font-style : italic;
+	background-color : #d9d9d9;
+}
+.comment_input_postno
+{
+	width: 15%;
+	height: 46px;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	padding-left: 19px;
+	font-size: 16px;
+	font-weight: 400;
+	color: #2c3145;
+}
+.comment_input_detail
+{
+	width: 49.5%;
+	height: 46px;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	padding-left: 19px;
+	font-size: 16px;
+	font-weight: 400;
+	color: #2c3145;
 }
 .comment_input
 {
@@ -877,11 +908,32 @@ section
 	font-weight: 400;
 	color: #2c3145;
 }
+.comment_input_address
+{
+	width: 100%;
+	height: 46px;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	padding-left: 19px;
+	margin : 3px auto 3px auto;
+	font-size: 16px;
+	font-weight: 400;
+	color: #2c3145;
+}
 .comment_form > div:not(:last-child)
 {
 	margin-bottom: 25px;
 }
+.register_form > div:not(:last-child)
+{
+	margin-bottom: 25px;
+}
 .comment_input:focus
+{
+	border: solid 1px #14bdee;
+	outline: none;
+}
+.comment_input_detail:focus
 {
 	border: solid 1px #14bdee;
 	outline: none;
@@ -898,6 +950,29 @@ section
 	font-weight: 400;
 	color: #384158;
 	margin-bottom: 12px;
+}
+.address_form
+{
+	font-size: 16px;
+	font-weight: 400;
+	color: #384158;
+	margin-bottom: 0px;
+	display: block;
+}
+.comment_button_post
+{
+	width: 130px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
 }
 .comment_button
 {
