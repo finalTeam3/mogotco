@@ -37,6 +37,7 @@ public class UserController {
 		return "main";
 	}
 	
+	//로그인기능
 	@RequestMapping("/loginimpl")
 	public String loginimpl(Model model, String id, String pwd, HttpSession session) {
 		
@@ -60,6 +61,7 @@ public class UserController {
 		return "main";
 	}
 	
+	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		if(session != null) {
@@ -89,10 +91,17 @@ public class UserController {
 		return "main";
 	}
 	
-	//마이페에지
+	//마이페이지
 	@RequestMapping("/mypage")
-	public String mypage(Model model) {
-		model.addAttribute("center", dir+"mypage");
+	public String mypage(Model model, String userid) {
+		UserDTO myuser = null;
+		try {
+			myuser = user_service.getMypage(userid);
+			model.addAttribute("us", myuser);
+			model.addAttribute("center", dir+"mypage");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	
@@ -100,6 +109,19 @@ public class UserController {
 	@RequestMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("center", dir+"register");
+		return "main";
+	}
+	
+	//회원가입기능
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Model model, UserDTO user) {
+		System.out.println(user);
+		try {
+			user_service.register(user);
+			model.addAttribute("center", dir+"login");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	
