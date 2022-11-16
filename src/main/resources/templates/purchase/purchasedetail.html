@@ -85,14 +85,13 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
-	if($('#progresspur').val()==0){
-		$('#progresspuresult').val("x");
-		console.log($('#progresspuresult').val());
+function review(purchaseid) {
+	var c = confirm('리뷰를 작성하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/review/review?id=}]]' + purchaseid;
 	}
-	else{
-		$('#progresspuresult').val("o");
-		console.log($('#progresspuresult').val());
-	};	
+};
+
 </script>
 </head>
 
@@ -150,24 +149,14 @@
 					<td th:text="${4}"></td>
 					<td th:text="${'www.3jo3.com'}"></td>
 					<td th:text="${c.mentoring_mplace}"></td>
-					<td id="progresspuresult"></td>
+					<td th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td th:text="${c.mentoring_mcaring}"></td>
 					<td>
 						<button th:onclick="review([[${c.purchaseid}]]);" type="submit" class="comment_button1">Review</button>
 					</td>
-					<input type="hidden" id="progresspur" th:text="${c.progresspur}" >
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </body>
-<script>
-function review(purchaseid) {
-	var c = confirm('리뷰를 작성하시겠습니까?');
-	if (c == true) {
-		location.href = '[[@{/review/review?id=}]]' + purchaseid;
-	}
-};
-
-</script>
 </html>
