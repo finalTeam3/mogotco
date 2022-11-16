@@ -297,7 +297,7 @@
 										<th>포 인 트</th>
 										<td>사용가능 포인트 : <span name="left_pnt">7210</span>p <span><input
 												type="checkbox" id="chk_use"
-												onclick="chkPoint(65000,7210,5000,100)">포인트 전체 사용</span> <span
+												th:onclick="chkPoint(65000,7210,5000,100)">포인트 전체 사용</span> <span
 											style="float: right">포인트는 최소 5000p부터 100p단위로 사용 가능합니다.</span>
 										</td>
 									</tr>
@@ -305,7 +305,7 @@
 										<td></td>
 										<td><span> <input type="number" name="use_pnt"
 												id="use_pnt" min="5000" max="65000"
-												onchange="changePoint(65000,7210,5000,100)"></span> p <span>
+												th:onchange="changePoint(65000,7210,5000,100)"></span> p <span>
 												( 남은포인트 : </span><span name="left_pnt" id="left_pnt">7210</span>p )
 										</td>
 									</tr>
