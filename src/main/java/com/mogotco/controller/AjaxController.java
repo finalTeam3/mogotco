@@ -78,5 +78,13 @@ public class AjaxController {
 			
 		return "";
 	}
-
+	
+	//userpoint(data저장이 안될 때)
+	@RequestMapping("/pointcount")
+	public Object pointcount(Integer total_price,Integer writepoint) {
+		Integer modiprice =0;
+		modiprice=total_price-writepoint;
+		return modiprice;
+	}
+	
 }
