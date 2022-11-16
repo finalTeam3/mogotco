@@ -15,5 +15,6 @@ import com.mogotco.frame.MyMapper;
 public interface PurchaseDetailMapper extends MyMapper<Integer, PurchaseDetailDTO> {
 	public List<PurchaseDetailDTO> facedetail(String purchase_userid) throws Exception;
 	public List<PurchaseDetailDTO> remotedetail(String purchase_userid) throws Exception;
+	public List<PurchaseDetailDTO> wholedetail(String purchase_userid) throws Exception;
 	public PurchaseDetailDTO groupcount(Integer mentoringoption_mentoringoptionid) throws Exception;
 }

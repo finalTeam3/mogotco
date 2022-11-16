@@ -39,5 +39,9 @@ public class BoardService implements MyService<Integer, BoardDTO>{
 	public List<BoardDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public List<BoardDTO> selectboardtype(int boardtype) throws Exception {
+		return mapper.selectboardtype(boardtype);
+	}	
 
 }
