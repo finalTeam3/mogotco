@@ -55,13 +55,11 @@
 							<!-- Course -->
 							<div class="col-lg-6 course_col">
 								<div th:each="mtr:${mtr}" class="course">
-									<div class="course_image"><img th:src="@{/images/}+${mtr.mentoringimg}+'.jpg'" alt=""></div>
+									<div class="course_image"><a th:href="@{/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
 										<div class="course_teacher" th:text="${mtr.user_userid}">Mr. John Taylor</div>
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
+										<div class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
@@ -70,10 +68,10 @@
 												<span th:text="${mtr.mentor_mentorcom}">20 Student</span>
 											</div>
 											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
+												<span th:text="${#dates.format(mtr.mrdate,'yyyy-MM-dd')}">5 Ratings</span>
 											</div>
-											<div class="course_price ml-auto">$130</div>
+											
+											
 										</div>
 									</div>
 								</div>

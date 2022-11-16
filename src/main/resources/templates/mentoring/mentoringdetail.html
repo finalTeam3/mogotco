@@ -31,7 +31,7 @@
 
 	<!-- Course -->
 
-	<div class="course">
+	<div th:each="mto:${mto} "class="course">
 		<div class="container">
 			<div class="row">
 
@@ -39,19 +39,19 @@
 				<div class="col-lg-8">
 					
 					<div class="course_container">
-						<div class="course_title">Software Training</div>
+						<div class="course_title" th:text="${mto.mtitle}">Software Training</div>
 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Teacher:</div>
-								<div class="course_info_text"><a href="#">Jacke Masito</a></div>
+								<div class="course_info_title">Recruitment quota:</div>
+								<div class="course_info_text" th:text="${mto.mmemberidcnt}"><a href="#">Jacke Masito</a></div>
 							</div>
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Reviews:</div>
-								<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+								<div class="course_info_title">Mentoring Date:</div>
+								<div class="rating_r rating_r_4" th:text="${#dates.format(mto.mentoringdate,'yyyy-MM-dd')}"><i></i><i></i><i></i><i></i><i></i></div>
 							</div>
 
 							<!-- Course Info Item -->
@@ -63,7 +63,7 @@
 						</div>
 
 						<!-- Course Image -->
-						<div class="course_image"><img th:src="@{/images/course_image.jpg}" alt=""></div>
+						<div class="course_image"><img th:src="@{/images/}+${mto.mentoringimg}" alt=""></div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
@@ -76,10 +76,9 @@
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Software Training</div>
-									<div class="tab_panel_content">
+									<div class="tab_panel_title" th:text="${mto.mtitle}">Software Training</div>
+									<div class="tab_panel_content" th:text="${mto.mcontents}">
 										<div class="tab_panel_text">
-											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
 										</div>
 										<div class="tab_panel_section">
 											<div class="tab_panel_subtitle">Requirements</div>
@@ -343,9 +342,9 @@
 
 						<!-- Feature_course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Course Feature</div>
+							<div class="sidebar_section_title">Mentoring Feature</div>
 							<div class="sidebar_feature">
-								<div class="course_price">$180</div>
+								<div class="course_price" th:text="${mto.mentoringprice}"></div>
 
 								<!-- Features -->
 								<div class="feature_list">
@@ -386,30 +385,32 @@
 
 						<!-- Feature -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Teacher</div>
+							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img th:src="@{/images/teacher.jpg}" alt=""></div>
+									<div class="teacher_image"><img th:src="@{/images/}+${mto.mentor_mentorimg}" alt=""></div>
 									<div class="teacher_title">
-										<div class="teacher_name"><a href="#">Jacke Masito</a></div>
+										<div class="teacher_name" th:text="${mto.user_userid}"><a href="#">Jacke Masito</a></div>
 										<div class="teacher_position">Marketing & Management</div>
 									</div>
 								</div>
 								<div class="teacher_meta_container">
 									<!-- Teacher Rating -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Average Rating:</div>
-										<div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
+										<!-- 대면 -->
+										<div class="teacher_meta_title">MentoringService:</div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mentorurl}">4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
 									</div>
 									<!-- Teacher Review -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Review:</div>
-										<div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
+										<!-- 비대면 -->
+										<div class="teacher_meta_title">MentoringPlace:</div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mplace}">12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
 									</div>
 									<!-- Teacher Quizzes -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Quizzes:</div>
-										<div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
+										<div class="teacher_meta_title">CaringService:</div>
+										<div class="teacher_meta_text ml-auto"><span></span><i class="fa fa-user" aria-hidden="true"></i></div>
 									</div>
 								</div>
 								<div class="teacher_info">

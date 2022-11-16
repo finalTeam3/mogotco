@@ -27,7 +27,6 @@ public class MentoringController {
 			model.addAttribute("mtr", mlist);
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
@@ -36,8 +35,15 @@ public class MentoringController {
 	
 	//멘토링상세페이지
 	@RequestMapping("/mentoringdetail")
-	public String mentoringdetail(Model model) {
-		model.addAttribute("center", mentoring+"mentoringdetail");
+	public String mentoringdetail(Model model, int mentoringid) {
+		MentoringDTO mto = null;
+		try {
+			mto = mservice.viewMentoringOp(mentoringid);
+			model.addAttribute("mto", mto);
+			model.addAttribute("center", mentoring+"mentoringdetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	
