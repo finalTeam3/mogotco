@@ -53,8 +53,8 @@
 						<div class="row courses_row">
 							
 							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div th:each="mtr:${mtr}" class="course">
+							<div th:each="mtr:${mtr}" class="col-lg-6 course_col">
+								<div class="course">
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
