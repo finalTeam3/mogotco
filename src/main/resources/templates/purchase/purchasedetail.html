@@ -1,16 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
-<link th:href="@{/plugins/video-js/video-js.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog_responsive.css}">
-<script th:src="@{/plugins/masonry/masonry.js}"></script>
-<script th:src="@{/plugins/video-js/video.min.js}"></script>
-<script th:src="@{/js/blog.js}"></script>
-</head>
-	
-	<!-- Home -->
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/ordercss/style.css}" rel="stylesheet">
 
+<style>
+.home {
+	width: 100%;
+	height: 182px;
+	background: #f2f4f5;
+	border-bottom: solid 1px #edeff0;
+}
+
+.breadcrumbs_container {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding-bottom: 1px;
+	padding-left: 3px;
+}
+
+.breadcrumbs ul li {
+	display: inline-block;
+	position: relative;
+}
+
+.breadcrumbs ul li:not(:last-child)::after {
+	display: inline-block;
+	font-family: 'FontAwesome';
+	content: '\f105';
+	margin-left: 7px;
+	margin-right: 4px;
+	color: #384158;
+}
+
+.breadcrumbs ul li a {
+	font-size: 14px;
+	font-weight: 400;
+	color: #384158;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+
+.breadcrumbs ul li a:hover {
+	color: #14bdee;
+}
+
+/* button */
+.comment_button1
+{
+	width: 100px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button1:hover
+{
+	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script>
+function review(purchaseid) {
+	var c = confirm('리뷰를 작성하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/review/review?id=}]]' + purchaseid;
+	}
+};
+
+</script>
+</head>
+
+
+<body>
 	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
@@ -19,191 +105,58 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Blog</li>
+								<li><a th:href="@{/user/mypage}">Mypage</a></li>
+								<li>Purchasedetail</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>			
-	</div>
-
-	<!-- Blog -->
-
-	<div class="blog">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="blog_post_container">
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_1.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_2.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_3.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Law Schools Debate a Contentious Testing Alternative</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_4.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_5.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center">
-					<div class="load_more trans_200"><a href="#">load more</a></div>
-				</div>
-			</div>
 		</div>
 	</div>
+	<!-- Checkout Start -->
+	<div class="container">
+		<span class="bg-secondary pr-3"></span> <span
+			class="bg-secondary pr-3"></span>
+		<h5 class="section-title position-relative text-uppercase mb-3">
+			<span class="bg-secondary pr-3">Product</span>
+		</h5>
+		<table id="otb" class="table">
+			<thead>
+				<tr class="active">
+					<th>Purchaseid</th>
+					<th>Purchasedate</th>
+					<th>Price</th>
+					<th>Purchasepay</th>
+					<th>Mentoringtitle</th>
+					<th>Mentoringdate</th>
+					<th>Member</th>
+					<th>MentoringUrl</th>
+					<th>Mentoringplace</th>
+					<th>Progress</th>
+					<th>Caring</th>
 
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c:${list}">
+					<td th:text="${c.purchaseid}"></td>
+					<td th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${c.purchase_purprice}"></td>
+					<td th:text="${c.purchase_purpay}"></td>
+					<td th:text="${c.mentoring_mtitle}"></td>
+					<td th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${4}"></td>
+					<td th:text="${'www.3jo3.com'}"></td>
+					<td th:text="${c.mentoring_mplace}"></td>
+					<td th:text="${c.progresspur}" id="progresspuresult"></td>
+					<td th:text="${c.mentoring_mcaring}"></td>
+					<td>
+						<button th:onclick="review([[${c.purchaseid}]]);" type="submit" class="comment_button1">Review</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
-
-
+</body>
+</html>

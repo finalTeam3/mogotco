@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/blog_single.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/blog_single_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script th:src="@{/js/course.js}"></script>
+<script th:src="@{/js/blog_single.js}"></script>
 </head>
 
 	
@@ -19,7 +19,8 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Notice</li>
+								<li><a th:href="@{/notice}">Notice</a></li>
+								<li>NoticeDetail</li>
 							</ul>
 						</div>
 					</div>
@@ -28,46 +29,41 @@
 		</div>			
 	</div>
 
-	<!-- Course -->
+	<!-- Blog -->
 
-	<div class="course">
+	<div class="blog">
 		<div class="container">
 			<div class="row">
-
-				<!-- Course -->
+				<!-- Blog Content -->
 				<div class="col-lg-12">
-					
-					<div class="course_container">
-						<div class="course_title">Notice</div>
-
-						<!-- Course Tabs -->
-						<div class="course_tabs_container">
-							<div class="tab_panels">
-
-								<!-- Curriculum -->
-								<div class="tab_panel active tab_panel_2">
-									<div class="tab_panel_content">
-										<div class="tab_panel_content">
-
-											<!-- Dropdowns -->
-											<ul class="dropdowns">
-												<li th:each="nt:${nt}" >
-													<div class="dropdown_item">
-														<div class="dropdown_item_title">
-														<a th:href = "@{/noticedetail(boardid=${nt.boardid})}" th:text = "${nt.boardtitle}">Lecture 1: Lorem Ipsn gravida nibh vel velit auctor aliquet.</a>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="blog_content">
+						<div th:text="${nt.boardtitle}" class="blog_title">Notice Title</div>
+						<div class="blog_meta">
+							<ul>
+								<li th:text = "|Post On ${#dates.format(nt.boarddate, 'yyyy-MM-dd')}|">Post on May 5, 2018</li>
+								<li th:text = "|By ${nt.adminid}|">By admin</li>
+							</ul>
+						</div>
+						<div class="blog_quote d-flex flex-row align-items-center justify-content-start">
+							<i class="fa fa-quote-left" aria-hidden="true"></i>
+							<div th:text = "${nt.boardcontent}">Notice Content</div>
+						</div>
+						<p th:text = "${nt.boardcontent}">Notice Content</p>
+						<div th:text = "${nt.boardcontent}" class="blog_subtitle">Notice Content</div>
+					</div>
+					<div class="blog_extra d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+						<div class="blog_social ml-lg-auto">
+							<span>Share: </span>
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
-
-				<!-- Course Sidebar -->
 			</div>
 		</div>
 	</div>
@@ -100,7 +96,4 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/hyejung

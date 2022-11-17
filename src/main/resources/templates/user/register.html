@@ -1,92 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+$(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'action' : '[[@{/user/registerimpl}]]',
+			'method' : 'post'
+		});
+		$('#register_form').submit();
+	});
+});
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
     
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="/styles/login/owl.carousel.min.css" rel="stylesheet">
-    <link href="/styles/login/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/styles/login/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="/styles/login/style.css" rel="stylesheet">
+</script>
 </head>
 
-<body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+	
+	<!-- Home -->
 
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li>RESISTER</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
 
-        <!-- Sign In Start -->
-        <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
-                    
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>MGC</h3>
-                            </a>
-                            <h3>Register</h3>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">ID</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">register~ Password</label>
-                        </div>
-                        
-                       <!--  <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="">Forgot Password</a>
-                        </div> -->
-                        
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Sign In End -->
-    </div>
+	<!-- Contact -->
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-   <!--  <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script> -->
+	<div class="contact">
+		
 
-    <!-- Template Javascript -->
-    <script src="/styles/login/main.js"></script>
-</body>
+		<!-- Contact Info -->
 
-</html>
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
+
+					<!-- Contact Form -->
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">REGISTER</div>
+							<form action="#" class="register_form" id = "register_form">
+							
+								<div>
+									<label for = "id" class="form_title">ID</label>
+									<input type="text" class="comment_input" id = "id" name = "userid">
+								</div>
+								
+								<div>
+									<label for = "pwd" class="form_title">Password</label>
+									<input type="password" class="comment_input" id = "pwd" name = "userpwd">
+								</div>
+								
+								<div>
+									<label for = "pwd2" class="form_title">Password</label>
+									<input type="password" class="comment_input" id = "pwd2">
+								</div>
+								
+								<div>
+									<label for = "name" class="form_title">Name</label>
+									<input type="text" class="comment_input" id = "name" name = "username">
+								</div>
+								
+								<div>
+									<label for = "phone" class="form_title">Phone Number</label>
+									<input type="text" class="comment_input" id = "phone" name = "usertel">
+								</div>
+								
+								<div>
+									<label for = "email" class="form_title">Email</label>
+									<input type="text" class="comment_input" id = "email" name = "useremail">
+								</div>
+								
+								<div>
+									<label for = "gender" class="form_title">Gender</label>
+									<input type="text" class="comment_input" id = "gender" name = "usergen">
+								</div>
+								
+								<div>
+								<label for = "address" class="address_form">Address</label>
+								<input type="text" class="comment_input_postno" id="sample6_postcode" placeholder="우편번호">
+								<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+								<input type="text" class="comment_input_address" name = "address" id="sample6_address" placeholder="주소"><br>
+								<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소">
+								<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목">
+								</div>
+								
+								<div>
+									<label for = "birth" class="form_title">Birth</label>
+									<input type="text" class="comment_input" id = "birth" name = "userbirth">
+								</div>
+								
+									<button id = "register_btn" class="comment_button trans_200">Register Now</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+
+						<!-- Newsletter Content -->
+						<div class="newsletter_content text-lg-left text-center">
+							<div class="newsletter_title">sign up for news and offers</div>
+							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
+						</div>
+
+						<!-- Newsletter Form -->
+						<div class="newsletter_form_container ml-lg-auto">
+							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
+								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
+								<button type="submit" class="newsletter_button">subscribe</button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+

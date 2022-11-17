@@ -50,10 +50,10 @@ class InsertPurchase {
 			
 			//구매이력을 바로 생성
 			int r = purchase.getPurchaseid();
-			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,purchase.getMentoringoption_mentoringoptionid(), r, 0, 0, purchase.getPurdate(), 
+			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,purchase.getMentoringoption_mentoringoptionid(), r, 0, "x", purchase.getPurdate(), 
 					purchase.getPurprice(), purchase.getPurpay(), purchase.getMentoring_mtitle(), purchase.getUser_mentorname(), 
 					purchase.getMentoring_mentoringdate(), purchase.getMentoringoption_mentoringtime(), 
-					mentoring.getMentorurl(), purchase.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
+					mentoring.getMentorurl(), purchase.getMentoring_mplace(),0 , mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
 			
 			//해당 mentoringoption을 불러옴

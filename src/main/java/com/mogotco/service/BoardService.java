@@ -42,6 +42,5 @@ public class BoardService implements MyService<Integer, BoardDTO>{
 	
 	public List<BoardDTO> selectboardtype(int boardtype) throws Exception {
 		return mapper.selectboardtype(boardtype);
-	}	
-
+	}
 }
