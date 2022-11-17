@@ -7,7 +7,16 @@
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
 
+#pubutton{
+margin-left: 22%;
+}
+
+#mcbutton{
+margin-left: 1%;
+}
+</style>
 <script>
 $(document).ready(function(){
 	$('#update_btn').click(function(){
@@ -19,6 +28,75 @@ $(document).ready(function(){
 		$('#modify_form').submit();
 	});
 });
+
+function display(data) {
+	var name = data.images[0].fields[0].inferText
+	var position = data.images[0].fields[1].inferText
+	var company = data.images[0].fields[2].inferText
+
+
+	alert(name);
+	alert(position);
+	alert(company);
+
+}
+
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
+	    var reader = new FileReader();
+
+	    reader.onload = function(event) {
+	    	$('#uploadprofile').attr('src',event.target.result);
+	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
+	    };
+	    reader.readAsDataURL(event.target.files[0]);
+	  }
+
+function previewimg(event) {// 명함 이미지 미리 보여주기
+/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	
+	$('#context').hide(); */
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$('#uploadimg').attr('src',event.target.result);
+    	$('#uploadimg').attr('style','width:300px; hight:300px;');
+    	
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    //alert('reader.readAsDataURL : ' + event.target.files[0]);
+  }
+
+function upload() {
+	const imageInput = $("#mcf")[0];
+	console.log("mcf: ", imageInput.files)
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
+	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+
+	
+/* 		for (var value of formData.values()) {
+	   console.log(value);
+	} */
+
+	$.ajax({
+		type : "POST",
+		url : '/ocrresult',
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
+
 </script>
 </head>
 
@@ -55,13 +133,23 @@ $(document).ready(function(){
 							<form class="register_form" id = "modify_form" enctype="multipart/form-data">
 								
 								<div>
+									<label class="form_title"> 
+										<div>
+											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="pupload" style="width:110px;height:35px;font-size:15px">프로필 수정</label>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+								</div>
+
+								<div>
 									<label for = "mentorid" class="form_title">Mentorid</label>
-									<input type="text" class="comment_input" th:value="${m.mentorid}" name="mentorid" id="mentorid" readonly="readonly">
+									<input type="text" class="userid comment_input" th:value="${m.mentorid}" name="mentorid" id="mentorid" readonly="readonly">
 								</div>
 
 								<div>
 									<label for = "userid" class="form_title">Userid</label>
-									<input type="text" class="comment_input" th:value="${m.userid}" name="userid" id="userid" readonly="readonly">
+									<input type="text" class="userid comment_input" th:value="${m.userid}" name="userid" id="userid" readonly="readonly">
 								</div>
 
 								<div style = "display:none">
@@ -69,26 +157,19 @@ $(document).ready(function(){
 									<input type="text" class="comment_input" ith:value="${m.adminid}" name="adminid" id="adminid">
 								</div>
 				
-								<div>
-									<label for="pupload" class="form_title">Profile Image 
-										<div>
-											<img id="uploadprofile">
-										</div>
-									</label>
-									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
-								</div>
 			
 													
 								<div>
-									<label for="mcf" class="form_title">Mentor Card 
+									<label class="form_title">Mentor Card
 									<div>
-										<img id="uploadimg">
+										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
+									<label class="btn btn-dark" for="mcf" style="width:96px;height:31px;font-size:13px">명함 수정</label>
 									</div>
 									</label>
 									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
-								</div>											
-								<div>
-									<button th:onclick="upload()" class="comment_button trans_200" style="width:50px">등록</button>
+									<div>
+									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									</div>
 								</div>			
 								
 								<div>

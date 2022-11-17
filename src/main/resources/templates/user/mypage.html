@@ -7,6 +7,13 @@
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+button + button {
+
+margin-left: 2%;
+
+}
+</style>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -93,6 +100,9 @@
 					<div class="col-lg-8">
 						<div class="contact_form">
 							<div class="contact_info_title">My Page</div>
+							<div>&nbsp</div>
+							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${session.loginuser.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
+							<button type="button" th:onclick="|location.href='@{/mentor/mentormodify(id=${session.loginuser.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
 							<form action="#" class="comment_form">
 							
 								<div>

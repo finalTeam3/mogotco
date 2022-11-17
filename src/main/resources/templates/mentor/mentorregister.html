@@ -10,13 +10,12 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 
-.uploadbox{
-
+#pubutton{
+margin-left: 11%;
 }
 
-span{
-    font-weight: inherit;
-    font-style: inherit;
+#mcbutton{
+margin-left: 1%;
 }
 </style>
 
@@ -145,15 +144,25 @@ function upload() {
 							<form class="register_form" id = "register_form" enctype="multipart/form-data">
 							
 								
+								<div>
+									<label class="form_title"> 
+										  파일 업로드 버튼을 눌러 프로필 이미지를 등록해주세요.
+										<div>
+											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="pupload" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+								</div>
 								
 								<div>
 									<label for = "userid" class="form_title">Userid</label>
-									<input type="text" class="comment_input" id = "userid" name = "userid" th:value = "${u.userid}" readonly="readonly">
+									<input type="text" class="userid comment_input" id = "userid" name = "userid" th:value = "${u.userid}" readonly="readonly">
 								</div>
 
 								<div>
 									<label for = "username" class="form_title">Username</label>
-									<input type="text" class="comment_input" id = "username" name = "username" th:value = "${u.username}" readonly="readonly">
+									<input type="text" class="userid comment_input" id = "username" name = "username" th:value = "${u.username}" readonly="readonly">
 								</div>
 
 								<div style = "display:none">
@@ -161,31 +170,21 @@ function upload() {
 									<input type="text" class="comment_input" id = "adminid" name = "adminid">
 								</div>
 				
-								<div>
-									<label for="pupload" class="form_title">Profile Image 
-										<div>
-											<img id="uploadprofile">
-										</div>
-									</label>
-									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
-								</div>
-<!-- 								<img id="previewimg">
-								<div class="col-md-12 form-group">
-									<label>profile img</label> <input class="form-control"
-										type="file" id="profileimg" accept="img/*" onchange="readURL(this)">
-								</div> -->			
+			
 													
 								<div>
-									<label for="mcf" class="form_title">Mentor Card 
+									<label class="form_title">Mentor Card
 									<div>
-										<img id="uploadimg">
+										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
+									<label class="btn btn-dark" for="mcf" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
 									</div>
 									</label>
 									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+									<div>
+									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									</div>
 								</div>											
-								<div>
-									<button th:onclick="upload()" class="comment_button trans_200" style="width:50px">등록</button>
-								</div>			
+			
 								
 								<div>
 									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>

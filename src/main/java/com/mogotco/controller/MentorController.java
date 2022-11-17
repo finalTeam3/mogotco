@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.service.MentorService;
+import com.mogotco.service.MentoringService;
 import com.mogotco.service.UserService;
 
 
@@ -21,6 +23,9 @@ public class MentorController {
 	
 	@Autowired
 	MentorService mservice;
+
+	@Autowired
+	MentoringService mtiservice;
 	
 	@Autowired
 	UserService uservice;
@@ -33,8 +38,16 @@ public class MentorController {
 	
 	//멘토 상세페이지
 	@RequestMapping("/mentordetail")
-	public String mentordetail(Model model) {
-		model.addAttribute("center", mentor+"mentordetail");
+	public String mentordetail(Model model, int mentoringid) {
+		MentoringDTO mti = null;
+		try {
+			mti = mtiservice.viewMentoringOp(mentoringid);
+			model.addAttribute("mti",mti);
+			model.addAttribute("center", mentor+"mentordetail");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	
@@ -43,7 +56,7 @@ public class MentorController {
 	public String mentormodify(Model model, String id) {
 		MentorDTO mentorall = null;
 		try {
-			mentorall = mservice.mentorAll("qkrtjdgns1234");
+			mentorall = mservice.mentorAll(id);
 			model.addAttribute("m",mentorall);
 			model.addAttribute("center", mentor+"mentormodify");
 		} catch (Exception e) {
@@ -69,7 +82,7 @@ public class MentorController {
 	public String mentorregister(Model model, String id) {
 		UserDTO user = null;
 		try {
-			user = uservice.get("whgkdrb4321");
+			user = uservice.get(id);
 			model.addAttribute("u", user);
 			model.addAttribute("center", mentor+"mentorregister");
 		} catch (Exception e) {
