@@ -44,20 +44,20 @@
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Recruitment quota:</div>
+								<div class="course_info_title">모집정원</div>
 								<div class="course_info_text" th:text="${mto.mmemberidcnt}"><a href="#">Jacke Masito</a></div>
 							</div>
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Mentoring Date:</div>
+								<div class="course_info_title">멘토링 진행 날짜</div>
 								<div class="rating_r rating_r_4" th:text="${#dates.format(mto.mentoringdate,'yyyy-MM-dd')}"><i></i><i></i><i></i><i></i><i></i></div>
 							</div>
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">Categories:</div>
-								<div class="course_info_text"><a href="#">Languages</a></div>
+								<div class="course_info_title">카테고리</div>
+								<div class="course_info_text" th:text="${mto.mcate_mname}"><a href="#">Languages</a></div>
 							</div>
 
 						</div>
@@ -77,6 +77,8 @@
 								<!-- Description -->
 								<div class="tab_panel active">
 									<div class="tab_panel_title" th:text="${mto.mtitle}">Software Training</div>
+									&nbsp
+									&nbsp
 									<div class="tab_panel_content" th:text="${mto.mcontents}">
 										<div class="tab_panel_text">
 										</div>
@@ -344,7 +346,8 @@
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Mentoring Feature</div>
 							<div class="sidebar_feature">
-								<div class="course_price" th:text="${mto.mentoringprice}"></div>
+								<span style = " font-size:1.5em;"><strong>가격 : </strong></span>
+								<div style="display:inline-block;" class="course_price" th:text="${mto.mentoringprice}"></div>
 
 								<!-- Features -->
 								<div class="feature_list">
@@ -392,8 +395,10 @@
 									<div class="teacher_title">
 										<div class="teacher_name" th:text="${mto.user_userid}"><a href="#">Jacke Masito</a></div>
 										<div class="teacher_position">Marketing & Management</div>
-									</div>
+									</div>		
 								</div>
+								&nbsp
+								&nbsp
 								<div class="teacher_meta_container">
 									<!-- Teacher Rating -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
@@ -413,45 +418,13 @@
 										<div class="teacher_meta_text ml-auto"><span></span><i class="fa fa-user" aria-hidden="true"></i></div>
 									</div>
 								</div>
-								<div class="teacher_info">
-									<p>Hi! I am Masion, I’m a marketing & management  eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
-								</div>
 							</div>
 						</div>
 
 						<!-- Latest Course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Latest Courses</div>
-							<div class="sidebar_latest">
 
-								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_1.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{course}">How to Design a Logo a Beginners Course</a></div>
-										<div class="latest_price">Free</div>
-									</div>
-								</div>
 
-								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_2.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">Photography for Beginners Masterclass</a></div>
-										<div class="latest_price">$170</div>
-									</div>
-								</div>
-
-								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_3.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">The Secrets of Body Language</a></div>
-										<div class="latest_price">$220</div>
-									</div>
-								</div>
-
-							</div>
 						</div>
 
 					</div>

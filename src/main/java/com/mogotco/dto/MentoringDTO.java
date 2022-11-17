@@ -35,6 +35,7 @@ public class MentoringDTO {
 	
 	// 멘토링 옵션 화면 출력을 위한 dto추가
 	private String mentor_mentorimg;
+	private String mcate_mname;
 	
 	
 	

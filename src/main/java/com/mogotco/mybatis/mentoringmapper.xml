@@ -29,9 +29,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
 	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringDTO">
-		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
+		SELECT mt.mentoringid, mc.mname AS mcate_mname, mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
 		mt.mentoringimg, mt.mentoringprice, mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
 		FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mt.mentoringid = #{mentoringid}
