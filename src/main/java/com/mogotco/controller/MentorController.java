@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.UserDTO;
 import com.mogotco.service.MentorService;
+import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/mentor")
@@ -15,7 +17,10 @@ public class MentorController {
 	String mentor = "mentor/";
 	
 	@Autowired
-	MentorService service;
+	MentorService mservice;
+	
+	@Autowired
+	UserService uservice;
 	
 	//멘토 상세페이지
 	@RequestMapping("/mentordetail")
@@ -29,7 +34,7 @@ public class MentorController {
 	public String mentormodify(Model model, String id) {
 		MentorDTO mentorall = null;
 		try {
-			mentorall = service.mentorAll("qkrtjdgns1234");
+			mentorall = mservice.mentorAll("qkrtjdgns1234");
 			model.addAttribute("m",mentorall);
 			model.addAttribute("center", mentor+"mentormodify");
 		} catch (Exception e) {
@@ -43,8 +48,7 @@ public class MentorController {
 	@RequestMapping("/modifyimpl")
 	public String update(Model model, MentorDTO mentordto) {
 		try {
-			System.out.println(mentordto);
-			service.modify(mentordto);
+			mservice.modify(mentordto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,10 +57,28 @@ public class MentorController {
 	
 	//멘토 등록페이지
 	@RequestMapping("/mentorregister")
-	public String mentorregister(Model model) {
-		model.addAttribute("center", mentor+"mentorregister");
+	public String mentorregister(Model model, String id) {
+		UserDTO user = null;
+		try {
+			user = uservice.get("whskawn4321");
+			model.addAttribute("u", user);
+			model.addAttribute("center", mentor+"mentorregister");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "main";
 	}
 
+	// 멘토 정보 등록 기능 (멘토 지원)
+	@RequestMapping("/registerimpl")
+	public String register(Model model, MentorDTO mentordto) {
+		try {
+			mservice.register(mentordto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}		
 	
 }

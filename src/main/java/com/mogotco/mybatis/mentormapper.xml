@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="MentorDTO">
-		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentordate, mentorcareer) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},SYSDATE(),#{mentorcareer})
+		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentorcareer, mentorapply) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE())
 	</insert>
 	
 	<update id="update" parameterType="MentorDTO">

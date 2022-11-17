@@ -3,69 +3,18 @@
 
 <head>
 <meta charset="utf-8">
-<!-- Customized Bootstrap Stylesheet -->
-<link th:href="@{/ordercss/style.css}" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-.home {
-	width: 100%;
-	height: 182px;
-	background: #f2f4f5;
-	border-bottom: solid 1px #edeff0;
-}
-
-.breadcrumbs_container {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	padding-bottom: 1px;
-	padding-left: 3px;
-}
-
-.breadcrumbs ul li {
-	display: inline-block;
-	position: relative;
-}
-
-.breadcrumbs ul li:not(:last-child)::after {
-	display: inline-block;
-	font-family: 'FontAwesome';
-	content: '\f105';
-	margin-left: 7px;
-	margin-right: 4px;
-	color: #384158;
-}
-
-.breadcrumbs ul li a {
-	font-size: 14px;
-	font-weight: 400;
-	color: #384158;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-
-.breadcrumbs ul li a:hover {
-	color: #14bdee;
-}
-
-textarea{
-}
 
 .uploadbox{
-  width: 300px;
-  border: 1px solid;
+
 }
 
-
-
 </style>
-<!-- jQuery -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 
 <script>
@@ -84,7 +33,6 @@ function display(data) {
 	alert(name);
 	alert(position);
 	alert(company);
-
 
 }
 
@@ -132,7 +80,7 @@ function upload() {
 
 	$.ajax({
 		type : "POST",
-		url : 'ocrresult',
+		url : '/ocrresult',
 		processData : false,
 		contentType : false,
 	 	data: formData,
@@ -148,7 +96,9 @@ function upload() {
 </head>
 
 
-<body>
+
+	<!-- Home -->
+
 	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
@@ -157,159 +107,152 @@ function upload() {
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/courses}">courses</a></li>
-								<li>register</li>
+								<li>APPLY</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>			
 	</div>
-	<!-- Checkout Start -->
 
-	<div class="container">
-		<div class="row px-xl-5">
-			<div class="col-lg-8" style="float: none; margin:0 auto;" >
-				<h5 class="section-title position-relative text-uppercase mb-3">
-					<span class="bg-secondary pr-3">Register</span>
-				</h5>
-				<div class="bg-light p-30 shadow mb-5">
-					<div class="row">
-						<div class="col-md-12 form-group">
-							<form id="uploadForm" enctype="multipart/form-data">
-							<label for="pupload">프로필 이미지 
-							<div class="uploadbox">
-								<img id="uploadprofile">
-							</div>
-							</label>
-							<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+	<!-- Contact -->
+
+	<div class="contact">
+
+		<!-- Contact Info -->
+
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
+
+					<!-- Contact Form -->
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">Mentor Apply</div>
+							<form action="#" class="register_form" id = "register_form" enctype="multipart/form-data">
+							
+								
+								
+								<div>
+									<label for = "userid" class="form_title">Userid</label>
+									<input type="text" class="comment_input" id = "userid" name = "userid" th:value = "${u.userid}" readonly="readonly">
+								</div>
+
+								<div>
+									<label for = "username" class="form_title">Username</label>
+									<input type="text" class="comment_input" id = "username" name = "username" th:value = "${u.username}" readonly="readonly">
+								</div>
+
+								<div style = "display:none">
+									<label for = "adminid" class="form_title">Adminid</label>
+									<input type="text" class="comment_input" id = "adminid" name = "adminid">
+								</div>
+				
+								<div>
+									<label for="pupload" class="form_title">Profile Image 
+										<div>
+											<img id="uploadprofile">
+										</div>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+								</div>
+<!-- 								<img id="previewimg">
+								<div class="col-md-12 form-group">
+									<label>profile img</label> <input class="form-control"
+										type="file" id="profileimg" accept="img/*" onchange="readURL(this)">
+								</div> -->			
+													
+								<div>
+									<label for="mcf" class="form_title">Mentor Card 
+									<div>
+										<img id="uploadimg">
+									</div>
+									</label>
+									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+								</div>											
+								<div>
+									<button th:onclick="upload()" class="comment_button trans_200" style="width:50px">등록</button>
+								</div>			
+								
+								<div>
+									<label for = "mentorcom" class="form_title">Mentorcom</label>
+									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
+								</div>
+
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon</label>
+									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
+								</div>
+
+								<div style = "display:none">
+									<label for = "mentorok" class="form_title">Mentorok</label>
+									<input type="text" class="comment_input" id = "mentorok" name = "mentorok">
+								</div>
+
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer</label>
+									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
+								</div>
+
+								<button id = "register_btn" class="comment_button trans_200">Apply</button>
+								
 							</form>
-						</div>											
-
-											
-<!-- 						<img id="previewimg">
-						<div class="col-md-12 form-group">
-							<label>profile img</label> <input class="form-control"
-								type="file" id="profileimg" accept="img/*" onchange="readURL(this)">
-						</div> -->
-											
-						<div class="col-md-12 form-group">
-							<label>mentorid</label> <input class="form-control"
-								type="text" placeholder="101" readonly="readonly">
+														
+<!-- 							  <form>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check1">
+							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check2">
+							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check3">
+							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check4">
+							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check5">
+							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check6">
+							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check7">
+							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check8">
+							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
+							      </label>
+							    </div>
+							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
+							  </form> -->							
+							
+							
 						</div>
-
-						<div class="col-md-12 form-group">
-							<label>이름</label> <input class="form-control"
-								type="text" placeholder="박성훈" readonly="readonly">
-						</div>
-						
-						<div class="col-md-12 form-group">
-							<form id="uploadForm" enctype="multipart/form-data">
-							<label for="mcf">명함 등록 
-							<div class="uploadbox">
-								<img id="uploadimg">
-							</div>
-							</label>
-							<input type="file" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
-							</form>
-						</div>											
-						<div class="col-md-12 form-group">
-						<button th:onclick="upload()">등록</button>
-						</div>
-												
-						<div class="col-md-12 form-group">
-							<label>회사명</label> <input class="form-control"
-								type="text" placeholder="" readonly="readonly">
-						</div>
-						<div class="col-md-12 form-group">
-							<label>직급</label> <input class="form-control"
-								type="text" placeholder="" readonly="readonly">
-						</div>
-						<div class="col-md-12 form-group">
-							<label>소개</label> <textarea class="form-control"></textarea>
-						</div>
-						<div class="col-md-12 form-group">
-							<label>희망분야</label> <input class="form-control"
-								type="text" placeholder="" readonly="readonly">
-						</div>
-						<div class="col-md-12 form-group">
-							<label>경력</label> <textarea class="form-control"></textarea>
-						</div>
-
-					<button class="btn btn-block btn-dark font-weight-bold py-3">신청하기</button>
-
-<!-- 						<div class="col-md-6 form-group">
-							<label>Mentoring member</label> <input class="form-control"
-								type="text" placeholder="4" readonly="readonly">
-						</div>
-						<div class="col-md-6 form-group">
-							<label>Mentoring Price</label> <input class="form-control"
-								type="text" placeholder="25000원" readonly="readonly">
-						</div>
-						<div class="col-md-12">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="shipto">
-								<label class="custom-control-label" for="shipto"
-									data-toggle="collapse" data-target="#shipping-address">Select
-									Point</label>
-							</div>
-						</div> -->
 					</div>
 				</div>
-<!-- 				<div class="collapse mb-5" id="shipping-address">
-					<h5 class="section-title position-relative text-uppercase mb-3">
-						<span class="bg-secondary pr-3">Point</span>
-					</h5>
-					<div class="bg-light p-30">
-						<div class="row">
-							<div class="col-md-6 form-group">
-								session에서 cust의 poinr값을 가지고옴
-								<label>My Point</label> <input class="form-control" type="text"
-									placeholder="3000">
-								<button class="submit ">submit</button>
-							</div>
-						</div>
-					</div>
-				</div> -->
 			</div>
-			
-<!--  			<div class="col-lg-4">
-				<h5 class="section-title position-relative text-uppercase mb-3">
-					<span class="bg-secondary pr-3">Order Total</span>
-				</h5>
-				<div class="bg-light p-30 mb-5">
-					<div class="border-bottom">
-						<div class="d-flex justify-content-between">
-							<p>Mentoring Price</p>
-							<p>25000원</p>
-						</div>
-						<div class="d-flex justify-content-between">
-							<p>Point</p>
-							<p>-3000원</p>
-						</div>
-					</div>
-					<div class="pt-2">
-						<div class="d-flex justify-content-between mt-2">
-							<h5>Total</h5>
-							<h5>22000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="mb-5">
-					<h5 class="section-title position-relative text-uppercase mb-3">
-						<span class="bg-secondary pr-3">Payment</span>
-					</h5>
-
-					<button class="btn btn-block btn-primary font-weight-bold py-3"
-						th:onclick="requestPay()">Payment</button>
-
-				</div>
-			</div> -->
-			
 		</div>
-
 	</div>
 
-</body>
+	<!-- Newsletter -->
+
+
+
 </html>
