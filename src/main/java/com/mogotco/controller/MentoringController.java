@@ -20,7 +20,7 @@ public class MentoringController {
 	String mentoring = "mentoring/";
 	
 	//멘토링목록
-	@RequestMapping("/mentorig")
+	@RequestMapping("/mentoring")
 	public String mentoring(Model model) {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		try {
