@@ -41,10 +41,15 @@
 						<form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
 							<input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
 							<select id="courses_search_select" class="courses_search_select courses_search_input">
-								<option>All Categories</option>
-								<option>Category</option>
-								<option>Category</option>
-								<option>Category</option>
+								<option>전체</option>
+								<option>웹</option>
+								<option>보안</option>
+								<option>네트워크</option>
+								<option>데이터사이언스</option>
+								<option>게임</option>
+								<option>AI</option>
+								<option>CLOUD</option>
+								<option>기타</option>
 							</select>
 							<button action="submit" class="courses_search_button ml-auto">search now</button>
 						</form>
@@ -53,21 +58,24 @@
 						<div class="row courses_row">
 							
 							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div th:each="mtr:${mtr}" class="course">
-									<div class="course_image"><a th:href="@{/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
+							<div th:each="mtr:${mtr}" class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
 										<div class="course_teacher" th:text="${mtr.user_userid}">Mr. John Taylor</div>
-										<div class="course_text" th:text="${mtr.mmemberidcnt}"></div>
+										<span>모집정원:</span>
+										<div style="display:inline-block;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
 											<div class="course_info">
 												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>현직:</span>
 												<span th:text="${mtr.mentor_mentorcom}">20 Student</span>
 											</div>
 											<div class="course_info">
+												<span>등록일자:</span>
 												<span th:text="${#dates.format(mtr.mrdate,'yyyy-MM-dd')}">5 Ratings</span>
 											</div>
 											

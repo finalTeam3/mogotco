@@ -882,9 +882,11 @@ section
 .course
 {
 	width: 100%;
+	height:100%;
 	border-radius: 6px;
 	background: #FFFFFF;
 	box-shadow: 0px 1px 10px rgba(29,34,47,0.1);
+	
 }
 .course_col:nth-child(odd)
 {
@@ -897,9 +899,12 @@ section
 .course_image
 {
 	width: 100%;
+	height:45%;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	overflow: hidden;
+	text-align: center;
+	padding-top: 25px;
 }
 .course_image img
 {
