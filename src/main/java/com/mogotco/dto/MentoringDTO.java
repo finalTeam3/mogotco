@@ -37,6 +37,9 @@ public class MentoringDTO {
 	private String mentor_mentorimg;
 	private String mcate_mname;
 	
+	//지금 당장 롸잇나우 할 수 있는 멘토링
+	private int date_difference;
+	private String user_username;
 	
 	
 	

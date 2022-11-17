@@ -1,4 +1,5 @@
 package com.mogotco.mentoring;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,22 +9,23 @@ import com.mogotco.dto.MentoringDTO;
 import com.mogotco.service.MentoringService;
 
 @SpringBootTest
-	class UpdateMentoring {
+	class Mentoringimmed {
 	@Autowired
 	MentoringService service;
 	
-	String  day = "2022-11-30"; 
-	java.sql.Date mdate = java.sql.Date.valueOf(day);
-	
 	@Test
 	void contextLoads() {
-		MentoringDTO mentoring = new MentoringDTO(204,103,30,70000,mdate,"f.jpg",null,1,null,"테스트","테스트3","이직관련상담",1,null,null,null,null,0,null);
+		List<MentoringDTO> metoring = null;
 		try {
-			service.modify(mentoring);
+			metoring = service.mentoringimmed();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		for(MentoringDTO c:metoring) {
+			System.out.println(c);
+		}
 	}
-
 
 }

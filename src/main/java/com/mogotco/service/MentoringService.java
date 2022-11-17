@@ -55,5 +55,10 @@ public class MentoringService implements MyService<Integer, MentoringDTO> {
 	public MentoringDTO viewMentoringOp(int mentoringid) throws Exception {
 		return mapper.viewMentoringOp(mentoringid);
 	}
+	
+	//지금 당장 롸잇나우 할 수 있는 멘토링
+	public List<MentoringDTO> mentoringimmed() throws Exception{
+		return mapper.mentoringimmed();
+	}
 
 }
