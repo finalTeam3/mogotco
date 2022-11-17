@@ -3,60 +3,95 @@
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.MentoringMapper">
-	
-	<select id="select" parameterType="Integer" resultType="MentoringDTO">
+
+	<select id="select" parameterType="Integer"
+		resultType="MentoringDTO">
 		SELECT * FROM mentoring WHERE mentoringid=#{mentoringid}
 	</select>
-	
+
 	<select id="selectAll" resultType="MentoringDTO">
 		SELECT * FROM mentoring
 	</select>
-	
+
 	<!-- 등록된 멘토링 리스트 출력을 위한 mybatis 연동 -->
-	<select id="selectMentoringAll" parameterType="Integer" resultType="MentoringDTO">
-		SELECT mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring mt
-		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+	<select id="selectMentoringAll" parameterType="Integer"
+		resultType="MentoringDTO">
+		SELECT mu.userid AS user_userid, mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		INNER JOIN mentor mr ON
+		mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mt.mcateid = #{mcateid}
 	</select>
-	
+
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
 	<select id="viewMentoringAll" resultType="MentoringDTO">
-		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle, mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		SELECT mt.mentoringid,
+		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
+		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring
+		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
-		INNER JOIN user mu ON mr.userid = mu.userid
+		INNER JOIN user mu
+		ON mr.userid = mu.userid
 	</select>
-	
+
 	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
-	<select id="viewMentoringOp" parameterType="Integer" resultType="MentoringDTO">
-		SELECT mt.mentoringid, mc.mname AS mcate_mname, mu.userid AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle, mt.mcontents, mt.mentoringdate,
-		mt.mentoringimg, mt.mentoringprice, mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
+	<select id="viewMentoringOp" parameterType="Integer"
+		resultType="MentoringDTO">
+		SELECT mt.mentoringid, mc.mname AS mcate_mname, mu.userid
+		AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle,
+		mt.mcontents, mt.mentoringdate,
+		mt.mentoringimg, mt.mentoringprice,
+		mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring
 		FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
-		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN mentor mr ON
+		mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mt.mentoringid = #{mentoringid}
 	</select>
-	
+	<!-- main에서 멘토링바로 할 수 있는 것들부터 하기 -->
+	<select id="mentoringimmed" resultType="MentoringDTO">
+		SELECT mentoringid,
+		mtitle, u.username AS user_username, mentoringprice,
+		mentoringimg,mentoringdate,
+		mcontents,DATEDIFF(mentoringdate,sysdate()) AS date_difference FROM
+		mentoring mentoring
+		INNER JOIN mentor men ON
+		mentoring.mentorid=men.mentorid
+		INNER JOIN user u ON
+		men.userid=u.userid
+		WHERE DATEDIFF(mentoringdate,sysdate())>=0 ORDER BY
+		date_difference ASC
+		LIMIT 3
+	</select>
 	<insert id="insert" parameterType="MentoringDTO">
-		INSERT INTO mentoring VALUES (NULL,#{mentorid},#{mcateid},#{mentoringprice},#{mentoringdate},
+		INSERT INTO mentoring VALUES
+		(NULL,#{mentorid},#{mcateid},#{mentoringprice},#{mentoringdate},
 		#{mentoringimg},#{mentorurl},#{mmemberidcnt},sysdate(),#{mplace},#{mcontents},#{mtitle},#{mcaring})
 		<selectKey keyProperty="mentoringid" resultType="Integer"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<update id="update" parameterType="MentoringDTO">
-		UPDATE mentoring SET mentorid=#{mentorid}, mcateid=#{mcateid}, mentoringprice=#{mentoringprice}, 
-		mentoringdate=#{mentoringdate}, mentoringimg=#{mentoringimg}, mentorurl=#{mentorurl}, 
-		mmemberidcnt=#{mmemberidcnt}, mrdate=sysdate(), mplace=#{mplace}, mcontents=#{mcontents},
-		mtitle=#{mtitle}, mcaring=#{mcaring} 
-		WHERE mentoringid=#{mentoringid}
+		UPDATE mentoring SET
+		mentorid=#{mentorid}, mcateid=#{mcateid},
+		mentoringprice=#{mentoringprice},
+		mentoringdate=#{mentoringdate},
+		mentoringimg=#{mentoringimg}, mentorurl=#{mentorurl},
+		mmemberidcnt=#{mmemberidcnt}, mrdate=sysdate(), mplace=#{mplace},
+		mcontents=#{mcontents},
+		mtitle=#{mtitle}, mcaring=#{mcaring}
+		WHERE
+		mentoringid=#{mentoringid}
 	</update>
-	
+
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM mentoring WHERE mentoringid=#{mentoringid}
+		DELETE FROM mentoring WHERE
+		mentoringid=#{mentoringid}
 	</delete>
-	
+
 </mapper>
