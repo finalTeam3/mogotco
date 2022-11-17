@@ -36,6 +36,9 @@ public class MentoringDTO {
 	// 멘토링 옵션 화면 출력을 위한 dto추가
 	private String mentor_mentorimg;
 	
+	//지금 당장 롸잇나우 할 수 있는 멘토링
+	private int date_difference;
+	private String user_username;
 	
 	
 	
