@@ -18,7 +18,7 @@ public class PurchaseDetailDTO {
 	private int mentoringoptionid;
 	private int purchaseid;
 	private int cancelpur;
-	private int progresspur;
+	private String progresspur;
 	
 	
 	//구매이력페이지(멘토링이력)-(대면)구매번호,구매날짜,가격,결제방법,멘토링제목,멘토이름,멘토링 날짜,시간,현재 멘토링 멤버 명수 상황,대면장소, 진행여부,케어유무

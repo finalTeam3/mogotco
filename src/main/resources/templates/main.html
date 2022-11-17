@@ -26,7 +26,8 @@
 <script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{/js/custom.js}"></script>
 <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
-<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>	 
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+<script src="https://kit.fontawesome.com/3394dbed7b.js" crossorigin="anonymous"></script>	 
 </head>
 
 <script>
@@ -76,11 +77,13 @@ function wsconnect() {
                         </ul>
                         
                         <div th:if = "${session.loginuser != null}" class="userdetail">
-                        		<a th:href="@{/user/mypage(id = ${session.loginuser.userid})}" th:text = "${session.loginuser.userid}">userdetail</a>
+                        		<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}" th:text = "${session.loginuser.userid}">mypage</a>
                         	</div>
                         
                         <div th:if = "${session.loginuser == null}" class="top_bar_login ml-auto">
-                           <div class="login_button"><a th:href="@{/user/login}">LOGIN</a></div>
+                        
+                           <div class="login_button"><a th:href="@{/user/login}">Login or Register</a></div>
+                           
                         </div>
                         
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
@@ -109,7 +112,9 @@ function wsconnect() {
                         <ul class="main_nav">
                            <li class="active"><a th:href="@{/}">Home</a></li>
                            <li><a th:href="@{/notice}">Notice</a></li>
+                           <li><a th:href="@{/about}">About</a></li>
                            <li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
+                           <li><a th:href="@{/mentoring/mservice}">Mentoring Service</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/blog(id = ${session.loginuser.userid})}">WishList</a></li>
                            <li><a th:href="@{/contact}">Contact</a></li>
                         </ul>
@@ -204,7 +209,7 @@ function wsconnect() {
    <!-- Footer -->
 
    <footer class="footer">
-      <div class="footer_background" style="background-image:url(images/footer_background.png)"></div>
+      <div class="footer_background" th:style="'background-image:url(' + @{/images/footer_background.png} + ')'"></div>
       <div class="container">
          <div class="row footer_row">
             <div class="col">

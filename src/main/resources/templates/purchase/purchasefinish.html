@@ -53,6 +53,26 @@
 .breadcrumbs ul li a:hover {
 	color: #14bdee;
 }
+/* button */
+.comment_button1
+{
+	width: 150px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button1:hover
+{
+	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+}
 </style>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
@@ -73,9 +93,6 @@
 		}
 	}
 
-	$(document).ready(function() {
-
-	});
 </script>
 </head>
 
@@ -135,8 +152,7 @@
 					<td type="text">카카오페이</td>
 					<!-- 내 구매이력으로 갈 것인지에 대한 버튼 -->
 					<td>
-						<button th:onclick="go([[${session.loginuser.userid}]]);" type="button"
-							class="btn btn-primary">Go to detail</button>
+						<button th:onclick="go([[${session.loginuser.userid}]]);" type="submit" class="comment_button1">Go to detail</button>
 					</td>
 					<input type="hidden" id="itemimghide" th:value="${404}">
 					<td type="hidden" id="itemimghide" th:value="${404}" style="display:none"></td>
