@@ -1,14 +1,17 @@
 package com.mogotco.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.UserDTO;
+import com.mogotco.frame.Util;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.UserService;
+
 
 @Controller
 @RequestMapping("/mentor")
@@ -21,6 +24,12 @@ public class MentorController {
 	
 	@Autowired
 	UserService uservice;
+	
+	@Value("${admindir}")
+	String admindir;
+	
+	@Value("${userdir}")
+	String userdir;
 	
 	//멘토 상세페이지
 	@RequestMapping("/mentordetail")
@@ -60,7 +69,7 @@ public class MentorController {
 	public String mentorregister(Model model, String id) {
 		UserDTO user = null;
 		try {
-			user = uservice.get("whskawn4321");
+			user = uservice.get("whgkdrb4321");
 			model.addAttribute("u", user);
 			model.addAttribute("center", mentor+"mentorregister");
 		} catch (Exception e) {
@@ -73,12 +82,20 @@ public class MentorController {
 	// 멘토 정보 등록 기능 (멘토 지원)
 	@RequestMapping("/registerimpl")
 	public String register(Model model, MentorDTO mentordto) {
+		
+		String mpimgname = mentordto.getMpimg().getOriginalFilename();
+		mentordto.setMentorimg(mpimgname);
+		
+		String mcimgname = mentordto.getMcimg().getOriginalFilename();
+		mentordto.setMcardimg(mcimgname);
+		
 		try {
+			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 			mservice.register(mentordto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:mentorregister";
 	}		
 	
 }

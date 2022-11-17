@@ -14,10 +14,24 @@
 
 }
 
+span{
+    font-weight: inherit;
+    font-style: inherit;
+}
 </style>
 
 
 <script>
+$(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/registerimpl}]]'
+		});
+		$('#register_form').submit();
+	});
+});
 
 function display(data) {
 	var name = data.images[0].fields[0].inferText
@@ -95,8 +109,6 @@ function upload() {
 </script>
 </head>
 
-
-
 	<!-- Home -->
 
 	<div class="home">
@@ -130,7 +142,7 @@ function upload() {
 					<div class="col-lg-8">
 						<div class="contact_form">
 							<div class="contact_info_title">Mentor Apply</div>
-							<form action="#" class="register_form" id = "register_form" enctype="multipart/form-data">
+							<form class="register_form" id = "register_form" enctype="multipart/form-data">
 							
 								
 								
@@ -176,22 +188,17 @@ function upload() {
 								</div>			
 								
 								<div>
-									<label for = "mentorcom" class="form_title">Mentorcom</label>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
 								</div>
 
 								<div>
-									<label for = "mentorcon" class="form_title">Mentorcon</label>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
 								</div>
 
-								<div style = "display:none">
-									<label for = "mentorok" class="form_title">Mentorok</label>
-									<input type="text" class="comment_input" id = "mentorok" name = "mentorok">
-								</div>
-
 								<div>
-									<label for = "mentorcareer" class="form_title">Mentorcareer</label>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
 								</div>
 

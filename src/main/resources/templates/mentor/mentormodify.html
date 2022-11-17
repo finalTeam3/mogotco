@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
-<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script th:src="@{/js/course.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
-<link th:href="@{plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
-</head>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
 $(document).ready(function(){
 	$('#update_btn').click(function(){
-		$('#mentor_form').attr({
+		$('#modify_form').attr({
+			'enctpe':'multipart/form-data',
 			'method':'post',
 			'action':'[[@{/mentor/modifyimpl}]]'
 		});
-		$('#mentor_form').submit();
+		$('#modify_form').submit();
 	});
 });
 </script>
+</head>
 
-	
 	<!-- Home -->
-
- 	<div class="home">
+ 
+	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
 				<div class="row">
@@ -34,7 +32,7 @@ $(document).ready(function(){
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>mentormodify</li>
+								<li>MODIFY</li>
 							</ul>
 						</div>
 					</div>
@@ -43,96 +41,133 @@ $(document).ready(function(){
 		</div>			
 	</div>
 
-	Course
 
-	<div class="course">
-		<div class="container">
-			<div class="row">
+	<div class="contact">
 
-				<div class="col-lg-12">
-					<div class="course_container">
-						<div class="course_title">mentor modify</div>
 
-						<div class="course_tabs_container">
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
 
-						<div class="tab_panel active tab_panel_2" >
-						
-					<form id="mentor_form">
-						<div class="col-md-12 form-group">
-							<label for="mentorid">테이블id</label> <input class="form-control"
-								type="text" readonly="readonly" th:value="${m.mentorid}" name="mentorid" id="mentorid">
-						</div>
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">Mentor Modify</div>
+							<form class="register_form" id = "modify_form" enctype="multipart/form-data">
+								
+								<div>
+									<label for = "mentorid" class="form_title">Mentorid</label>
+									<input type="text" class="comment_input" th:value="${m.mentorid}" name="mentorid" id="mentorid" readonly="readonly">
+								</div>
 
-						<div class="col-md-12 form-group">
-							<label for="userid">멘토id</label> <input class="form-control"
-								type="text" readonly="readonly" th:value="${m.userid}" name="userid" id="userid">
-						</div>
-						
-						<div class="col-md-12 form-group" style="display:none">
-							<label for="adminid">담당 관리자id</label> <input class="form-control"
-								type="text" readonly="readonly" th:value="${m.adminid}" name="adminid" id="adminid">
-						</div>
-					
+								<div>
+									<label for = "userid" class="form_title">Userid</label>
+									<input type="text" class="comment_input" th:value="${m.userid}" name="userid" id="userid" readonly="readonly">
+								</div>
 
-<!-- 						<div class="col-md-12 form-group">
-							<form id="uploadForm" enctype="multipart/form-data">
-							<label for="mcf">명함 등록 
-							<div class="uploadbox">
-								<img id="uploadimg">
-							</div>
-							</label>
-							<input type="file" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+								<div style = "display:none">
+									<label for = "adminid" class="form_title">Adminid</label>
+									<input type="text" class="comment_input" ith:value="${m.adminid}" name="adminid" id="adminid">
+								</div>
+				
+								<div>
+									<label for="pupload" class="form_title">Profile Image 
+										<div>
+											<img id="uploadprofile">
+										</div>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+								</div>
+			
+													
+								<div>
+									<label for="mcf" class="form_title">Mentor Card 
+									<div>
+										<img id="uploadimg">
+									</div>
+									</label>
+									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+								</div>											
+								<div>
+									<button th:onclick="upload()" class="comment_button trans_200" style="width:50px">등록</button>
+								</div>			
+								
+								<div>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" th:value="${m.mentorcom}" id="mentorcom" name="mentorcom">
+								</div>
+
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
+								</div>
+
+								<div>
+									<label for = "cancelmentoring" class="form_title">Cancelmentoring<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" th:value="${m.cancelmentoring}" name="cancelmentoring" id="cancelmentoring">
+								</div>
+
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<textarea class="comment_input" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
+								</div>
+
+								<button id = "update_btn" class="comment_button trans_200">Modify</button>
+								
 							</form>
-						</div>											
-						<div class="col-md-12 form-group">
-						<button th:onclick="upload()">등록</button>
-						</div> -->
-												
-						<div class="col-md-12 form-group">
-							<label for="mentorcom">회사명</label> <input class="form-control" th:value="${m.mentorcom}" type="text" id="mentorcom" name="mentorcom">
-						</div>
-						<div class="col-md-12 form-group">
-							<label>직급</label> <input class="form-control"
-								type="text" >
-						</div>
-						<div class="col-md-12 form-group">
-							<label for="mentorcon">소개</label> <textarea class="form-control" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
-						</div>
-<!-- 						<div class="col-md-12 form-group">
-							<label>희망분야</label> <input class="form-control"
-								type="text" placeholder="" >
-						</div> -->
-						
- 						<div class="col-md-12 form-group" style="display:none">
-							<label for="mentorimg">프로필 이미지</label> <input class="form-control"
-								type="text" th:value="${m.mentorimg}" name="mentorimg" id="mentorimg">
-						</div>						
-
-						<div class="col-md-12 form-group">
-							<label for="mentorok">멘토 승인 여부</label> <input class="form-control"
-								type="text" readonly="readonly" th:value="${m.mentorok}" name="mentorok" id="mentorok">
-						</div>
-						<div class="col-md-12 form-group">
-							<label for="cancelmentoring">멘토링 취소 가능 횟수</label> <input class="form-control"
-								type="text" readonly="readonly" th:value="${m.cancelmentoring}" name="cancelmentoring" id="cancelmentoring">
-						</div>																		
-						<div class="col-md-12 form-group">
-							<label for="mentorcareer">경력</label> <textarea class="form-control" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
-						</div>
-					</form>	
-
-					      <button type="submit" id="update_btn" class="btn btn-dark">수정하기</button>
-
-							</div>
+														
+<!-- 							  <form>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check1">
+							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check2">
+							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check3">
+							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check4">
+							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check5">
+							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check6">
+							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check7">
+							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check8">
+							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
+							      </label>
+							    </div>
+							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
+							  </form> -->							
+							
+							
 						</div>
 					</div>
 				</div>
-
-				
 			</div>
 		</div>
-	</div> 
+	</div>
 
+ 
 
 
 	

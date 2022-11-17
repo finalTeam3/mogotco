@@ -2,6 +2,8 @@ package com.mogotco.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,10 @@ public class MentorDTO {
 	private Date mentordate;
 	private int cancelmentoring;
 	private String mentorcareer;
+	private Date mentorapply;
+	
+	private MultipartFile mpimg;  // mentor profile image
+	private MultipartFile mcimg;  // mentor card image
 	
 	private String mentoring_mtitle;
 	private String mentoring_mentoringimg;
