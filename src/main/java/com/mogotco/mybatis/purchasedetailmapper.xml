@@ -16,28 +16,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 전체구매이력(구매번호,구매날짜,가격,결제방법,멘토링제목,멘토이름,멘토링 날짜,시간,대면장소, 비대면 url,진행여부,케어유무) -->
 	<select id="wholedetail" parameterType="String"
 		resultType="PurchaseDetailDTO">
-		SELECT purde.purchaseid, pur.purdate AS purchase_purdate,
-		pur.purprice
-		AS purchase_purprice,pur.purpay AS purchase_purpay,
+		SELECT purde.purchaseid, pur.purdate AS purchase_purdate, pur.purprice AS
+		purchase_purprice,pur.purpay AS purchase_purpay,
 		mentoring.mtitle AS mentoring_mtitle, u.username AS
 		user_mentorname,mentoring.mentoringdate AS mentoring_mentoringdate,
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
-		mentoring.mplace AS mentoring_mplace, mentoring.mentorurl AS
-		mentoring_mentorurl,
-		purde.progresspur,mentoring.mcaring AS
-		mentoring_mcaring FROM purchasedetail purde
-		INNER JOIN purchase pur ON
-		purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption
-		mentoringoption ON
+		purde.mentoringoptionid,
+		mentoring.mplace AS mentoring_mplace, mentoring.mentorurl AS mentoring_mentorurl,
+		purde.progresspur,mentoring.mcaring AS mentoring_mcaring FROM
+		purchasedetail purde
+		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
+		INNER JOIN mentoringoption mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid
-		INNER JOIN
-		mentoring mentoring ON
+		INNER JOIN mentoring mentoring ON
 		mentoringoption.mentoringid=mentoring.mentoringid
-		INNER JOIN mentor
-		mentor ON mentoring.mentorid=mentor.mentorid
-		INNER JOIN user u ON
-		mentor.userid=u.userid
+		INNER JOIN mentor mentor ON mentoring.mentorid=mentor.mentorid
+		INNER JOIN user u ON mentor.userid=u.userid
 		WHERE pur.userid=#{userid}
 	</select>
 
