@@ -358,10 +358,10 @@
 					url : "[[@{/purchase}]]", //ajax kgorder(왜냐면 데이터 저장을 하기 위해서는 고유 키값을 받아온 뒤 실행할 수 있음)
 					headers: { "Content-Type": "application/json" },
 					data : {//아니면 완료까지만 하고 바로 결제가 완료되었다는 것으로 페이지가 넘어가게	
-						"uid" : rsp.imp_uid,
-						"purprice" : rsp.paid_amount,
-						"purpay" : rsp.pay_method,
-						"mentoring_mtitle" : rsp.name
+						uid : rsp.imp_uid,
+						purprice : rsp.paid_amount,
+						purpay : rsp.pay_method,
+						mentoring_mtitle : rsp.name
 					}
 					//현재 여기서부터 안됨. controller쪽을 손봐야할듯
 				}).done(function(data) {
