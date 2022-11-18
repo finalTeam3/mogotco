@@ -150,9 +150,9 @@ function upload() {
 										<div>
 											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
 										</div>
-									<label id="pubutton" class="btn btn-dark" for="pupload" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
+									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
 									</label>
-									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+									<input type="file" style="display:none" name="mpimg" id="mpimg" onchange="previewprofile(event);">
 								</div>
 								
 								<div>
@@ -170,16 +170,14 @@ function upload() {
 									<input type="text" class="comment_input" id = "adminid" name = "adminid">
 								</div>
 				
-			
-													
 								<div>
 									<label class="form_title">Mentor Card
 									<div>
 										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
-									<label class="btn btn-dark" for="mcf" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
+									<label class="btn btn-dark" for="mcimg" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
 									</div>
 									</label>
-									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+									<input type="file" class="comment_input" style="display:none" name="mcimg" id="mcimg"  onchange="previewimg(event);">
 									<div>
 									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
 									</div>
@@ -200,56 +198,10 @@ function upload() {
 									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
 								</div>
-
-								<button id = "register_btn" class="comment_button trans_200">Apply</button>
 								
 							</form>
+								<button id = "register_btn" class="comment_button trans_200">Apply</button>
 														
-<!-- 							  <form>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check1">
-							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check2">
-							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check3">
-							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check4">
-							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check5">
-							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check6">
-							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check7">
-							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check8">
-							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
-							      </label>
-							    </div>
-							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
-							  </form> -->							
-							
-							
 						</div>
 					</div>
 				</div>

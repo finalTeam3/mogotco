@@ -108,7 +108,7 @@ public class MentorController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:mentorregister";
+		return "redirect:mentorregister?id="+mentordto.getUserid();
 	}		
 	
 }
