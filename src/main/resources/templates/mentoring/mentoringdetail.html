@@ -354,8 +354,11 @@
 
 									<!-- Feature -->
 									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration:</span></div>
-										<div class="feature_text ml-auto">2 weeks</div>
+										<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Select Mentoring Time</span></div>
+									</div>
+									<div th:each="mttime:${mttime}">
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										<button th:text="${mttime.mentoringtime}" type="submit" class="home_search_button" style="margin-bottom:3px;"></button>
 									</div>
 
 

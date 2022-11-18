@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MentoringDTO;
+import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 
 @Controller
@@ -16,6 +18,9 @@ public class MentoringController {
 	
 	@Autowired
 	MentoringService mservice;
+	
+	@Autowired
+	MentoringOptionService moservice;
 	
 	String mentoring = "mentoring/";
 	
@@ -38,9 +43,12 @@ public class MentoringController {
 	@RequestMapping("/mentoringdetail")
 	public String mentoringdetail(Model model, int mentoringid) {
 		MentoringDTO mto = null;
+		List<MentoringOptionDTO> mttime = null;
 		try {
 			mto = mservice.viewMentoringOp(mentoringid);
+			mttime = moservice.viewMentorigTime(mentoringid);
 			model.addAttribute("mto", mto);
+			model.addAttribute("mttime", mttime);
 			model.addAttribute("center", mentoring+"mentoringdetail");
 		} catch (Exception e) {
 			e.printStackTrace();

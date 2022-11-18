@@ -908,7 +908,7 @@ section
 	height: 46px;
 	background: #14bdee;
 	border: none;
-	outline: none;
+	outline: none !important;
 	border-radius: 3px;
 	font-size: 14px;
 	font-weight: 500;
