@@ -5,13 +5,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mogotco.mapper.UserMapper">
 	
 	<insert id="insert" parameterType="userDTO">
-		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, userpoint, naverid, kakaoid, googleid, usergen) 
-		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{userpoint}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen})
+		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, userpoint, naverid, kakaoid, googleid, usergen, addrnum) 
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{userpoint}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen}, #{addrnum})
 	</insert> 
 	
 	<update id="update" parameterType="userDTO">
 		UPDATE user SET userpwd = #{userpwd}, username = #{username}, useraddr = #{useraddr}, usertel = #{usertel}, useremail = #{useremail}, 
-		withdraw = #{withdraw}, userbirth = #{userbirth}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}
+		withdraw = #{withdraw}, userbirth = #{userbirth}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}, addrnum = #{addrnum}
 		WHERE userid = #{userid}
 	</update>
 	
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectMypage" parameterType="String" resultType="userDTO">
-		SELECT u.userid, u.userpwd, u.username, m.mentorok, u.useraddr, u.usertel, u.useremail, u.userbirth, u.userpoint, u.usergen FROM user u  
+		SELECT u.userid, u.userpwd, u.username, m.mentorok, u.useraddr, u.usertel, u.useremail, u.userbirth, u.userpoint, u.usergen, u.addrnum FROM user u  
 		INNER JOIN mentor m ON u.userid = m.userid
 		WHERE u.userid = #{userid}
 	</select>
