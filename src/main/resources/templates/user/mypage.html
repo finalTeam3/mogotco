@@ -7,6 +7,13 @@
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+button + button {
+
+margin-left: 2%;
+
+}
+</style>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -93,6 +100,10 @@
 					<div class="col-lg-8">
 						<div class="contact_form">
 							<div class="contact_info_title">My Page</div>
+							<div>&nbsp</div>
+							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
+							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
+							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
 							<form action="#" class="comment_form">
 							
 								<div>
@@ -122,11 +133,11 @@
 								
 								<div>
 								<label for = "address" class="address_form">Address</label>
-								<input type="text" class="comment_input_postno" id="sample6_postcode" placeholder="우편번호">
-								<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-								<input type="text" class="comment_input_address" name = "address" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소"><br>
-								<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소">
-								<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목">
+									<input type="text" class="comment_input_postno" id="sample6_postcode" placeholder="우편번호">
+									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+									<input type="text" class="comment_input_address" name = "address" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소"><br>
+									<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소">
+									<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목">
 								</div>
 								
 								<div>

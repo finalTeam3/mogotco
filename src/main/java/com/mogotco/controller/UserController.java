@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.service.KakaologinAPI;
+import com.mogotco.service.MentorService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -26,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	KakaologinAPI kakao_service;
+	
+	@Autowired
+	MentorService mentor_service;
 	
 	public void maincenter(Model model) {
 	}
@@ -96,9 +101,12 @@ public class UserController {
 	@RequestMapping("/mypage")
 	public String mypage(Model model, String userid) {
 		UserDTO myuser = null;
+		MentorDTO mentor =null;
 		try {
-			myuser = user_service.getMypage(userid);
+			myuser = user_service.get(userid);
+			mentor = mentor_service.mentorAll(userid);
 			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mentor);
 			model.addAttribute("center", dir+"mypage");
 		} catch (Exception e) {
 			e.printStackTrace();

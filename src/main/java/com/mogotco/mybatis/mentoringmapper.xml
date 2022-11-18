@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN user u ON
 		men.userid=u.userid
 		WHERE DATEDIFF(mentoringdate,sysdate())>=0 ORDER BY
-		date_difference DESC
+		date_difference ASC
 		LIMIT 3
 	</select>
 	<insert id="insert" parameterType="MentoringDTO">

@@ -1022,6 +1022,8 @@ section
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	overflow: hidden;
+	text-align: center;
+	padding-top: 25px;
 }
 .course_image img
 {

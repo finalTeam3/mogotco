@@ -1,16 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link th:href="@{/plugins/video-js/video-js.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/blog_responsive.css}">
-<script th:src="@{/plugins/masonry/masonry.js}"></script>
-<script th:src="@{/plugins/video-js/video.min.js}"></script>
-<script th:src="@{/js/blog.js}"></script>
-</head>
-	
-	<!-- Home -->
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
 
+#pubutton{
+margin-left: 22%;
+}
+
+#mcbutton{
+margin-left: 1%;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$('#update_btn').click(function(){
+		$('#modify_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/modifyimpl}]]'
+		});
+		$('#modify_form').submit();
+	});
+});
+
+function display(data) {
+	var name = data.images[0].fields[0].inferText
+	var position = data.images[0].fields[1].inferText
+	var company = data.images[0].fields[2].inferText
+
+
+	alert(name);
+	alert(position);
+	alert(company);
+
+}
+
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
+	    var reader = new FileReader();
+
+	    reader.onload = function(event) {
+	    	$('#uploadprofile').attr('src',event.target.result);
+	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
+	    };
+	    reader.readAsDataURL(event.target.files[0]);
+	  }
+
+function previewimg(event) {// 명함 이미지 미리 보여주기
+/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	
+	$('#context').hide(); */
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$('#uploadimg').attr('src',event.target.result);
+    	$('#uploadimg').attr('style','width:300px; hight:300px;');
+    	
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    //alert('reader.readAsDataURL : ' + event.target.files[0]);
+  }
+
+function upload() {
+	const imageInput = $("#mcf")[0];
+	console.log("mcf: ", imageInput.files)
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
+	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+
+	
+/* 		for (var value of formData.values()) {
+	   console.log(value);
+	} */
+
+	$.ajax({
+		type : "POST",
+		url : '/ocrresult',
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
+
+</script>
+</head>
+
+	<!-- Home -->
+ 
 	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
@@ -19,7 +110,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Blog</li>
+								<li>MODIFY</li>
 							</ul>
 						</div>
 					</div>
@@ -28,182 +119,136 @@
 		</div>			
 	</div>
 
-	<!-- Blog -->
 
-	<div class="blog">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="blog_post_container">
+	<div class="contact">
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_1.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_2.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">Mentor Modify</div>
+							<form class="register_form" id = "modify_form" enctype="multipart/form-data">
+								
+								<div>
+									<label class="form_title"> 
+										<div>
+											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="pupload" style="width:110px;height:35px;font-size:15px">프로필 수정</label>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
 								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_3.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Law Schools Debate a Contentious Testing Alternative</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
+								<div>
+									<label for = "mentorid" class="form_title">Mentorid</label>
+									<input type="text" class="userid comment_input" th:value="${m.mentorid}" name="mentorid" id="mentorid" readonly="readonly">
 								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
+
+								<div>
+									<label for = "userid" class="form_title">Userid</label>
+									<input type="text" class="userid comment_input" th:value="${m.userid}" name="userid" id="userid" readonly="readonly">
 								</div>
-							</div>
-						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_video_container">
-								<video class="blog_post_video video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "poster": "images/blog_4.jpg"}'>
-									<source th:src="@{/images/mov_bbb.mp4}" type="video/mp4">
-									<source th:src="@{/images/mov_bbb.ogg}" type="video/ogg">
-									Your browser does not support HTML5 video.
-								</video>
-							</div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Building Skills Outside the Classroom With New Ways</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
+								<div style = "display:none">
+									<label for = "adminid" class="form_title">Adminid</label>
+									<input type="text" class="comment_input" ith:value="${m.adminid}" name="adminid" id="adminid">
 								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
+				
+			
+													
+								<div>
+									<label class="form_title">Mentor Card
+									<div>
+										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
+									<label class="btn btn-dark" for="mcf" style="width:96px;height:31px;font-size:13px">명함 수정</label>
+									</div>
+									</label>
+									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+									<div>
+									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									</div>
+								</div>			
+								
+								<div>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" th:value="${m.mentorcom}" id="mentorcom" name="mentorcom">
 								</div>
-							</div>
-						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_image"><img th:src="@{/images/blog_5.jpg}" alt=""></div>
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">Here’s What You Need to Know About Online Testing</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
 								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
+
+								<div>
+									<label for = "cancelmentoring" class="form_title">Cancelmentoring<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" th:value="${m.cancelmentoring}" name="cancelmentoring" id="cancelmentoring">
 								</div>
-							</div>
-						</div>
 
-						<!-- Blog Post -->
-						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-								<div class="blog_post_title"><a th:href="@{/blog_single}">With Changing Students and Times</a></div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<textarea class="comment_input" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
 								</div>
-								<div class="blog_post_text">
-									<p>Policy analysts generally agree on a need for reform, but not on which path policymakers should take...</p>
-								</div>
-							</div>
-						</div>
 
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center">
-					<div class="load_more trans_200"><a href="#">load more</a></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
+								<button id = "update_btn" class="comment_button trans_200">Modify</button>
+								
 							</form>
+														
+<!-- 							  <form>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check1">
+							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check2">
+							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check3">
+							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check4">
+							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check5">
+							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check6">
+							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check7">
+							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check8">
+							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
+							      </label>
+							    </div>
+							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
+							  </form> -->							
+							
+							
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+ 
 
 
+	

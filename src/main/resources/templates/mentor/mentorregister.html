@@ -1,92 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 
 <head>
-    <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+#pubutton{
+margin-left: 11%;
+}
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+#mcbutton{
+margin-left: 1%;
+}
+</style>
 
-    <!-- Libraries Stylesheet -->
-    <link href="/styles/login/owl.carousel.min.css" rel="stylesheet">
-    <link href="/styles/login/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/styles/login/bootstrap.min.css" rel="stylesheet">
+<script>
+$(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/registerimpl}]]'
+		});
+		$('#register_form').submit();
+	});
+});
 
-    <!-- Template Stylesheet -->
-    <link href="/styles/login/style.css" rel="stylesheet">
+function display(data) {
+	var name = data.images[0].fields[0].inferText
+	var position = data.images[0].fields[1].inferText
+	var company = data.images[0].fields[2].inferText
+	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
+	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
+	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
+	//JSNO 형태로 가격정보 출력 : data.images[0].fields[3].inferText - 10,000
+	//JSNO 형태로 프로젝트명 출력 : data.images[0].fields[4].inferText
+	//JSNO 형태로 바코드번호 출력 : data.images[0].fields[5].inferText
+
+	alert(name);
+	alert(position);
+	alert(company);
+
+}
+
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
+	    var reader = new FileReader();
+
+	    reader.onload = function(event) {
+	    	$('#uploadprofile').attr('src',event.target.result);
+	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
+	    };
+	    reader.readAsDataURL(event.target.files[0]);
+	  }
+
+function previewimg(event) {// 명함 이미지 미리 보여주기
+/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	
+	$('#context').hide(); */
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$('#uploadimg').attr('src',event.target.result);
+    	$('#uploadimg').attr('style','width:300px; hight:300px;');
+    	
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    //alert('reader.readAsDataURL : ' + event.target.files[0]);
+  }
+
+function upload() {
+	const imageInput = $("#mcf")[0];
+	console.log("mcf: ", imageInput.files)
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
+	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+
+	
+/* 		for (var value of formData.values()) {
+	   console.log(value);
+	} */
+
+	$.ajax({
+		type : "POST",
+		url : '/ocrresult',
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
+
+</script>
 </head>
 
-<body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+	<!-- Home -->
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li>APPLY</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+
+	<!-- Contact -->
+
+	<div class="contact">
+
+		<!-- Contact Info -->
+
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
+
+					<!-- Contact Form -->
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">Mentor Apply</div>
+							<form class="register_form" id = "register_form" enctype="multipart/form-data">
+							
+								
+								<div>
+									<label class="form_title"> 
+										  파일 업로드 버튼을 눌러 프로필 이미지를 등록해주세요.
+										<div>
+											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="pupload" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
+									</label>
+									<input type="file" style="display:none" name="pupload" id="pupload" onchange="previewprofile(event);">
+								</div>
+								
+								<div>
+									<label for = "userid" class="form_title">Userid</label>
+									<input type="text" class="userid comment_input" id = "userid" name = "userid" th:value = "${u.userid}" readonly="readonly">
+								</div>
+
+								<div>
+									<label for = "username" class="form_title">Username</label>
+									<input type="text" class="userid comment_input" id = "username" name = "username" th:value = "${u.username}" readonly="readonly">
+								</div>
+
+								<div style = "display:none">
+									<label for = "adminid" class="form_title">Adminid</label>
+									<input type="text" class="comment_input" id = "adminid" name = "adminid">
+								</div>
+				
+			
+													
+								<div>
+									<label class="form_title">Mentor Card
+									<div>
+										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
+									<label class="btn btn-dark" for="mcf" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
+									</div>
+									</label>
+									<input type="file" class="comment_input" style="display:none" name="mcf" id="mcf"  onchange="previewimg(event);">
+									<div>
+									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									</div>
+								</div>											
+			
+								
+								<div>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
+								</div>
+
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
+								</div>
+
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
+								</div>
+
+								<button id = "register_btn" class="comment_button trans_200">Apply</button>
+								
+							</form>
+														
+<!-- 							  <form>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check1">
+							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check2">
+							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check3">
+							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check4">
+							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check5">
+							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check6">
+							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check7">
+							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
+							      </label>
+							    </div>
+							    <div class="form-check">
+							      <label class="form-check-label" for="check8">
+							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
+							      </label>
+							    </div>
+							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
+							  </form> -->							
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
 
 
-        <!-- Sign In Start -->
-        <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
-                    
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>MGC</h3>
-                            </a>
-                            <h3>Register</h3>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">ID</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">register~ Password</label>
-                        </div>
-                        
-                       <!--  <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="">Forgot Password</a>
-                        </div> -->
-                        
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Sign In End -->
-    </div>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-   <!--  <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script> -->
-
-    <!-- Template Javascript -->
-    <script src="/styles/login/main.js"></script>
-</body>
 
 </html>
