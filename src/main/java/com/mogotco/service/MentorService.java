@@ -48,4 +48,8 @@ public class MentorService implements MyService<Integer, MentorDTO> {
 		return mapper.mentoritem(userid);
 	}
 
+	public MentorDTO adminupdate(String userid) throws Exception {
+		return mapper.adminupdate(userid);
+	}
+
 }

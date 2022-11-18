@@ -69,7 +69,15 @@ public class MentorController {
 	// 멘토 정보 업데이트 기능
 	@RequestMapping("/modifyimpl")
 	public String update(Model model, MentorDTO mentordto) {
+
+		String mpimgname = mentordto.getMpimg().getOriginalFilename();
+		mentordto.setMentorimg(mpimgname);
+		
+		String mcimgname = mentordto.getMcimg().getOriginalFilename();
+		mentordto.setMcardimg(mcimgname);		
+		
 		try {
+			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 			mservice.modify(mentordto);
 		} catch (Exception e) {
 			e.printStackTrace();
