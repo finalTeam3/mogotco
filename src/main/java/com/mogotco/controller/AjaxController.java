@@ -34,38 +34,40 @@ public class AjaxController {
 	@Autowired
 	MentoringOptionService service4;
 
-
+	@RequestMapping("/importsuccess")
+	public Object importsuccess() {
+		return "";
+	}
 	@RequestMapping("/kgorder")
 	public Object kgorder(PurchaseDTO pur) {
 		//결제완료 버튼을 눌렀을 때
-		
+		System.out.println(pur);
 		//purchase부분에 point생성
 		//purchase부분 넘길때 받아올 것들
-		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", 202, "공부법 상담 해드립니다.", null,null , "09:00", null,3 ,408,100);
 		try {
 			//구매 내용을 등록하고
-			service.register(purchase);
+			service.register(pur);
 			
 			//구매한 mentoring정보를 불러옴(url을 불러오기위한 것)
-			MentoringDTO mentoring = service2.get(purchase.getMentoring_mentoringid());
+			MentoringDTO mentoring = service2.get(pur.getMentoring_mentoringid());
 			
 			//멘토링 멤버번호를 생성(멘토링 멤버 추가)
-			MentoringmemberDTO mentoringmember = new MentoringmemberDTO(0, purchase.getMentoringoption_mentoringoptionid(), purchase.getUserid());
+			MentoringmemberDTO mentoringmember = new MentoringmemberDTO(0, pur.getMentoringoption_mentoringoptionid(), pur.getUserid());
 			service3.register(mentoringmember);
 			
 			//구매이력을 바로 생성
-			int r = purchase.getPurchaseid();
-			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,purchase.getMentoringoption_mentoringoptionid(), r, 0, "x", purchase.getPurdate(), 
-					purchase.getPurprice(), purchase.getPurpay(), purchase.getMentoring_mtitle(), purchase.getUser_mentorname(), 
-					purchase.getMentoring_mentoringdate(), purchase.getMentoringoption_mentoringtime(), 
-					mentoring.getMentorurl(), purchase.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
+			int r = pur.getPurchaseid();
+			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,pur.getMentoringoption_mentoringoptionid(), r, 0, "x", pur.getPurdate(), 
+					pur.getPurprice(), pur.getPurpay(), pur.getMentoring_mtitle(), pur.getUser_mentorname(), 
+					pur.getMentoring_mentoringdate(), pur.getMentoringoption_mentoringtime(), 
+					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
 			
 			//해당 mentoringoption을 불러옴
-			MentoringOptionDTO beforementoringoption = service4.get(purchase.getMentoringoption_mentoringoptionid());
+			MentoringOptionDTO beforementoringoption = service4.get(pur.getMentoringoption_mentoringoptionid());
 			//재고수정
-			MentoringOptionDTO aftermentoringoption = new MentoringOptionDTO(purchase.getMentoringoption_mentoringoptionid(), 
-						purchase.getMentoring_mentoringid(), purchase.getMentoringoption_mentoringtime(), beforementoringoption.getMoptionstock()-1);
+			MentoringOptionDTO aftermentoringoption = new MentoringOptionDTO(pur.getMentoringoption_mentoringoptionid(), 
+						pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime(), beforementoringoption.getMoptionstock()-1);
 			service4.modify(aftermentoringoption);
 			
 			//point값 수정

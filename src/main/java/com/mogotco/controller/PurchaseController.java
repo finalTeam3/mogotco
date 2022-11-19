@@ -33,12 +33,20 @@ public class PurchaseController {
 	@RequestMapping("/purchasedetail")
 	public String purchasedetail(Model model, String id) {
 		List<PurchaseDetailDTO> detail = null;
-		//PurchaseDetailDTO detailmember = null;
+		PurchaseDetailDTO detailmember = null;
 		try {
+			//멘토링 정보를 불러오고
 			detail = purchasedetailservice.wholedetail(id);
-			//detailmember = purchasedetailservice.groupcount(mentoringmembercnt);
+			//향상 for문에 first라는 개별 객체에 넣어줌
+			for(PurchaseDetailDTO first : detail) {
+				//멘토링 멤버수를 뽑기위해 mentoringoptionid를 불러오고
+				Integer mentoringoptionid = first.getMentoringoptionid();
+				//뽑은 멤버수 정보를
+				detailmember = purchasedetailservice.groupcount(mentoringoptionid);
+				//다시 first객체에 setting해준다.
+				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
+			}
 			model.addAttribute("list", detail);
-			//model.addAttribute("member", detailmember);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

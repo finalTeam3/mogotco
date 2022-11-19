@@ -146,48 +146,6 @@
 		}
 		document.getElementById("result_pnt").innerHTML = amt - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
 	};
-
-	//import
-	var IMP = window.IMP;
-	IMP.init("imp82873338");
-
-	var today = new Date();
-	var hours = today.getHours(); // 시
-	var minutes = today.getMinutes(); // 분
-	var seconds = today.getSeconds(); // 초
-	var milliseconds = today.getMilliseconds();
-	var makeMerchantUid = hours + minutes + seconds + milliseconds;
-
-	//order시에 필요한 값들 변수로 다 선언해주기
-
-	function requestPay() {
-		IMP.request_pay({
-			pg : 'html5_inicis',
-			pay_method : 'card',
-			merchant_uid : "IMP" + makeMerchantUid,
-			name : '당근 10kg',
-			amount : 100,
-			buyer_email : 'Iamport@chai.finance',
-			buyer_name : '아임포트 기술지원팀',
-			buyer_tel : '010-1234-5678',
-			buyer_addr : '서울특별시 강남구 삼성동',
-			buyer_postcode : '123-456'
-		}, function(rsp) { // callback
-			if (rsp.success) {
-				$.ajax({
-					type : "POST",
-					url : "/kgorder", //ajax kgorder
-					data : {
-						//order일때 필요한 것 다 들어감
-						"amount" : 1,
-						"pay_method" : 'card'
-					}
-				});
-			} else {
-				console.log(rsp);
-			}
-		});
-	}
 </script>
 </head>
 
@@ -222,43 +180,35 @@
 				<div class="bg-light p-30 mb-5">
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<label>Mentoring no</label> <input class="form-control"
+							<label>Mentoring no</label> <input id="mentoringid" class="form-control"
 								type="text" th:value="${203}" readonly="readonly">
 						</div>
 
 						<div class="col-md-6 form-group">
-							<label>Mentoring title</label> <input class="form-control"
+							<label>Mentoring title</label> <input id="mtitle" class="form-control"
 								type="text" th:value="${'이직 상담 신청하세요.'}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentor name</label> <input class="form-control"
+							<label>Mentor name</label> <input id="mentorname" class="form-control"
 								type="text" th:value="${'조윤영'}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentor Email</label> <input class="form-control"
-								type="text" th:value="${'whdbsdud@naver.com'}"
-								readonly="readonly">
-						</div>
-						<div class="col-md-6 form-group">
-							<label>Mentoring date</label> <input class="form-control"
+							<label>Mentoring date</label> <input id="mentoringdate" class="form-control"
 								type="text" th:value="${'2022-11-10'}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring time</label> <input class="form-control"
+							<label>Mentoring time</label> <input id="mentoringtime" class="form-control"
 								type="text" th:value="${'11:00'}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring place</label> <input class="form-control"
+							<label>Mentoring place</label> <input id="mplace" class="form-control"
 								type="text" th:value="${'서울강북구 4.19로 105'}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring member</label> <input class="form-control"
-								type="text" th:value="${4}" readonly="readonly">
-						</div>
-						<div class="col-md-6 form-group">
-							<label>Mentoring Price</label> <input class="form-control"
+							<label>Mentoring Price</label> <input id="mentoringprice" class="form-control"
 								type="text" th:value="${'25000원'}" readonly="readonly">
 						</div>
+						<input type="hidden" id="mentoringoptionid" th:value="${414}">
 						<div class="col-md-12">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="shipto">
@@ -342,7 +292,7 @@
 					<div class="pt-2">
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
-							<h5 th:text="${25000}" id="total_price"></h5>
+							<h5 th:text="${100}" id="total_price"></h5>
 						</div>
 					</div>
 				</div>
@@ -361,4 +311,78 @@
 	</div>
 
 </body>
+	<script>
+
+	//import
+	var IMP = window.IMP;
+	IMP.init("imp82873338");
+
+	var today = new Date();
+	var hours = today.getHours(); // 시
+	var minutes = today.getMinutes(); // 분
+	var seconds = today.getSeconds(); // 초
+	var milliseconds = today.getMilliseconds();
+	var makeMerchantUid = hours + minutes + seconds + milliseconds;
+
+	//order시에 필요한 값들 변수로 다 선언해주기
+	var mentoringid = $('#mentoringid').val();
+	var mtitle = $('#mtitle').val();
+	var mentorname = $('#mentorname').val();
+	var mentoringdate = $('#mentoringdate').val();
+	var mentoringtime = $('#mentoringtime').val();
+	var mplace = $('#mplace').val();
+	var mentoringoption_mentoringoptionid = $('#mentoringoptionid').val();//mentoringoptionid(purchasedetail)
+	var total_price = $('#total_price').text();//purprice(purchase)
+	var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
+	
+	function requestPay() {
+		IMP.request_pay({
+			pg : 'html5_inicis',
+			pay_method : 'card', 
+			merchant_uid : "IMP" + makeMerchantUid,
+			name : mtitle,
+			amount : total_price 
+		}, function(rsp) { // callback
+			if (rsp.success) {
+				console.log(rsp);
+				console.log(rsp.amount);//현재 출력이 안되는 상황임
+				console.log(rsp.pay_method);
+				console.log(rsp.name);
+				$.ajax({
+					//이전단에서 결제 버튼을 눌렀을 때 orderno를 생성하고 modify하는 방식으로 가야할듯
+					type : "POST",
+					url : "http://127.0.0.1/mogotco/purchase", //ajax kgorder(왜냐면 데이터 저장을 하기 위해서는 고유 키값을 받아온 뒤 실행할 수 있음)
+					headers: { "Content-Type": "application/json" },
+					data : {//아니면 완료까지만 하고 바로 결제가 완료되었다는 것으로 페이지가 넘어가게	
+						//"purprice" : rsp.amount,
+						'purpay' : rsp.pay_method,
+						'mentoring_mtitle' : rsp.name
+					}
+					}).done(function (data) {
+						$.ajax({
+						url : '[[@{/kgorder}]]', //ajax kgorder(왜냐면 데이터 저장을 하기 위해서는 고유 키값을 받아온 뒤 실행할 수 있음)
+						data : {//아니면 완료까지만 하고 바로 결제가 완료되었다는 것으로 페이지가 넘어가게
+							//order일때 필요한 것 다 들어감
+							//"purprice" : purprice, //purprice(purchase)
+							'userid' : userid, //userid(purchase)
+							//"purpay" : purpay, //purpay(purchase)
+							'mentoringoption_mentoringoptionid' : mentoringoption_mentoringoptionid, //mentoringoptionid(purchasedetail)
+							'mentoring_mentoringid' : mentoringid,
+							//"mentoring_mtitle" : mentoring_mtitle, //mentoring_mtitle(purchase)
+							'user_mentorname' : mentorname,
+							'mentoring_mentoringdate' : mentoringdate,
+							'mentoringoption_mentoringtime' : mentoringtime,
+							'mentoring_mplace' : mplace,
+							'purprice' : total_price
+						}	
+				});
+					});
+			} else {
+				//결제 취소를 하면 해당 결제 번호를 지우는 방식으로 가는것이 좋을 듯
+				console.log(rsp);
+			}
+		
+		});
+	}
+</script>
 </html>

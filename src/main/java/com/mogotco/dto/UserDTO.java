@@ -28,6 +28,7 @@ public class UserDTO {
 	private String kakaoid;
 	private String googleid;
 	private String usergen;
+	private String addrnum;
 	
 	private int mentor_mentorok;
 }
