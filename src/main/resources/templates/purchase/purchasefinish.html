@@ -136,6 +136,7 @@
 					<th>Mentoringprice</th>
 					<th>Purchasedate</th>
 					<th>Purchasepay</th>
+					<th>Purchasecard</th>
 
 				</tr>
 			</thead>
@@ -150,6 +151,7 @@
 					<td type="text">25000</td>
 					<td type="text">2022-11-10</td>
 					<td type="text">카카오페이</td>
+					<td type="text">신한카드</td>
 					<!-- 내 구매이력으로 갈 것인지에 대한 버튼 -->
 					<td>
 						<button th:onclick="go([[${session.loginuser.userid}]]);" type="submit" class="comment_button1">Go to detail</button>
