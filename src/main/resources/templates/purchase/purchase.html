@@ -363,7 +363,7 @@
     						+ '&[[@{mentoring_mentoringtime=}]]' + mentoringtime + '&[[@{mentoring_mplace=}]]'
     						+ mplace + '&[[@{mentoringoption_mentoringoptionid=}]]' + mentoringoption_mentoringoptionid
     						+ '&[[@{purprice=}]]' + rsp.paid_amount + '&[[@{purpay=}]]'
-    						+  rsp.pay_method;
+    						+  rsp.pay_method + '&[[@{purcard=}]]'+ rsp.card_name;
     			}
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
