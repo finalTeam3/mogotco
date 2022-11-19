@@ -6,6 +6,14 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
+<script>
+function timeChange(statusTime) {
+	var selectTime = $(statusTime).text();
+	$('#time').val(selectTime);
+}
+
+
+</script>
 </head>
 
 	
@@ -353,16 +361,16 @@
 								<div class="feature_list">
 
 									<!-- Feature -->
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Select Mentoring Time</span></div>
+								<div class="feature_course d-flex flex-row align-items-center justify-content-start">
+									<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i>
+										<input id="time" class="form-control border-0" type="text" placeholder="Mentoring Time" style="width:170px; outline:3px solid #14bdee; margin-top:10px; background-color:white; color:black;" readonly>
 									</div>
-									<div th:each="mttime:${mttime}">
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										<button th:text="${mttime.mentoringtime}" type="submit" class="home_search_button" style="margin-bottom:3px;"></button>
-									</div>
-
-
 								</div>
+									<div th:each="mttime:${mttime}">
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										<button id="time_btn" onclick="timeChange(this)" th:text="${mttime.mentoringtime}" type="submit" class="home_search_button" style="margin-bottom:3px;"></button>
+									</div>
+								
 							</div>
 						</div>
 
