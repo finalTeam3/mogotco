@@ -79,7 +79,7 @@ public class PurchaseController {
 	@RequestMapping("/purchasefinish")
 	public String purchasefinish(Model model, HttpSession session, PurchaseDTO pur) {
 		//결제완료 버튼을 눌렀을 때
-		System.out.println(pur);
+
 		//purchase부분에 point생성
 		//purchase부분 넘길때 받아올 것들
 		try {
@@ -111,6 +111,11 @@ public class PurchaseController {
 			//point값 수정
 			//session정보를 가지고와서 수정함
 			
+			//구매 정보 뽑음
+			PurchaseDTO finish = null;
+			finish=service.purchasefinishpage(r);
+			//model객체에 담음
+			model.addAttribute("list", finish);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
