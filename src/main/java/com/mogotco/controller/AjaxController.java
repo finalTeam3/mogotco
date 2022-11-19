@@ -4,11 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mogotco.dto.MentoringDTO;
-import com.mogotco.dto.MentoringOptionDTO;
-import com.mogotco.dto.MentoringmemberDTO;
-import com.mogotco.dto.PurchaseDTO;
-import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
