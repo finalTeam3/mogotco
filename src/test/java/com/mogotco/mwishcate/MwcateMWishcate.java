@@ -20,7 +20,7 @@ class MwcateMWishcate {
 	void contextLoads() {
 		List<MWishcateDTO> list = null;
 		try {
-			list = service.mwcate("tlsehdwns2441");
+			list = service.mwcate(103);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

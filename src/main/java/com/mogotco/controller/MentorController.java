@@ -1,15 +1,18 @@
 package com.mogotco.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
-import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
+import com.mogotco.service.MWishcateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.UserService;
@@ -30,6 +33,9 @@ public class MentorController {
 	@Autowired
 	UserService uservice;
 	
+	@Autowired
+	MWishcateService mwservice;
+
 	@Value("${admindir}")
 	String admindir;
 	
@@ -38,11 +44,20 @@ public class MentorController {
 	
 	//멘토 상세페이지
 	@RequestMapping("/mentordetail")
-	public String mentordetail(Model model, int mentoringid) {
-		MentoringDTO mti = null;
+	public String mentordetail(Model model, int mentorid) {
+		MentorDTO mta = null;
+		MentorDTO mtd = null;
+		List<MentorDTO> mtlist = null;
+		List<MWishcateDTO> mwclist = null;
 		try {
-			mti = mtiservice.viewMentoringOp(mentoringid);
-			model.addAttribute("mti",mti);
+			mta = mservice.get(mentorid);
+			mtd = mservice.mentordetail(mentorid);
+			mtlist = mservice.mentoritem(mentorid);
+			mwclist = mwservice.mwcate(mentorid);
+			model.addAttribute("mta",mta);
+			model.addAttribute("mtd",mtd);
+			model.addAttribute("mtlist",mtlist);
+			model.addAttribute("mwclist",mwclist);
 			model.addAttribute("center", mentor+"mentordetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

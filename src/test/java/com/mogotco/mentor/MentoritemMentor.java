@@ -19,7 +19,7 @@ class MentoritemMentor {
 	void contextLoads() {
 		List<MentorDTO> list = null;
 		try {
-			list = service.mentoritem("qkrtjdgns1234");
+			list = service.mentoritem(101);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

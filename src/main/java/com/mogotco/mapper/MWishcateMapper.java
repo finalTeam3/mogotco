@@ -12,5 +12,5 @@ import com.mogotco.frame.MyMapper;
 @Repository
 @Mapper
 public interface MWishcateMapper extends MyMapper<Integer, MWishcateDTO>{
-	public List<MWishcateDTO> mwcate(String userid) throws Exception;
+	public List<MWishcateDTO> mwcate(int mentorid) throws Exception;
 }

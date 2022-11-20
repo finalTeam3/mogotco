@@ -84,31 +84,32 @@
 							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img th:src="@{/images/}+${mti.mentor_mentorimg}" alt=""></div>
+									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
 									<div class="teacher_title">
-										<div class="teacher_name"><a href="#">Jacke Masito</a></div>
+										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
 										<div class="teacher_position">Marketing & Management</div>
 									</div>
 								</div>
+								<br>
 								<div class="teacher_meta_container">
 									<!-- Teacher Rating -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Average Rating:</div>
-										<div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
+										<div class="teacher_meta_title" th:text=${mta.mentorcom}>Mentorcom:</div>
+										<!-- <div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div> -->
 									</div>
 									<!-- Teacher Review -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+<!-- 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title">Review:</div>
 										<div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
-									</div>
+									</div> -->
 									<!-- Teacher Quizzes -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+<!-- 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title">Quizzes:</div>
 										<div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
-									</div>
+									</div> -->
 								</div>
 								<div class="teacher_info">
-									<p>Hi! I am Masion, I’m a marketing & management  eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
+									<p></p>
 								</div>
 							</div>
 						</div>
@@ -119,31 +120,37 @@
 							<div class="sidebar_latest">
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_1.jpg}" alt=""></div></div>
+								<div class="latest d-flex flex-row align-items-start justify-content-start" th:each="mtlist:${mtlist}">
+									<div class="latest_image">
+										<div>
+											<a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtlist.mentoring_mentoringid})}">
+											<img th:src="@{/images/}+${mtlist.mentoring_mentoringimg}" alt="">
+											</a>
+										</div>
+									</div>
 									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{course}">How to Design a Logo a Beginners Course</a></div>
-										<div class="latest_price">Free</div>
+										<div class="latest_title"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}"></a></div>
+										<div class="latest_price" th:text="${mtlist.mentoring_mentoringdate}"></div>
 									</div>
 								</div>
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+<!-- 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img th:src="@{/images/latest_2.jpg}" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a th:href="@{/course}">Photography for Beginners Masterclass</a></div>
 										<div class="latest_price">$170</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
+<!-- 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image"><div><img th:src="@{/images/latest_3.jpg}" alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a th:href="@{/course}">The Secrets of Body Language</a></div>
 										<div class="latest_price">$220</div>
 									</div>
-								</div>
+								</div> -->
 
 							</div>
 						</div>
@@ -184,16 +191,33 @@
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
 								<div class="tab active">소개</div>
-								<div class="tab">경력</div>
+								<!-- <div class="tab">경력</div> -->
 								<!-- <div class="tab">reviews</div> -->
 							</div>
 							<div class="tab_panels">
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Software Training</div>
-									<div class="tab_panel_content">
-										<div class="tab_panel_text">
+									<h3 class="tab_panel_text">Mentoring Category</h3>
+									<br>
+ 									<div class="tab_panel_content" th:each="mwclist:${mwclist}">
+	 									<div>
+	 									<button class="comment_button trans_200" th:text="${mwclist.mcate_mname}" ></button>
+										</div>
+									</div>
+									<br>
+									<h3 class="tab_panel_text">Mentor Contents</h3>
+ 									<div class="tab_panel_content">
+	 									<h4 class="tab_panel_text" th:text="${mta.mentorcon}">
+										</h4>
+									</div>
+									<br>
+									<h3 class="tab_panel_text">Mentor Career</h3>
+ 									<div class="tab_panel_content">
+	 									<h4 class="tab_panel_text" th:text="${mta.mentorcareer}">
+										</h4>
+									</div>
+<!-- 										<div class="tab_panel_text">
 											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
 										</div>
 										<div class="tab_panel_section">
@@ -214,7 +238,7 @@
 										<div class="tab_panel_faq">
 											<div class="tab_panel_title">FAQ</div>
 
-											<!-- Accordions -->
+											Accordions
 											<div class="accordions">
 												
 												<div class="elements_accordions">
@@ -257,8 +281,7 @@
 												</div>
 
 											</div>
-										</div>
-									</div>
+										</div> -->
 								</div>
 
 								<!-- Curriculum -->

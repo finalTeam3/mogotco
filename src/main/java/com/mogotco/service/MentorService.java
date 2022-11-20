@@ -44,12 +44,16 @@ public class MentorService implements MyService<Integer, MentorDTO> {
 		return mapper.mentorAll(userid);
 	}
 
-	public List<MentorDTO> mentoritem(String userid) throws Exception {
-		return mapper.mentoritem(userid);
+	public List<MentorDTO> mentoritem(int mentorid) throws Exception {
+		return mapper.mentoritem(mentorid);
 	}
 
 	public MentorDTO adminupdate(String userid) throws Exception {
 		return mapper.adminupdate(userid);
+	}
+	
+	public MentorDTO mentordetail(int mentorid) throws Exception{
+		return mapper.mentordetail(mentorid);
 	}
 
 }

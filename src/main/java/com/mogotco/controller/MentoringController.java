@@ -43,12 +43,15 @@ public class MentoringController {
 	@RequestMapping("/mentoringdetail")
 	public String mentoringdetail(Model model, int mentoringid) {
 		MentoringDTO mto = null;
+		MentoringDTO mtg = null;
 		List<MentoringOptionDTO> mttime = null;
 		try {
 			mto = mservice.viewMentoringOp(mentoringid);
+			mtg = mservice.get(mentoringid);
 			mttime = moservice.viewMentorigTime(mentoringid);
 			model.addAttribute("mto", mto);
 			model.addAttribute("mttime", mttime);
+			model.addAttribute("mtg", mtg);
 			model.addAttribute("center", mentoring+"mentoringdetail");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -8,12 +8,25 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM mentor WHERE userid=#{userid}
 	</select>
 
-	<select id="mentoritem" parameterType="String" resultType="MentorDTO">
-		SELECT m.mentorid, m.userid, mr.mtitle as mentoring_mtitle, mr.mentoringimg as mentoring_mentoringimg, 
+	<select id="mentoritem" parameterType="Integer" resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, mr.mentoringid as mentoring_mentoringid,
+		mr.mtitle as mentoring_mtitle,
+		mr.mentoringimg as mentoring_mentoringimg,
 		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
 		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
-		WHERE m.userid=#{userid}
+		WHERE m.mentorid=#{mentorid}
 	</select>
+	
+	<!-- 멘토상세페이지에서 mentorid로 멘토 정보 가져올 때 -->
+	<select id="mentordetail" parameterType="Integer" resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, u.username as user_username,
+		mr.mtitle as mentoring_mtitle,
+		mr.mentoringimg as mentoring_mentoringimg,
+		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
+		INNER JOIN user u ON u.userid = m.userid
+		WHERE m.mentorid=#{mentorid}
+	</select>	
 
 	<select id="select" parameterType="Integer" resultType="MentorDTO">
 		SELECT * FROM mentor WHERE mentorid=#{mentorid}
