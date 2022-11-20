@@ -37,5 +37,8 @@ public class PurchaseDTO {
 	//cust의 point값 가져오기
 	private int user_userpoint;
 	
+	//멘토링 구매 값 가져오기
+	private int mentoring_mentoringprice;
+	
 
 }

@@ -181,13 +181,13 @@
 					<div class="row">
 						<div class="col-md-6 form-group">
 							<label>Mentoring no</label> <input id="mentoringid"
-								class="form-control" type="text" th:value="${203}"
+								class="form-control" type="text" th:value="${pur.mentoring_mentoringid}"
 								readonly="readonly">
 						</div>
 
 						<div class="col-md-6 form-group">
 							<label>Mentoring title</label> <input id="mtitle"
-								class="form-control" type="text" th:value="${'이직 상담 신청하세요.'}"
+								class="form-control" type="text" th:value="${pur.mentoring_mtitle}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
@@ -197,25 +197,25 @@
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring date</label> <input id="mentoringdate"
-								class="form-control" type="text" value="2022-11-10" 
+								class="form-control" type="text" th:value="${pur.mentoring_mentoringdate}"  
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring time</label> <input id="mentoringtime"
-								class="form-control" type="text" th:value="${'11:00'}"
+								class="form-control" type="text" th:value="${pur.mentoringoption_mentoringtime}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring place</label> <input id="mplace"
-								class="form-control" type="text" th:value="${'서울강북구 4.19로 105'}"
+								class="form-control" type="text" th:value="${pur.mentoring_mplace}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring Price</label> <input id="mentoringprice"
-								class="form-control" type="text" th:value="${'25000원'}"
+								class="form-control" type="text" th:value="${pur.mentoring_mentoringprice}"
 								readonly="readonly">
 						</div>
-						<input type="hidden" id="mentoringoptionid" th:value="${414}">
+						<input type="hidden" id="mentoringoptionid" th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="shipto">
@@ -290,7 +290,7 @@
 					<div class="border-bottom">
 						<div class="d-flex justify-content-between">
 							<p>Mentoring Price</p>
-							<p th:text="${25000}" id="ordermentoring_price"></p>
+							<p th:text="${pur.mentoring_mentoringprice}" id="ordermentoring_price"></p>
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>

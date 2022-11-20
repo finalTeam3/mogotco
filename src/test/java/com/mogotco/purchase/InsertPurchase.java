@@ -36,7 +36,7 @@ class InsertPurchase {
 	@Test
 	void contextLoads() {
 		//결제완료 버튼을 눌렀을 때
-		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", "현대카드",202, "공부법 상담 해드립니다.", null,null , "09:00", null,3 ,408,100);
+		PurchaseDTO purchase = new PurchaseDTO(0, "qkrtjdgns1234", 20000, null, "네이버페이", "현대카드",202, "공부법 상담 해드립니다.", null,null , "09:00", null,3 ,408,100,0);
 		try {
 			//구매 내용을 등록하고
 			service.register(purchase);

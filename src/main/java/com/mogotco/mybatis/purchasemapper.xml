@@ -22,14 +22,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
 		mentoring.mplace AS mentoring_mplace, mentoring.mmemberidcnt AS
 		mentoring_mmemberidcnt,(mentoring.mentoringprice*1) AS purprice
-		FROM purchasedetail purde
-		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption mentoringoption ON
+		FROM
+		purchasedetail purde
+		INNER JOIN purchase pur ON
+		purde.purchaseid=pur.purchaseid
+		INNER JOIN mentoringoption
+		mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid
-		INNER JOIN mentoring mentoring ON
+		INNER JOIN
+		mentoring mentoring ON
 		mentoringoption.mentoringid=mentoring.mentoringid
-		INNER JOIN mentor mentor ON mentoring.mentorid=mentor.mentorid
-		INNER JOIN user u ON mentor.userid=u.userid
+		INNER JOIN mentor
+		mentor ON mentoring.mentorid=mentor.mentorid
+		INNER JOIN user u ON
+		mentor.userid=u.userid
 		WHERE pur.purchaseid=#{purchaseid}
 	</select>
 
@@ -39,15 +45,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mentoring.mentoringid AS mentoring_mentoringid,
 		mentoring.mtitle AS mentoring_mtitle, mentoring.mentoringdate AS
 		mentoring_mentoringdate,
-		mentoringoption.mentoringtime AS mentoringoption_mentoringtime, mentoring.mplace AS
-		mentoring_mplace, pur.purprice AS purprice,
-		pur.purdate AS purdate, pur.purcard AS purcard FROM purchasedetail purde
-		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption mentoringoption ON
+		mentoringoption.mentoringtime AS
+		mentoringoption_mentoringtime, mentoring.mplace AS
+		mentoring_mplace,
+		pur.purprice AS purprice,
+		pur.purdate AS purdate, pur.purcard AS
+		purcard, pur.purpay AS purpay FROM purchasedetail purde
+		INNER JOIN
+		purchase pur ON purde.purchaseid=pur.purchaseid
+		INNER JOIN
+		mentoringoption mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid
-		INNER JOIN mentoring mentoring ON
+		INNER JOIN
+		mentoring mentoring ON
 		mentoringoption.mentoringid=mentoring.mentoringid
-		WHERE pur.purchaseid=#{purchaseid}
+		WHERE
+		pur.purchaseid=#{purchaseid}
 	</select>
 
 
@@ -60,10 +73,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<update id="update" parameterType="PurchaseDTO">
 		UPDATE purchase SET
-		userid=#{userid},purprice=#{purprice},purpay=#{purpay},purcard=#{purcard} WHERE
+		userid=#{userid},purprice=#{purprice},purpay=#{purpay},purcard=#{purcard}
+		WHERE
 		purchaseid=#{purchaseid}
 	</update>
 	<!-- purchase에는 delete는 필요 없을 듯 -->

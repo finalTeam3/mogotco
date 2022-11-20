@@ -44,7 +44,20 @@ public class PurchaseController {
 	
 	//구매페이지
 	@RequestMapping("")
-	public String purchase(Model model, HttpSession session) {
+	public String purchase(Model model, HttpSession session, PurchaseDTO pur) {
+		
+		//mentoringid제외한 것
+		model.addAttribute("pur", pur);
+		
+		//mentoringoptionid
+		MentoringOptionDTO mto = null;
+		try {
+			mto = service4.viewmentoringoptionid(pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime());
+			model.addAttribute("mto", mto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.addAttribute("center", purchase+"purchase");
 		return "main";
 	}
@@ -67,11 +80,12 @@ public class PurchaseController {
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
 			model.addAttribute("list", detail);
+			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			model.addAttribute("center", purchase+"error");
 		}
-		model.addAttribute("center", purchase+"purchasedetail");
 		return "main";
 	}
 
