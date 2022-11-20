@@ -76,83 +76,15 @@ function timeChange(statusTime) {
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
-								<div class="tab active">description</div>
-								<div class="tab">curriculum</div>
+								<div class="tab active">mentoring info</div>
+								<div class="tab">meeting place</div>
 								<div class="tab">reviews</div>
 							</div>
 							<div class="tab_panels">
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title" th:text="${mto.mtitle}">Software Training</div>
-									&nbsp
-									&nbsp
-									<div class="tab_panel_content" th:text="${mto.mcontents}">
-										<div class="tab_panel_text">
-										</div>
-										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">Requirements</div>
-											<ul class="tab_panel_bullets">
-												<li>Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent.</li>
-												<li>Cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a.</li>
-												<li>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat.</li>
-												<li>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</li>
-											</ul>
-										</div>
-										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">What is the target audience?</div>
-											<div class="tab_panel_text">
-												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-											</div>
-										</div>
-										<div class="tab_panel_faq">
-											<div class="tab_panel_title">FAQ</div>
-
-											<!-- Accordions -->
-											<div class="accordions">
-												
-												<div class="elements_accordions">
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Can I just enroll in a single course?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center active"><div>I'm not interested in the entire Specialization?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific order?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-												</div>
-
-											</div>
-										</div>
-									</div>
+									<p class="tab_panel_content" th:text="${mto.mcontents}" style="font-weight:bold; font-size:18px; color:black;"></p>
 								</div>
 
 								<!-- Curriculum -->
@@ -352,29 +284,40 @@ function timeChange(statusTime) {
 
 						<!-- Feature_course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Mentoring Info</div>
+							<div class="sidebar_section_title">Mentoring Price</div>
 							<div class="sidebar_feature">
 								<span style = " font-size:1.5em;"><strong>가격 : </strong></span>
 								<div style="display:inline-block;" class="course_price" th:text="${mto.mentoringprice}"></div>
+								<br>
+								<br>
 
 								<!-- Features -->
 								<div class="feature_list">
+								<div class="sidebar_section_title">Time & Purchase</div>
 
 									<!-- Feature -->
 								<div class="feature_course d-flex flex-row align-items-center justify-content-start">
+									<div th:each="mttime:${mttime}">
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										<button id="time_btn" onclick="timeChange(this)" th:text="${mttime.mentoringtime}" type="submit" class="home_search_button" style="margin-right:3px;"></button>
+									</div>
+								</div>
 									<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i>
 										<input id="time" class="form-control border-0" type="text" placeholder="Mentoring Time" style="width:170px; outline:3px solid #14bdee; margin-top:10px; background-color:white; color:black;" readonly>
 									</div>
-								</div>
-									<div th:each="mttime:${mttime}">
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										<button id="time_btn" onclick="timeChange(this)" th:text="${mttime.mentoringtime}" type="submit" class="home_search_button" style="margin-bottom:3px;"></button>
+									<div>
+										&nbsp&nbsp
+										<button type="submit" class="home_search_button" style="margin-top:70px; width:200px">구매하기</button>
 									</div>
 								
 							</div>
 						</div>
 
 						<!-- Feature -->
+						<br>
+						<br>
+						<br>
+						<br>
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
