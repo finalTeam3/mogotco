@@ -8,6 +8,9 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <!-- Favicon -->
     <link th:href="@{/img/favicon.ico}" rel="icon">
 
@@ -29,10 +32,6 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/styles/login/style.css}" rel="stylesheet">
-    
-        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Javascript -->
     <script th:src="@{/styles/login/main.js}"></script>
@@ -40,6 +39,11 @@
     <!-- login -->
     <script>
     $(document).ready(function(){
+    	var logresult = "[[${logresult}]]";
+    	if (logresult == "fail") {
+    		modal();
+    	}
+    	
     	$('#login_form > button').click(function(){
     		$('#login_form').attr(
     			{
@@ -102,7 +106,22 @@
         </div>
         <!-- Sign In End -->
     </div>
-
+    
+<!-- Modal -->
+<div class="modal fade" id="modaltest" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">ID나 비밀번호가 일치하지 않습니다.</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 
