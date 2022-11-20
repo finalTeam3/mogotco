@@ -7,9 +7,10 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
 <script>
-function timeChange(statusTime) {
-	var selectTime = $(statusTime).text();
-	$('#time').val(selectTime);
+// 시간선택 버튼 클릭시 value 값 input에 받아오기
+function timeChange(statusTime) { // 버튼 클릭시 함수 시작
+	var selectTime = $(statusTime).text(); // 버튼의 value값 받아오기
+	$('#time').val(selectTime); // 버튼의 value값 input에 받아오기
 };
 
 

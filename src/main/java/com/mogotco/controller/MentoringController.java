@@ -29,7 +29,7 @@ public class MentoringController {
 	public String mentoring(Model model) {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		try {
-			mlist = mservice.viewMentoringAll();
+			mlist = mservice.viewMentoringAll(); // 모든 멘토링 정보 넣어주기
 			model.addAttribute("mtr", mlist);
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
@@ -42,13 +42,13 @@ public class MentoringController {
 	//멘토링상세페이지
 	@RequestMapping("/mentoringdetail")
 	public String mentoringdetail(Model model, int mentoringid) {
-		MentoringDTO mto = null;
-		MentoringDTO mtg = null;
-		List<MentoringOptionDTO> mttime = null;
+		MentoringDTO mto = null; // 멘토링 옵션용
+		MentoringDTO mtg = null; // 멘토 프로필 정보용
+		List<MentoringOptionDTO> mttime = null; // 멘토링별 시간 리스트용
 		try {
-			mto = mservice.viewMentoringOp(mentoringid);
-			mtg = mservice.get(mentoringid);
-			mttime = moservice.viewMentorigTime(mentoringid);
+			mto = mservice.viewMentoringOp(mentoringid); // 멘토링 옵션 정보 넣어주기
+			mtg = mservice.get(mentoringid); // 멘토 프로필 정보 넣어주기
+			mttime = moservice.viewMentorigTime(mentoringid); // 멘토링 시간 리스트 넣어주기
 			model.addAttribute("mto", mto);
 			model.addAttribute("mttime", mttime);
 			model.addAttribute("mtg", mtg);
