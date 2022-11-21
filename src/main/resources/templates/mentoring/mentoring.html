@@ -20,7 +20,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Courses</li>
+								<li>Mentoring</li>
 							</ul>
 						</div>
 					</div>
@@ -65,11 +65,11 @@
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
 										<br>
 										<br>
-										<div style="display:inline;"><span>등록:</span></div>
-										<div style="display:inline;" class="course_teacher" th:text="${mtr.user_userid}"></div>
+										<div style="display:inline; color:black;"><span>등록:</span></div>
+										<div style="display:inline; color:black;" class="course_teacher" th:text="${mtr.user_userid}"></div>
 										<br>
-										<div style="display:inline;"><span>모집정원:</span></div>
-										<div style="display:inline;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
+										<div style="display:inline; color:black;"><span>모집정원:</span></div>
+										<div style="display:inline; color:black;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
