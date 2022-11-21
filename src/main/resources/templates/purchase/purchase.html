@@ -181,14 +181,14 @@
 					<div class="row">
 						<div class="col-md-6 form-group">
 							<label>Mentoring no</label> <input id="mentoringid"
-								class="form-control" type="text" th:value="${pur.mentoring_mentoringid}"
-								readonly="readonly">
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringid}" readonly="readonly">
 						</div>
 
 						<div class="col-md-6 form-group">
 							<label>Mentoring title</label> <input id="mtitle"
-								class="form-control" type="text" th:value="${pur.mentoring_mtitle}"
-								readonly="readonly">
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mtitle}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentor name</label> <input id="mentorname"
@@ -197,25 +197,27 @@
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring date</label> <input id="mentoringdate"
-								class="form-control" type="text" th:value="${pur.mentoring_mentoringdate}"  
-								readonly="readonly">
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringdate}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring time</label> <input id="mentoringtime"
-								class="form-control" type="text" th:value="${pur.mentoringoption_mentoringtime}"
+								class="form-control" type="text"
+								th:value="${pur.mentoringoption_mentoringtime}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring place</label> <input id="mplace"
-								class="form-control" type="text" th:value="${pur.mentoring_mplace}"
-								readonly="readonly">
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mplace}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
 							<label>Mentoring Price</label> <input id="mentoringprice"
-								class="form-control" type="text" th:value="${pur.mentoring_mentoringprice}"
-								readonly="readonly">
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringprice}" readonly="readonly">
 						</div>
-						<input type="hidden" id="mentoringoptionid" th:value="${mto.mentoringoptionid}">
+						<input type="hidden" id="mentoringoptionid"
+							th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="shipto">
@@ -290,7 +292,8 @@
 					<div class="border-bottom">
 						<div class="d-flex justify-content-between">
 							<p>Mentoring Price</p>
-							<p th:text="${pur.mentoring_mentoringprice}" id="ordermentoring_price"></p>
+							<p th:text="${pur.mentoring_mentoringprice}"
+								id="ordermentoring_price"></p>
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>
@@ -308,7 +311,6 @@
 					<h5 class="section-title position-relative text-uppercase mb-3">
 						<span class="bg-secondary pr-3">Payment</span>
 					</h5>
-
 					<button class="btn btn-block btn-primary font-weight-bold py-3"
 						th:onclick="requestPay()">Payment</button>
 
@@ -342,6 +344,7 @@
 	var total_price = $('#total_price').text();//purprice(purchase)
 	var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
 
+	//일반 결제
 	function requestPay() {
 		IMP.request_pay({
 			pg : 'html5_inicis',
@@ -350,25 +353,30 @@
 			name : mtitle,
 			amount : total_price
 		}, function(rsp) { // callback
-			console.log(rsp);
-		    if ( rsp.success ) {
-    			var msg = '결제가 완료되었습니다.';
-    			var c = confirm(msg);
-    			if (c == true) {
-    				//성공시 이동할 페이지
-    				location.href = '[[@{/purchase/purchasefinish?userid=}]]'
-    						+ userid + '&[[@{mentoring_mentoringid=}]]' + mentoringid
-    						+ '&[[@{mentoring_mtitle=}]]' + rsp.name + '&[[@{user_mentorname=}]]'
-    						+ mentorname + '&[[@{mentoring_mentoringdate=}]]' + mentoringdate
-    						+ '&[[@{mentoringoption_mentoringtime=}]]' + mentoringtime + '&[[@{mentoring_mplace=}]]'
-    						+ mplace + '&[[@{mentoringoption_mentoringoptionid=}]]' + mentoringoption_mentoringoptionid
-    						+ '&[[@{purprice=}]]' + rsp.paid_amount + '&[[@{purpay=}]]'
-    						+  rsp.pay_method + '&[[@{purcard=}]]'+ rsp.card_name;
-    			}
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        alert(msg);
-		    }
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				var c = confirm(msg);
+				if (c == true) {
+					//성공시 이동할 페이지
+					location.href = '[[@{/purchase/purchasefinish?userid=}]]'
+							+ userid + '&[[@{mentoring_mentoringid=}]]'
+							+ mentoringid + '&[[@{mentoring_mtitle=}]]'
+							+ rsp.name + '&[[@{user_mentorname=}]]'
+							+ mentorname + '&[[@{mentoring_mentoringdate=}]]'
+							+ mentoringdate
+							+ '&[[@{mentoringoption_mentoringtime=}]]'
+							+ mentoringtime + '&[[@{mentoring_mplace=}]]'
+							+ mplace
+							+ '&[[@{mentoringoption_mentoringoptionid=}]]'
+							+ mentoringoption_mentoringoptionid
+							+ '&[[@{purprice=}]]' + rsp.paid_amount
+							+ '&[[@{purpay=}]]' + rsp.pay_method
+							+ '&[[@{purcard=}]]' + rsp.card_name;
+				}
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				alert(msg);
+			}
 		})
 	};
 </script>
