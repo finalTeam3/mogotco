@@ -62,6 +62,16 @@ margin-left: 2%;
             }
         }).open();
     }
+    
+$(document).ready(function(){
+	$('#mpupdate_btn').click(function(){
+		$('#name').attr('readonly', false);  
+		$('#phone').attr('readonly', false);  
+		$('#email').attr('readonly', false);  
+		$('#gender').attr('readonly', false);  
+		$('#birth').attr('readonly', false);  
+	});
+});  
 </script>
 </head>
 
@@ -71,6 +81,8 @@ margin-left: 2%;
 	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
+			
+			
 				<div class="row">
 					<div class="col">
 						<div class="breadcrumbs">
@@ -101,59 +113,61 @@ margin-left: 2%;
 						<div class="contact_form">
 							<div class="contact_info_title">My Page</div>
 							<div>&nbsp</div>
-							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
-							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
-							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
+							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(userid=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
+							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(userid=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
+							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(userid=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
 							<form action="#" class="comment_form">
 							
 								<div>
 									<label for = "id" class="form_title">ID</label>
-									<input type="text" class="userid comment_input" id = "id" th:value = "${us.userid}" readonly = "readonly" name = "id">
+									<input type="text" class="userid comment_input" id = "id" th:value = "${us.userid}" readonly = "readonly" name = "userid">
 								</div>
 								
 								<div>
 									<label for = "name" class="form_title">Name</label>
-									<input type="text" class="comment_input" id = "name" th:value = "${us.username}" name = "name">
+									<input type="text" class="comment_input" id = "name" th:value = "${us.username}" name = "username" readonly>
 								</div>
 								
 								<div>
 									<label for = "phone" class="form_title">Phone Number</label>
-									<input type="text" class="comment_input" id = "phone" th:value = "${us.usertel}" name = "phone">
+									<input type="text" class="comment_input" id = "phone" th:value = "${us.usertel}" name = "usertel" readonly>
 								</div>
 								
 								<div>
 									<label for = "email" class="form_title">Email</label>
-									<input type="text" class="comment_input" id = "email" th:value = "${us.useremail}" name = "email">
+									<input type="text" class="comment_input" id = "email" th:value = "${us.useremail}" name = "useremail" readonly>
 								</div>
 								
 								<div>
 									<label for = "gender" class="form_title">Gender</label>
-									<input type="text" class="comment_input" id = "gender" th:value = "${us.usergen}" name = "gender">
+									<input type="text" class="comment_input" id = "gender" th:value = "${us.usergen}" name = "usergen" readonly>
 								</div>
 								
 								<div>
 								<label for = "address" class="address_form">Address</label>
-									<input type="text" class="comment_input_postno" id="sample6_postcode" placeholder="우편번호">
+									<input type="text" class="comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
 									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-									<input type="text" class="comment_input_address" name = "address" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소"><br>
-									<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소">
-									<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목">
+									<input type="text" class="comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
+									<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소" readonly>
+									<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목" readonly>
 								</div>
 								
 								<div>
 									<label for = "birth" class="form_title">Birth</label>
-									<input type="text" class="comment_input" id = "birth" th:value = "${us.userbirth}" name = "birth">
+									<input type="text" class="comment_input" id = "birth" th:value = "${us.userbirth}" name = "userbirth" readonly>
 								</div>
 								
 								<div>
 									<label for = "point" class="form_title">Point</label>
-									<input type="text" class="comment_input" id = "point" th:value = "${us.userpoint}" name = "point">
+									<input type="text" class="comment_input" id = "point" th:value = "${us.userpoint}" name = "userpoint" readonly>
 								</div>
 								
-								<div>
-									<button type="submit" class="comment_button trans_200">회원 정보 수정</button>
-								</div>
+								
 							</form>
+								<div>
+									<button id = "mpupdate_btn" class="comment_button trans_200">회원 정보 수정</button>
+									<button class="comment_button trans_200">회원 탈퇴</button>
+								</div>
 						</div>
 					</div>
 
