@@ -29,6 +29,8 @@ public class UserDTO {
 	private String googleid;
 	private String usergen;
 	private String addrnum;
+	private String addrdetail;
+	private String addrextra;
 	
 	private int mentor_mentorok;
 }
