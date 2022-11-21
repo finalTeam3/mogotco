@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mogotco.mapper.UserMapper">
 	
 	<insert id="insert" parameterType="userDTO">
-		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, userpoint, naverid, kakaoid, googleid, usergen, addrnum, addrdetail, addrextra) 
-		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{userpoint}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen}, #{addrnum}, #{addrdetail}, #{addrextra})
+		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, naverid, kakaoid, googleid, usergen, addrnum, addrdetail, addrextra) 
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen}, #{addrnum}, #{addrdetail}, #{addrextra})
 	</insert> 
 	
 	<update id="update" parameterType="userDTO">
