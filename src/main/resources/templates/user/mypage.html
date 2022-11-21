@@ -62,14 +62,55 @@ margin-left: 2%;
             }
         }).open();
     }
+   
+    function changetext() {
+    	const btnElement = document.getElementById('mpupdate_btn');
+    	btnElement.innerText = "회원 정보 저장";
+    }
+    
+    function modal() {
+    	$('#updatemodal').modal();
+    }
     
 $(document).ready(function(){
 	$('#mpupdate_btn').click(function(){
+		modal();
+		$('#pwd').attr('readonly', false);  
 		$('#name').attr('readonly', false);  
 		$('#phone').attr('readonly', false);  
 		$('#email').attr('readonly', false);  
 		$('#gender').attr('readonly', false);  
 		$('#birth').attr('readonly', false);  
+		$('#sample6_address').attr('readonly', false);  
+		$('#sample6_detailAddress').attr('readonly', false);  
+		$('#sample6_extraAddress').attr('readonly', false);  
+		$('#mpupdate_btn').click(function(){
+			$('#pwd').attr('readonly', true);  
+			$('#name').attr('readonly', true);  
+			$('#phone').attr('readonly', true);  
+			$('#email').attr('readonly', true);  
+			$('#gender').attr('readonly', true);  
+			$('#birth').attr('readonly', true); 
+			$('#sample6_address').attr('readonly', true);  
+			$('#sample6_detailAddress').attr('readonly', true);  
+			$('#sample6_extraAddress').attr('readonly', true); 
+			$('#mypage_update_form').attr(
+				{
+					'action':'[[@{/user/mypageupdate}]]',
+					'method':'post'
+				}
+			);
+			$('#mypage_update_form').submit();
+		});
+	});
+	$('#deleteuser_btn').click(function(){
+		$('#mypage_update_form').attr(
+				{
+					'action':'[[@{/user/deleteuser}]]',
+					'method':'post'
+				}
+		);
+		$('#mypage_update_form').submit();
 	});
 });  
 </script>
@@ -113,14 +154,19 @@ $(document).ready(function(){
 						<div class="contact_form">
 							<div class="contact_info_title">My Page</div>
 							<div>&nbsp</div>
-							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(userid=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
-							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(userid=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
-							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(userid=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
-							<form action="#" class="comment_form">
+							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
+							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
+							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
+							<form id = "mypage_update_form" class="comment_form">
 							
 								<div>
 									<label for = "id" class="form_title">ID</label>
 									<input type="text" class="userid comment_input" id = "id" th:value = "${us.userid}" readonly = "readonly" name = "userid">
+								</div>
+								
+								<div>
+									<label for = "pwd" class="form_title">Password</label>
+									<input type="Password" class="comment_input" id = "pwd" th:value = "${us.userpwd}" name = "userpwd" readonly>
 								</div>
 								
 								<div>
@@ -148,8 +194,8 @@ $(document).ready(function(){
 									<input type="text" class="comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
 									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 									<input type="text" class="comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
-									<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소" readonly>
-									<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목" readonly>
+									<input type="text" class="comment_input_detail" name = "addrdetail" th:value = "${us.addrdetail}" id="sample6_detailAddress" placeholder="상세주소" readonly>
+									<input type="text" class="comment_input_detail" name = "addrextra" th:value = "${us.addrextra}" id="sample6_extraAddress" placeholder="참고항목" readonly>
 								</div>
 								
 								<div>
@@ -165,8 +211,8 @@ $(document).ready(function(){
 								
 							</form>
 								<div>
-									<button id = "mpupdate_btn" class="comment_button trans_200">회원 정보 수정</button>
-									<button class="comment_button trans_200">회원 탈퇴</button>
+									<button id = "mpupdate_btn" onclick = "changetext()" class="comment_button trans_200">회원 정보 수정</button>
+									<button id = "deleteuser_btn" class="comment_button trans_200">회원 탈퇴</button>
 								</div>
 						</div>
 					</div>
@@ -200,33 +246,19 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
+		<!-- Modal -->
+<div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">변경하고 싶은 정보를 변경 후 [회원 정보 저장] 을 눌러주세요~</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
