@@ -41,27 +41,27 @@
 					<div class="blog_post_container">
 					
 						<!-- Blog Post -->
-						<div class="blog_post trans_200">
+						<div class="blog_post trans_200" th:each="wlist:${wlist}">
 							<div class="blog_post_body">
 							
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image">
 										<div>
-											<a>
-											<img th:src="@{/images/defaultprofileupload.jpg}" style="width:100px" alt="">
+											<a th:href="@{/mentor/mentordetail(mentorid=${wlist.mentorid})}">
+											<img th:src="@{/images/}+${wlist.mentor_mentorimg}" th:style="${'height:100px'}" alt="">
 											</a>
 										</div>
 									</div>
 								<div class="blog_post_meta">
 									<ul>
-										<li>&nbsp&nbsp<a>adminfdsadsds</a></li>
+										<li>&nbsp&nbsp<a></a></li>
 									</ul>
 									<ul>
-										<li>&nbsp&nbsp<a>admindsfafsfsd</a></li>
+										<li>&nbsp&nbsp&nbsp<a th:text="${wlist.mentor_mentorcom}">회사</a></li>
 									</ul>
 									<ul>
-										<li>&nbsp&nbsp<a>admindsffadsds</a></li>
+										<li>&nbsp&nbsp&nbsp<a th:text="${wlist.user_mentorname}" th:href="@{/mentor/mentordetail(mentorid=${wlist.mentorid})}">이름</a></li>
 									</ul>																		
 								</div>
 								</div>
@@ -70,10 +70,10 @@
 						</div>
 
 						<!-- Blog Post -->
-						<div class="blog_post trans_200">
+<!-- 						<div class="blog_post trans_200">
 							<div class="blog_post_body">
 							
-								<!-- Latest Course -->
+								Latest Course
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image">
 										<div>
@@ -91,13 +91,13 @@
 								</div>
 
 							</div>
-						</div>						
+						</div> -->						
 						
 						<!-- Blog Post -->
-						<div class="blog_post trans_200">
+<!-- 						<div class="blog_post trans_200">
 							<div class="blog_post_body">
 							
-								<!-- Latest Course -->
+								Latest Course
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image">
 										<div>
@@ -115,13 +115,13 @@
 								</div>
 
 							</div>
-						</div>
+						</div> -->
 						
 						<!-- Blog Post -->
-						<div class="blog_post trans_200">
+<!-- 						<div class="blog_post trans_200">
 							<div class="blog_post_body">
 							
-								<!-- Latest Course -->
+								Latest Course
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image">
 										<div>
@@ -139,13 +139,13 @@
 								</div>
 
 							</div>
-						</div>
+						</div> -->
 						
-												<!-- Blog Post -->
-						<div class="blog_post trans_200">
+						<!-- Blog Post -->
+<!-- 						<div class="blog_post trans_200">
 							<div class="blog_post_body">
 							
-								<!-- Latest Course -->
+								Latest Course
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div class="latest_image">
 										<div>
@@ -154,21 +154,21 @@
 											</a>
 										</div>
 									</div>
-								<div class="blog_post_meta">
-									<ul>
-										<li>&nbsp&nbsp<a>adminfdsadsds</a></li>
-									</ul>
-									<ul>
-										<li>&nbsp&nbsp<a>admindsfafsfsd</a></li>
-									</ul>
-									<ul>
-										<li>&nbsp&nbsp<a>admindsffadsds</a></li>
-									</ul>																		
-								</div>
+									<div class="blog_post_meta">
+										<ul>
+											<li>&nbsp&nbsp<a>adminfdsadsds</a></li>
+										</ul>
+										<ul>
+											<li>&nbsp&nbsp<a>admindsfafsfsd</a></li>
+										</ul>
+										<ul>
+											<li>&nbsp&nbsp<a>admindsffadsds</a></li>
+										</ul>																		
+									</div>
 								</div>
 
 							</div>
-						</div>												
+						</div> -->												
 						
 					</div>										
 					
