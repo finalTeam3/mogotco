@@ -80,6 +80,7 @@ public class PurchaseController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			System.out.println(detail);
 			model.addAttribute("list", detail);
 			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
