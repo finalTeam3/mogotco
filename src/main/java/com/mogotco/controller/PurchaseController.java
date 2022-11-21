@@ -54,11 +54,12 @@ public class PurchaseController {
 		try {
 			mto = service4.viewmentoringoptionid(pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime());
 			model.addAttribute("mto", mto);
+			model.addAttribute("center", purchase+"purchase");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			model.addAttribute("center", purchase+"error");
 		}
-		model.addAttribute("center", purchase+"purchase");
 		return "main";
 	}
 	
