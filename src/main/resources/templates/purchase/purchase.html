@@ -237,12 +237,11 @@
 							<div class="col-md-5 form-group">
 								<!-- session에서 cust의 poinr값을 가지고옴 -->
 								<label>My Point</label><span><input
-												type="checkbox" id="chk_use"
-												th:onclick="chkPoint()">포인트 전체 사용</span><input class="form-control" type="text"
-									id="writepoint" placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()"
-									><input class="form-control"
-									type="text" id="userpoint" th:value="${session.loginuser.userpoint}"
-									readonly="readonly">
+									class="form-control" type="text" id="writepoint"
+									placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()"><input type="checkbox"
+									id="chk_use" th:onclick="chkPoint()">포인트 전체 사용</span><input
+									class="form-control" type="text" id="userpoint"
+									th:value="${session.loginuser.userpoint}" readonly="readonly">
 							</div>
 						</div>
 					</div>
@@ -261,13 +260,15 @@
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>
-							<p><span id="willusepoint"></span></p>
+							<p>
+								<span id="willusepoint"></span>
+							</p>
 						</div>
 					</div>
 					<div class="pt-2">
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
-							<h5 id="total_price"></h5>
+							<h5 th:text="${pur.mentoring_mentoringprice}" id="total_price"></h5>
 						</div>
 					</div>
 				</div>
@@ -286,43 +287,53 @@
 
 </body>
 <script>
-//point
-function pointchange(){
-	var x = Number(document.getElementById("writepoint").value);
-	var u = Number(document.getElementById("userpoint").value);
-	var p = '[[${pur.mentoring_mentoringprice}]]';
-	
-	//enterkey쳤을 때
-	if(event.keyCode == 13){
-		//사용자가 양수를 입력했을 때
-		if(x > 0){
-			//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
-			if(x > u){
-				var msg = "사용할 포인트를 초과하였습니다.";
-				alert(msg);
-			}else{
-				// 사용할 포인트 띄우기
-				document.getElementById("willusepoint").innerHTML = x;
-				document.getElementById("total_price").innerHTML = p-x;
-				document.getElementById("userpoint").innerHTML = u-x;
-				
-			}
-		
-		}
-		else{
-			var msg = "포인트를 입력하세요";
-			alert(msg);
-		}
-	}
-};
+	//point
+	function pointchange() {
+		var x = Number(document.getElementById("writepoint").value);
+		var u = Number(document.getElementById("userpoint").value);
+		var p = Number(document.getElementById("mentoringprice").value);
 
-//point 전체사용
-function chkPoint(){
-	var u = '[[${session.loginuser.userpoint}]]';
-		document.getElementById("writepoint").innerHTML = u;
-		document.getElementById("willusepoint").innerHTML = u;
-		document.getElementById("total_price").innerHTML = p-x;
-};
+		//enterkey쳤을 때
+		if (event.keyCode == 13) {
+			//사용자가 양수를 입력했을 때
+			if (x > 0) {
+				//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
+				if (x > u) {
+					var msg = "사용할 포인트를 초과하였습니다.";
+					alert(msg);
+				} else {
+					// 사용할 포인트 띄우기
+					document.getElementById("willusepoint").innerHTML = x;
+					document.getElementById("total_price").innerHTML = p - x;
+					var a = u - x;
+					document.getElementById("userpoint").value = a;
+				}
+
+			} else {
+				var msg = "포인트를 입력하세요";
+				alert(msg);
+			}
+		}
+	};
+
+	//point 전체사용
+	function chkPoint() {
+		var u = Number(document.getElementById("userpoint").value);
+		var p = Number(document.getElementById("mentoringprice").value);
+		var checkbox = document.getElementById('chk_use');
+		if (checkbox.checked != true) {
+			document.getElementById("writepoint").value = null;
+			document.getElementById("willusepoint").innerHTML = null;
+			document.getElementById("total_price").innerHTML = p;
+			document.getElementById("userpoint").value = '[[${session.loginuser.userpoint}]]';
+		} else {
+			//point를 다썼을 때
+			document.getElementById("writepoint").value = u;
+			document.getElementById("willusepoint").innerHTML = u;
+			document.getElementById("total_price").innerHTML = p - u;
+			document.getElementById("userpoint").value = 0;
+		}
+	};
 </script>
 <script>
 	//import

@@ -131,11 +131,14 @@ public class PurchaseController {
 			finish=service.purchasefinishpage(r);
 			//model객체에 담음
 			model.addAttribute("list", finish);
+			
+			//화면
+			model.addAttribute("center", purchase+"purchasefinish");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			model.addAttribute("center", purchase+"error");
 		}
-		model.addAttribute("center", purchase+"purchasefinish");
 		return "main";
 	}
 
