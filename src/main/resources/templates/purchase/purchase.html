@@ -92,59 +92,66 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
 	//point
-	function chkPoint(amt, pnt, min, unit) {
-		//input값을 전체 마일리지로 설정 > minusPoint 
-		//amt : 최초 결제 금액 / pnt : 사용가능,남은 포인트 / min : 사용 가능 최소 포인트 / unit : 사용단위
-		var v_point = 0; //사용할 포인트 (input 입력값)
+	function pointchange() {
+		var x = Number(document.getElementById("writepoint").value);
+		var u = Number(document.getElementById("userpoint").value);
+		var p = Number(document.getElementById("mentoringprice").value);
+		
+		var xx = $('#writepoint').val();
+		var pp = $('#mentoringprice').val();
 
-		if (document.getElementById("chk_use").checked) {
-			if (pnt < min) //최소 사용 단위보다 작을 때
-			{
-				v_point = 0;
+		//enterkey쳤을 때
+		if (event.keyCode == 13) {
+			//사용자가 양수를 입력했을 때
+			if (x > 0) {
+				//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
+				if (x > u) {
+					var msg = "사용할 포인트를 초과하였습니다.";
+					alert(msg);
+				} else {
+					// 사용할 포인트 띄우기
+					
+					document.getElementById("willusepoint").innerHTML = x;
+					document.getElementById("total_price").innerHTML = p - x;
+					var a = u - x;
+					document.getElementById("userpoint").value = a;
+					
+					//input hidden
+					$('#willusepoint1').val(x);
+					$('#total_price1').val(p-x);
+					
+					console.log($('#willusepoint1').val());
+					console.log($('#total_price1').val());	
+				}
+
 			} else {
-				v_point = pnt - pnt % unit; //사용할 포인트 = 전체 마일리지 중 최소단위 이하 마일리지를 뺀 포인트
+				var msg = "포인트를 입력하세요";
+				alert(msg);
 			}
-
-			if (pnt > amt) { //결제금액보다 포인트가 더 클 때
-				v_point = amt; //사용할 포인트는 결제금액과 동일하게 설정
-			}
-
 		}
-		document.getElementById("use_pnt").value = v_point; //input 값 설정
-
-		changePoint(amt, pnt, min, unit);
 	};
 
-	function changePoint(amt, pnt, min, unit) {
-		//input값을 불러옴 > left_pnt 변경 > 최종결제 변경
-		//amt : 최초 결제 금액 / pnt : 사용가능,남은 포인트 / min : 사용 가능 최소 포인트 / unit : 사용단위
-		var v_point = parseInt(document.getElementById("use_pnt").value); //사용할 포인트 (input 입력값)
-		if (v_point > pnt) //입력값이 사용가능 포인트보다 클때
-		{
-			v_point = pnt;
-			document.getElementById("use_pnt").value = v_point; //input 값 재설정
-		}
-
-		if (v_point > amt) { //결제금액보다 포인트가 더 클 때
-			v_point = amt; //사용할 포인트는 결제금액과 동일하게 설정
-			document.getElementById("use_pnt").value = v_point; //input 값 재설정
-		}
-
-		if (v_point < min) //최소 사용 단위보다 작을 때
-		{
-			v_point = 0;
-			document.getElementById("use_pnt").value = v_point; //input 값 재설정
+	//point 전체사용
+	function chkPoint() {
+		var u = '[[${session.loginuser.userpoint}]]';
+		var p = Number(document.getElementById("mentoringprice").value);
+		var checkbox = document.getElementById('chk_use');
+		if (checkbox.checked != true) {
+			document.getElementById("writepoint").value = null;
+			document.getElementById("willusepoint").innerHTML = null;
+			document.getElementById("total_price").innerHTML = p;
+			document.getElementById("willusepoint1").value = 0;
+			document.getElementById("total_price1").value = p;
+			document.getElementById("userpoint").value = '[[${session.loginuser.userpoint}]]';
 		} else {
-			v_point = v_point - v_point % unit; //사용할 포인트 = 사용할 마일리지 중 최소단위 이하 마일리지를 뺀 포인트
+			//point를 다썼을 때
+			document.getElementById("writepoint").value = u;
+			document.getElementById("willusepoint").innerHTML = u;
+			document.getElementById("willusepoint1").value = u;
+			document.getElementById("total_price").innerHTML = p - u;
+			document.getElementById("total_price1").value = p - u;
+			document.getElementById("userpoint").value = 0;
 		}
-
-		var v_left = document.getElementsByName("left_pnt"); //사용가능 마일리지, 남은 포인트 값 설정
-		for (var i = 0; i < v_left.length; i++) {
-
-			v_left[i].innerHTML = pnt - v_point; //= 전체 포인트 중에 사용할 포인트빼고 남은 포인트
-
-		}
-		document.getElementById("result_pnt").innerHTML = amt - v_point; //최종 결제금액 = 결제금액 - 사용할 포인트
 	};
 </script>
 </head>
@@ -255,13 +262,17 @@
 					<div class="border-bottom">
 						<div class="d-flex justify-content-between">
 							<p>Mentoring Price</p>
-							<p th:text="${pur.mentoring_mentoringprice}"
+							<p th:text="${pur.mentoring_mentoringprice}+${'원'}"
 								id="ordermentoring_price"></p>
+							<input type='hidden' th:value="${pur.mentoring_mentoringprice}+${'원'}"
+								id="ordermentoring1_price1">
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>
 							<p>
 								<span id="willusepoint"></span>
+								<input type='hidden' th:value="${point}" name='point'
+								id="willusepoint1">
 							</p>
 						</div>
 					</div>
@@ -269,6 +280,8 @@
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
 							<h5 th:text="${pur.mentoring_mentoringprice}" id="total_price"></h5>
+							<input type='hidden' th:value="${price}" name='price'
+								id="total_price1">
 						</div>
 					</div>
 				</div>
@@ -287,79 +300,32 @@
 
 </body>
 <script>
-	//point
-	function pointchange() {
-		var x = Number(document.getElementById("writepoint").value);
-		var u = Number(document.getElementById("userpoint").value);
-		var p = Number(document.getElementById("mentoringprice").value);
-
-		//enterkey쳤을 때
-		if (event.keyCode == 13) {
-			//사용자가 양수를 입력했을 때
-			if (x > 0) {
-				//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
-				if (x > u) {
-					var msg = "사용할 포인트를 초과하였습니다.";
-					alert(msg);
-				} else {
-					// 사용할 포인트 띄우기
-					document.getElementById("willusepoint").innerHTML = x;
-					document.getElementById("total_price").innerHTML = p - x;
-					var a = u - x;
-					document.getElementById("userpoint").value = a;
-				}
-
-			} else {
-				var msg = "포인트를 입력하세요";
-				alert(msg);
-			}
-		}
-	};
-
-	//point 전체사용
-	function chkPoint() {
-		var u = Number(document.getElementById("userpoint").value);
-		var p = Number(document.getElementById("mentoringprice").value);
-		var checkbox = document.getElementById('chk_use');
-		if (checkbox.checked != true) {
-			document.getElementById("writepoint").value = null;
-			document.getElementById("willusepoint").innerHTML = null;
-			document.getElementById("total_price").innerHTML = p;
-			document.getElementById("userpoint").value = '[[${session.loginuser.userpoint}]]';
-		} else {
-			//point를 다썼을 때
-			document.getElementById("writepoint").value = u;
-			document.getElementById("willusepoint").innerHTML = u;
-			document.getElementById("total_price").innerHTML = p - u;
-			document.getElementById("userpoint").value = 0;
-		}
-	};
-</script>
-<script>
-	//import
-	var IMP = window.IMP;
-	IMP.init("imp82873338");
-
-	var today = new Date();
-	var hours = today.getHours(); // 시
-	var minutes = today.getMinutes(); // 분
-	var seconds = today.getSeconds(); // 초
-	var milliseconds = today.getMilliseconds();
-	var makeMerchantUid = hours + minutes + seconds + milliseconds;
-
-	//order시에 필요한 값들 변수로 다 선언해주기
-	var mentoringid = $('#mentoringid').val();
-	var mtitle = $('#mtitle').val();
-	var mentorname = $('#mentorname').val();
-	var mentoringdate = $('#mentoringdate').val();
-	var mentoringtime = $('#mentoringtime').val();
-	var mplace = $('#mplace').val();
-	var mentoringoption_mentoringoptionid = $('#mentoringoptionid').val();//mentoringoptionid(purchasedetail)
-	var total_price = $('#total_price').text();//purprice(purchase)
-	var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
-
 	//일반 결제
 	function requestPay() {
+		//import
+		var IMP = window.IMP;
+		IMP.init("imp82873338");
+
+		var today = new Date();
+		var hours = today.getHours(); // 시
+		var minutes = today.getMinutes(); // 분
+		var seconds = today.getSeconds(); // 초
+		var milliseconds = today.getMilliseconds();
+		var makeMerchantUid = hours + minutes + seconds + milliseconds;
+
+		//order시에 필요한 값들 변수로 다 선언해주기
+		var mentoringid = $('#mentoringid').val();
+		var mtitle = $('#mtitle').val();
+		var mentorname = $('#mentorname').val();
+		var mentoringdate = $('#mentoringdate').val();
+		var mentoringtime = $('#mentoringtime').val();
+		var mplace = $('#mplace').val();
+		var mentoringoption_mentoringoptionid = $('#mentoringoptionid').val();//mentoringoptionid(purchasedetail)
+		var total_price = $('#total_price1').val();//purprice(purchase)
+		var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
+		var willusepoint = $('#willusepoint1').val();
+		var mentoringprice = $('#mentoringprice').val();
+		
 		IMP.request_pay({
 			pg : 'html5_inicis',
 			pay_method : 'card',
@@ -385,7 +351,9 @@
 							+ mentoringoption_mentoringoptionid
 							+ '&[[@{purprice=}]]' + rsp.paid_amount
 							+ '&[[@{purpay=}]]' + rsp.pay_method
-							+ '&[[@{purcard=}]]' + rsp.card_name;
+							+ '&[[@{purcard=}]]' + rsp.card_name
+							+ '&[[@{willusepoint=}]]' + willusepoint
+							+ '&[[@{mentoringprice=}]]' + mentoringprice;
 				}
 			} else {
 				var msg = '결제에 실패하였습니다.';

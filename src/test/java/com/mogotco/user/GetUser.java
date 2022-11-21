@@ -18,7 +18,7 @@ class GetUser {
 		
 		UserDTO user = null;
 		try {
-			user = service.get("qkrajswl1541");
+			user = service.get("whdlsdud4321");
 			System.out.println("OK");
 		} catch (Exception e) {
 			e.printStackTrace();
