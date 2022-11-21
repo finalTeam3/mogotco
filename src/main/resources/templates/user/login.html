@@ -39,10 +39,10 @@
     <!-- login -->
     <script>
     $(document).ready(function(){
-    	var logresult = "[[${logresult}]]";
-    	if (logresult == "fail") {
+    	/*     	var logresult = "[[${logresult}]]";
+    	if (logresult == 0) {
     		modal();
-    	}
+    	} */
     	
     	$('#login_form > button').click(function(){
     		$('#login_form').attr(
@@ -54,6 +54,7 @@
     		$('#login_form').submit();
     	});
     });
+    
     </script>
 </head>
 
