@@ -325,8 +325,11 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><a th:href="@{/mentor/mentordetail(mentorid=${mtg.mentorid})}"><img th:src="@{/images/}+${mto.mentor_mentorimg}" alt=""></a></div>
 									<div class="teacher_title">
-										<div class="teacher_name" th:text="${mto.user_userid}" th:href="@{/mentor/mentordetail}"><a href="#">Jacke Masito</a></div>
-										<div class="teacher_position">Marketing & Management</div>
+										<div style="display:inline; color:#808080;"><span>Mentor ID :</span></div>
+										<div style="display:inline; color:#808080;" class="teacher_name" th:text="${mto.user_userid}" th:href="@{/mentor/mentordetail}"><a href="#"></a></div>
+										<br>
+										<div style="display:inline; color:#808080;"><span>현직 회사 :</span></div>
+										<div style="display:inline; color:#808080;" class="teacher_name" th:text="${mto.mentor_mentorcom}"><a href="#"></a></div>
 									</div>		
 								</div>
 								&nbsp

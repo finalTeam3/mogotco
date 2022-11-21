@@ -63,9 +63,13 @@
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
-										<div class="course_teacher" th:text="${mtr.user_userid}">Mr. John Taylor</div>
-										<span>모집정원:</span>
-										<div style="display:inline-block;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
+										<br>
+										<br>
+										<div style="display:inline;"><span>등록:</span></div>
+										<div style="display:inline;" class="course_teacher" th:text="${mtr.user_userid}"></div>
+										<br>
+										<div style="display:inline;"><span>모집정원:</span></div>
+										<div style="display:inline;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
