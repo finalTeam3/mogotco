@@ -55,5 +55,9 @@ public class MentoringOptionService implements MyService<Integer, MentoringOptio
 	public List<MentoringOptionDTO> viewMentoringOp(int mentoringid) throws Exception {
 		return mapper.viewMentoringOp(mentoringid);
 	}
+	//멘토링과 멘토링 시간에 따른 멘토링옵션id출력(mentoringdetail->purchase)(choyunyoung add)
+	public MentoringOptionDTO viewmentoringoptionid(int mentoringid, String mentoringtime) throws Exception{
+		return mapper.viewmentoringoptionid(mentoringid, mentoringtime);
+	}
 
 }

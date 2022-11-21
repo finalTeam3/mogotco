@@ -180,35 +180,44 @@
 				<div class="bg-light p-30 mb-5">
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<label>Mentoring no</label> <input id="mentoringid" class="form-control"
-								type="text" th:value="${203}" readonly="readonly">
+							<label>Mentoring no</label> <input id="mentoringid"
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringid}" readonly="readonly">
 						</div>
 
 						<div class="col-md-6 form-group">
-							<label>Mentoring title</label> <input id="mtitle" class="form-control"
-								type="text" th:value="${'이직 상담 신청하세요.'}" readonly="readonly">
+							<label>Mentoring title</label> <input id="mtitle"
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mtitle}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentor name</label> <input id="mentorname" class="form-control"
-								type="text" th:value="${'조윤영'}" readonly="readonly">
+							<label>Mentor name</label> <input id="mentorname"
+								class="form-control" type="text" th:value="${'조윤영'}"
+								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring date</label> <input id="mentoringdate" class="form-control"
-								type="text" th:value="${'2022-11-10'}" readonly="readonly">
+							<label>Mentoring date</label> <input id="mentoringdate"
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringdate}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring time</label> <input id="mentoringtime" class="form-control"
-								type="text" th:value="${'11:00'}" readonly="readonly">
+							<label>Mentoring time</label> <input id="mentoringtime"
+								class="form-control" type="text"
+								th:value="${pur.mentoringoption_mentoringtime}"
+								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring place</label> <input id="mplace" class="form-control"
-								type="text" th:value="${'서울강북구 4.19로 105'}" readonly="readonly">
+							<label>Mentoring place</label> <input id="mplace"
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mplace}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring Price</label> <input id="mentoringprice" class="form-control"
-								type="text" th:value="${'25000원'}" readonly="readonly">
+							<label>Mentoring Price</label> <input id="mentoringprice"
+								class="form-control" type="text"
+								th:value="${pur.mentoring_mentoringprice}" readonly="readonly">
 						</div>
-						<input type="hidden" id="mentoringoptionid" th:value="${414}">
+						<input type="hidden" id="mentoringoptionid"
+							th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="shipto">
@@ -227,49 +236,14 @@
 						<div class="row">
 							<div class="col-md-5 form-group">
 								<!-- session에서 cust의 poinr값을 가지고옴 -->
-								<label>My Point</label> <input class="form-control" type="text"
-									id="writepoint"> <input class="form-control"
-									type="text" th:value="${session.loginuser.userpoint}"
-									readonly="readonly">
-								<button class="submit" th:onclick="pointcount()">submit</button>
-							</div>
-							<table class="tbl_edit01">
-								<colgroup>
-									<col width="90px" />
-									<col width="*" />
-								</colgroup>
-								<tbody>
-									<tr>
-										<th>결제금액</th>
-										<td><span class="bold txt_blue">65000원</span></td>
-									</tr>
-									<tr>
-										<th>포 인 트</th>
-										<td>사용가능 포인트 : <span name="left_pnt">7210</span>p <span><input
+								<label>My Point</label><span><input
 												type="checkbox" id="chk_use"
-												th:onclick="chkPoint(65000,7210,5000,100)">포인트 전체 사용</span> <span
-											style="float: right">포인트는 최소 5000p부터 100p단위로 사용 가능합니다.</span>
-										</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td><span> <input type="number" name="use_pnt"
-												id="use_pnt" min="5000" max="65000"
-												th:onchange="changePoint(65000,7210,5000,100)"></span> p <span>
-												( 남은포인트 : </span><span name="left_pnt" id="left_pnt">7210</span>p )
-										</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											<p class="bold txt_red">
-												최종 결제 금액 : <span class="bold txt_red" id="result_pnt">65000</span>
-												원
-											</p>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+												th:onclick="chkPoint()">포인트 전체 사용</span><input class="form-control" type="text"
+									id="writepoint" placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()"
+									><input class="form-control"
+									type="text" id="userpoint" th:value="${session.loginuser.userpoint}"
+									readonly="readonly">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -282,17 +256,18 @@
 					<div class="border-bottom">
 						<div class="d-flex justify-content-between">
 							<p>Mentoring Price</p>
-							<p th:text="${25000}" id="ordermentoring_price"></p>
+							<p th:text="${pur.mentoring_mentoringprice}"
+								id="ordermentoring_price"></p>
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>
-							<p id="willusepoint"></p>
+							<p><span id="willusepoint"></span></p>
 						</div>
 					</div>
 					<div class="pt-2">
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
-							<h5 th:text="${100}" id="total_price"></h5>
+							<h5 id="total_price"></h5>
 						</div>
 					</div>
 				</div>
@@ -300,7 +275,6 @@
 					<h5 class="section-title position-relative text-uppercase mb-3">
 						<span class="bg-secondary pr-3">Payment</span>
 					</h5>
-
 					<button class="btn btn-block btn-primary font-weight-bold py-3"
 						th:onclick="requestPay()">Payment</button>
 
@@ -311,8 +285,46 @@
 	</div>
 
 </body>
-	<script>
+<script>
+//point
+function pointchange(){
+	var x = Number(document.getElementById("writepoint").value);
+	var u = Number(document.getElementById("userpoint").value);
+	var p = '[[${pur.mentoring_mentoringprice}]]';
+	
+	//enterkey쳤을 때
+	if(event.keyCode == 13){
+		//사용자가 양수를 입력했을 때
+		if(x > 0){
+			//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
+			if(x > u){
+				var msg = "사용할 포인트를 초과하였습니다.";
+				alert(msg);
+			}else{
+				// 사용할 포인트 띄우기
+				document.getElementById("willusepoint").innerHTML = x;
+				document.getElementById("total_price").innerHTML = p-x;
+				document.getElementById("userpoint").innerHTML = u-x;
+				
+			}
+		
+		}
+		else{
+			var msg = "포인트를 입력하세요";
+			alert(msg);
+		}
+	}
+};
 
+//point 전체사용
+function chkPoint(){
+	var u = '[[${session.loginuser.userpoint}]]';
+		document.getElementById("writepoint").innerHTML = u;
+		document.getElementById("willusepoint").innerHTML = u;
+		document.getElementById("total_price").innerHTML = p-x;
+};
+</script>
+<script>
 	//import
 	var IMP = window.IMP;
 	IMP.init("imp82873338");
@@ -334,55 +346,41 @@
 	var mentoringoption_mentoringoptionid = $('#mentoringoptionid').val();//mentoringoptionid(purchasedetail)
 	var total_price = $('#total_price').text();//purprice(purchase)
 	var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
-	
+
+	//일반 결제
 	function requestPay() {
 		IMP.request_pay({
 			pg : 'html5_inicis',
-			pay_method : 'card', 
+			pay_method : 'card',
 			merchant_uid : "IMP" + makeMerchantUid,
 			name : mtitle,
-			amount : total_price 
+			amount : total_price
 		}, function(rsp) { // callback
 			if (rsp.success) {
-				console.log(rsp);
-				console.log(rsp.amount);//현재 출력이 안되는 상황임
-				console.log(rsp.pay_method);
-				console.log(rsp.name);
-				$.ajax({
-					//이전단에서 결제 버튼을 눌렀을 때 orderno를 생성하고 modify하는 방식으로 가야할듯
-					type : "POST",
-					url : "http://127.0.0.1/mogotco/purchase", //ajax kgorder(왜냐면 데이터 저장을 하기 위해서는 고유 키값을 받아온 뒤 실행할 수 있음)
-					headers: { "Content-Type": "application/json" },
-					data : {//아니면 완료까지만 하고 바로 결제가 완료되었다는 것으로 페이지가 넘어가게	
-						//"purprice" : rsp.amount,
-						'purpay' : rsp.pay_method,
-						'mentoring_mtitle' : rsp.name
-					}
-					}).done(function (data) {
-						$.ajax({
-						url : '[[@{/kgorder}]]', //ajax kgorder(왜냐면 데이터 저장을 하기 위해서는 고유 키값을 받아온 뒤 실행할 수 있음)
-						data : {//아니면 완료까지만 하고 바로 결제가 완료되었다는 것으로 페이지가 넘어가게
-							//order일때 필요한 것 다 들어감
-							//"purprice" : purprice, //purprice(purchase)
-							'userid' : userid, //userid(purchase)
-							//"purpay" : purpay, //purpay(purchase)
-							'mentoringoption_mentoringoptionid' : mentoringoption_mentoringoptionid, //mentoringoptionid(purchasedetail)
-							'mentoring_mentoringid' : mentoringid,
-							//"mentoring_mtitle" : mentoring_mtitle, //mentoring_mtitle(purchase)
-							'user_mentorname' : mentorname,
-							'mentoring_mentoringdate' : mentoringdate,
-							'mentoringoption_mentoringtime' : mentoringtime,
-							'mentoring_mplace' : mplace,
-							'purprice' : total_price
-						}	
-				});
-					});
+				var msg = '결제가 완료되었습니다.';
+				var c = confirm(msg);
+				if (c == true) {
+					//성공시 이동할 페이지
+					location.href = '[[@{/purchase/purchasefinish?userid=}]]'
+							+ userid + '&[[@{mentoring_mentoringid=}]]'
+							+ mentoringid + '&[[@{mentoring_mtitle=}]]'
+							+ rsp.name + '&[[@{user_mentorname=}]]'
+							+ mentorname + '&[[@{mentoring_mentoringdate=}]]'
+							+ mentoringdate
+							+ '&[[@{mentoringoption_mentoringtime=}]]'
+							+ mentoringtime + '&[[@{mentoring_mplace=}]]'
+							+ mplace
+							+ '&[[@{mentoringoption_mentoringoptionid=}]]'
+							+ mentoringoption_mentoringoptionid
+							+ '&[[@{purprice=}]]' + rsp.paid_amount
+							+ '&[[@{purpay=}]]' + rsp.pay_method
+							+ '&[[@{purcard=}]]' + rsp.card_name;
+				}
 			} else {
-				//결제 취소를 하면 해당 결제 번호를 지우는 방식으로 가는것이 좋을 듯
-				console.log(rsp);
+				var msg = '결제에 실패하였습니다.';
+				alert(msg);
 			}
-		
-		});
-	}
+		})
+	};
 </script>
 </html>

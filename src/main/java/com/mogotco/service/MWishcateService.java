@@ -40,8 +40,8 @@ public class MWishcateService implements MyService<Integer, MWishcateDTO>{
 		return mapper.selectAll();
 	}
 	
-	public List<MWishcateDTO> mwcate(String userid) throws Exception{
-		return mapper.mwcate(userid);
+	public List<MWishcateDTO> mwcate(int mentorid) throws Exception{
+		return mapper.mwcate(mentorid);
 	}
 	
 

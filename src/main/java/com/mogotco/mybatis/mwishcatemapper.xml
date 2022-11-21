@@ -4,12 +4,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.MWishcateMapper">
 
-	<select id="mwcate" parameterType="String" resultType="MWishcateDTO">
+	<select id="mwcate" parameterType="Integer" resultType="MWishcateDTO">
 		SELECT mw.mwishcateid, mw.mentorid, mw.mcateid, mc.mname as mcate_mname,
 		m.userid as mentor_userid FROM mwishcate mw
 		INNER JOIN mcate mc ON mc.mcateid = mw.mcateid
 		INNER JOIN mentor m ON m.mentorid = mw.mentorid
-		WHERE m.userid = #{userid}
+		WHERE m.mentorid = #{mentorid}
 	</select>
 
 	<select id="select" parameterType="Integer" resultType="MWishcateDTO">

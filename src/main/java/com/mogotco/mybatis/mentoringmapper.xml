@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="viewMentoringOp" parameterType="Integer"
 		resultType="MentoringDTO">
 		SELECT mt.mentoringid, mc.mname AS mcate_mname, mu.userid
-		AS user_userid, mr.mentorimg AS mentor_mentorimg, mt.mtitle,
+		AS user_userid, mr.mentorimg AS mentor_mentorimg, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
 		mt.mcontents, mt.mentoringdate,
 		mt.mentoringimg, mt.mentoringprice,
 		mt.mplace, mt.mentorurl, mt.mmemberidcnt, mt.mcaring

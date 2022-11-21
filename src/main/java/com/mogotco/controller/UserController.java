@@ -51,12 +51,14 @@ public class UserController {
 		try {
 			user = user_service.get(id);
 			if(user == null) {
+				model.addAttribute("logresult", "f");
 				model.addAttribute("center", dir + "login");
 			} else {
 				if(pwd.equals(user.getUserpwd())) {
+					model.addAttribute("logresult", "t");
 					session.setAttribute("loginuser", user);
-					maincenter(model);
 				} else {
+					model.addAttribute("logresult", "f");
 					model.addAttribute("center", dir + "login");
 				}
 			}

@@ -16,6 +16,8 @@ public interface MentoringOptionMapper extends MyMapper<Integer, MentoringOption
 	public List<MentoringOptionDTO> viewMentoringStock(int mentoringid) throws Exception;
 	// 멘토링 옵션 화면출력(시간, 재고 함께) 출력 (화면 구성때문에 혹시 몰라서 예비)
 	public List<MentoringOptionDTO> viewMentoringOp(int mentoringid) throws Exception;
+	//멘토링과 멘토링 시간에 따른 멘토링옵션id출력(mentoringdetail->purchase)
+	public MentoringOptionDTO viewmentoringoptionid(int mentoringid, String mentoringtime) throws Exception;
 	
 
 }

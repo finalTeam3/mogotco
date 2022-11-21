@@ -87,7 +87,7 @@
 <script>
 	function go(userid) {
 		var c = confirm('구매이력으로 이동하시겠습니까?');
-		//var mentoringmembercnt = $('#mentoringmembercnt').val();
+
 		if (c == true) {
 			location.href = '[[@{/purchase/purchasedetail?id=}]]' + userid;
 		}
@@ -133,23 +133,25 @@
 					<th>Mentoringdate</th>
 					<th>Mentoringtime</th>
 					<th>Mentoringplace</th>
-					<th>Mentoringprice</th>
+					<th>Purprice</th>
 					<th>Purchasedate</th>
 					<th>Purchasepay</th>
+					<th>Purchasecard</th>
 
 				</tr>
 			</thead>
 			<tbody>
 				<!-- 연결시에는 furnishop orderdetail참고 -->
 				<tr class="active1">
-					<td type="text">203</td>
-					<td type="text">이직 상담 신청하세요.</td>
-					<td type="text">2022-11-10</td>
-					<td type="text">11:00</td>
-					<td type="text">서울강북구 4.19로 105</td>
-					<td type="text">25000</td>
-					<td type="text">2022-11-10</td>
-					<td type="text">카카오페이</td>
+					<td th:text="${list.mentoring_mentoringid}"></td>
+					<td th:text="${list.mentoring_mtitle}"></td>
+					<td th:text="${list.mentoring_mentoringdate}"></td>
+					<td th:text="${list.mentoringoption_mentoringtime}"></td>
+					<td th:text="${list.mentoring_mplace}"></td>
+					<td th:text="${list.purprice}"></td>
+					<td th:text="${list.purdate}"></td>
+					<td th:text="${list.purpay}"></td>
+					<td th:text="${list.purcard}"></td>
 					<!-- 내 구매이력으로 갈 것인지에 대한 버튼 -->
 					<td>
 						<button th:onclick="go([[${session.loginuser.userid}]]);" type="submit" class="comment_button1">Go to detail</button>

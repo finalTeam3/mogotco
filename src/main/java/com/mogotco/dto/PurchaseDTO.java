@@ -1,6 +1,6 @@
 package com.mogotco.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +19,7 @@ public class PurchaseDTO {
 	private int purprice;
 	private Date purdate;
 	private String purpay;
+	private String purcard;
 	
 	//구매페이지-멘토링번호, 멘토제목, 멘토이름, 멘토링날짜, 시간, 대면장소, 모집정원(멘토링 테이블에서 끌고오기), 가격(멘토링테이블에 있는 가격에서 x1을 함->controller에서)(purprice), 결제방법 입력칸  
 	//구매완료페이지-멘토링번호, 멘토제목,멘토링날짜, 시간,대면장소,최종결제금액,구매날짜,결제방법
@@ -35,6 +36,9 @@ public class PurchaseDTO {
 	
 	//cust의 point값 가져오기
 	private int user_userpoint;
+	
+	//멘토링 구매 값 가져오기
+	private int mentoring_mentoringprice;
 	
 
 }

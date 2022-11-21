@@ -19,8 +19,8 @@ public class MentorDTO {
 	private int mentorid;
 	private String userid;
 	private String adminid;
-	private String mentorcom;
-	private String mentorcon;
+	private String mentorcom; // mentor company
+	private String mentorcon; // mentor contents
 	private String mentorimg;
 	private String mcardimg;
 	private int mentorok;
@@ -32,9 +32,11 @@ public class MentorDTO {
 	private MultipartFile mpimg;  // mentor profile image
 	private MultipartFile mcimg;  // mentor card image
 	
+	private String mentoring_mentoringid;
 	private String mentoring_mtitle;
 	private String mentoring_mentoringimg;
 	private String mentoring_mentoringdate;
+	private String user_username;
 	
 	
 }

@@ -20,7 +20,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Courses</li>
+								<li>Mentoring</li>
 							</ul>
 						</div>
 					</div>
@@ -63,9 +63,13 @@
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
-										<div class="course_teacher" th:text="${mtr.user_userid}">Mr. John Taylor</div>
-										<span>모집정원:</span>
-										<div style="display:inline-block;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
+										<br>
+										<br>
+										<div style="display:inline; color:black;"><span>등록:</span></div>
+										<div style="display:inline; color:black;" class="course_teacher" th:text="${mtr.user_userid}"></div>
+										<br>
+										<div style="display:inline; color:black;"><span>모집정원:</span></div>
+										<div style="display:inline; color:black;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
@@ -135,110 +139,25 @@
 
 						<!-- Latest Course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Latest Courses</div>
+							<div class="sidebar_section_title">Mentoring Register</div>
 							<div class="sidebar_latest">
 
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_1.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">How to Design a Logo a Beginners Course</a></div>
-										<div class="latest_price">Free</div>
+									<div>
+										&nbsp&nbsp&nbsp&nbsp
+										<button type="button" th:onclick="|location.href='@{/mentoring/mentoringregister}'|" class="home_search_button" style="width:180px; font-weight:bold;">멘토링 등록하기</button>
 									</div>
 								</div>
 
-								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_2.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">Photography for Beginners Masterclass</a></div>
-										<div class="latest_price">$170</div>
-									</div>
-								</div>
 
-								<!-- Latest Course -->
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_3.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">The Secrets of Body Language</a></div>
-										<div class="latest_price">$220</div>
-									</div>
-								</div>
-
-							</div>
 						</div>
 
-						<!-- Gallery -->
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Instagram</div>
-							<div class="sidebar_gallery">
-								<ul class="gallery_items d-flex flex-row align-items-start justify-content-between flex-wrap">
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_1_large.jpg">
-											<img th:src="@{/images/gallery_1.jpg}" alt="">
-										</a>
-									</li>
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_2_large.jpg">
-											<img th:src="@{/images/gallery_2.jpg}" alt="">
-										</a>
-									</li>
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_3_large.jpg">
-											<img th:src="@{/images/gallery_3.jpg}" alt="">
-										</a>
-									</li>
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_4_large.jpg">
-											<img th:src="@{/images/gallery_4.jpg}" alt="">
-										</a>
-									</li>
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_5_large.jpg">
-											<img th:src="@{/images/gallery_5.jpg}" alt="">
-										</a>
-									</li>
-									<li class="gallery_item">
-										<div class="gallery_item_overlay d-flex flex-column align-items-center justify-content-center">+</div>
-										<a class="colorbox" href="images/gallery_6_large.jpg">
-											<img th:src="@{/images/gallery_6.jpg}" alt="">
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
 
-						<!-- Tags -->
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Tags</div>
-							<div class="sidebar_tags">
-								<ul class="tags_list">
-									<li><a href="#">creative</a></li>
-									<li><a href="#">unique</a></li>
-									<li><a href="#">photography</a></li>
-									<li><a href="#">ideas</a></li>
-									<li><a href="#">wordpress</a></li>
-									<li><a href="#">startup</a></li>
-								</ul>
-							</div>
-						</div>
+
 
 						<!-- Banner -->
-						<div class="sidebar_section">
-							<div class="sidebar_banner d-flex flex-column align-items-center justify-content-center text-center">
-								<div class="sidebar_banner_background" th:style="'background-image:url(' + @{/images/banner_1.jpg} + ')'"></div>
-								<div class="sidebar_banner_overlay"></div>
-								<div class="sidebar_banner_content">
-									<div class="banner_title">Free Book</div>
-									<div class="banner_button"><a href="#">download now</a></div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -246,7 +165,11 @@
 	</div>
 
 	<!-- Newsletter -->
-
+	<br>
+	<br>
+	<br>
+	<br>
+	
 	<div class="newsletter">
 		<div class="newsletter_background parallax-window" data-parallax="scroll" th:data-image-src="@{/images/newsletter.jpg}" data-speed="0.8"></div>
 		<div class="container">

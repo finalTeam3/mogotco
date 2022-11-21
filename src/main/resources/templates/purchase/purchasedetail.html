@@ -128,6 +128,7 @@ function review(purchaseid) {
 					<th>Purchasedate</th>
 					<th>Price</th>
 					<th>Purchasepay</th>
+					<th>Purchasecard</th>
 					<th>Mentoringtitle</th>
 					<th>Mentoringdate</th>
 					<th>Member</th>
@@ -142,6 +143,7 @@ function review(purchaseid) {
 					<td th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
 					<td th:text="${c.purchase_purprice}"></td>
 					<td th:text="${c.purchase_purpay}"></td>
+					<td th:text="${c.purchase_purcard}"></td>
 					<td th:text="${c.mentoring_mtitle}"></td>
 					<td th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
 					<td th:text="${c.mentoringmembercnt}"></td>

@@ -858,6 +858,13 @@ section
 	font-weight: 700;
 	color: #384158;
 }
+.contact_form_login
+{
+	padding-right: 10px;
+	width : 364px;
+	height : 390px;
+	margin : auto auto 100px 403px;
+}
 .contact_form
 {
 	padding-right: 10px;
