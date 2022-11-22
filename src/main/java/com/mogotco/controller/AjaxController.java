@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mogotco.dto.WishlistDTO;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
+import com.mogotco.service.WishlistService;
 
 
 @RestController
@@ -29,6 +31,9 @@ public class AjaxController {
 	@Autowired
 	MentoringOptionService service4;
 
+	@Autowired
+	WishlistService wishservice;
+
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
 		return "";
@@ -40,6 +45,19 @@ public class AjaxController {
 		Integer modiprice =0;
 		modiprice=total_price-writepoint;
 		return modiprice;
+	}
+	
+	// mentor를 wishlist 테이블에 추가
+	@RequestMapping("/addwishlist")
+	public Object addwishlist(WishlistDTO wish) {
+		try {
+			wishservice.register(wish);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 	
 }

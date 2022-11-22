@@ -6,6 +6,27 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<script>
+$(document).ready(function(){
+	$('#wishlist_btn').click(function(){
+		alert(test);
+		var userid = '[[${session.loginuser.userid}]]';
+		var mentorid = $('#mentorid').val();
+		$.ajax({
+			url:'[[@{addwishlist}]]',
+			date:{
+				'userid':userid,
+				'mentorid':mentorid},
+			success:function(data){
+				$('#myModal').modal();
+			}
+		});
+		
+	});
+	
+});
+</script>
 </head>
 
 	
@@ -43,39 +64,7 @@
 							<div class="sidebar_feature">
 
 								<!-- Features -->
-<!-- 								<div class="feature_list">
 
-									Feature
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration:</span></div>
-										<div class="feature_text ml-auto">2 weeks</div>
-									</div>
-
-									Feature
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">10</div>
-									</div>
-
-									Feature
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">6</div>
-									</div>
-
-									Feature
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">Yes</div>
-									</div>
-
-									Feature
-									<div class="feature_course d-flex flex-row align-items-center justify-content-start">
-										<div class="feature_course_title"><i class="fa fa-users" aria-hidden="true"></i><span>Lectures:</span></div>
-										<div class="feature_text ml-auto">35</div>
-									</div>
-
-								</div> -->
 							</div>
 						</div>
 
@@ -86,8 +75,10 @@
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
 									<div class="teacher_title">
+										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
 										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
 										<div class="teacher_position">Marketing & Management</div>
+										<button type="button" id="wishlist_btn" class="comment_button trans_200" style="width:80px;height:30px"><i class="fa-solid fa-heart"></i></button>
 									</div>
 								</div>
 								<br>
@@ -113,6 +104,7 @@
 								</div>
 							</div>
 						</div>
+						
 
 						<!-- Latest Course -->
 						<div class="sidebar_section">
@@ -135,28 +127,15 @@
 								</div>
 
 								<!-- Latest Course -->
-<!-- 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_2.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">Photography for Beginners Masterclass</a></div>
-										<div class="latest_price">$170</div>
-									</div>
-								</div> -->
 
 								<!-- Latest Course -->
-<!-- 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img th:src="@{/images/latest_3.jpg}" alt=""></div></div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/course}">The Secrets of Body Language</a></div>
-										<div class="latest_price">$220</div>
-									</div>
-								</div> -->
 
 							</div>
 						</div>
 
 					</div>
 				</div>
+
 
 				<!-- Course -->
 				<div class="col-lg-8">
@@ -192,7 +171,7 @@
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
 								<div class="tab active">소개</div>
 								<!-- <div class="tab">경력</div> -->
-								<!-- <div class="tab">reviews</div> -->
+								<div class="tab">reviews</div>
 							</div>
 							<div class="tab_panels">
 
@@ -202,7 +181,7 @@
 									<br>
  									<div class="tab_panel_content" th:each="mwclist:${mwclist}">
 	 									<div>
-	 									<button class="comment_button trans_200" th:text="${mwclist.mcate_mname}" ></button>
+	 									<button class="comment_button trans_200" th:text="${mwclist.mcate_mname}" style="width:110px;height:24px" ></button>
 										</div>
 									</div>
 									<br>
@@ -285,7 +264,7 @@
 								</div>
 
 								<!-- Curriculum -->
-								<div class="tab_panel tab_panel_2">
+<!-- 								<div class="tab_panel tab_panel_2">
 									<div class="tab_panel_content">
 										<div class="tab_panel_title">Software Training</div>
 										<div class="tab_panel_content">
@@ -293,7 +272,7 @@
 												<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
 											</div>
 
-											<!-- Dropdowns -->
+											Dropdowns
 											<ul class="dropdowns">
 												<li class="has_children">
 													<div class="dropdown_item">
@@ -374,7 +353,7 @@
 											</ul>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Reviews -->
 								<div class="tab_panel tab_panel_3">
@@ -463,10 +442,10 @@
 												</div>
 											</li>
 										</ul>
-										<div class="add_comment_container">
+<!-- 										<div class="add_comment_container">
 											<div class="add_comment_title">Add a review</div>
 											<div class="add_comment_text">You must be <a href="#">logged</a> in to post a comment.</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 
@@ -480,32 +459,28 @@
 		</div>
 	</div>
 
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+			  <!-- The Modal -->
+			  <div class="modal fade" id="myModal">
+			    <div class="modal-dialog modal-dialog-centered">
+			      <div class="modal-content">
+			      
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			          <h4 class="modal-title">Modal Heading</h4>
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			          Modal body..
+			        </div>
+			        
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        </div>
+			        
+			      </div>
+			    </div>
+			  </div>
 
