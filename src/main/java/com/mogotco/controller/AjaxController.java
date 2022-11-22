@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mogotco.dto.UserDTO;
 import com.mogotco.dto.WishlistDTO;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
+import com.mogotco.service.UserService;
 import com.mogotco.service.WishlistService;
 
 
@@ -33,6 +35,9 @@ public class AjaxController {
 
 	@Autowired
 	WishlistService wishservice;
+	
+	@Autowired
+	UserService user_service;
 
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
@@ -58,6 +63,24 @@ public class AjaxController {
 		}
 		
 		return "";
+	}
+	
+	//회원가입시 아이디 중복체크 기능
+	@RequestMapping("/checkid")
+	public Object checkid(String cid) {
+		String result = "";
+		UserDTO user = null;
+		try {
+			user = user_service.get(cid);
+			if(user != null) {
+				result = "f";
+			} else {
+				result = "t";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 }
