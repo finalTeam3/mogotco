@@ -8,14 +8,13 @@
 <script th:src="@{/js/course.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <script>
-$(document).ready(function(){
+$(document).ready(function(){ㅇ
 	$('#wishlist_btn').click(function(){
-		alert(test);
 		var userid = '[[${session.loginuser.userid}]]';
 		var mentorid = $('#mentorid').val();
 		$.ajax({
-			url:'[[@{addwishlist}]]',
-			date:{
+			url:'[[@{/addwishlist}]]',
+			data:{
 				'userid':userid,
 				'mentorid':mentorid},
 			success:function(data){
