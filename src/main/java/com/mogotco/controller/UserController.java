@@ -148,6 +148,25 @@ public class UserController {
 		return "main";
 	}
 	
+	//회원가입시 아이디 중복체크 기능
+	@RequestMapping("/checkid")
+	public Object checkid(String cid) {
+		String result = "";
+		UserDTO user = null;
+		try {
+			user = user_service.get(cid);
+			System.out.println(user);
+			if(user != null) {
+				result = "f";
+			} else {
+				result = "t";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	//회원가입기능
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model model, UserDTO user) {

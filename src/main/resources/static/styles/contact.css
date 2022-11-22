@@ -1021,9 +1021,44 @@ section
 	border-radius: 3px;
 	margin-top: 15px;
 }
+.comment_button_regi
+{
+	width: 150px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button_login
+{
+	width: 150px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+	display : block;
+}
 .comment_button:hover
 {
 	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+}
+.comment_button_regi:hover
+{
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
 }
 .contact_info
 {
