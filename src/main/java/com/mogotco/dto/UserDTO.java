@@ -31,6 +31,8 @@ public class UserDTO {
 	private String addrnum;
 	private String addrdetail;
 	private String addrextra;
+	private String snsinsta;
+	private String snsgit;
 	
 	private int mentor_mentorok;
 }
