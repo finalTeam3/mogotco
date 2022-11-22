@@ -292,7 +292,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 function purchase() {
 	var mentoringid ='[[${mto.mentoringid}]]';//mentoringid
 	var mtitle = '[[${mto.mtitle}]]';	//mtitle
-		//mentorname
+	var mentorid = '[[${mto.user_userid}]]';
 	var mentoringdate =$('#mentoringdate').text(); //mentoringdate
 	var mentoring_mentoringdate = new Date('[[${mto.mentoringdate}]]');
 	var mentoringtime =$('#time').val();	//mentoringtime
@@ -302,7 +302,7 @@ function purchase() {
 	
 	location.href = '[[@{/purchase?mentoring_mentoringid=}]]'
 		+ mentoringid + '&[[@{mentoring_mtitle=}]]' + mtitle + '&[[@{mentoring_mentoringdate=}]]' + mentoringdate + '&[[@{mentoringoption_mentoringtime=}]]' + mentoringtime + '&[[@{mentoring_mplace=}]]'
-		+ mplace + '&[[@{mentoring_mentoringprice=}]]' + mentoringprice;
+		+ mplace + '&[[@{mentoring_mentoringprice=}]]' + mentoringprice + '&[[@{user_mentorid=}]]' + mentorid;
 }
 
 </script>

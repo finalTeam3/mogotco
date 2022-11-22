@@ -129,19 +129,17 @@ public class PurchaseController {
 			//지금 로그인된 회원 정보
 			UserDTO beforeuser = null;
 			beforeuser = service5.get(pur.getUserid());
-			System.out.println(beforeuser);
+
 			//수정 point
 			int modipoint = 0;
 			modipoint = beforeuser.getUserpoint() - willusepoint + mentoringprice/100;
-			System.out.println(modipoint);
+
 			//수정할 회원 정보
 			UserDTO afteruser = new UserDTO(beforeuser.getUserid(), beforeuser.getUserpwd(), beforeuser.getUsername(), beforeuser.getUseraddr(), beforeuser.getUsertel(), beforeuser.getUseremail(), 
 					beforeuser.getUserdate(), beforeuser.getWithdraw(), beforeuser.getUserbirth(), modipoint, beforeuser.getNaverid(), beforeuser.getKakaoid(), beforeuser.getGoogleid(), beforeuser.getUsergen(), 
 					beforeuser.getAddrnum(), beforeuser.getAddrdetail(), beforeuser.getAddrextra(), beforeuser.getMentor_mentorok());
 			//수정
 			service5.modify(afteruser);
-			
-			System.out.println(afteruser);
 			
 			//구매 정보 뽑음
 			PurchaseDTO finish = null;
