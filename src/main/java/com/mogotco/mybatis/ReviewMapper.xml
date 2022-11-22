@@ -44,25 +44,27 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 개인 mentor 평점 avg(choyunyoung add) -->
 	<select id="indivirating" parameterType="String"
 		resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS avgrate
+		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS
+		avgrate
 		FROM mentor m
-		INNER JOIN mentoring men ON m.mentorid=men.mentorid
+		INNER JOIN mentoring men ON
+		m.mentorid=men.mentorid
 		INNER
-		JOIN review r ON men.mentoringid=r.mentoringid
+		JOIN review r ON
+		men.mentoringid=r.mentoringid
 		WHERE m.userid =
 		#{userid}
 	</select>
 
 	<!-- mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로) -->
-	<select id="topmentors" 
-		resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS avgrate
-		FROM mentor m
+	<select id="topmentors" resultType="reviewDTO">
+		SELECT m.mentorid AS mentor_mentorid,m.userid AS mentor_userid, m.mentorimg AS mentor_mentorimg,
+		u.snsinsta AS user_snsinsta, u.snsgit AS user_snsgit,
+		ROUND(avg(r.rating),1) AS avgrate FROM mentor m
 		INNER JOIN mentoring men ON m.mentorid=men.mentorid
-		INNER
-		JOIN review r ON men.mentoringid=r.mentoringid
-		GROUP BY m.userid ORDER
-		BY avgrate DESC LIMIT 4
+		INNER JOIN review r ON men.mentoringid=r.mentoringid
+		INNER JOIN user u ON m.userid=u.userid
+		GROUP BY m.mentorid ORDER BY avgrate DESC LIMIT 4
 	</select>
 
 </mapper>
