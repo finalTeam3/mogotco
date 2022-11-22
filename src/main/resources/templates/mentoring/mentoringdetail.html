@@ -13,7 +13,6 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 	$('#time').val(selectTime); // 버튼의 value값 input에 받아오기
 };
 </script>
-
 </head>
 
 	
@@ -76,8 +75,8 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
-								<div class="tab active">mentoring info</div>
-								<div class="tab">meeting place</div>
+								<div class="tab">mentoring info</div>
+								<div class="tab" id="kakaomap">meeting place</div>
 								<div class="tab">reviews</div>
 							</div>
 							<div class="tab_panels">
@@ -88,9 +87,11 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								</div>
 
 								<!-- Curriculum -->
-								<div class="tab_panel tab_panel_2">
+								<div class="tab_panel active">
 									<div class="tab_panel_content">
-									<div id="map" style="width:100%;height:350px;"></div>
+										<div id="map" style="width:100%;height:350px;"></div>
+											<!-- kakao map -->
+												<script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=aa0b8f301544c68fe928d59bb6b4f627&libraries=services}"></script>
 									</div>
 								</div>
 
@@ -284,8 +285,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 			</div>
 		</div>
 	</div>
-	
-	
+	</div>
 <script>
 //구매하기(choyunyoung add)
 //mentorname,mentoringoptionid
@@ -307,9 +307,8 @@ function purchase() {
 
 </script>
 <!-- kakao map -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa0b8f301544c68fe928d59bb6b4f627&libraries=services"></script>
-<!-- kakao map -->
  <script>
+ $('#kakaomap').click(function(){
  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
  mapOption = {
      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -344,6 +343,14 @@ geocoder.addressSearch('[[${mto.mplace}]]', function(result, status) {
 
      // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
      map.setCenter(coords);
- } 
+     
+ };
 });
+	//다시 지도를 찾음
+	 map.relayout();
+	//center지정 다시 해주기
+	 map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667));
+});
+
 </script>
+</html>
