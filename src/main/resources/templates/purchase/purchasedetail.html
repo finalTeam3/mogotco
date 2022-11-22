@@ -85,10 +85,11 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
-function review(purchaseid) {
+function review(purchaseid,mentor_userid) {
+
 	var c = confirm('리뷰를 작성하시겠습니까?');
 	if (c == true) {
-		location.href = '[[@{/review/review?id=}]]' + purchaseid;
+		location.href = '[[@{/review/review?id=}]]' + purchaseid +'[[@{mentor_userid=}]]' + mentor_userid;
 	}
 };
 
@@ -119,8 +120,9 @@ function review(purchaseid) {
 		<span class="bg-secondary pr-3"></span> <span
 			class="bg-secondary pr-3"></span>
 		<h5 class="section-title position-relative text-uppercase mb-3">
-			<span class="bg-secondary pr-3">Product</span>
+			<span class="bg-secondary pr-3">Purchasedetail</span>
 		</h5>
+	
 		<table id="otb" class="table" >
 			<thead>
 				<tr class="active">
@@ -151,11 +153,11 @@ function review(purchaseid) {
 					<td th:text="${c.mentoring_mplace}"></td>
 					<td th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button th:onclick="review([[${c.purchaseid}]]);" type="submit" class="comment_button1">Review</button>
+						<button th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])" type="submit" class="comment_button1">Review</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	</div>
+		</div>
 </body>
 </html>

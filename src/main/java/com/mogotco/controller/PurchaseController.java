@@ -113,7 +113,7 @@ public class PurchaseController {
 			//구매이력을 바로 생성
 			int r = pur.getPurchaseid();
 			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,pur.getMentoringoption_mentoringoptionid(), r, 0, "x", pur.getPurdate(), 
-					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getUser_mentorname(), 
+					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getMentor_userid(), pur.getUser_mentorname(), 
 					pur.getMentoring_mentoringdate(), pur.getMentoringoption_mentoringtime(), 
 					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
