@@ -94,5 +94,17 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM mentoring WHERE
 		mentoringid=#{mentoringid}
 	</delete>
+	
+	<select id="mentoringsearch" resultType="MentoringDTO" parameterType="string">
+    	SELECT mt.mentoringid,
+		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
+		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring
+		mt
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu
+		ON mr.userid = mu.userid
+		WHERE mt.mtitle LIKE CONCAT('%',#{txt},'%')
+		
+    </select>
 
 </mapper>

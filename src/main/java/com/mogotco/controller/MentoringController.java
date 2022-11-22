@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
@@ -26,6 +27,9 @@ public class MentoringController {
 	
 	@Autowired
 	MCateService mcateservice;
+	
+	@Autowired
+	MentoringMapper mtmapper;
 	
 	String mentoring = "mentoring/";
 	
@@ -96,5 +100,21 @@ public class MentoringController {
 	public String mservice() {
 		return mentoring+"mservice";
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, String txt) {
+		List<MentoringDTO> searchlist = null;
+		try {
+			searchlist = mtmapper.mentoringsearch(txt);
+			model.addAttribute("mtr", searchlist);
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
+	
+	
 	
 }

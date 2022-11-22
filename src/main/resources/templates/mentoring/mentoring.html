@@ -7,6 +7,20 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/courses.js}"></script>
 </head>
+<script>
+$(document).ready(function(){
+	$('#search_button').click(function(){
+		$('#search_form').attr({
+			method:'get',
+			action:'[[@{/mentoring/search}]]'
+			
+		});
+		$('#search_form').submit();
+
+	});
+});
+	
+</script>
 
 
 	
@@ -38,8 +52,8 @@
 				<!-- Courses Main Content -->
 				<div class="col-lg-8">
 					<div class="courses_search_container">
-						<form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-							<input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+						<form action="#" id="search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+							<input name="txt" type="text" class="courses_search_input" placeholder="Search Mentorng" required="required">
 							<select id="courses_search_select" class="courses_search_select courses_search_input">
 								<option>전체</option>
 								<option>웹</option>
@@ -51,7 +65,7 @@
 								<option>CLOUD</option>
 								<option>기타</option>
 							</select>
-							<button action="submit" class="courses_search_button ml-auto">search now</button>
+							<button id="search_button" class="courses_search_button ml-auto" type="button">search now</button>
 						</form>
 					</div>
 					<div class="courses_container">
