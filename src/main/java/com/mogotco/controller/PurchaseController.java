@@ -14,11 +14,13 @@ import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.MentoringmemberDTO;
 import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.dto.UserDTO;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
+import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/purchase")
@@ -41,6 +43,9 @@ public class PurchaseController {
 	
 	@Autowired
 	MentoringOptionService service4;
+	
+	@Autowired
+	UserService service5;
 	
 	//구매페이지
 	@RequestMapping("")
@@ -80,7 +85,6 @@ public class PurchaseController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
-			System.out.println(detail);
 			model.addAttribute("list", detail);
 			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
@@ -93,11 +97,8 @@ public class PurchaseController {
 
 	//구매완료페이지
 	@RequestMapping("/purchasefinish")
-	public String purchasefinish(Model model, HttpSession session, PurchaseDTO pur) {
+	public String purchasefinish(Model model, HttpSession session, PurchaseDTO pur, int willusepoint, int mentoringprice) {
 		//결제완료 버튼을 눌렀을 때
-
-		//purchase부분에 point생성
-		//purchase부분 넘길때 받아올 것들
 		try {
 			//구매 내용을 등록하고
 			service.register(pur);
@@ -125,18 +126,36 @@ public class PurchaseController {
 			service4.modify(aftermentoringoption);
 			
 			//point값 수정
-			//session정보를 가지고와서 수정함
+			//지금 로그인된 회원 정보
+			UserDTO beforeuser = null;
+			beforeuser = service5.get(pur.getUserid());
+			System.out.println(beforeuser);
+			//수정 point
+			int modipoint = 0;
+			modipoint = beforeuser.getUserpoint() - willusepoint + mentoringprice/100;
+			System.out.println(modipoint);
+			//수정할 회원 정보
+			UserDTO afteruser = new UserDTO(beforeuser.getUserid(), beforeuser.getUserpwd(), beforeuser.getUsername(), beforeuser.getUseraddr(), beforeuser.getUsertel(), beforeuser.getUseremail(), 
+					beforeuser.getUserdate(), beforeuser.getWithdraw(), beforeuser.getUserbirth(), modipoint, beforeuser.getNaverid(), beforeuser.getKakaoid(), beforeuser.getGoogleid(), beforeuser.getUsergen(), 
+					beforeuser.getAddrnum(), beforeuser.getAddrdetail(), beforeuser.getAddrextra(), beforeuser.getMentor_mentorok());
+			//수정
+			service5.modify(afteruser);
+			
+			System.out.println(afteruser);
 			
 			//구매 정보 뽑음
 			PurchaseDTO finish = null;
 			finish=service.purchasefinishpage(r);
 			//model객체에 담음
 			model.addAttribute("list", finish);
+			
+			//화면
+			model.addAttribute("center", purchase+"purchasefinish");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			model.addAttribute("center", purchase+"error");
 		}
-		model.addAttribute("center", purchase+"purchasefinish");
 		return "main";
 	}
 

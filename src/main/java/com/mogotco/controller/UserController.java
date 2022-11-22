@@ -116,6 +116,31 @@ public class UserController {
 		return "main";
 	}
 	
+	//마이페이지 수정 기능
+	@RequestMapping("/mypageupdate")
+	public String mypageupdate(UserDTO user) {
+		try {
+			user_service.modify(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:mypage?userid="+user.getUserid();
+	}
+	
+	//회원 탈퇴 기능
+	@RequestMapping("/deleteuser")
+	public String deleteuser(UserDTO user, HttpSession session) {
+		try {
+			user_service.deleteuser(user);
+			if(session != null) {
+				session.invalidate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
 	//회원가입페이지
 	@RequestMapping("/register")
 	public String register(Model model) {
@@ -135,13 +160,5 @@ public class UserController {
 		}
 		return "main";
 	}
-	
-	//회원정보수정페이지
-	@RequestMapping("/usermodify")
-	public String usermodify(Model model) {
-		model.addAttribute("center", dir+"usermodify");
-		return "main";
-	}
-
 	
 }

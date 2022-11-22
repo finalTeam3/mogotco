@@ -11,8 +11,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<update id="update" parameterType="userDTO">
 		UPDATE user SET userpwd = #{userpwd}, username = #{username}, useraddr = #{useraddr}, usertel = #{usertel}, useremail = #{useremail}, 
-		withdraw = #{withdraw}, userbirth = #{userbirth}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}
+		withdraw = #{withdraw}, userbirth = #{userbirth}, userpoint=#{userpoint}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}
 		WHERE userid = #{userid}
+	</update>
+	
+	<update id="deleteuser" parameterType="userDTO">
+		UPDATE user SET withdraw = 1 WHERE userid = #{userid}
 	</update>
 	
 	<delete id="delete" parameterType="String">

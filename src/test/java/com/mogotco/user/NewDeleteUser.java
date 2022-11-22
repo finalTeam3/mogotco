@@ -8,7 +8,7 @@ import com.mogotco.dto.UserDTO;
 import com.mogotco.service.UserService;
 
 @SpringBootTest
-class GetUser {
+class NewDeleteUser {
 	
 	@Autowired
 	UserService service;
@@ -16,16 +16,13 @@ class GetUser {
 	@Test
 	void contextLoads() {
 		
-		UserDTO user = null;
+		UserDTO user = new UserDTO("qkrgPwjd1541", "qkrgPwjd", "박혜정", "서울 강북구 인수봉로61길 18", "010-4009-1541", "skbsy153@gmail.com", null, 0, "1994-11-08", 3000, null, null, null, "여", "01022", "201호", "(수유동, 참하우스토리)", 0);
 		try {
-			user = service.get("whdlsdud4321");
+			service.deleteuser(user);
 			System.out.println("OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(user);
-		
 	}
 	
 }
