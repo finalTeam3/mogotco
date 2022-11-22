@@ -50,19 +50,43 @@ public class MentorController {
 		List<MentorDTO> mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		try {
-			mta = mservice.get(mentorid);
-			mtd = mservice.mentordetail(mentorid);
-			mtlist = mservice.mentoritem(mentorid);
-			mwclist = mwservice.mwcate(mentorid);
-			model.addAttribute("mta",mta);
-			model.addAttribute("mtd",mtd);
-			model.addAttribute("mtlist",mtlist);
-			model.addAttribute("mwclist",mwclist);
-			model.addAttribute("center", mentor+"mentordetail");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				mta = mservice.get(mentorid);
+				mtd = mservice.mentordetail(mentorid);
+				mtlist = mservice.mentoritem(mentorid);
+				mwclist = mwservice.mwcate(mentorid);
+				model.addAttribute("mta",mta);
+				model.addAttribute("mtd",mtd);
+				model.addAttribute("mtlist",mtlist);
+				model.addAttribute("mwclist",mwclist);
+				model.addAttribute("center", mentor+"mentordetail");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return "main";
+	}
+	
+	//비회원 멘토 상세 페이지
+	@RequestMapping("/nonid")
+	public String nonid(Model model, int mentorid) {
+		MentorDTO mta = null;
+		MentorDTO mtd = null;
+		List<MentorDTO> mtlist = null;
+		List<MWishcateDTO> mwclist = null;
+		try {
+				mta = mservice.get(mentorid);
+				mtd = mservice.mentordetail(mentorid);
+				mtlist = mservice.mentoritem(mentorid);
+				mwclist = mwservice.mwcate(mentorid);
+				model.addAttribute("mta",mta);
+				model.addAttribute("mtd",mtd);
+				model.addAttribute("mtlist",mtlist);
+				model.addAttribute("mwclist",mwclist);
+				model.addAttribute("center", mentor+"mentordetail1");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return "main";
 	}
 	
