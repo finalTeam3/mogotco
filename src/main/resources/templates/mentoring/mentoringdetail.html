@@ -90,6 +90,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								<!-- Curriculum -->
 								<div class="tab_panel tab_panel_2">
 									<div class="tab_panel_content">
+									<div id="map" style="width:100%;height:350px;"></div>
 									</div>
 								</div>
 
@@ -259,7 +260,8 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<!-- 비대면 -->
 										<div class="teacher_meta_title">MentoringPlace:</div>
-										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mplace}">12k</span></div>
+										<div class="teacher_meta_text ml-auto">
+											<span th:text="${mto.mplace}">12k</span></div>
 									</div>
 									<!-- Teacher Quizzes -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
@@ -282,7 +284,6 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 			</div>
 		</div>
 	</div>
-	<div id="map" style="width:100%;height:350px;"></div>
 	
 	
 <script>
