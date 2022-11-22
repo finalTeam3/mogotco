@@ -57,8 +57,6 @@
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
 										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
-										<div class="teacher_position">Marketing & Management</div>
-										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px"><i class="fa-solid fa-heart"></i></button>
 										<!-- <input class="comment_input" th:text="${session.loginuser.userid}" style = "display:none" name="userid" id="userid"> -->
 									</div>
 								</div>
@@ -464,21 +462,3 @@
 			      </div>
 			    </div>
 			  </div>
-<script>
-$(document).ready(function(){
-	$('#wishlist_btn').click(function(){
-		//var userid = $('#userid').text();
-		var mentorid = $('#mentorid').val();
-		$.ajax({
-			url:'[[@{/addwishlist}]]',
-			data:{
-				'userid':userid,
-				'mentorid':mentorid},
-			success:function(data){
-				$('#myModal').modal();
-			}
-		});
-		
-	});
-});
-</script>

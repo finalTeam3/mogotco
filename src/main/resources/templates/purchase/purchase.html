@@ -90,7 +90,7 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script>
+<script>	
 	//point
 	function pointchange() {
 		var x = Number(document.getElementById("writepoint").value);
@@ -99,7 +99,7 @@
 		
 		var xx = $('#writepoint').val();
 		var pp = $('#mentoringprice').val();
-
+		
 		//enterkey쳤을 때
 		if (event.keyCode == 13) {
 			//사용자가 양수를 입력했을 때
@@ -119,9 +119,6 @@
 					//input hidden
 					$('#willusepoint1').val(x);
 					$('#total_price1').val(p-x);
-					
-					console.log($('#willusepoint1').val());
-					console.log($('#total_price1').val());	
 				}
 
 			} else {
@@ -198,8 +195,8 @@
 								th:value="${pur.mentoring_mtitle}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentor id</label> <input id="mentorname"
-								class="form-control" type="text" th:value="${pur.user_mentorid}"
+							<label>Mentorid</label> <input id="mentorname"
+								class="form-control" type="text" th:value="${pur.mentor_userid}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
@@ -280,7 +277,7 @@
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
 							<h5 th:text="${pur.mentoring_mentoringprice}" id="total_price"></h5>
-							<input type='hidden' th:value="${price}" name='price'
+							<input type='hidden' th:value="${pur.mentoring_mentoringprice}" name='price'
 								id="total_price1">
 						</div>
 					</div>

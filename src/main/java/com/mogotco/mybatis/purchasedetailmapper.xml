@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT purde.purchaseid, pur.purdate AS purchase_purdate, pur.purprice AS
 		purchase_purprice,pur.purpay AS purchase_purpay, pur.purcard AS
 		purchase_purcard,
-		mentoring.mtitle AS mentoring_mtitle, u.username AS
+		mentoring.mtitle AS mentoring_mtitle, u.userid AS mentor_userid, u.username AS
 		user_mentorname,mentoring.mentoringdate AS mentoring_mentoringdate,
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
 		purde.mentoringoptionid,

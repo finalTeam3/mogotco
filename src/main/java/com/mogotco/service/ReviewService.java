@@ -42,7 +42,16 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 	
 	public List<ReviewDTO> getmentorreview(String userid) throws Exception {
 	      return mapper.getmentorreview(userid);
-	   }
+	}
+	
+	//개인 mentor 평점 avg(choyunyoung add)
+	public ReviewDTO indivirating(String userid) throws Exception{
+		return mapper.indivirating(userid);
+	}
+	//mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로)
+	public List<ReviewDTO> topmentors() throws Exception{
+		return mapper.topmentors();
+	}
 
 
 }

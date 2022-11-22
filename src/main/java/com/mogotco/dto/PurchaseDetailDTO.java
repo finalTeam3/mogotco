@@ -30,6 +30,7 @@ public class PurchaseDetailDTO {
 	private String purchase_purpay;
 	private String purchase_purcard;
 	private String mentoring_mtitle;
+	private String mentor_userid;
 	private String user_mentorname;//멘토이름임 헷갈리지 않기 위해서 이름 바꿔놈
 	private Date mentoring_mentoringdate;
 	private String mentoringoption_mentoringtime;

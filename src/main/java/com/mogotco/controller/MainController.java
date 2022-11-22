@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.BoardDTO;
 import com.mogotco.dto.MentoringDTO;
+import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.BoardService;
 import com.mogotco.service.MentoringService;
+import com.mogotco.service.ReviewService;
 
 @Controller
 @RequestMapping("/")
@@ -23,12 +25,22 @@ public class MainController {
 	@Autowired
 	MentoringService mentoring_service;
 	
+	//review
+	@Autowired
+	ReviewService review_service;
+	
 	@RequestMapping("")
 	public String main(Model model) {
 		List<MentoringDTO> immedmentoring = null;
+		List<ReviewDTO> topmentor = null;
 		try {
+			//지금 즉시 받을 수 있는 가장 빠른 멘토링
 			immedmentoring = mentoring_service.mentoringimmed();
+			//평점이 가장 높은 순서대로 멘토 4명
+			topmentor = review_service.topmentors();
+			
 			model.addAttribute("imme", immedmentoring);
+			model.addAttribute("topm", topmentor);
 			model.addAttribute("center", "maincenter");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

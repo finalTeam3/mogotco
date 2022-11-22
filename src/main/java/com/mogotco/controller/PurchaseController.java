@@ -113,7 +113,7 @@ public class PurchaseController {
 			//구매이력을 바로 생성
 			int r = pur.getPurchaseid();
 			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,pur.getMentoringoption_mentoringoptionid(), r, 0, "x", pur.getPurdate(), 
-					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getUser_mentorname(), 
+					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getMentor_userid(), pur.getUser_mentorname(), 
 					pur.getMentoring_mentoringdate(), pur.getMentoringoption_mentoringtime(), 
 					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
@@ -137,7 +137,7 @@ public class PurchaseController {
 			//수정할 회원 정보
 			UserDTO afteruser = new UserDTO(beforeuser.getUserid(), beforeuser.getUserpwd(), beforeuser.getUsername(), beforeuser.getUseraddr(), beforeuser.getUsertel(), beforeuser.getUseremail(), 
 					beforeuser.getUserdate(), beforeuser.getWithdraw(), beforeuser.getUserbirth(), modipoint, beforeuser.getNaverid(), beforeuser.getKakaoid(), beforeuser.getGoogleid(), beforeuser.getUsergen(), 
-					beforeuser.getAddrnum(), beforeuser.getAddrdetail(), beforeuser.getAddrextra(), beforeuser.getMentor_mentorok());
+					beforeuser.getAddrnum(), beforeuser.getAddrdetail(), beforeuser.getAddrextra(), beforeuser.getSnsinsta(), beforeuser.getSnsgit(), beforeuser.getMentor_mentorok());
 			//수정
 			service5.modify(afteruser);
 			

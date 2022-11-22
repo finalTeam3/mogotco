@@ -22,4 +22,7 @@ public class ReviewDTO {
 	private Date reviewdate;
 	
 	private String mentor_userid;
+	
+	//리뷰 전체 평점(choyunyoung add)
+	private float avgrate;
 }
