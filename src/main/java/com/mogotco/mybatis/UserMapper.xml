@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE userid = #{userid}
 	</update>
 	
+	<update id="deleteuser" parameterType="userDTO">
+		UPDATE user SET withdraw = 1 WHERE userid = #{userid}
+	</update>
+	
 	<delete id="delete" parameterType="String">
 		DELETE FROM user WHERE userid = #{userid}
 	</delete> 

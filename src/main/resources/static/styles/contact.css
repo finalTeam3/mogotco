@@ -935,6 +935,16 @@ section
 {
 	margin-bottom: 25px;
 }
+.comment_input_postno:focus
+{
+	border: solid 1px #14bdee;
+	outline: none;
+}
+.comment_input_address:focus
+{
+	border: solid 1px #14bdee;
+	outline: none;
+}
 .comment_input:focus
 {
 	border: solid 1px #14bdee;
