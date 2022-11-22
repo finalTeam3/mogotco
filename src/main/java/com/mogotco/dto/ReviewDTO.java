@@ -21,7 +21,13 @@ public class ReviewDTO {
 	private String reviewcon;
 	private Date reviewdate;
 	
+	private int mentor_mentorid;
 	private String mentor_userid;
+	private int mcate_mcateid;
+	private String mcate_mname;
+	private String mentor_mentorimg;
+	private String user_snsinsta;
+	private String user_snsgit;
 	
 	//리뷰 전체 평점(choyunyoung add)
 	private float avgrate;
