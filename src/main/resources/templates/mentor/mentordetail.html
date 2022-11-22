@@ -75,10 +75,10 @@ $(document).ready(function(){
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
 									<div class="teacher_title">
-									<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
+										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
 										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
 										<div class="teacher_position">Marketing & Management</div>
-										<button type="button" id="wishlist_btn" class="comment_button trans_200" style="width:80px;height:30px"><i class="fa fa-heart" aria-hidden="true"></i></button>
+										<button type="button" id="wishlist_btn" class="comment_button trans_200" style="width:80px;height:30px"><i class="fa-solid fa-heart"></i></button>
 									</div>
 								</div>
 								<br>
