@@ -68,13 +68,8 @@ margin-left: 2%;
     	btnElement.innerText = "회원 정보 저장";
     }
     
-    function modal() {
-    	$('#updatemodal').modal();
-    }
-    
 $(document).ready(function(){
 	$('#mpupdate_btn').click(function(){
-		modal();
 		$('#pwd').attr('readonly', false);  
 		$('#name').attr('readonly', false);  
 		$('#phone').attr('readonly', false);  
@@ -212,8 +207,8 @@ $(document).ready(function(){
 								
 							</form>
 								<div>
-									<button id = "mpupdate_btn" onclick = "changetext()" class="comment_button trans_200">회원 정보 수정</button>
-									<button id = "deleteuser_btn" class="comment_button trans_200">회원 탈퇴</button>
+									<button type='button' data-toggle="modal" data-target="#updatemodal" id = "mpupdate_btn" onclick = "changetext()" class="comment_button trans_200">회원 정보 수정</button>
+									<button type='button' data-toggle="modal" data-target="#deletemodal" id = "deleteuser_btn" class="comment_button trans_200">회원 탈퇴</button>
 								</div>
 						</div>
 					</div>
@@ -248,18 +243,22 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
-		<!-- Modal -->
+		<!-- Update Modal -->
 <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
       <div class="modal-body">변경하고 싶은 정보를 변경 후 [회원 정보 저장] 을 눌러주세요~</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <div class="modal-body-btn"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>
       </div>
+    </div>
+  </div>
+
+		<!-- Delete Modal -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">정말로 탈퇴하실건가요..?</div>
+             <div class="modal-body-btn"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>
     </div>
   </div>
 </div>
