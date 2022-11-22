@@ -349,7 +349,32 @@ geocoder.addressSearch('[[${mto.mplace}]]', function(result, status) {
 	//다시 지도를 찾음
 	 map.relayout();
 	//center지정 다시 해주기
-	 map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667));
+	 map.setCenter(new kakao.maps.LatLng(37.503376, 127.049776));
+	
+	// 마커가 표시될 위치입니다 
+	 var markerPosition  = new kakao.maps.LatLng(37.503376, 127.049776); 
+
+	 // 마커를 생성합니다
+	 var marker = new kakao.maps.Marker({
+	     position: markerPosition
+	 });
+
+	 // 마커가 지도 위에 표시되도록 설정합니다
+	 marker.setMap(map);
+
+	 var iwContent = '<div style="width:150px;text-align:center;padding:6px 0; color:black;"><strong style="color:#14bdee; font-size:16px;">MOGOTCO 본사</strong><br>비대면 수업 입니다</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	     iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+	 // 인포윈도우를 생성합니다
+	 var infowindow = new kakao.maps.InfoWindow({
+	     position : iwPosition, 
+	     content : iwContent 
+	 });
+	   
+	 // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	 infowindow.open(map, marker); 
+	
+	
 });
 
 </script>
