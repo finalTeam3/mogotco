@@ -128,7 +128,7 @@
 							<div class="sidebar_section_title">Categories</div>
 							<div class="sidebar_categories">
 								<ul>
-									<li th:each="mtc:${mtcatelist}"><a href="#" th:text="${mtc.mname}">Art & Design</a></li>
+									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mcateid=${mtc.mcateid})}" th:text="${mtc.mname}">Art & Design</a></li>
 								</ul>
 							</div>
 						</div>

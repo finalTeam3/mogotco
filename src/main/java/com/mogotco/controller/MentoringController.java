@@ -47,6 +47,23 @@ public class MentoringController {
 		return "main";
 	}
 	
+	@RequestMapping("/mentoringCate")
+	public String mentoringCate(Model model, int mcateid) {
+		List<MentoringDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			citemlist = mservice.selectMentoringAll(mcateid) ;// 카테고리별 멘토링 정보 넣어주기
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "main";
+	}
+	
 	//멘토링상세페이지
 	@RequestMapping("/mentoringdetail")
 	public String mentoringdetail(Model model, int mentoringid) {
