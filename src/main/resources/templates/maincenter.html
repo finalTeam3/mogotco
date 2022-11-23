@@ -1,12 +1,7 @@
 <html lang="en">
 <script>
 function request(mentor_mentorid){
-	if('[[${session.loginuser}]]'==null){
-		location.href='[[@{/mentor/nonid?mentorid=}]]'+mentor_mentorid;
-	}
-	else{
-		location.href='[[@{/mentor/mentordetail?mentorid=}]]'+mentor_mentorid;
-	}
+		location.href='[[@{/mentor/idcheck?mentorid=}]]'+mentor_mentorid;
 }
 
 </script>
