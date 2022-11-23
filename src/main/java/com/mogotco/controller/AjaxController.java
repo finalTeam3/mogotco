@@ -55,15 +55,20 @@ public class AjaxController {
 	// mentor를 wishlist 테이블에 추가
 	@RequestMapping("/addwishlist")
 	public Object addwishlist(WishlistDTO wish) {
+		WishlistDTO wdt = null;
 		try {
-			wishservice.register(wish);
+			wdt = wishservice.wishcheck(wish.getUserid(), wish.getMentorid());
+			System.out.println(wdt);
+			if(wdt == null) {
+				wishservice.register(wish);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return "";
 	}
+
 	
 	//회원가입시 아이디 중복체크 기능
 	@RequestMapping("/checkid")

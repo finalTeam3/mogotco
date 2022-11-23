@@ -12,4 +12,5 @@ import com.mogotco.frame.MyMapper;
 @Mapper
 public interface WishlistMapper extends MyMapper<Integer, WishlistDTO>{
 	public List<WishlistDTO> wmentor(String userid) throws Exception;
+	public WishlistDTO wishcheck(String userid, Integer mentorid) throws Exception;
 }
