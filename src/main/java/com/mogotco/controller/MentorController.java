@@ -1,6 +1,11 @@
 package com.mogotco.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +47,29 @@ public class MentorController {
 	@Value("${userdir}")
 	String userdir;
 	
+	//아이디값 유무 판단
+	@RequestMapping("/idcheck")
+	public void idcheck(int mentorid,HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);	
+		if(session == null) {
+					try {
+						response.sendRedirect("/mogotco/mentor/nonid?mentorid="+mentorid);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}//controller주소로 감
+				}else {
+					try {
+						response.sendRedirect("/mogotco/mentor/mentordetail?mentorid="+mentorid);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}//controller주소로 감
+				}
+			}
+	
+	
+	
 	//멘토 상세페이지
 	@RequestMapping("/mentordetail")
 	public String mentordetail(Model model, int mentorid) {
@@ -50,15 +78,16 @@ public class MentorController {
 		List<MentorDTO> mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		try {
-				mta = mservice.get(mentorid);
-				mtd = mservice.mentordetail(mentorid);
-				mtlist = mservice.mentoritem(mentorid);
-				mwclist = mwservice.mwcate(mentorid);
-				model.addAttribute("mta",mta);
-				model.addAttribute("mtd",mtd);
-				model.addAttribute("mtlist",mtlist);
-				model.addAttribute("mwclist",mwclist);
-				model.addAttribute("center", mentor+"mentordetail");
+					mta = mservice.get(mentorid);
+					mtd = mservice.mentordetail(mentorid);
+					mtlist = mservice.mentoritem(mentorid);
+					mwclist = mwservice.mwcate(mentorid);
+					model.addAttribute("mta",mta);
+					model.addAttribute("mtd",mtd);
+					model.addAttribute("mtlist",mtlist);
+					model.addAttribute("mwclist",mwclist);
+					model.addAttribute("center", mentor+"mentordetail");
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -43,5 +43,9 @@ public class WishlistService implements MyService<Integer, WishlistDTO>{
 	public List<WishlistDTO> wmentor(String userid) throws Exception {
 		return mapper.wmentor(userid);
 	}	
+	
+	public WishlistDTO wishcheck(String userid, Integer mentorid) throws Exception{
+		return mapper.wishcheck(userid, mentorid);
+	}
 
 }

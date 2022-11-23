@@ -26,6 +26,7 @@ public class ReviewDTO {
 	private int mcate_mcateid;
 	private String mcate_mname;
 	private String mentor_mentorimg;
+	private String mentor_mentorcom;
 	private String user_snsinsta;
 	private String user_snsgit;
 	

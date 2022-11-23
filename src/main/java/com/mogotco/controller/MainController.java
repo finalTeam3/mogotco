@@ -34,25 +34,13 @@ public class MainController {
 	public String main(Model model) {
 		List<MentoringDTO> immedmentoring = null;
 		List<ReviewDTO> topmentor = null;
-		List<ReviewDTO> mwish = null;
-		ReviewDTO mwishadd = null;
+
 		try {
 			//지금 즉시 받을 수 있는 가장 빠른 멘토링
 			immedmentoring = mentoring_service.mentoringimmed();
 			//평점이 가장 높은 순서대로 멘토 4명
 			topmentor = review_service.topmentors();
-			
-			/*
-			 * //mwishcate뽑기 for(ReviewDTO first : topmentor) { Integer mentorid =
-			 * first.getMentor_mentorid(); //mentorid에 따른 mentor이 선호하는 것 불러옴 mwish =
-			 * review_service.mentorwish(mentorid); for(ReviewDTO second : mwish) {
-			 * 
-			 * }
-			 * 
-			 * }
-			 */
-			
-			
+
 			model.addAttribute("imme", immedmentoring);
 			model.addAttribute("topm", topmentor);
 			model.addAttribute("center", "maincenter");

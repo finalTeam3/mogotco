@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="topmentors" resultType="reviewDTO">
 		SELECT m.mentorid AS
 		mentor_mentorid,m.userid AS mentor_userid, m.mentorimg AS
-		mentor_mentorimg,
+		mentor_mentorimg,m.mentorcom AS mentor_mentorcom,
 		u.snsinsta AS user_snsinsta, u.snsgit AS user_snsgit,
 		ROUND(avg(r.rating),1) AS avgrate FROM mentor m
 		INNER JOIN mentoring

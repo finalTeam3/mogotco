@@ -35,5 +35,17 @@ public class WishlistController {
 		return "main";
 	}
 	
+	// mentor를 wishlist 테이블에서 삭제
+	@RequestMapping("/removewishlist")
+	public Object removewishlist(Integer wishlistid, String userid) {
+		try {
+			wservice.remove(wishlistid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:wishlist?id=" + userid;
+	}
 	
 }
