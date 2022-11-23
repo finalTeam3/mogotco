@@ -467,7 +467,7 @@
 <script>
 $(document).ready(function(){
 	$('#wishlist_btn').click(function(){
-		//var userid = $('#userid').text();
+		var userid = '[[${session.loginuser.userid}]]';
 		var mentorid = $('#mentorid').val();
 		$.ajax({
 			url:'[[@{/addwishlist}]]',
