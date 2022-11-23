@@ -239,7 +239,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><a th:onclick="request()"><img th:src="@{/images/}+${mto.mentor_mentorimg}" alt=""></a></div>
+									<div class="teacher_image"><a th:onclick="request()"><img style="cursor:pointer" th:src="@{/images/}+${mto.mentor_mentorimg}" alt=""></a></div>
 									<div class="teacher_title">
 										<div style="display:inline; color:#808080;"><span>Mentor ID :</span></div>
 										<div style="display:inline; color:#808080;" class="teacher_name" th:text="${mto.user_userid}" th:href="@{/mentor/mentordetail}"><a href="#"></a></div>

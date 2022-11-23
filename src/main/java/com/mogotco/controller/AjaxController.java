@@ -58,7 +58,6 @@ public class AjaxController {
 		WishlistDTO wdt = null;
 		try {
 			wdt = wishservice.wishcheck(wish.getUserid(), wish.getMentorid());
-			System.out.println(wdt);
 			if(wdt == null) {
 				wishservice.register(wish);
 			}
