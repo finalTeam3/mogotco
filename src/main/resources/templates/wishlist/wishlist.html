@@ -7,6 +7,17 @@
 <script th:src="@{/plugins/masonry/masonry.js}"></script>
 <script th:src="@{/plugins/video-js/video.min.js}"></script>
 <script th:src="@{/js/blog.js}"></script>
+<script>
+function del(wishlistid) {
+	var userid = '[[${session.loginuser.userid}]]';
+	var c = confirm('삭제 하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/wishlist/removewishlist?wishlistid=}]]' + wishlistid + '&[[@{userid=}]]'
+		+ userid;
+	}
+};
+</script>
+
 </head>
 	
 	<!-- Home -->
@@ -39,10 +50,10 @@
 						<div class="section_subtitle">&nbsp</p></div>
 					</div>					
 					<div class="blog_post_container">
-					
 						<!-- Blog Post -->
 						<div class="blog_post trans_200" th:each="wlist:${wlist}">
 							<div class="blog_post_body">
+								<button type="button" class="close" th:onclick="del([[${wlist.wishlistid}]])" data-dismiss="modal" id="remove_btn" style="color:#A5B8D3">&times;</button>
 							
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
@@ -55,6 +66,7 @@
 									</div>
 								<div class="blog_post_meta">
 									<ul>
+									<input class="comment_input" th:value="${wlist.wishlistid}" id="wishlistid" style ="display:none">
 										<li>&nbsp&nbsp<a></a></li>
 									</ul>
 									<ul>
@@ -69,123 +81,47 @@
 							</div>
 						</div>
 
-						<!-- Blog Post -->
-<!-- 						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-							
-								Latest Course
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image">
-										<div>
-											<a>
-											<img th:src="@{/images/defaultprofileupload.jpg}" style="width:100px" alt="">
-											</a>
-										</div>
-									</div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								</div>
-
-							</div>
-						</div> -->						
+						<!-- Blog Post -->						
 						
 						<!-- Blog Post -->
-<!-- 						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-							
-								Latest Course
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image">
-										<div>
-											<a>
-											<img th:src="@{/images/defaultprofileupload.jpg}" style="width:100px" alt="">
-											</a>
-										</div>
-									</div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								</div>
-
-							</div>
-						</div> -->
 						
 						<!-- Blog Post -->
-<!-- 						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-							
-								Latest Course
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image">
-										<div>
-											<a>
-											<img th:src="@{/images/defaultprofileupload.jpg}" style="width:100px" alt="">
-											</a>
-										</div>
-									</div>
-								<div class="blog_post_meta">
-									<ul>
-										<li><a href="#">admin</a></li>
-										<li><a href="#">november 11, 2017</a></li>
-									</ul>
-								</div>
-								</div>
-
-							</div>
-						</div> -->
 						
-						<!-- Blog Post -->
-<!-- 						<div class="blog_post trans_200">
-							<div class="blog_post_body">
-							
-								Latest Course
-								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image">
-										<div>
-											<a>
-											<img th:src="@{/images/defaultprofileupload.jpg}" style="width:100px" alt="">
-											</a>
-										</div>
-									</div>
-									<div class="blog_post_meta">
-										<ul>
-											<li>&nbsp&nbsp<a>adminfdsadsds</a></li>
-										</ul>
-										<ul>
-											<li>&nbsp&nbsp<a>admindsfafsfsd</a></li>
-										</ul>
-										<ul>
-											<li>&nbsp&nbsp<a>admindsffadsds</a></li>
-										</ul>																		
-									</div>
-								</div>
-
-							</div>
-						</div> -->												
+						<!-- Blog Post -->												
 						
 					</div>										
 					
 				</div>
 			</div>
-<!-- 			<div class="row">
-				<div class="col text-center">
-					<div class="load_more trans_200"><a href="#">load more</a></div>
-				</div>
-			</div> -->
+
 		</div>
 	</div>
 
-
-
-	<!-- Newsletter -->
-
+			  <!-- The Modal -->
+<!-- 			  <div class="modal fade" id="removeModal">
+			    <div class="modal-dialog modal-dialog-centered modal-sm">
+			      <div class="modal-content">
+			      
+			        Modal Header
+			        <div>
+			        </div>
+			        
+			        Modal body
+			        <div class="modal-body text-center">
+			          <i class="fa-regular fa-face-frown-open fa-4x"></i>
+			          <div>&nbsp</div>
+			          <h4 class="modal-title">삭제하시겠습니까?</h4>
+			          <div>&nbsp</div>
+			          <button type="button" class="btn btn-secondary" data-dismiss="modal">삭제</button>
+			        </div>
+			        
+			        Modal footer
+			        <div>
+			        </div>
+			        
+			      </div>
+			    </div>
+			  </div> -->
 
 
 

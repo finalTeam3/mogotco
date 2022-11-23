@@ -64,6 +64,7 @@ public class AjaxController {
 		
 		return "";
 	}
+
 	
 	//회원가입시 아이디 중복체크 기능
 	@RequestMapping("/checkid")
