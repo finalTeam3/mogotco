@@ -5,14 +5,19 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mogotco.mapper.UserMapper">
 	
 	<insert id="insert" parameterType="userDTO">
-		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, naverid, kakaoid, googleid, usergen, addrnum, addrdetail, addrextra) 
-		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen}, #{addrnum}, #{addrdetail}, #{addrextra})
+		INSERT INTO user (userid, userpwd, username, useraddr, usertel, useremail, userdate, userbirth, naverid, kakaoid, googleid, usergen, addrnum, addrdetail, addrextra, snsinsta, snsgit) 
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useraddr}, #{usertel}, #{useremail}, sysdate(), #{userbirth}, #{naverid}, #{kakaoid}, #{googleid}, #{usergen}, #{addrnum}, #{addrdetail}, #{addrextra}, #{snsinsta}, #{snsgit})
 	</insert> 
 	
 	<update id="update" parameterType="userDTO">
 		UPDATE user SET userpwd = #{userpwd}, username = #{username}, useraddr = #{useraddr}, usertel = #{usertel}, useremail = #{useremail}, 
-		withdraw = #{withdraw}, userbirth = #{userbirth}, userpoint=#{userpoint}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}
+		withdraw = #{withdraw}, userbirth = #{userbirth}, userpoint=#{userpoint}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, 
+		usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}, snsinsta = #{snsinsta}, snsgit = #{snsgit}
 		WHERE userid = #{userid}
+	</update>
+	
+	<update id="deleteuser" parameterType="userDTO">
+		UPDATE user SET withdraw = 1 WHERE userid = #{userid}
 	</update>
 	
 	<delete id="delete" parameterType="String">
@@ -28,7 +33,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectMypage" parameterType="String" resultType="userDTO">
-		SELECT u.userid, u.userpwd, u.username, m.mentorok, u.useraddr, u.usertel, u.useremail, u.userbirth, u.userpoint, u.usergen, u.addrnum, u.addrdetail, u.addrextra FROM user u  
+		SELECT u.userid, u.userpwd, u.username, m.mentorok, u.useraddr, u.usertel, u.useremail, u.userbirth, u.userpoint, u.usergen, u.addrnum, u.addrdetail, u.addrextra, u.snsinsta, u.snsgit FROM user u  
 		INNER JOIN mentor m ON u.userid = m.userid
 		WHERE u.userid = #{userid}
 	</select>

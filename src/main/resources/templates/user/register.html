@@ -15,6 +15,29 @@ $(document).ready(function(){
 		});
 		$('#register_form').submit();
 	});
+	$('#pwd2').keyup(function(){
+		var pwd = $('#pwd').val();
+		var pwd2 = $('#pwd2').val();
+		if(pwd == pwd2) {
+			$('#pspan').text('Correct')
+		} else {
+			$('#pspan').text('비밀번호가 일치하지 않습니다.')
+		};
+	});
+	$('#idcheck_btn').click(function(){
+		var id = $('#id').val();
+		$.ajax({
+			url : '[[@{/checkid}]]',
+			data : {'cid' : id},
+			success : function(result){
+				if(result == 't') {
+					$('#ispan').text('사용 가능한 ID 입니다.')
+				} else {
+					$('#ispan').text('다른 ID를 입력해주세요.')
+				}
+			}
+		});
+	});
 });
 
     function sample6_execDaumPostcode() {
@@ -65,6 +88,16 @@ $(document).ready(function(){
         }).open();
     }
     
+    function formcheck() {
+    	var c = document.register_form;
+    	
+    	if (c.userid.value == "") {
+    		alert("ID를 입력해주세요");
+    		c.userid.focus();
+    		return false;
+    	}
+    	
+    }
 </script>
 </head>
 
@@ -107,7 +140,9 @@ $(document).ready(function(){
 							
 								<div>
 									<label for = "id" class="form_title">ID</label>
-									<input type="text" class="comment_input" id = "id" name = "userid">
+									<div><input type="text" class="comment_input col-lg-5" id = "id" name = "userid">
+									<button id = "idcheck_btn" type="button" class="comment_button_regi trans_200" style="width:100px;height:30px">ID 중복 확인</button></div>
+									<span id = "ispan"></span>
 								</div>
 								
 								<div>
@@ -116,8 +151,9 @@ $(document).ready(function(){
 								</div>
 								
 								<div>
-									<label for = "pwd2" class="form_title">Password</label>
-									<input type="password" class="comment_input" id = "pwd2">
+									<label for = "pwd2" class="form_title">Password Confirm</label>
+									<input type="password" class="comment_input" id = "pwd2" name = "pwd2">
+									<span id = "pspan"></span>
 								</div>
 								
 								<div>
@@ -145,8 +181,8 @@ $(document).ready(function(){
 								<input type="text" class="comment_input_postno" id="sample6_postcode" name = "addrnum" placeholder="우편번호">
 								<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 								<input type="text" class="comment_input_address" name = "useraddr" id="sample6_address" placeholder="주소"><br>
-								<input type="text" class="comment_input_detail" id="sample6_detailAddress" placeholder="상세주소">
-								<input type="text" class="comment_input_detail" id="sample6_extraAddress" placeholder="참고항목">
+								<input type="text" class="comment_input_detail" name = "addrdetail" id="sample6_detailAddress" placeholder="상세주소">
+								<input type="text" class="comment_input_detail" name = "addrextra" id="sample6_extraAddress" placeholder="참고항목">
 								</div>
 								
 								<div>
@@ -162,33 +198,3 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="newsletter_background" th:style="'background-image:url(' + @{/images/newsletter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-

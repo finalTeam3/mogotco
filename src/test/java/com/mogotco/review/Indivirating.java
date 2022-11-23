@@ -8,7 +8,7 @@ import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.ReviewService;
 
 @SpringBootTest
-class InsertReview {
+class Indivirating {
 	
 	@Autowired
 	ReviewService service;
@@ -16,10 +16,10 @@ class InsertReview {
 	@Test
 	void contextLoads() {
 		
-		ReviewDTO review = new ReviewDTO(0, 200, "qkrgPwjd1541", 1, "넘조아써",null, 0,null,0,null,null, null,null,0);
+		ReviewDTO list = null;
 		try {
-			service.register(review);
-			System.out.println("OK");
+			list = service.indivirating("qkrgPwjd1541");
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

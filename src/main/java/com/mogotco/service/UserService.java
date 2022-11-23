@@ -43,6 +43,9 @@ public class UserService implements MyService<String, UserDTO>{
 	public UserDTO getMypage(String k) throws Exception {
 		return mapper.selectMypage(k);
 	}
-
+	
+	public void deleteuser(UserDTO user) throws Exception {
+		mapper.deleteuser(user);
+	}
 
 }

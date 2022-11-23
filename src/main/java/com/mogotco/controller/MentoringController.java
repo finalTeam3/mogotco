@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.mapper.MentoringMapper;
+import com.mogotco.service.MCateService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 
@@ -22,15 +25,41 @@ public class MentoringController {
 	@Autowired
 	MentoringOptionService moservice;
 	
+	@Autowired
+	MCateService mcateservice;
+	
+	@Autowired
+	MentoringMapper mtmapper;
+	
 	String mentoring = "mentoring/";
 	
 	//멘토링목록
 	@RequestMapping("/mentoring")
 	public String mentoring(Model model) {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		try {
 			mlist = mservice.viewMentoringAll(); // 모든 멘토링 정보 넣어주기
-			model.addAttribute("mtr", mlist);
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "main";
+	}
+	
+	@RequestMapping("/mentoringCate")
+	public String mentoringCate(Model model, int mcateid) {
+		List<MentoringDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			citemlist = mservice.selectMentoringAll(mcateid) ;// 카테고리별 멘토링 정보 넣어주기
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,5 +100,21 @@ public class MentoringController {
 	public String mservice() {
 		return mentoring+"mservice";
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, String txt) {
+		List<MentoringDTO> searchlist = null;
+		try {
+			searchlist = mtmapper.mentoringsearch(txt);
+			model.addAttribute("mtr", searchlist);
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
+	
+	
 	
 }

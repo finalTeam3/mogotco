@@ -1,4 +1,15 @@
 <html lang="en">
+<script>
+function request(mentor_mentorid){
+	if('[[${session.loginuser}]]'==null){
+		location.href='[[@{/mentor/nonid?mentorid=}]]'+mentor_mentorid;
+	}
+	else{
+		location.href='[[@{/mentor/mentordetail?mentorid=}]]'+mentor_mentorid;
+	}
+}
+
+</script>
 <body>
 
 
@@ -199,21 +210,23 @@
 			<div class="row team_row">
 
 				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
+				<div class="col-lg-3 col-md-6 team_col" th:each="t:${topm}">
 					<div class="team_item">
 						<div class="team_image">
-							<img th:src="@{/images/choyunyoung.jpg}" alt="">
+							<img  th:onclick="request([[${t.mentor_mentorid}]])" th:src="@{/images/}+${t.mentor_mentorimg}" alt="">
 						</div>
 						<div class="team_body">
 							<div class="team_title">
-								<a href="#">Choyunyoung</a>
+								<a th:text="${t.mentor_userid}"></a>
+								<input type='hidden' th:value="${t.mentor_mentorid}" name='mentorid'
+								id="mentorid"> 
 							</div>
 							<div class="team_subtitle">Marketing & Management</div>
 							<div class="social_list">
 								<ul>
-									<li><a href="https://github.com/yyboom"><i
+									<li><a th:href="${t.user_snsgit}"><i
 											class="fa fa-github" aria-hidden="true"></i></a></li>
-									<li><a href="https://www.instagram.com/nyong_teemo/"><i
+									<li><a th:href="${t.user_snsinsta}"><i
 											class="fa fa-instagram" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-commenting"
 											aria-hidden="true"></i></a></li>
@@ -222,82 +235,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image">
-							<img th:src="@{/images/parkhyejung.jpg}" alt="">
-						</div>
-						<div class="team_body">
-							<div class="team_title">
-								<a href="#">Parkhyejung</a>
-							</div>
-							<div class="team_subtitle">Designer & Website</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="https://github.com/parkpirate"><i
-											class="fa fa-github" aria-hidden="true"></i></a></li>
-									<li><a href="https://www.instagram.com/hyejjeongee/"><i
-											class="fa fa-instagram" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-commenting"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image">
-							<img th:src="@{/images/shindongjoon.jpg}" alt="">
-						</div>
-						<div class="team_body">
-							<div class="team_title">
-								<a href="#">Shindongjoon</a>
-							</div>
-							<div class="team_subtitle">Quantum mechanics</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="https://github.com/Shindongjoon7"><i
-											class="fa fa-github" aria-hidden="true"></i></a></li>
-									<li><a href="https://www.instagram.com/7lsehdwns/"><i
-											class="fa fa-instagram" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-commenting"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image">
-							<img th:src="@{/images/parksunghoon.jpg}" alt="">
-						</div>
-						<div class="team_body">
-							<div class="team_title">
-								<a href="#">Parksunghoon</a>
-							</div>
-							<div class="team_subtitle">Math & Physics</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="https://github.com/psh5032"><i
-											class="fa fa-github" aria-hidden="true"></i></a></li>
-									<li><a href="https://www.instagram.com/n___hsp/"><i
-											class="fa fa-instagram" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-commenting"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>

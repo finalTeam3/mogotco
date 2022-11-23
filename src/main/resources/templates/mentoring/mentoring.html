@@ -7,6 +7,20 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/courses.js}"></script>
 </head>
+<script>
+$(document).ready(function(){
+	$('#search_button').click(function(){
+		$('#search_form').attr({
+			method:'get',
+			action:'[[@{/mentoring/search}]]'
+			
+		});
+		$('#search_form').submit();
+
+	});
+});
+	
+</script>
 
 
 	
@@ -38,8 +52,8 @@
 				<!-- Courses Main Content -->
 				<div class="col-lg-8">
 					<div class="courses_search_container">
-						<form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-							<input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+						<form action="#" id="search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+							<input name="txt" type="text" class="courses_search_input" placeholder="Search Mentorng" required="required">
 							<select id="courses_search_select" class="courses_search_select courses_search_input">
 								<option>전체</option>
 								<option>웹</option>
@@ -51,7 +65,7 @@
 								<option>CLOUD</option>
 								<option>기타</option>
 							</select>
-							<button action="submit" class="courses_search_button ml-auto">search now</button>
+							<button id="search_button" class="courses_search_button ml-auto" type="button">search now</button>
 						</form>
 					</div>
 					<div class="courses_container">
@@ -128,11 +142,7 @@
 							<div class="sidebar_section_title">Categories</div>
 							<div class="sidebar_categories">
 								<ul>
-									<li><a href="#">Art & Design</a></li>
-									<li><a href="#">Business</a></li>
-									<li><a href="#">IT & Software</a></li>
-									<li><a href="#">Languages</a></li>
-									<li><a href="#">Programming</a></li>
+									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mcateid=${mtc.mcateid})}" th:text="${mtc.mname}">Art & Design</a></li>
 								</ul>
 							</div>
 						</div>
@@ -165,34 +175,6 @@
 	</div>
 
 	<!-- Newsletter -->
-	<br>
-	<br>
-	<br>
-	<br>
+
+
 	
-	<div class="newsletter">
-		<div class="newsletter_background parallax-window" data-parallax="scroll" th:data-image-src="@{/images/newsletter.jpg}" data-speed="0.8"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-						<!-- Newsletter Content -->
-						<div class="newsletter_content text-lg-left text-center">
-							<div class="newsletter_title">sign up for news and offers</div>
-							<div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-						</div>
-
-						<!-- Newsletter Form -->
-						<div class="newsletter_form_container ml-lg-auto">
-							<form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-								<input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-								<button type="submit" class="newsletter_button">subscribe</button>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>

@@ -31,7 +31,7 @@ public class MentoringDTO {
 	
 	// 등록된 멘토링 리스트를 출력해주기 위한 dto추가
 	private String mentor_mentorcom;
-	private String user_userid;
+	private String user_userid;//멘토의 사용자 아이디임
 	
 	// 멘토링 옵션 화면 출력을 위한 dto추가
 	private String mentor_mentorimg;

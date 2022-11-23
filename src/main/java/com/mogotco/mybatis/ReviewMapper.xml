@@ -3,33 +3,81 @@
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.ReviewMapper">
-	
+
 	<insert id="insert" parameterType="reviewDTO">
-		INSERT INTO review VALUES(NULL, #{mentoringid}, #{userid}, #{rating}, #{reviewcon}, sysdate())
-	</insert> 
-	
+		INSERT INTO review
+		VALUES(NULL, #{mentoringid}, #{userid}, #{rating}, #{reviewcon},
+		sysdate())
+	</insert>
+
 	<update id="update" parameterType="reviewDTO">
-		UPDATE review SET rating = #{rating}, reviewcon = #{reviewcon}
+		UPDATE review SET rating =
+		#{rating}, reviewcon = #{reviewcon}
 		WHERE reviewid = #{reviewid}
 	</update>
-	
+
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM review WHERE reviewid = #{reviewid}
-	</delete> 
-	
-	<select id="select" parameterType="Integer" resultType="reviewDTO">
+		DELETE FROM review WHERE
+		reviewid = #{reviewid}
+	</delete>
+
+	<select id="select" parameterType="Integer"
+		resultType="reviewDTO">
 		SELECT * FROM review WHERE reviewid = #{reviewid}
 	</select>
-	
+
 	<select id="selectAll" resultType="reviewDTO">
 		SELECT * FROM review
 	</select>
-	
-	<select id="getmentorreview" parameterType="String" resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, r.userid, r.rating, r.reviewcon, r.reviewdate FROM review r
-		INNER JOIN mentoring ming ON r.mentoringid = ming.mentoringid
-		INNER JOIN mentor m ON ming.mentorid = m.mentorid
+
+	<select id="getmentorreview" parameterType="String"
+		resultType="reviewDTO">
+		SELECT m.userid AS mentor_userid, r.userid, r.rating,
+		r.reviewcon, r.reviewdate FROM review r
+		INNER JOIN mentoring ming ON
+		r.mentoringid = ming.mentoringid
+		INNER JOIN mentor m ON ming.mentorid =
+		m.mentorid
 		WHERE m.userid = #{userid}
+	</select>
+
+	<!-- 개인 mentor 평점 avg(choyunyoung add) -->
+	<select id="indivirating" parameterType="String"
+		resultType="reviewDTO">
+		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS
+		avgrate
+		FROM mentor m
+		INNER JOIN mentoring men ON
+		m.mentorid=men.mentorid
+		INNER
+		JOIN review r ON
+		men.mentoringid=r.mentoringid
+		WHERE m.userid =
+		#{userid}
+	</select>
+
+	<!-- mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로) -->
+	<select id="topmentors" resultType="reviewDTO">
+		SELECT m.mentorid AS
+		mentor_mentorid,m.userid AS mentor_userid, m.mentorimg AS
+		mentor_mentorimg,
+		u.snsinsta AS user_snsinsta, u.snsgit AS user_snsgit,
+		ROUND(avg(r.rating),1) AS avgrate FROM mentor m
+		INNER JOIN mentoring
+		men ON m.mentorid=men.mentorid
+		INNER JOIN review r ON
+		men.mentoringid=r.mentoringid
+		INNER JOIN user u ON m.userid=u.userid
+		GROUP BY m.mentorid ORDER BY avgrate DESC LIMIT 4
+	</select>
+
+	<!-- mentor들의 cate뽑기(review에 있음)(choyunyoung add) -->
+	<select id="mentorwish" parameterType="Integer" resultType="reviewDTO">
+		SELECT me.mentorid AS mentor_mentorid, m.mcateid AS mcate_mcateid, m.mname
+		AS mcate_mname FROM mcate m
+		INNER JOIN mwishcate mw ON m.mcateid = mw.mcateid
+		INNER JOIN mentor me ON mw.mentorid=me.mentorid
+		WHERE me.mentorid = #{mentorid}
 	</select>
 
 </mapper>

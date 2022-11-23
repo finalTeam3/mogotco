@@ -25,6 +25,7 @@ public class PurchaseDTO {
 	//구매완료페이지-멘토링번호, 멘토제목,멘토링날짜, 시간,대면장소,최종결제금액,구매날짜,결제방법
 	private int mentoring_mentoringid;
 	private String mentoring_mtitle;
+	private String mentor_userid;
 	private String user_mentorname;
 	private Date mentoring_mentoringdate;
 	private String mentoringoption_mentoringtime;

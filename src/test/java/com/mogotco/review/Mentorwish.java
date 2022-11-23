@@ -1,5 +1,7 @@
 package com.mogotco.review;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +10,7 @@ import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.ReviewService;
 
 @SpringBootTest
-class InsertReview {
+class Mentorwish {
 	
 	@Autowired
 	ReviewService service;
@@ -16,13 +18,17 @@ class InsertReview {
 	@Test
 	void contextLoads() {
 		
-		ReviewDTO review = new ReviewDTO(0, 200, "qkrgPwjd1541", 1, "넘조아써",null, 0,null,0,null,null, null,null,0);
+		List<ReviewDTO> review = null;
 		try {
-			service.register(review);
-			System.out.println("OK");
+			review = service.mentorwish(100);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		for(ReviewDTO r:review) {
+			System.out.println(r);
+		}
+		
 	}
 	
 }
