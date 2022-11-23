@@ -38,8 +38,27 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$('#emailcheck_btn').click(function(){
+		var email = $('#email').val();
+		mailcheck();
+		
+	});
 });
 
+	function mailcheck() {
+		var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+		var email = document.register_form.email.value;
+		console.log(regex.test(email))
+		
+		if(regex.test(email)) {
+			$('#espan1').text('받은 메일의 인증번호를 입력해주세요')
+		} else {
+			$('#espan1').text('메일주소를 확인해보셔야 할 듯..')
+		}
+		
+	}
+
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -136,12 +155,12 @@ $(document).ready(function(){
 					<div class="col-lg-8">
 						<div class="contact_form">
 							<div class="contact_info_title">REGISTER</div>
-							<form action="#" class="register_form" id = "register_form">
+							<form action="#" class="register_form" id = "register_form" name = "register_form">
 							
 								<div>
 									<label for = "id" class="form_title">ID</label>
 									<div><input type="text" class="comment_input col-lg-5" id = "id" name = "userid">
-									<button id = "idcheck_btn" type="button" class="comment_button_regi trans_200" style="width:100px;height:30px">ID 중복 확인</button></div>
+									<button id = "idcheck_btn" type="button" class="comment_button_regi trans_200">ID 중복 확인</button></div>
 									<span id = "ispan"></span>
 								</div>
 								
@@ -168,7 +187,12 @@ $(document).ready(function(){
 								
 								<div>
 									<label for = "email" class="form_title">Email</label>
-									<input type="text" class="comment_input" id = "email" name = "useremail">
+									<div><input type="text" class="comment_input col-lg-5" id = "email" name = "useremail">
+									<button id = "emailcheck_btn" type="button" onclick = "mailcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button></div>
+									<div><span id = "espan1"></span></div>
+									<input class="comment_input col-lg-5" placeholder = "인증번호 6자리를 입력해주세요" disabled = "disabled" maxlength = "6">
+									<button id = "emailcheck_btn" type="button" class="comment_button_mail trans_200">인증</button></div>
+									<span id = "espan2"></span>
 								</div>
 								
 								<div>
