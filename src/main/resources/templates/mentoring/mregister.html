@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+
+#pubutton{
+margin-left: 11%;
+}
+
+#mcbutton{
+margin-left: 1%;
+}
+</style>
+
+
+<script>
+$(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/registerimpl}]]'
+		});
+		$('#register_form').submit();
+	});
+});
+
+function display(data) {
+	var name = data.images[0].fields[0].inferText
+	var position = data.images[0].fields[1].inferText
+	var company = data.images[0].fields[2].inferText
+	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
+	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
+	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
+	//JSNO 형태로 가격정보 출력 : data.images[0].fields[3].inferText - 10,000
+	//JSNO 형태로 프로젝트명 출력 : data.images[0].fields[4].inferText
+	//JSNO 형태로 바코드번호 출력 : data.images[0].fields[5].inferText
+
+	alert(name);
+	alert(position);
+	alert(company);
+
+}
+
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
+	    var reader = new FileReader();
+
+	    reader.onload = function(event) {
+	    	$('#uploadprofile').attr('src',event.target.result);
+	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
+	    };
+	    reader.readAsDataURL(event.target.files[0]);
+	  }
+
+function previewimg(event) {// 명함 이미지 미리 보여주기
+/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	
+	$('#context').hide(); */
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$('#uploadimg').attr('src',event.target.result);
+    	$('#uploadimg').attr('style','width:300px; hight:300px;');
+    	
+    };
+    reader.readAsDataURL(event.target.files[0]);
+    //alert('reader.readAsDataURL : ' + event.target.files[0]);
+  }
+
+function upload() {
+	const imageInput = $("#mcf")[0];
+	console.log("mcf: ", imageInput.files)
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
+	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+
+	
+/* 		for (var value of formData.values()) {
+	   console.log(value);
+	} */
+
+	$.ajax({
+		type : "POST",
+		url : '/ocrresult',
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
+
+</script>
+</head>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li>APPLY</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+
+	<!-- Contact -->
+
+	<div class="contact">
+
+		<!-- Contact Info -->
+
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
+
+					<!-- Contact Form -->
+					<div class="col-lg-8">
+						<div class="contact_form">
+							<div class="contact_info_title">Mentoring Register</div>
+							<form class="register_form" id = "register_form" enctype="multipart/form-data">
+							
+								
+								<div>
+									<label class="form_title"> 
+										  파일 업로드 버튼을 눌러 프로필 이미지를 등록해주세요.
+										<div>
+											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
+									</label>
+									<input type="file" style="display:none" name="mpimg" id="mpimg" onchange="previewprofile(event);">
+								</div>
+								
+								<div>
+									<label for = "userid" class="form_title">Userid</label>
+									<input type="text" class="userid comment_input" id = "userid" name = "userid" value = "" readonly="readonly">
+								</div>
+
+								<div>
+									<label for = "username" class="form_title">Username</label>
+									<input type="text" class="userid comment_input" id = "username" name = "username" value = "" readonly="readonly">
+								</div>
+
+								<div style = "display:none">
+									<label for = "adminid" class="form_title">Adminid</label>
+									<input type="text" class="comment_input" id = "adminid" name = "adminid">
+								</div>
+												
+								<div>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
+								</div>
+
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
+								</div>
+
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
+								</div>
+								
+							</form>
+								<button id = "register_btn" class="comment_button trans_200">Register</button>
+														
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+
+
+</html>

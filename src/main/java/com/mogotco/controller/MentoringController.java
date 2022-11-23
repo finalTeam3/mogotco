@@ -91,7 +91,7 @@ public class MentoringController {
 	//멘토링 등록페이지
 	@RequestMapping("/mentoringregister")
 	public String mentoringregister(Model model) {
-		model.addAttribute("center", mentoring+"mentoringregister");
+		model.addAttribute("center", mentoring+"mregister");
 		return "main";
 	}
 
@@ -103,10 +103,13 @@ public class MentoringController {
 	
 	@RequestMapping("/search")
 	public String search(Model model, String txt) {
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
 		try {
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			searchlist = mtmapper.mentoringsearch(txt);
 			model.addAttribute("mtr", searchlist);
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
