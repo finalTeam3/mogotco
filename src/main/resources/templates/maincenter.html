@@ -209,7 +209,7 @@ function request(mentor_mentorid){
 						</div>
 						<div class="team_body">
 							<div class="team_title">
-								<a th:text="${t.mentor_userid}"></a>
+								<a th:text="${t.mentor_userid}" id="mentor_userid"></a>
 								<input type='hidden' th:value="${t.mentor_mentorid}" name='mentorid'
 								id="mentorid"> 
 							</div>
@@ -220,7 +220,7 @@ function request(mentor_mentorid){
 											class="fa fa-github" aria-hidden="true"></i></a></li>
 									<li><a th:href="${t.user_snsinsta}"><i
 											class="fa fa-instagram" aria-hidden="true"></i></a></li>
-									<li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${t.mentor_mentorid}]])" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li>
+									<li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${t.mentor_mentorid}]],[[${t.mentor_userid}]])" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li>
 								</ul>
 							</div>
 						</div>
@@ -236,35 +236,30 @@ function request(mentor_mentorid){
 </script>
 
 <script>
-function shareMessage(mentor_mentorid) {
+function shareMessage(mentor_mentorid,mentor_userid) {
 Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
-      title: '딸기 치즈 케익',
-      description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+      title: 'Mogotco mentor',
+      description: 'mentorid : '+mentor_userid,
       imageUrl:
-        'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
         mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
       },
     },
-    social: {
-      likeCount: 286,
-      commentCount: 45,
-      sharedCount: 845,
-    },
     buttons: [
       {
-        title: '웹으로 보기',
+        title: 'web',
         link: {
           mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
           webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         },
       },
       {
-        title: '앱으로 보기',
+        title: 'app',
         link: {
           mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
           webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
