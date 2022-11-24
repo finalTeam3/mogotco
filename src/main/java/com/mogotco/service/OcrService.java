@@ -1,4 +1,4 @@
-package com.mogotco.controller;
+package com.mogotco.service;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Component
-public class OcrController {
+public class OcrService {
 	
 	String apiURL = "https://7efoxxvkek.apigw.ntruss.com/custom/v1/19092/6d9e630d6786c0f9e1946bf8ae877c02f848a0fe795ce15764411c1e6ca4ad5a/infer";
 	String secretKey = "UGFDWVdDaEJURHN2eVllWkRkb0FzS3VKU1VIeVJUbEc=";

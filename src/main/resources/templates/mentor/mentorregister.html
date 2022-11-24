@@ -30,12 +30,24 @@ $(document).ready(function(){
 		});
 		$('#register_form').submit();
 	});
+	
+	$('#mcbutton').click(function(){
+		$('#register_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/registerimpl}]]'
+		});
+		$('#register_form').submit();
+	});
 });
 
 function display(data) {
 	var name = data.images[0].fields[0].inferText
 	var position = data.images[0].fields[1].inferText
 	var company = data.images[0].fields[2].inferText
+	console.log(name)
+	console.log(position)
+	console.log(company)
 	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
 	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
 	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
@@ -75,8 +87,9 @@ function previewimg(event) {// 명함 이미지 미리 보여주기
   }
 
 function upload() {
-	const imageInput = $("#mcf")[0];
-	console.log("mcf: ", imageInput.files)
+	const imageInput = $("#mcimg")[0];
+	console.log("mcimg: ", imageInput.files)
+	alert(imageInput.files);
 
 	if (imageInput.files.length === 0) {
 		alert("파일을 선택해주세요");
@@ -85,15 +98,15 @@ function upload() {
 
 	const formData = new FormData();
 	formData.append("image", imageInput.files[0]);
-
+	alert(image);
 	
-/* 		for (var value of formData.values()) {
+	for (var value of formData.values()) {
 	   console.log(value);
-	} */
+	} 
 
 	$.ajax({
 		type : "POST",
-		url : '/ocrresult',
+		url : "/ocrresult",
 		processData : false,
 		contentType : false,
 	 	data: formData,
@@ -157,12 +170,12 @@ function upload() {
 								
 								<div>
 									<label for = "userid" class="form_title">Userid</label>
-									<input type="text" class="userid comment_input" id = "userid" name = "userid" th:value = "${u.userid}" readonly="readonly">
+									<input type="text" class="userid comment_input" id = "userid" name = "userid" th:value = "${session.loginuser.userid}" readonly="readonly">
 								</div>
 
 								<div>
 									<label for = "username" class="form_title">Username</label>
-									<input type="text" class="userid comment_input" id = "username" name = "username" th:value = "${u.username}" readonly="readonly">
+									<input type="text" class="userid comment_input" id = "username" name = "username" th:value = "${session.loginuser.username}" readonly="readonly">
 								</div>
 
 								<div style = "display:none">
