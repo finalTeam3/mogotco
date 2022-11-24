@@ -195,7 +195,7 @@ public class MentorController {
 		return "main";
 	}
 	
-	//멘토링 관리자 페이지
+	// ocrtest 페이지
 	@RequestMapping("/ocrpage")
 	public String ocrpage(Model model) {
 		

@@ -13,7 +13,17 @@
 </style>
 
 <script>
-
+$(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#test_form').attr({
+			'enctpe':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/mentor/registerimpl}]]'
+		});
+		$('#test_form').submit();
+	});
+	
+});
 </script>
 </head>
 
@@ -42,24 +52,23 @@
 
 		<!-- Contact Info -->
 
-		<div class="contact_info_container">
-			<div class="container">
-				<div class="row">
-
-					<!-- Contact Form -->
-					<div class="col-lg-8">
-						<div class="contact_form">
-							<div class="contact_info_title">OCR TEST</div>
-							
-							
-							
-							
-														
-						</div>
+		<!-- Contact Form -->
+		
+			<div class="contact_form">
+				<div class="contact_info_title">OCR TEST</div>
+				<form id = "test_form" enctype="multipart/form-data">
+				
+					<div>
+						<label class="form_title"> </label>
+						<label id="pubutton" class="btn btn-dark" for="mpimg">파일 업로드</label>
+						<input type="file" style="display:none" name="mpimg" id="mpimg">
 					</div>
-				</div>
+				</form>
+				<button id = "register_btn" class="comment_button trans_200">Apply</button>
+											
 			</div>
-		</div>
+
+		
 	</div>
 
 

@@ -31,14 +31,6 @@ $(document).ready(function(){
 		$('#register_form').submit();
 	});
 	
-	$('#mcbutton').click(function(){
-		$('#register_form').attr({
-			'enctpe':'multipart/form-data',
-			'method':'post',
-			'action':'[[@{/mentor/registerimpl}]]'
-		});
-		$('#register_form').submit();
-	});
 });
 
 function display(data) {
@@ -98,7 +90,7 @@ function upload() {
 
 	const formData = new FormData();
 	formData.append("image", imageInput.files[0]);
-	alert(image);
+	alert(formData);
 	
 	for (var value of formData.values()) {
 	   console.log(value);
@@ -184,12 +176,11 @@ function upload() {
 								</div>
 				
 								<div>
-									<label class="form_title">Mentor Card
+									<label class="form_title">Mentor Card</label>
 									<div>
-										<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
+									<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
 									<label class="btn btn-dark" for="mcimg" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
 									</div>
-									</label>
 									<input type="file" class="comment_input" style="display:none" name="mcimg" id="mcimg"  onchange="previewimg(event);">
 									<div>
 									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>

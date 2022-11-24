@@ -107,7 +107,6 @@ public class AjaxController {
 	public Object ocrresult(MultipartHttpServletRequest filelist) {
 		Object obj = null;
 		String fieldName = "";
-		System.out.println(fieldName);
 		MultipartFile mfile = null;
 		
 		Iterator<String> iter = filelist.getFileNames();
@@ -118,7 +117,7 @@ public class AjaxController {
 			Util.saveMcFile(mfile, admindir, userdir);
 		}
 		obj = ocrservice.ocrresult(mfile.getOriginalFilename());
-		
+		System.out.println(obj);
 		return obj;
 	}
 	
