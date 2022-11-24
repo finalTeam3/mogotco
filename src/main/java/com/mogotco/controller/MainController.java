@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.BoardDTO;
-import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.BoardService;

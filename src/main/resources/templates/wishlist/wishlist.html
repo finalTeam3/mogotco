@@ -53,7 +53,7 @@ function del(wishlistid) {
 						<!-- Blog Post -->
 						<div class="blog_post trans_200" th:each="wlist:${wlist}">
 							<div class="blog_post_body">
-								<button type="button" class="close" th:onclick="del([[${wlist.wishlistid}]])" data-dismiss="modal" id="remove_btn" style="color:#A5B8D3">&times;</button>
+								<button type="button" class="close" th:onclick="del([[${wlist.wishlistid}]])" data-dismiss="modal" id="remove_btn" style="color:#A5B8D3;cursor:pointer">&times;</button>
 							
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
