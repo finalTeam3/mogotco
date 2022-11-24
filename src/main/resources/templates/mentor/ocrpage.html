@@ -13,7 +13,7 @@
 </style>
 
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
 	$('#register_btn').click(function(){
 		$('#test_form').attr({
 			'enctpe':'multipart/form-data',
@@ -23,7 +23,40 @@ $(document).ready(function(){
 		$('#test_form').submit();
 	});
 	
-});
+}); */
+
+function upload() {
+	const imageInput = $("#mcimg")[0];
+	console.log("mcimg: ", imageInput.files)
+	alert(imageInput.files);
+
+	if (imageInput.files.length === 0) {
+		alert("파일을 선택해주세요");
+		return;
+	}
+
+	const formData = new FormData();
+	formData.append("image", imageInput.files[0]);
+	alert(formData);
+	console.log(formData)
+	
+	for (var value of formData.values()) {
+	   console.log(value);
+	} 
+
+	$.ajax({
+		type : "POST",
+		url : "/ocrresult",
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			//alert(data);
+			alert(data.images[0].fields[0].inferText);
+			display(data);
+		}
+	});
+}
 </script>
 </head>
 
@@ -49,26 +82,27 @@ $(document).ready(function(){
 	<!-- Contact -->
 
 	<div class="contact">
-
+		<div class="contact_info_container">
 		<!-- Contact Info -->
-
+		<div class="col-lg-8">
 		<!-- Contact Form -->
 		
 			<div class="contact_form">
 				<div class="contact_info_title">OCR TEST</div>
-				<form id = "test_form" enctype="multipart/form-data">
 				
+				<form id = "test_form" enctype="multipart/form-data">
+
+					<input type="file" class="comment_input" name="mcimg" id="mcimg">
 					<div>
-						<label class="form_title"> </label>
-						<label id="pubutton" class="btn btn-dark" for="mpimg">파일 업로드</label>
-						<input type="file" style="display:none" name="mpimg" id="mpimg">
+					<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200">등록</button>
 					</div>
+					
 				</form>
-				<button id = "register_btn" class="comment_button trans_200">Apply</button>
+				<!-- <button id = "register_btn" class="comment_button trans_200">Apply</button> -->
 											
 			</div>
-
-		
+		</div>
+		</div>
 	</div>
 
 
