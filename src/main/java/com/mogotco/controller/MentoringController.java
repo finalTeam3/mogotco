@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
+import com.mogotco.service.PurchaseDetailService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -30,6 +32,9 @@ public class MentoringController {
 	
 	@Autowired
 	MentoringMapper mtmapper;
+	
+	@Autowired
+	PurchaseDetailService service1;
 	
 	String mentoring = "mentoring/";
 	
@@ -118,6 +123,30 @@ public class MentoringController {
 		return "main";
 	}
 	
-	
+	//내 멘토링 이력 보기(멘티입장 멘토링 한거)(choyunyoung add)
+	@RequestMapping("/mymentoringdetail")
+	public String mymentoringdetail(Model model, String id) {
+		List<PurchaseDetailDTO> detail = null;
+		PurchaseDetailDTO detailmember = null;
+		try {
+			//멘토링 정보를 불러오고
+			detail = service1.wholedetail(id);
+			//향상 for문에 first라는 개별 객체에 넣어줌
+			for(PurchaseDetailDTO first : detail) {
+				//멘토링 멤버수를 뽑기위해 mentoringoptionid를 불러오고
+				Integer mentoringoptionid = first.getMentoringoptionid();
+				//뽑은 멤버수 정보를
+				detailmember = service1.groupcount(mentoringoptionid);
+				//다시 first객체에 setting해준다.
+				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
+			}
+			model.addAttribute("list", detail);
+			model.addAttribute("center", mentoring+"mymentoringdetail");;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "main";
+	}
 	
 }
