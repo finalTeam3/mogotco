@@ -943,6 +943,14 @@ section
 	font-weight: 400;
 	color: #2c3145;
 }
+.correct
+{
+	color : green;
+}
+.incorrect
+{
+	color : red;
+}
 .comment_form > div:not(:last-child)
 {
 	margin-bottom: 25px;

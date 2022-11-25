@@ -129,7 +129,7 @@
 			<version>3.3.7</version>
 		</dependency>  
 		
-		<!-- 회원가입시 이메일 인증을 위한 xml -->
+		<!-- register mail accept xml -->
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 		    <groupId>javax.mail</groupId>
@@ -142,6 +142,12 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
 		    <version>5.3.9</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		    <version>2.7.5</version>
 		</dependency>
 	
 	</dependencies>

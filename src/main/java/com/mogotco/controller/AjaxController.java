@@ -1,7 +1,10 @@
 package com.mogotco.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mogotco.dto.UserDTO;
@@ -38,7 +41,7 @@ public class AjaxController {
 	
 	@Autowired
 	UserService user_service;
-
+	
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
 		return "";

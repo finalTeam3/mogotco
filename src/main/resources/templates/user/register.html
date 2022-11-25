@@ -7,7 +7,12 @@
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+
 $(document).ready(function(){
+	var code = "";	// 이메일 인증번호 저장
+	
+	/* 회원가입 */
 	$('#register_btn').click(function(){
 		$('#register_form').attr({
 			'action' : '[[@{/user/registerimpl}]]',
@@ -15,6 +20,8 @@ $(document).ready(function(){
 		});
 		$('#register_form').submit();
 	});
+	
+	/* 비밀번호 확인시 일치 여부 */
 	$('#pwd2').keyup(function(){
 		var pwd = $('#pwd').val();
 		var pwd2 = $('#pwd2').val();
@@ -24,6 +31,8 @@ $(document).ready(function(){
 			$('#pspan').text('비밀번호가 일치하지 않습니다.')
 		};
 	});
+	
+	/* 아이디 중복 체크 */
 	$('#idcheck_btn').click(function(){
 		var id = $('#id').val();
 		$.ajax({
@@ -38,22 +47,50 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	/* 이메일 인증번호 보내기 */
 	$('#emailcheck_btn').click(function(){
-		var email = $('#email').val();
-		mailcheck();
+		
+		mailregexcheck();	// 이메일 정규식 검증 - true
+		
+		var email = $('#email').val();	// 사용자가 입력한 이메일
+
+		
+		$.ajax({
+			type : 'get',
+			url : '[[@{/user/emailCheck}]]?email=' + email, // 컨트롤러로 사용자가 입력한 이메일을 보내줌
+			success : function (data) {	// 컨트롤러의 data가 반환
+				$('#emailconfirm').attr('disabled', false);
+				code = data;
+			}
+		});
 		
 	});
-});
-
-	function mailcheck() {
-		var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-		var email = document.register_form.email.value;
-		console.log(regex.test(email))
+	
+	/* 인증번호 일치여부 검사 */
+	$('#codecheck_btn').click(function(){
+		var emailconfirm = document.register_form.emailconfirm.value;	// 사용자가 입력한 인증번호 값
 		
-		if(regex.test(email)) {
+		if(emailconfirm == code) {
+			$('#espan2').text('인증번호가 일치합니다');
+			$('#espan2').attr('class', 'correct');
+		} else {
+			$('#espan2').text('인증번호가 일치하지 않습니다. 다시 확인해주세요');
+			$('#espan2').attr('class', 'incorrect');
+		}
+	});
+});
+	
+	/* 이메일 정규직 검증 */
+	function mailregexcheck() {
+		
+		var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');	 //정규식 작성
+		var email = document.register_form.email.value;	// 사용자가 입력한 이메일 
+		
+		if(regex.test(email)) {	// 정규식 테스트
 			$('#espan1').text('받은 메일의 인증번호를 입력해주세요')
 		} else {
-			$('#espan1').text('메일주소를 확인해보셔야 할 듯..')
+			$('#espan1').text('메일주소 형식을 다시 확인해서 입력해주세요')
 		}
 		
 	}
@@ -188,12 +225,14 @@ $(document).ready(function(){
 								<div>
 									<label for = "email" class="form_title">Email</label>
 									<div><input type="text" class="comment_input col-lg-5" id = "email" name = "useremail">
-									<button id = "emailcheck_btn" type="button" onclick = "mailcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button></div>
+									<button id = "emailcheck_btn" type="button" onclick = "mailregexcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button></div>
 									<div><span id = "espan1"></span></div>
-									<input class="comment_input col-lg-5" placeholder = "인증번호 6자리를 입력해주세요" disabled = "disabled" maxlength = "6">
-									<button id = "emailcheck_btn" type="button" class="comment_button_mail trans_200">인증</button></div>
-									<span id = "espan2"></span>
+									<input type="text" class="comment_input col-lg-5" id = "emailconfirm" placeholder = "인증번호 6자리를 입력해주세요" disabled = "disabled" maxlength = "6">
+									<button id = "codecheck_btn" type="button" class="comment_button_mail trans_200">인증</button>
+									<div><span id = "espan2"></span></div>
 								</div>
+								
+								
 								
 								<div>
 									<label for = "gender" class="form_title">Gender</label>
@@ -216,6 +255,7 @@ $(document).ready(function(){
 								
 									<button id = "register_btn" class="comment_button trans_200">Register Now</button>
 							</form>
+							</div>
 						</div>
 					</div>
 				</div>
