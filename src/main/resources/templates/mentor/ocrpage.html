@@ -13,17 +13,7 @@
 </style>
 
 <script>
-/* $(document).ready(function(){
-	$('#register_btn').click(function(){
-		$('#test_form').attr({
-			'enctpe':'multipart/form-data',
-			'method':'post',
-			'action':'[[@{/mentor/registerimpl}]]'
-		});
-		$('#test_form').submit();
-	});
-	
-}); */
+
 function display(obj) {
 	var name = obj.images[0].fields[0].inferText; //이름
 	var position = obj.images[0].fields[1].inferText; //직책
@@ -35,8 +25,7 @@ function display(obj) {
 
 function upload() {
 	const imageInput = $("#mcimg")[0];
-	console.log("mcimg: ", imageInput.files);
-
+	alert("ocr 실행중입니다. 잠시만 기다려 주세요.")
 	if (imageInput.files.length === 0) {
 		alert("파일을 선택해주세요");
 		return;
@@ -44,7 +33,6 @@ function upload() {
 
 	const formData = new FormData();
 	formData.append("image", imageInput.files[0]);
-	console.log(formData)
 
 	$.ajax({
 		type : "POST",
@@ -55,9 +43,9 @@ function upload() {
 	 	dataType : "JSON",
 	 	success: function(obj) {
 
-			console.log(obj);
-			alert(obj);
 			alert(obj.images[0].fields[0].inferText);
+			alert(obj.images[0].fields[1].inferText);
+			alert(obj.images[0].fields[2].inferText);
 			display(obj);	
 
 	 	}
