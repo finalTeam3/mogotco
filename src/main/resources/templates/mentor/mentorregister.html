@@ -33,26 +33,6 @@ $(document).ready(function(){
 	
 });
 
-function display(data) {
-	var name = data.images[0].fields[0].inferText
-	var position = data.images[0].fields[1].inferText
-	var company = data.images[0].fields[2].inferText
-	console.log(name)
-	console.log(position)
-	console.log(company)
-	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
-	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
-	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
-	//JSNO 형태로 가격정보 출력 : data.images[0].fields[3].inferText - 10,000
-	//JSNO 형태로 프로젝트명 출력 : data.images[0].fields[4].inferText
-	//JSNO 형태로 바코드번호 출력 : data.images[0].fields[5].inferText
-
-	alert(name);
-	alert(position);
-	alert(company);
-
-}
-
 function previewprofile(event) {// 프로필 이미지 미리 보여주기
 	    var reader = new FileReader();
 
@@ -78,11 +58,17 @@ function previewimg(event) {// 명함 이미지 미리 보여주기
     //alert('reader.readAsDataURL : ' + event.target.files[0]);
   }
 
+function display(obj) {
+	var name = obj.images[0].fields[0].inferText; //이름 (화면에 출력 x) 
+	var position = obj.images[0].fields[1].inferText; //직책
+	var company = obj.images[0].fields[2].inferText; //회사
+	$('#mentorcom').val(company);
+	$('#mcardposition').val(position);
+}
+
 function upload() {
 	const imageInput = $("#mcimg")[0];
-	console.log("mcimg: ", imageInput.files)
-	alert(imageInput.files);
-
+	alert("ocr 실행중입니다. 잠시만 기다려 주세요.")
 	if (imageInput.files.length === 0) {
 		alert("파일을 선택해주세요");
 		return;
@@ -90,23 +76,20 @@ function upload() {
 
 	const formData = new FormData();
 	formData.append("image", imageInput.files[0]);
-	alert(formData);
-	
-	for (var value of formData.values()) {
-	   console.log(value);
-	} 
 
 	$.ajax({
 		type : "POST",
-		url : "/ocrresult",
+		url : "[[@{/ocrresult}]]",
 		processData : false,
 		contentType : false,
 	 	data: formData,
-		success : function(data) {
-			//alert(data);
-			alert(data.images[0].fields[0].inferText);
-			display(data);
-		}
+	 	dataType : "JSON",
+	 	success: function(obj) {
+
+			display(obj);	
+
+	 	}
+		
 	});
 }
 
@@ -183,14 +166,18 @@ function upload() {
 									</div>
 									<input type="file" class="comment_input" style="display:none" name="mcimg" id="mcimg"  onchange="previewimg(event);">
 									<div>
-									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									<button type="button" id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
 									</div>
 								</div>											
 			
-								
 								<div>
 									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
+								</div>
+
+								<div>
+									<label for = "mcardposition" class="form_title">mcardposition<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id="mcardposition" name="mcardposition">
 								</div>
 
 								<div>
