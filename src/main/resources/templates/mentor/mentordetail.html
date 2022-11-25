@@ -7,6 +7,7 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+
 </head>
 
 	
@@ -66,19 +67,20 @@
 								<div class="teacher_meta_container">
 									<!-- Teacher Rating -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title" th:text=${mta.mentorcom}>Mentorcom:</div>
-										<!-- <div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div> -->
+										<div class="teacher_meta_title">회사:</div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mta.mentorcom}">4.7</span></div>
 									</div>
-									<!-- Teacher Review -->
-<!-- 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Review:</div>
-										<div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
-									</div> -->
-									<!-- Teacher Quizzes -->
-<!-- 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">Quizzes:</div>
-										<div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
-									</div> -->
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title">멘토 승인 여부:</div>
+										<div class="teacher_meta_text ml-auto" th:if="${mta.mentorok == 1}"><span class="badge badge-pill badge-primary" style="color:#FFFFFF">승인</span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mta.mentorok == 0}"><span class="badge badge-pill badge-danger" style="color:#FFFFFF">미승인</span></div>
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title">멘토링 취소 제한 횟수:</div>
+										<div class="teacher_meta_text ml-auto">
+										  <span class="badge badge-pill badge-light" th:text=${mta.cancelmentoring} ></span>
+										 </div> 
+									</div>
 								</div>
 								<div class="teacher_info">
 									<p></p>
