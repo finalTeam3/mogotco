@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
 <link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
@@ -300,7 +300,7 @@ function purchase() {
 	var mentoringprice='[[${mto.mentoringprice}]]';//mentoringprice
 	//mentoringoptionid(controller에서 만들어줌)
 	
-	location.href = '[[@{/purchase?mentoring_mentoringid=}]]'
+	location.href = '[[@{/purchase/idcheck?mentoring_mentoringid=}]]'
 		+ mentoringid + '&[[@{mentoring_mtitle=}]]' + mtitle + '&[[@{mentoring_mentoringdate=}]]' + mentoringdate + '&[[@{mentoringoption_mentoringtime=}]]' + mentoringtime + '&[[@{mentoring_mplace=}]]'
 		+ mplace + '&[[@{mentoring_mentoringprice=}]]' + mentoringprice + '&[[@{mentor_userid=}]]' + mentorid;
 }
