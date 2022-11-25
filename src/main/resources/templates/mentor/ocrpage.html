@@ -24,11 +24,18 @@
 	});
 	
 }); */
+function display(obj) {
+	var name = obj.images[0].fields[0].inferText; //이름
+	var position = obj.images[0].fields[1].inferText; //직책
+	var company = obj.images[0].fields[2].inferText; //회사
+	$('#mentorcom').val(company);
+	$('#mentorcon').text(name);
+	$('#mentorcareer').text(position);
+}
 
 function upload() {
 	const imageInput = $("#mcimg")[0];
-	console.log("mcimg: ", imageInput.files)
-	alert(imageInput.files);
+	console.log("mcimg: ", imageInput.files);
 
 	if (imageInput.files.length === 0) {
 		alert("파일을 선택해주세요");
@@ -37,24 +44,24 @@ function upload() {
 
 	const formData = new FormData();
 	formData.append("image", imageInput.files[0]);
-	alert(formData);
 	console.log(formData)
-	
-	for (var value of formData.values()) {
-	   console.log(value);
-	} 
 
 	$.ajax({
 		type : "POST",
-		url : "/ocrresult",
+		url : "[[@{/ocrresult}]]",
 		processData : false,
 		contentType : false,
 	 	data: formData,
-		success : function(data) {
-			//alert(data);
-			alert(data.images[0].fields[0].inferText);
-			display(data);
-		}
+	 	dataType : "JSON",
+	 	success: function(obj) {
+
+			console.log(obj);
+			alert(obj);
+			alert(obj.images[0].fields[0].inferText);
+			display(obj);	
+
+	 	}
+		
 	});
 }
 </script>
@@ -94,9 +101,23 @@ function upload() {
 
 					<input type="file" class="comment_input" name="mcimg" id="mcimg">
 					<div>
-					<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200">등록</button>
+					<button type="button" id="mcbutton" th:onclick="upload()" class="comment_button trans_200">등록</button>
 					</div>
 					
+				<div>
+									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom" value="mentorcom">
+								</div>
+
+								<div>
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
+								</div>
+
+								<div>
+									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
+								</div>
 				</form>
 				<!-- <button id = "register_btn" class="comment_button trans_200">Apply</button> -->
 											
