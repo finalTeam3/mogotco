@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
 <link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/courses.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/courses_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/courses.js}"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+  integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 </head>
 <script>
 $(document).ready(function(){
@@ -76,7 +78,8 @@ $(document).ready(function(){
 								<div class="course">
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
-										<h3 class="course_title" th:text="${mtr.mtitle}"><a th:href="@{/course}">Software Training</a></h3>
+										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left;"><a th:href="@{/course}"></a></h3>
+										<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<br>
 										<br>
 										<div style="display:inline; color:black;"><span>등록:</span></div>
@@ -173,8 +176,41 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+<script>
+  Kakao.init('b67794657ed6e950ec05402c7a55d07f'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 
-	<!-- Newsletter -->
-
-
-	
+<script>
+function shareMessage(mentoringid,mtitle) {
+Kakao.Share.sendDefault({
+    objectType: 'feed',
+    content: {
+      title: 'Mogotco mentor',
+      description: 'mentorid : '+mtitle,
+      imageUrl:
+          '',
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+        mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+        webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+      },
+    },
+    buttons: [
+      {
+        title: 'web',
+        link: {
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+        },
+      },
+      {
+        title: 'app',
+        link: {
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+        },
+      },
+    ],
+  });
+}
+</script>

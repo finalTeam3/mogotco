@@ -28,6 +28,7 @@ public class MentorDTO {
 	private int cancelmentoring;
 	private String mentorcareer;
 	private Date mentorapply;
+	private String mcardposition;
 	
 	private MultipartFile mpimg;  // mentor profile image
 	private MultipartFile mcimg;  // mentor card image
