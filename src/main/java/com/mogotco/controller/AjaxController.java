@@ -1,14 +1,21 @@
 package com.mogotco.controller;
 
+import java.util.Iterator;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mogotco.dto.UserDTO;
 import com.mogotco.dto.WishlistDTO;
+import com.mogotco.frame.Util;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
+import com.mogotco.service.OcrService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
 import com.mogotco.service.UserService;
@@ -38,6 +45,15 @@ public class AjaxController {
 	
 	@Autowired
 	UserService user_service;
+	
+	@Autowired
+	OcrService ocrservice;
+	
+	@Value("${admindir}")
+	String admindir;
+	
+	@Value("${userdir}")
+	String userdir;
 
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
@@ -85,6 +101,24 @@ public class AjaxController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	@RequestMapping("/ocrresult")
+	public Object ocrresult(MultipartHttpServletRequest filelist) {
+		Object obj = null;
+		String fieldName = "";
+		MultipartFile mfile = null;
+		
+		Iterator<String> iter = filelist.getFileNames();
+		while (iter.hasNext()) {
+			fieldName = (String) iter.next();
+			mfile = filelist.getFile(fieldName);
+			System.out.println(mfile);
+			Util.saveMcFile(mfile, admindir, userdir);
+		}
+		obj = ocrservice.ocrresult(mfile.getOriginalFilename());
+		System.out.println(obj);
+		return obj;
 	}
 	
 }

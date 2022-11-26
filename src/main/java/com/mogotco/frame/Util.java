@@ -48,6 +48,29 @@ public class Util {
 
 		}
 
-	}	
+	}
+	
+	// 멘토 카드 저장
+	public static void saveMcFile(MultipartFile mf1, String admindir, String userdir) {
+		byte[] data1;
+		
+		String mpimgname = mf1.getOriginalFilename();
+		
+		try {
+			// 멘토 프로필 이미지 파일 저장
+			data1 = mf1.getBytes();
+			FileOutputStream fo11 = new FileOutputStream(admindir + mpimgname);
+			fo11.write(data1);
+			fo11.close();
+			FileOutputStream fo12 = new FileOutputStream(userdir + mpimgname);
+			fo12.write(data1);
+			fo12.close();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	
 	
 }

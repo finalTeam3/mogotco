@@ -184,7 +184,24 @@ public class MentorController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:mentorregister?id=" + mentordto.getUserid();
-	}
 
+		return "redirect:mentorregister?id="+mentordto.getUserid();
+	}
+	
+	//멘토링 관리자 페이지
+	@RequestMapping("/mentoringadmin")
+	public String metoringadmin(Model model) {
+		
+		model.addAttribute("center", mentor+"mentoringadmin");
+		return "main";
+	}
+	
+	// ocrtest 페이지
+	@RequestMapping("/ocrpage")
+	public String ocrpage(Model model) {
+		
+		model.addAttribute("center", mentor+"ocrpage");
+		return "main";
+	}
+	
 }
