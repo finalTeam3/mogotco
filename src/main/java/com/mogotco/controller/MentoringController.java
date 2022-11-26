@@ -100,10 +100,11 @@ public class MentoringController {
 		return "main";
 	}
 
-	//mservice page
-	@RequestMapping("/mservice")
-	public String mservice() {
-		return mentoring+"mservice";
+	//mentoringstart page
+	@RequestMapping("/mentoringstart")
+	public String mentoringstart(Model model, String id) {
+		model.addAttribute("moptionid", id);
+		return mentoring+"mentoringstart";
 	}
 	
 	@RequestMapping("/search")

@@ -85,11 +85,11 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
-function review(purchaseid,mentor_userid) {
+function gomentoring(mentoringoptionid) {
 
-	var c = confirm('리뷰를 작성하시겠습니까?');
+	var c = confirm('멘토링을 시작하시겠습니까?');
 	if (c == true) {
-		location.href = '[[@{/review/review?id=}]]' + purchaseid +'[[@{mentor_userid=}]]' + mentor_userid;
+		location.href = '[[@{/mentoring/mentoringstart?id=}]]' + mentoringoptionid;
 	}
 };
 
@@ -145,7 +145,7 @@ function review(purchaseid,mentor_userid) {
 					<td th:text="${c.mentoring_mplace}"></td>
 					<td th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])" type="submit" class="comment_button1">Review</button>
+						<button th:onclick="gomentoring([[${c.mentoringoptionid}]])" type="submit" class="comment_button1">Review</button>
 					</td>
 				</tr>
 			</tbody>
