@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>ConnectLive 화상회의</title>
-		<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk@2.2.2/dist/connectlive-web-sdk.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk/dist/connectlive-web-sdk.min.js"></script>
  
 			
 		<style>
@@ -180,15 +180,16 @@
 		<script>
     	
     	// 커넥트 라이브 내부 인증
-    	ConnectLive.signIn({
-    	    serviceId: 'IH9V9FUXPHSR',
-    	    serviceSecret: 'IH9V9FUXPHSRUKYA:KzURF9fInik5g1BK',
-    	    endpoint: 'http://49.50.174.57:8080/mogotco/mentoring/mservice'
-    	}).then(()=>{
-    	    alert('인증에 성공했습니다.');
-    	}).catch(()=>{
-    	    alert('인증에 실패했습니다.');
-    	});
+    	alert();
+    	//ConnectLive.signIn({
+    	  //  serviceId: 'IH9V9FUXPHSR',
+    	   // serviceSecret: 'IH9V9FUXPHSRUKYA:KzURF9fInik5g1BK',
+    	   // endpoint: 'http://49.50.174.57:8080/mogotco/mentoring/mentoringstart?moptionid='+roodId
+    	//}).then(()=>{
+    	 //   alert('인증에 성공했습니다.');
+    	//}).catch(()=>{
+    	 //   alert('인증에 실패했습니다.');
+    	//});
     	
     		
     	// DATA
@@ -196,7 +197,7 @@
     	let room = null;
     	let remoteParticipants = [];
 
-    	const roomId = 'icl-video-call';
+    	const roomId = '[[${moptionid}]]';
     	const connectButton = document.querySelector('#connect');
     	const disconnectButton = document.querySelector('#disconnect');
     	const status = document.querySelector('#status');
@@ -342,12 +343,11 @@
     	    resetLog();
     	    disableButton();
     	    changeStatus('Connecting...');
-
+    	    const roomId = '[[${moptionid}]]';
     	    // Provisioning
     	    await ConnectLive.signIn({
-    	      serviceId: 'IH9V9FUXPHSR',
-    	      serviceSecret: 'IH9V9FUXPHSRUKYA:KzURF9fInik5g1BK',
-    	      endpoint: 'http://49.50.174.57:8080/mogotco/mentoring/mservice',
+    	      serviceId: 'J1YE3C9ZUFH9',
+    	      serviceSecret: 'J1YE3C9ZUFH9CDNU:AnN9g1p0rpS1wxgG',
     	    });
     	    addLog('User Signed In');
 
