@@ -40,8 +40,8 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 		return mapper.selectAll();
 	}
 	
-	public List<ReviewDTO> getmentorreview(String userid) throws Exception {
-	      return mapper.getmentorreview(userid);
+	public List<ReviewDTO> getmentorreview(int mentorid) throws Exception {
+	      return mapper.getmentorreview(mentorid);
 	}
 	
 	//개인 mentor 평점 avg(choyunyoung add)
