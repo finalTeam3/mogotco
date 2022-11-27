@@ -41,6 +41,9 @@ public class PurchaseDetailDTO {
 	//현재 멘토링 멤버 상황
 	private int mentoringmembercnt; //각 멘토링시간에 듣는 인원수
 	
+	//멘토 상세페이지로 넘어가기 위한 멘토아이디
+	private int mentor_mentorid;
+	
 	
 	
 
