@@ -145,7 +145,7 @@ function gomentoring(mentoringoptionid) {
 					<td th:text="${c.mentoring_mplace}"></td>
 					<td th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button th:onclick="gomentoring([[${c.mentoringoptionid}]])" type="submit" class="comment_button1">Review</button>
+						<button th:if="${c.mentoring_mplace} == ${'비대면'}" th:onclick="gomentoring([[${c.mentoringoptionid}]])" type="submit" class="comment_button1">start</button>
 					</td>
 				</tr>
 			</tbody>
