@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/ordercss/style.css}" rel="stylesheet">
+
+<style>
+.home {
+	width: 100%;
+	height: 182px;
+	background: #f2f4f5;
+	border-bottom: solid 1px #edeff0;
+}
+
+.breadcrumbs_container {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding-bottom: 1px;
+	padding-left: 3px;
+}
+
+.breadcrumbs ul li {
+	display: inline-block;
+	position: relative;
+}
+
+.breadcrumbs ul li:not(:last-child)::after {
+	display: inline-block;
+	font-family: 'FontAwesome';
+	content: '\f105';
+	margin-left: 7px;
+	margin-right: 4px;
+	color: #384158;
+}
+
+.breadcrumbs ul li a {
+	font-size: 14px;
+	font-weight: 400;
+	color: #384158;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+
+.breadcrumbs ul li a:hover {
+	color: #14bdee;
+}
+
+/* button */
+.comment_button1
+{
+	width: 70px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button1:hover
+{
+	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script>
+function gomentoring(mentoringoptionid) {
+
+	var c = confirm('멘토링을 시작하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/mentoring/mentoringstart?id=}]]' + mentoringoptionid;
+	}
+};
+
+</script>
+</head>
+
+
+<body>
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/user/mypage}">Mypage</a></li>
+								<li>mymentoringdetail</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Checkout Start -->
+	<div class="container">
+		<span class="bg-secondary pr-3"></span> <span
+			class="bg-secondary pr-3"></span>
+		<h5 class="section-title position-relative text-uppercase mb-3">
+			<span class="bg-secondary pr-3">mymentoringdetail</span>
+		</h5>
+	
+		<table id="otb" class="table" >
+			<thead>
+				<tr class="active">
+
+					<th>Mentoringtitle</th>
+					<th>Mentoringdate</th>
+					<th>Member</th>
+					<th>MentoringUrl</th>
+					<th>Mentoringplace</th>
+					<th>Progress</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c:${list}">
+
+					<td th:text="${c.mentoring_mtitle}"></td>
+					<td th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${c.mentoringmembercnt}"></td>
+					<td th:text="${c.mentoring_mentorurl}"></td>
+					<td th:text="${c.mentoring_mplace}"></td>
+					<td th:text="${c.progresspur}" id="progresspuresult"></td>
+					<td>
+						<button th:onclick="gomentoring([[${c.mentoringoptionid}]])" type="submit" class="comment_button1">Review</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+</body>
+</html>

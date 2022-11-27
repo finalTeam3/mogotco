@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+  integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 
 </head>
@@ -57,9 +59,10 @@
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
-										<div class="teacher_position">Marketing & Management</div>
-										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px"><i class="fa-solid fa-heart"></i></button>
+										<div class="teacher_name" style="float:left;"><a href="#" th:text="${mtd.user_username}"></a></div>
+										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mtd.mentorid}]],[[${mtd.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button>
+										
 										<!-- <input class="comment_input" th:text="${session.loginuser.userid}" style = "display:none" name="userid" id="userid"> -->
 									</div>
 								</div>
@@ -476,4 +479,42 @@ $(document).ready(function(){
 		
 	});
 });
+</script>
+<script>
+  Kakao.init('b67794657ed6e950ec05402c7a55d07f');
+</script>
+
+<script>
+function shareMessage(mentorid,userid) {
+Kakao.Share.sendDefault({
+    objectType: 'feed',
+    content: {
+      title: 'Mogotco mentor',
+      description: 'mentorid : '+userid,
+      imageUrl:
+          '',
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+          mobileWebUrl: 'http://127.0.0.1//mogotco/mentor/nonid?mentorid='+mentorid,
+          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+      }
+    },
+    buttons: [
+      {
+        title: 'web',
+        link: {
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+        },
+      },
+      {
+        title: 'app',
+        link: {
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+        },
+      },
+    ],
+  });
+}
 </script>
