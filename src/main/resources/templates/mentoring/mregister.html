@@ -5,8 +5,12 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/example-styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/demo-styles.css}">
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
+<script th:src="@{/path/to/cdn/jquery.slim.min.js}"></script>
+<script th:src="@{/path/to/src/jquery.multi-select.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -19,6 +23,67 @@ margin-left: 11%;
 #mcbutton{
 margin-left: 1%;
 }
+</style>
+<style>
+.multi-select-container {
+  display: inline-block;
+  position: relative;
+}
+
+.multi-select-menu {
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  float: left;
+  min-width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  padding: 0.4em 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.multi-select-menu input {
+  margin-right: 0.3em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-button {
+  display: inline-block;
+  font-size: 0.875em;
+  padding: 0.2em 0.6em;
+  max-width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: -0.5em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.multi-select-button:after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.4em 0.4em 0 0.4em;
+  border-color: #999 transparent transparent transparent;
+  margin-left: 0.4em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-container--open .multi-select-menu { display: block; }
+
+.multi-select-container--open .multi-select-button:after {
+  border-width: 0 0.4em 0.4em 0.4em;
+  border-color: transparent transparent #999 transparent;
+}
+
 </style>
 
 
@@ -153,21 +218,74 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 							   
 							   	<div>
 									<label for = "mentorcom" class="form_title">멘토링 시간 선택<span style="color:red"> *</span></label><br>
-										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;">
-											<option selected>10:00</option>
-											<option>11:00</option>
-											<option>12:00</option>
-											<option>13:00</option>
-											<option>14:00</option>
-											<option>15:00</option>
-											<option>16:00</option>
-											<option>17:00</option>
-											<option>18:00</option>
-											<option>19:00</option>
-											<option>20:00</option>
-											<option>21:00</option>
-											<option>22:00</option>
+										<select id="languages" name="languages" multiple>
+										  <option>10:00</option>
+										  <option>11:00</option>
+										  <option>12:00</option>
+										  <option>13:00</option>
+										  <option>14:00</option>
+										  <option>15:00</option>
+										  <option>16:00</option>
+										  <option>17:00</option>
+										  <option>18:00</option>
+										  <option>19:00</option>
+										  <option>20:00</option>
+										  <option>21:00</option>
+										  <option>22:00</option>
 										</select>
+										    <script type="text/javascript" th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    										<script type="text/javascript" th:src="@{/js/jquery.multi-select.js}"></script>
+    										<script type="text/javascript">
+											    $(function(){
+											    	$('#languages').multiSelect({
+
+											    		  // Custom templates
+											    		  'containerHTML': '<div class="multi-select-container">',
+											    		  'menuHTML': '<div class="multi-select-menu">',
+											    		  'buttonHTML': '<span class="multi-select-button">',
+											    		  'menuItemsHTML': '<div class="multi-select-menuitems">',
+											    		  'menuItemHTML': '<label class="multi-select-menuitem">',
+											    		  'presetsHTML': '<div class="multi-select-presets">',
+
+											    		  // sets some HTML (eg: <div class="multi-select-modal">) to enable the modal overlay.
+											    		  'modalHTML': undefined,
+
+											    		  // Active CSS class
+											    		  'activeClass': 'multi-select-container--open',
+
+											    		  // Text to show when no option is selected
+											    		  'noneText': '-- Select --',
+
+											    		  // Text to show when all options are selected
+											    		  'allText': undefined,
+
+											    		  // an array of preset option groups
+											    		  // presets: [{
+											    		  //   name: 'All categories',
+											    		  //   all: true // select all
+											    		  // },{
+											    		  //   name: 'My categories',
+											    		  //   options: ['a', 'c']
+											    		  // }]
+											    		  'presets': undefined,
+
+											    		  // CSS class added to the container, when the menu is about to extend beyond the right edge of the position<a href="https://www.jqueryscript.net/menu/">Menu</a>Within element
+											    		  'positionedMenuClass': 'multi-select-container--positioned',
+
+											    		  // If you provide a jQuery object here, the plugin will add a class (see positionedMenuClass option) to the container when the right edge of the dropdown menu is about to extend outside the specified element, giving you the opportunity to use CSS to prevent the menu extending, for example, by allowing the option labels to wrap onto multiple lines.
+											    		  'positionMenuWithin': undefined,
+
+											    		  // The plugin will attempt to keep this distance, in pixels, clear between the bottom of the menu and the bottom of the viewport, by setting a fixed height style if the menu would otherwise approach this distance from the bottom edge of the viewport.
+											    		  'viewportBottomGutter': 20,
+
+											    		  // minimal height
+											    		  'menuMinHeight': 200
+											    		  
+											    		});
+											    	});
+											    </script>
+										
+										
 							   </div>
 							   
 							   <div>

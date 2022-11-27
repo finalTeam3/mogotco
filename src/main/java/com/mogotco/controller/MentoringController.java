@@ -8,12 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MCateDTO;
+import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
+import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
+import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -27,6 +30,9 @@ public class MentoringController {
 	
 	@Autowired
 	MCateService mcateservice;
+	
+	@Autowired
+	MentorService mentor_service;
 	
 	@Autowired
 	MentoringMapper mtmapper;

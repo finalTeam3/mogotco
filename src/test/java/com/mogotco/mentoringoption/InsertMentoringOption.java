@@ -19,10 +19,10 @@ import com.mogotco.service.MentoringOptionService;
 	@Test
 	void contextLoads() {
 		ArrayList<MentoringOptionDTO> list = new ArrayList<MentoringOptionDTO>();
-		MentoringOptionDTO moption = new MentoringOptionDTO(0,204,"22:00",6);
-		MentoringOptionDTO moption2 = new MentoringOptionDTO(0,205,"10:00",3);
-		MentoringOptionDTO moption3 = new MentoringOptionDTO(0,206,"11:00",4);
-		list.add(moption);
+		MentoringOptionDTO moption1 = new MentoringOptionDTO(0,204,"10:00",3);
+		MentoringOptionDTO moption2 = new MentoringOptionDTO(0,204,"11:00",3);
+		MentoringOptionDTO moption3 = new MentoringOptionDTO(0,204,"13:00",3);
+		list.add(moption1);
 		list.add(moption2);
 		list.add(moption3);
 
