@@ -130,6 +130,7 @@ public class MentoringController {
 		List<PurchaseDetailDTO> detail = null;
 		PurchaseDetailDTO detailmember = null;
 		try {
+			//비대면
 			//멘토링 정보를 불러오고
 			detail = service1.wholedetail(id);
 			//향상 for문에 first라는 개별 객체에 넣어줌
@@ -141,8 +142,9 @@ public class MentoringController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
-			model.addAttribute("list", detail);
-			model.addAttribute("center", mentoring+"mymentoringdetail");;
+			model.addAttribute("list", detail);			
+			//화면
+			model.addAttribute("center", mentoring+"mymentoringdetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

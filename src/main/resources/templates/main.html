@@ -114,7 +114,6 @@ function wsconnect() {
                            <li><a th:href="@{/notice}">Notice</a></li>
                            <li><a th:href="@{/about}">About</a></li>
                            <li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
-                           <li th:if = "${session.loginuser != null}"><a th:href="@{/wishlist/wishlist(id=${session.loginuser.userid})}">WishList</a></li>
                         </ul>
                         <div class="search_button"><i class="fa-solid fa-magnifying-glass"aria-hidden="true"></i></div>
 
@@ -164,11 +163,13 @@ function wsconnect() {
       </div>
       <nav class="menu_nav">
          <ul class="menu_mm">
+         	<li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/user/login}"><i class="fa-solid fa-user"></i></a></li>
             <li class="menu_mm"><a th:href="@{/}">Home</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/mypage(userid = ${session.loginuser.userid})}">Mypage</a></li>
             <li class="menu_mm"><a th:href="@{/notice}">Notice</a></li>
-            <li class="menu_mm"><a th:href="@{/mentoring}">Mentoring</a></li>
-            <li class="menu_mm"><a th:href="@{/blog}">Blog</a></li>
-            <li class="menu_mm"><a th:href="@{/contack}">Contact</a></li>
+            <li class="menu_mm"><a th:href="@{/about}">About</a></li>
+            <li class="menu_mm"><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/logout}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
          </ul>
       </nav>
    </div>
@@ -176,34 +177,10 @@ function wsconnect() {
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
 <div class="super_container"th:insert = "${center} ? ${center} : maincenter">
-   
-   <!-- Home -->
-
-
-   <!-- Features -->
-
-
-   <!-- Popular Courses -->
-
-
-   <!-- Counter -->
-
-
-   <!-- Events -->
-
-
-   <!-- Team -->
-
-
-   <!-- Latest News -->
-
-
-   <!-- Newsletter -->
-
-
 
  </div>  
 </body>
+  <!-- Maincenter finish------------------------------------------------------------------------------------>
    <!-- Footer -->
 
    <footer class="footer">

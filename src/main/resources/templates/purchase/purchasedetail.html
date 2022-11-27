@@ -5,57 +5,151 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <!-- Customized Bootstrap Stylesheet -->
-<link th:href="@{/ordercss/style.css}" rel="stylesheet">
-
-<style>
-.home {
-	width: 100%;
-	height: 182px;
-	background: #f2f4f5;
-	border-bottom: solid 1px #edeff0;
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<style type="text/css">
+.responsive-table {
+  width: 105%;
+  margin-bottom: 1.5em;
+}
+.responsive-table thead {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.responsive-table thead th {
+  background-color: #14bdee;
+  border: 1px solid #14bdee;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+}
+.responsive-table thead th:first-of-type {
+  text-align: left;
+}
+.responsive-table tbody,
+.responsive-table tr,
+.responsive-table th,
+.responsive-table td {
+  display: block;
+  padding: 0;
+  text-align: left;
+  white-space: normal;
+}
+.responsive-table th,
+.responsive-table td {
+  padding: .5em;
+  vertical-align: middle;
+}
+.responsive-table caption {
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+.responsive-table tfoot {
+  font-size: .8em;
+  font-style: italic;
+}
+.responsive-table tbody tr {
+  margin-bottom: 1em;
+  border: 2px solid #14bdee;
+}
+.responsive-table tbody tr:last-of-type {
+  margin-bottom: 0;
+}
+.responsive-table tbody th[scope="row"] {
+  background-color: #14bdee;
+  color: white;
+}
+.responsive-table tbody td[data-type=currency] {
+  text-align: right;
+}
+.responsive-table tbody td[data-title]:before {
+  content: attr(data-title);
+  float: left;
+  font-size: .8em;
+  color: rgb(0, 0, 0);
+}
+.responsive-table tbody td {
+  text-align: right;
+  border-bottom: 1px solid #14bdee;
 }
 
-.breadcrumbs_container {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	padding-bottom: 1px;
-	padding-left: 3px;
+
+@media (min-width: 200em) {
+  .responsive-table {
+    font-size: .9em;
+  }
+  .responsive-table thead {
+    position: relative;
+    clip: auto;
+    height: auto;
+    width: auto;
+    overflow: auto;
+  }
+  .responsive-table tr {
+    display: table-row;
+  }
+  .responsive-table th,
+  .responsive-table td {
+    display: table-cell;
+    padding: .5em;
+  }
+
+  .responsive-table caption {
+    font-size: 1.5em;
+  }
+  .responsive-table tbody {
+    display: table-row-group;
+  }
+  .responsive-table tbody tr {
+    display: table-row;
+    border-width: 1px;
+  }
+  .responsive-table tbody tr:nth-of-type(even) {
+    background-color: rgba(94, 93, 82, 0.1);
+  }
+  .responsive-table tbody th[scope="row"] {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    text-align: left;
+  }
+  .responsive-table tbody td {
+    text-align: center;
+  }
+  .responsive-table tbody td[data-title]:before {
+    content: none;
+    color: rgb(0, 0, 0);
+  }
+}
+@media (min-width: 62em) {
+  .responsive-table {
+    font-size: 1em;
+  }
+  .responsive-table th,
+  .responsive-table td {
+    padding: .75em .5em;
+  }
+  .responsive-table tfoot {
+    font-size: .9em;
+  }
 }
 
-.breadcrumbs ul li {
-	display: inline-block;
-	position: relative;
+@media (min-width: 75em) {
+  .responsive-table th,
+  .responsive-table td {
+    padding: .75em;
+  }
 }
-
-.breadcrumbs ul li:not(:last-child)::after {
-	display: inline-block;
-	font-family: 'FontAwesome';
-	content: '\f105';
-	margin-left: 7px;
-	margin-right: 4px;
-	color: #384158;
-}
-
-.breadcrumbs ul li a {
-	font-size: 14px;
-	font-weight: 400;
-	color: #384158;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-
-.breadcrumbs ul li a:hover {
-	color: #14bdee;
-}
-
 /* button */
-.comment_button1
-{
+.comment_button1 {
 	width: 70px;
 	height: 46px;
 	background: #14bdee;
@@ -69,9 +163,9 @@
 	border-radius: 3px;
 	margin-top: 15px;
 }
-.comment_button1:hover
-{
-	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
 }
 </style>
 <script
@@ -85,19 +179,21 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
-function review(purchaseid,mentor_userid) {
+	function review(purchaseid, mentor_userid) {
 
-	var c = confirm('리뷰를 작성하시겠습니까?');
-	if (c == true) {
-		location.href = '[[@{/review/review?id=}]]' + purchaseid +'[[@{mentor_userid=}]]' + mentor_userid;
-	}
-};
-
+		var c = confirm('리뷰를 작성하시겠습니까?');
+		if (c == true) {
+			location.href = '[[@{/review/review?id=}]]' + purchaseid
+					+ '[[@{mentor_userid=}]]' + mentor_userid;
+		}
+	};
 </script>
 </head>
 
 
 <body>
+	<!-- Home -->
+
 	<div class="home">
 		<div class="breadcrumbs_container">
 			<div class="container">
@@ -113,51 +209,88 @@ function review(purchaseid,mentor_userid) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>			
 	</div>
 	<!-- Checkout Start -->
+		<div class="contact">
+
+		<!-- Contact Info -->
+
+		<div class="contact_info_container">
 	<div class="container">
-		<span class="bg-secondary pr-3"></span> <span
-			class="bg-secondary pr-3"></span>
-		<h5 class="section-title position-relative text-uppercase mb-3">
-			<span class="bg-secondary pr-3">Purchasedetail</span>
-		</h5>
-	
-		<table id="otb" class="table" >
+			<div class="row">
+			<div class="col-lg-8">
+			<div class="contact_form">
+			<div class="contact_info_title">PurchaseDetail</div>
+		<table class="responsive-table">
 			<thead>
-				<tr class="active">
-					<th>Purchaseid</th>
-					<th>Purchasedate</th>
-					<th>Price</th>
-					<th>Purchasepay</th>
-					<th>Purchasecard</th>
-					<th>Mentoringtitle</th>
-					<th>Mentoringdate</th>
-					<th>Member</th>
-					<th>MentoringUrl</th>
-					<th>Mentoringplace</th>
-					<th>Progress</th>
+				<tr>
+					<th scope="col">Mentoringtitle</th>
+					<th scope="col">Purchaseid</th>
+					<th scope="col">Purchasedate</th>
+					<th scope="col">Price</th>
+					<th scope="col">Purchasepay</th>
+					<th scope="col">Purchasecard</th>
+					<th scope="col">Mentoringdate</th>
+					<th scope="col">Member</th>
+					<th scope="col">MentoringUrl</th>
+					<th scope="col">Mentoringplace</th>
+					<th scope="col">Progress</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="c:${list}">
-					<td th:text="${c.purchaseid}"></td>
-					<td th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
-					<td th:text="${c.purchase_purprice}"></td>
-					<td th:text="${c.purchase_purpay}"></td>
-					<td th:text="${c.purchase_purcard}"></td>
-					<td th:text="${c.mentoring_mtitle}"></td>
-					<td th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
-					<td th:text="${c.mentoringmembercnt}"></td>
-					<td th:text="${c.mentoring_mentorurl}"></td>
-					<td th:text="${c.mentoring_mplace}"></td>
-					<td th:text="${c.progresspur}" id="progresspuresult"></td>
+					<th scope="row" th:text="${c.mentoring_mtitle}"></th>
+					<td data-title="Purchaseid" th:text="${c.purchaseid}"></td>
+					<td data-title="Purchasedate" th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
+					<td data-title="Price" th:text="${c.purchase_purprice}"></td>
+					<td data-title="Purchasepay" th:text="${c.purchase_purpay}"></td>
+					<td data-title="Purchasecard" th:text="${c.purchase_purcard}"></td>
+					<td
+						data-title="Mentoringdate" th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
+					<td data-title="Member" th:text="${c.mentoringmembercnt}"></td>
+					<td data-title="MentoringUrl" th:text="${c.mentoring_mentorurl}"></td>
+					<td data-title="Mentoringplace" th:text="${c.mentoring_mplace}"></td>
+					<td data-title="Progress" th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])" type="submit" class="comment_button1">Review</button>
+						<button
+							th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])"
+							type="submit" class="comment_button1">Review</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		</div>
+	</div>
+						<!-- Contact Info -->
+					<div class="col-lg-4">
+						<div class="contact_info">
+							<div class="contact_info_title">Contact Info</div>
+							<div class="contact_info_text">
+								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">New York Office</div>
+								<ul class="location_list">
+									<li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">Australia Office</div>
+								<ul class="location_list">
+									<li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+	</div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

@@ -24,8 +24,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
 		purde.mentoringoptionid,
 		mentoring.mplace AS mentoring_mplace, mentoring.mentorurl AS mentoring_mentorurl,
-		purde.progresspur,mentoring.mcaring AS mentoring_mcaring FROM
-		purchasedetail purde
+		purde.progresspur,mentoring.mcaring AS mentoring_mcaring, mentor.mentorid AS mentor_mentorid
+		FROM purchasedetail purde
 		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
 		INNER JOIN mentoringoption mentoringoption ON
 		purde.mentoringoptionid=mentoringoption.mentoringoptionid

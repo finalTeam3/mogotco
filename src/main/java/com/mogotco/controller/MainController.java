@@ -92,4 +92,10 @@ public class MainController {
 		return "main";
 	}
 	
+	//about
+	@RequestMapping("/about")
+	public String about(Model model) {
+		model.addAttribute("center", "about");
+		return "main";
+	}
 }
