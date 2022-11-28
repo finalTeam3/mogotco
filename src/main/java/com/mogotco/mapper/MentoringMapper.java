@@ -19,9 +19,28 @@ public interface MentoringMapper extends MyMapper<Integer, MentoringDTO> {
 	public MentoringDTO viewMentoringOp(int mentoringid) throws Exception;
 	//지금 당장 롸잇나우 할 수 있는 멘토링
 	public List<MentoringDTO> mentoringimmed() throws Exception;
+	
 	// 멘토링 전체 검색
 	public List<MentoringDTO> mentoringsearch(String txt) throws Exception;
 	// 멘토링 카테고리별로 검색(choyunyoung add)
 	public List<MentoringDTO> mcatesearch(String mname, String txt) throws Exception;
+	
+	// -- 카테고리, 리뷰순(choyunyoung add)
+	public List<MentoringDTO> mcatereviewsearch(String mname, String txt) throws Exception;
+	// -- 카테고리, 가격순(choyunyoung add)
+	public List<MentoringDTO> mcatepricesearch(String mname, String txt) throws Exception;
+	// -- 카테고리, 가장빨리 멘토링 가능한 순(choyunyoung add)
+	public List<MentoringDTO> mcaterecentsearch(String mname, String txt) throws Exception;
+	// -- 카테고리, 사후관리 유무(choyunyoung add)
+	public List<MentoringDTO> mcatemcaringoksearch(String mname, String txt, int mcaring) throws Exception;
+	
+	// -- 전체 , 가격순(choyunyoung add)
+	public List<MentoringDTO> allreviewsearch(String mname, String txt) throws Exception;
+	// -- 전체 , 리뷰순(choyunyoung add)
+	public List<MentoringDTO> allpricesearch(String mname, String txt) throws Exception;
+	// -- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)
+	public List<MentoringDTO> allrecentsearch(String mname, String txt) throws Exception;
+	// -- 전체, 사후관리 유무(choyunyoung add)
+	public List<MentoringDTO> allmcaringoksearch(String mname, String txt) throws Exception;
 
 }
