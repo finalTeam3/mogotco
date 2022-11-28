@@ -35,12 +35,12 @@ public interface MentoringMapper extends MyMapper<Integer, MentoringDTO> {
 	public List<MentoringDTO> mcatemcaringoksearch(String mname, String txt, int mcaring) throws Exception;
 	
 	// -- 전체 , 가격순(choyunyoung add)
-	public List<MentoringDTO> allreviewsearch(String mname, String txt) throws Exception;
+	public List<MentoringDTO> allreviewsearch(String txt) throws Exception;
 	// -- 전체 , 리뷰순(choyunyoung add)
-	public List<MentoringDTO> allpricesearch(String mname, String txt) throws Exception;
+	public List<MentoringDTO> allpricesearch(String txt) throws Exception;
 	// -- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)
-	public List<MentoringDTO> allrecentsearch(String mname, String txt) throws Exception;
+	public List<MentoringDTO> allrecentsearch(String txt) throws Exception;
 	// -- 전체, 사후관리 유무(choyunyoung add)
-	public List<MentoringDTO> allmcaringoksearch(String mname, String txt) throws Exception;
+	public List<MentoringDTO> allmcaringoksearch(String txt, int mcaring) throws Exception;
 
 }

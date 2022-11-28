@@ -217,4 +217,74 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		LIKE
 		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring}
 	</select>
+	
+	
+		<!-- 전체 , 가격순(choyunyoung add) -->
+	<select id="allreviewsearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid
+		WHERE mt.mtitle
+		LIKE
+		CONCAT('%',#{txt},'%') GROUP BY mt.mentoringid ORDER BY avgrate
+		DESC
+	</select>
+		<!-- 전체 , 리뷰순(choyunyoung add) -->
+	<select id="allpricesearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid
+		WHERE mt.mtitle
+		LIKE
+		CONCAT('%',#{txt},'%') GROUP BY mt.mentoringid ORDER BY
+		mt.mentoringprice DESC
+	</select>
+		<!-- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)-->
+	<select id="allrecentsearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
+		date_difference FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid =
+		mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN
+		user mu ON mr.userid = mu.userid
+		WHERE mt.mtitle
+		LIKE
+		CONCAT('%',#{txt},'%') and
+		DATEDIFF(mentoringdate,sysdate())>=0 ORDER BY
+		date_difference DESC
+	</select>
+		<!-- 전체, 사후관리 유무(choyunyoung add) -->
+	<select id="allmcaringoksearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		WHERE mt.mtitle
+		LIKE
+		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring}
+	</select>
 </mapper>
