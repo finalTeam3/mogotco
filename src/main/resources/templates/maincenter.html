@@ -7,6 +7,20 @@ function request(mentor_mentorid){
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+  <script>
+$(document).ready(function(){
+	$('#search_button2').click(function(){
+		$('#search_form_mentoring2').attr({
+			method:'get',
+			action:'[[@{/mentoring/multimainserach}]]'
+			
+		});
+		$('#search_form_mentoring2').submit();
+
+	});
+});
+	
+</script>
 <body>
 
 
@@ -28,23 +42,24 @@ function request(mentor_mentorid){
 								<div class="home_slider_subtitle">Future Of Education
 									Technology</div>
 								<div class="home_slider_form_container">
-									<form action="#" id="home_search_form_1"
+									<form id="search_form_mentoring2" 
 										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
 										<div
 											class="d-flex flex-row align-items-center justify-content-start">
-											<input type="search" class="home_search_input"
+											<input type="text" class="home_search_input" name="txt"
 												placeholder="Keyword Search" required="required"> <select
-												class="dropdown_item_select home_search_input">
-												<option>Mentoring Category</option>
-												<option>Category</option>
-												<option>Category</option>
-											</select> <select class="dropdown_item_select home_search_input">
-												<option>Select Price Type</option>
-												<option>Price Type</option>
-												<option>Price Type</option>
+												class="dropdown_item_select home_search_input" name="mname">
+												<option value="all">전체</option>
+												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+											</select> 
+ 											<select name="mtype" class="dropdown_item_select home_search_input">
+												<option value="lowprice" selected>가격순</option>
+												<option value="orderreview">별점순</option>
+												<option value="recentmen">빠른 멘토링</option>
+												<option value="mcaringok">사후관리</option>
 											</select>
 										</div>
-										<button type="submit" class="home_search_button">search</button>
+										<button id="search_button2" type="submit" class="home_search_button">search</button>
 									</form>
 								</div>
 							</div>

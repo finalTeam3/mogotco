@@ -11,20 +11,18 @@
 </head>
 <script>
 $(document).ready(function(){
-	$('#search_button').click(function(){
-		$('#search_form').attr({
+	$('#search_button1').click(function(){
+		$('#search_form_mentoring').attr({
 			method:'get',
 			action:'[[@{/mentoring/search}]]'
 			
 		});
-		$('#search_form').submit();
+		$('#search_form_mentoring').submit();
 
 	});
 });
 	
 </script>
-
-
 	
 	<!-- Home -->
 
@@ -54,20 +52,13 @@ $(document).ready(function(){
 				<!-- Courses Main Content -->
 				<div class="col-lg-8">
 					<div class="courses_search_container">
-						<form action="#" id="search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+						<form id="search_form_mentoring" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
 							<input name="txt" type="text" class="courses_search_input" placeholder="Search Mentorng" required="required">
-							<select id="courses_search_select" class="courses_search_select courses_search_input">
-								<option>전체</option>
-								<option>웹</option>
-								<option>보안</option>
-								<option>네트워크</option>
-								<option>데이터사이언스</option>
-								<option>게임</option>
-								<option>AI</option>
-								<option>CLOUD</option>
-								<option>기타</option>
-							</select>
-							<button id="search_button" class="courses_search_button ml-auto" type="button">search now</button>
+							<select name="mname" id="courses_search_select1" class="courses_search_select courses_search_input">
+								<option value="all">전체</option>
+								<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+							</select> 
+							<button id="search_button1" class="courses_search_button ml-auto" type="submit">search now</button>
 						</form>
 					</div>
 					<div class="courses_container">
@@ -175,6 +166,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 <script>
   Kakao.init('b67794657ed6e950ec05402c7a55d07f'); // 사용하려는 앱의 JavaScript 키 입력
