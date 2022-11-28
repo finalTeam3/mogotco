@@ -113,7 +113,7 @@ public class AjaxController {
 		while (iter.hasNext()) {
 			fieldName = (String) iter.next();
 			mfile = filelist.getFile(fieldName);
-			System.out.println(mfile);
+			// System.out.println(mfile);
 			Util.saveMcFile(mfile, admindir, userdir);
 		}
 		obj = ocrservice.ocrresult(mfile.getOriginalFilename());
