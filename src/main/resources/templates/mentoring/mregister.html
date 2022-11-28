@@ -39,8 +39,8 @@ margin-left: 1%;
   background: #fff;
   margin: 1em 0;
   padding: 0.4em 0;
-  border: 1px solid #aaa;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 2px solid #d3d3d3;;
+  box-shadow: none;
   display: none;
 }
 
@@ -51,7 +51,7 @@ margin-left: 1%;
 
 .multi-select-button {
   display: inline-block;
-  font-size: 0.875em;
+  font-size: 15px;
   padding: 0.2em 0.6em;
   max-width: 20em;
   white-space: nowrap;
@@ -59,10 +59,12 @@ margin-left: 1%;
   text-overflow: ellipsis;
   vertical-align: -0.5em;
   background-color: #fff;
-  border: 1px solid #aaa;
+  border: 1px solid #d3d3d3;;
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
   cursor: default;
+  color:black; 
+  height:40px;
 }
 
 .multi-select-button:after {
@@ -77,7 +79,7 @@ margin-left: 1%;
   vertical-align: 0.1em;
 }
 
-.multi-select-container--open .multi-select-menu { display: block; }
+.multi-select-container--open .multi-select-menu { display: block; color:black;}
 
 .multi-select-container--open .multi-select-button:after {
   border-width: 0 0.4em 0.4em 0.4em;
@@ -254,7 +256,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 											    		  'activeClass': 'multi-select-container--open',
 
 											    		  // Text to show when no option is selected
-											    		  'noneText': '-- Select --',
+											    		  'noneText': '시간선택',
 
 											    		  // Text to show when all options are selected
 											    		  'allText': undefined,
