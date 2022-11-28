@@ -1,6 +1,7 @@
 package com.mogotco.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -170,7 +171,7 @@ public class MentorController {
 
 	// 멘토 정보 등록 기능 (멘토 지원)
 	@RequestMapping("/registerimpl")
-	public String register(Model model, MentorDTO mentordto) {
+	public String register(Model model, MentorDTO mentordto, Integer[] mcateid, MWishcateDTO mwishcate) {
 
 		String mpimgname = mentordto.getMpimg().getOriginalFilename();
 		mentordto.setMentorimg(mpimgname);
@@ -181,6 +182,14 @@ public class MentorController {
 		try {
 			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 			mservice.register(mentordto);
+			System.out.println(mentordto);
+			int r = mentordto.getMentorid();
+			for(int i=0;i<mcateid.length;i++) {
+				MWishcateDTO mw = null;
+				mw = new MWishcateDTO(0,mcateid[i],r,null,null);
+				mwservice.register(mw);
+				System.out.println(mw);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

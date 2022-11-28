@@ -38,6 +38,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="MentorDTO">
 		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentorcareer, mentorapply, mcardposition) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE(),#{mcardposition})
+		<selectKey keyProperty="mentorid" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>	
 	</insert>
 	
 	<update id="update" parameterType="MentorDTO">
