@@ -534,7 +534,7 @@ section
 }
 .search_input
 {
-	width: 100%;
+	width: 90%;
 	height: 40px;
 	border: none;
 	outline: none;
@@ -542,7 +542,7 @@ section
 }
 .header_search_button
 {
-	position: absolute;
+	position: absolute;	
 	top: 0;
 	right: 0;
 	width: 40px;

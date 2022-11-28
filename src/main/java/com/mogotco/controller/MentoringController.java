@@ -152,4 +152,22 @@ public class MentoringController {
 		return "main";
 	}
 	
+	//main에서 전체검색(choyunyoung add)
+	@RequestMapping("/mainsearch")
+	public String mainsearch(Model model, String txt) {
+		//List<MCateDTO> catelist = null; // 카테고리 리스트용
+		List<MentoringDTO> searchlist = null;
+		try {
+			//catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			searchlist = mtmapper.mentoringsearch(txt);
+			model.addAttribute("mtr", searchlist);
+			//model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentoring+"mentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
+	
 }
