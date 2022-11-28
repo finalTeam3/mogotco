@@ -20,7 +20,7 @@ public class ReviewController {
 	
 	//리뷰페이지(멘토상세페이지 리뷰 탭)
 	@RequestMapping("/review")
-	public String review(Model model, int mentorid) {
+	public String review(Model model, Integer mentorid) {
 		MentorDTO mentor = null;
 		List<ReviewDTO> rlist = null;
 		try {

@@ -85,11 +85,11 @@
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
-function review(purchaseid,mentor_userid) {
+function review(mentorid) {
 
 	var c = confirm('리뷰를 작성하시겠습니까?');
 	if (c == true) {
-		location.href = '[[@{/review/review?id=}]]' + purchaseid +'[[@{mentor_userid=}]]' + mentor_userid;
+		location.href = '[[@{/mentor/mentordetail?mentorid=}]]' + mentorid;
 	}
 };
 
@@ -153,7 +153,7 @@ function review(purchaseid,mentor_userid) {
 					<td th:text="${c.mentoring_mplace}"></td>
 					<td th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<a th:href = "@{/mentor/mentordetail(mentorid = ${c.mentor_mentorid})}"><button th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])" type="submit" class="comment_button1">Review</button></a>
+						<a th:href = "@{/mentor/mentordetail(mentorid = ${c.mentor_mentorid})}"><button th:onclick="review([[${c.mentor_mentorid}]])" type="submit" class="comment_button1">Review</button></a>
 					</td>
 				</tr>
 			</tbody>
