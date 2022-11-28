@@ -73,7 +73,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//로그아웃
@@ -82,7 +82,7 @@ public class UserController {
 		if(session != null) {
 			session.invalidate();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//카카오 로그인
