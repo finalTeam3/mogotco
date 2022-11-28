@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.ReviewDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.service.MWishcateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringService;
+import com.mogotco.service.ReviewService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -39,6 +41,9 @@ public class MentorController {
 
 	@Autowired
 	MWishcateService mwservice;
+	
+	@Autowired
+	ReviewService review_service;
 
 	@Value("${admindir}")
 	String admindir;
@@ -77,6 +82,7 @@ public class MentorController {
 		MentorDTO mtd = null;
 		List<MentorDTO> mtlist = null;
 		List<MWishcateDTO> mwclist = null;
+		List<ReviewDTO> rlist = null;	// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtd = mservice.mentordetail(mentorid);
@@ -87,6 +93,10 @@ public class MentorController {
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentordetail");
+			
+			// 해당 멘토의 리뷰리스트 조회_혜정
+			rlist = review_service.getmentorreview(mentorid);
+			model.addAttribute("mentorreview", rlist);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -203,5 +213,6 @@ public class MentorController {
 		model.addAttribute("center", mentor+"ocrpage");
 		return "main";
 	}
+	
 	
 }

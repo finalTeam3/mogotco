@@ -1,33 +1,25 @@
 package com.mogotco.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.ReviewDTO;
-import com.mogotco.service.MentorService;
+import com.mogotco.service.ReviewService;
 
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
 	
 	@Autowired
-	MentorService mentor_service;
+	ReviewService review_service;
 	
-	//리뷰페이지(멘토상세페이지 리뷰 탭)
-	@RequestMapping("/review")
-	public String review(Model model, Integer mentorid) {
-		MentorDTO mentor = null;
-		List<ReviewDTO> rlist = null;
+	@RequestMapping("/reviewregister")
+	public String reviewregister(ReviewDTO review) {
 		try {
-			mentor = mentor_service.get(mentorid);
-			model.addAttribute("reviewmentor", mentor);
-			model.addAttribute("center", "mentor/mentordetail");
+			review_service.register(review);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return "main";
 	}

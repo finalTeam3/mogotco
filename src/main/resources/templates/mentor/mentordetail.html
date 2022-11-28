@@ -10,6 +10,19 @@
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 
+<script>
+$(doucument).ready(function(){
+	
+	/* 댓글 등록 */
+	$('#reviewregi_btn').click(function(){
+		$.ajax({
+			url : '[[@{/reviewregister}]]',
+			
+		});
+	});
+	
+});
+</script>
 </head>
 
 	
@@ -367,37 +380,18 @@
 									
 									<!-- Comments -->
 									<div class="comments_container">
-										<ul class="comments_list">
-											<li>
+										<ul class="comments_list" >
+											<li th:each = "mreview:${mentorreview}">
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_image"><div><img th:src="@{/images/comment_1.jpg}" alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_author" th:text = "${mreview.userid}">Milley Cyrus</div>
 															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
+															<div class="comment_time ml-auto" th:text = "${#dates.format(mreview.reviewdate, 'yyyy-MM-dd')}">1 day ago</div>
 														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-													<div class="comment_image"><div><img th:src="@{/images/comment_3.jpg}" alt=""></div></div>
-													<div class="comment_content">
-														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
-														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+														<div class="comment_text" th:text = "${mreview.reviewcon}">
+															<p>review</p>
 														</div>
 														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
 															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
@@ -407,14 +401,36 @@
 												</div>
 											</li>
 										</ul>
+										
+										<!-- Add Review -->
  										<div class="add_comment_container">
 											<div class="add_comment_title">멘토에게 리뷰남기기</div>
-											<div class="add_comment_text">멘토님도 누군가에겐 가족입니다.</div>
-											
-												<input type="text" class="comment_input_review">
+											<form name = "review_form" id = "review_form" class = "review_form">
+											<!-- rating -->
+												<fieldset>
+													<span class="text-bold">별점을 선택해주세요</span>
+													
+													<input type="radio" name="reviewStar" value="5" id="rate1">
+													<label for="rate1" class="fa-solid fa-star fa-xl"></label>
+														
+													<input type="radio" name="reviewStar" value="4" id="rate2">
+													<label for="rate2" class="fa-solid fa-star fa-xl"></label>
+													
+													<input type="radio" name="reviewStar" value="3" id="rate3">
+													<label for="rate3" class="fa-solid fa-star fa-xl"></label>
+													
+													<input type="radio" name="reviewStar" value="2" id="rate4">
+													<label for="rate4" class="fa-solid fa-star fa-xl"></label>
+													
+													<input type="radio" name="reviewStar" value="1" id="rate5">
+													<label for="rate5" class="fa-solid fa-star fa-xl"></label>
+													
+												</fieldset>
+												
+												<input type="text" class="comment_input_review" placeholder="좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다!">
 												<div class = "reviewbtn"><button type='button' id = "reviewregi_btn" class="comment_button_review trans_200">등록하기</button></div>
-											</div>
-											
+											</form>
+										</div>
 									</div>
 								</div>
 

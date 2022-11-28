@@ -1276,6 +1276,31 @@ section
 	height: 100%;
 	background: #14bdee;
 }
+.review_form input[type=radio]
+{
+	display: none;
+}
+.fa-star
+{
+	color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+.fa-star:hover
+{
+	text-shadow: 0 0 0 #14bdee;
+}
+.fa-star:hover ~ label
+{
+	text-shadow: 0 0 0 #14bdee;
+}
+.review_form fieldset
+{
+	direction : rtl;
+}
+.review_form input[type=radio]:checked ~ label
+{
+	text-shadow: 0 0 0 #14bdee;
+}
 .comments_container
 {
 	margin-top: 80px;
@@ -1379,7 +1404,7 @@ section
 }
 .add_comment_title
 {
-	font-family: 'Roboto Slab', serif;
+	font-family:'FontAwesome';
 	font-size: 20px;
 	font-weight: 700;
 	color: #384158;
