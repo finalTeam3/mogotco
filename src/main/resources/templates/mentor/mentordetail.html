@@ -387,7 +387,18 @@ $(doucument).ready(function(){
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
 															<div class="comment_author" th:text = "${mreview.userid}">Milley Cyrus</div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
+															
+															<!-- 별점 -->
+															<div class="comment_rating">
+															<div class="star-ratings-base">
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															</div>
+															</div>
+															
 															<div class="comment_time ml-auto" th:text = "${#dates.format(mreview.reviewdate, 'yyyy-MM-dd')}">1 day ago</div>
 														</div>
 														<div class="comment_text" th:text = "${mreview.reviewcon}">

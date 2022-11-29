@@ -1296,10 +1296,35 @@ section
 .review_form fieldset
 {
 	direction : rtl;
+	margin : 5px auto 5px auto;
 }
 .review_form input[type=radio]:checked ~ label
 {
 	text-shadow: 0 0 0 #14bdee;
+}
+.star-ratings {
+	color: #aaa9a9;
+	position: relative;
+	unicode-bidi: bidi-override;
+	width: max-content;
+	-webkit-text-fill-color: transparent;
+}
+
+.star-ratings-fill {
+	color: #fff58c;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-text-fill-color: #212121;
+}
+
+.star-ratings-base {
+	z-index: 0;
+	padding: 0;
 }
 .comments_container
 {
