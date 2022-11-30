@@ -12,7 +12,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT m.mentorid, m.userid, mr.mentoringid as mentoring_mentoringid,
 		mr.mtitle as mentoring_mtitle,
 		mr.mentoringimg as mentoring_mentoringimg,
-		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
+		mr.mentoringdate as mentoring_mentoringdate,
+		mr.mplace as mentoring_mplace FROM mentor m
 		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
 		WHERE m.mentorid=#{mentorid}
 	</select>

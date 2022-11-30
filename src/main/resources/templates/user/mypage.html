@@ -164,6 +164,7 @@ $(document).ready(function(){
 							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
 							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
 							<button type="button" th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토링이력</button>
+							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${ms.mentorid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토링 관리</button>
 
 							<form id = "mypage_update_form" class="comment_form">
 

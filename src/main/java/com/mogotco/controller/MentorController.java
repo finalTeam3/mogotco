@@ -1,7 +1,6 @@
 package com.mogotco.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.service.MWishcateService;
@@ -202,11 +202,19 @@ public class MentorController {
 		return "redirect:mentorregister?id="+mentordto.getUserid();
 	}
 	
-	//멘토링 관리자 페이지
+	// 멘토링 관리자 페이지
 	@RequestMapping("/mentoringadmin")
-	public String metoringadmin(Model model) {
-		
-		model.addAttribute("center", mentor+"mentoringadmin");
+	public String mentoringadmin(Model model, int mentorid) {
+		List<MentorDTO> mtlist = null;
+		try {
+			mtlist = mservice.mentoritem(mentorid);
+			model.addAttribute("mtlist", mtlist);
+			model.addAttribute("center", mentor + "mentoringadmin");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	
@@ -215,6 +223,22 @@ public class MentorController {
 	public String ocrpage(Model model) {
 		
 		model.addAttribute("center", mentor+"ocrpage");
+		return "main";
+	}
+	
+	// 멘토링 관리자 상세페이지
+	@RequestMapping("/mentoringadmindetail")
+	public String mentoringadmindetail(Model model, int mentoringid) {
+		MentoringDTO mti = null;
+		try {
+			mti = mtiservice.get(mentoringid);
+			model.addAttribute("mti", mti);
+			model.addAttribute("center", mentor+"mentoringadmindetail");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "main";
 	}
 	

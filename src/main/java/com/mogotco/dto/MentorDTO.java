@@ -37,6 +37,7 @@ public class MentorDTO {
 	private String mentoring_mtitle;
 	private String mentoring_mentoringimg;
 	private String mentoring_mentoringdate;
+	private String mentoring_mplace;
 	private String user_username;
 	
 	
