@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
+import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.service.MWishcateService;
 import com.mogotco.service.MentorService;
+import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.UserService;
 
@@ -40,6 +42,9 @@ public class MentorController {
 
 	@Autowired
 	MWishcateService mwservice;
+	
+	@Autowired
+	MentoringOptionService moservice;
 
 	@Value("${admindir}")
 	String admindir;
@@ -230,15 +235,26 @@ public class MentorController {
 	@RequestMapping("/mentoringadmindetail")
 	public String mentoringadmindetail(Model model, int mentoringid) {
 		MentoringDTO mti = null;
+		List<MentoringOptionDTO> molist = null;
 		try {
 			mti = mtiservice.get(mentoringid);
+			molist = moservice.viewMentorigTime(mentoringid);
 			model.addAttribute("mti", mti);
+			model.addAttribute("molist",molist);
 			model.addAttribute("center", mentor+"mentoringadmindetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		return "main";
+	}
+	
+	// 멘토링 관리자 페이지의 시간별 멘토링 멤버 목록 페이지
+	@RequestMapping("/mentoringmember")
+	public String mentoringmember(Model model) {
+		
+		model.addAttribute("center", mentor+"mentoringmember");
 		return "main";
 	}
 	
