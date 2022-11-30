@@ -199,7 +199,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								
 								<div>
 									<label class="form_title"> 
-										  파일 업로드 버튼을 눌러 프로필 이미지를 등록해주세요.
+										  파일 업로드 버튼을 눌러 멘토링 대표사진을 등록해주세요.
 										<div>
 											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
 										</div>
@@ -209,17 +209,17 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								</div>
 								
 								<div>
-									<label for = "userid" class="form_title">멘토번호</label>
-									<input type="text" class="userid comment_input" id = "userid" name = "userid" value = "" readonly="readonly">
+									<label for = "mentorid" class="form_title">멘토번호</label>
+									<input type="text" class="userid comment_input" id = "userid" name = "userid" readonly="readonly">
 								</div>
 																
 								<div>
-									<label for = "mentorcom" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
+									<label for = "mentoringdate" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
 										<input class="form-control border-0" type="date" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
 							   </div>
 							   
 							   	<div>
-									<label for = "mentorcom" class="form_title">멘토링 시간 선택<span style="color:red"> *</span></label><br>
+									<label for = "mentoringtime" class="form_title">멘토링 시간 선택<span style="color:red"> *</span></label><br>
 										<select id="languages" name="languages" multiple>
 										  <option>10:00</option>
 										  <option>11:00</option>
@@ -291,69 +291,62 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 							   </div>
 							   
 							   <div>
-									<label for = "mentorcom" class="form_title">카테고리 선택<span style="color:red"> *</span></label><br>
+									<label for = "mcate" class="form_title">카테고리 선택<span style="color:red"> *</span></label><br>
 										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;">
-											<option selected>웹</option>
-											<option>보안</option>
-											<option>네트워크</option>
-											<option>데이터사이언스</option>
-											<option>게임</option>
-											<option>AI</option>
-											<option>CLOUD</option>
-											<option>기타질문</option>
+											<option value=10>웹</option>
+											<option value=20>보안</option>
+											<option value=30>네트워크</option>
+											<option value=40>데이터사이언스</option>
+											<option value=50>게임</option>
+											<option value=60>AI</option>
+											<option value=70>CLOUD</option>
+											<option value=80>기타질문</option>
 										</select>
 							   </div>
 							   
 							   	<div>
-									<label for = "mentorcom" class="form_title">케어 서비스<span style="color:red"> *</span></label><br>
+									<label for = "mcaring" class="form_title">케어 서비스<span style="color:red"> *</span></label><br>
 										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius: 2px; outline:2px solid #d3d3d3">
-											<option selected>있음</option>
-											<option>없음</option>
+											<option value=1>있음</option>
+											<option value=0>없음</option>
 										</select>
 							   </div>
-
-								<div style = "display:none">
-									<label for = "adminid" class="form_title">Adminid</label>
-									<input type="text" class="comment_input" id = "adminid" name = "adminid">
-								</div>
 												
 								<div>
-									<label for = "mentorcom" class="form_title">모집정원<span style="color:red"> *</span></label><br>
+									<label for = "mmemberidcnt" class="form_title">모집정원<span style="color:red"> *</span></label><br>
 									<input type="number" min="1" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
 								</div>
 								
 								<div>
-									<label for = "mentorcom" class="form_title">멘토링 가격<span style="color:red"> *</span></label><br>
+									<label for = "mentoringprice" class="form_title">멘토링 가격<span style="color:red"> *</span></label><br>
 									<input type="number" min="0" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
 								</div>
 								
 
 								<div>
-									<label for = "mentorcon" class="form_title">멘토링 제목<span style="color:red"> *</span></label>
+									<label for = "mtitle" class="form_title">멘토링 제목<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
 								</div>
 
 								<div>
-									<label for = "mentorcareer" class="form_title">멘토링 내용<span style="color:red"> *</span></label>
+									<label for = "mcontents" class="form_title">멘토링 내용<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer" style="height:160px;"></textarea>
 								</div>
 								
 								<div>
-									<label for = "mentorcom" class="form_title">비대면 멘토링 URL<span style="color:red"> *</span></label>
+									<label for = "mentorurl" class="form_title">비대면 멘토링 URL<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom" placeholder="URL을 입력해주세요">
 								</div>
 								
 								<div>
-									<label for = "address" class="address_form">대면장소(멘토링) 주소찾기<span style="color:red"> *</span></label>
-									<input type="text" class="comment_input_postno" name = "addrnum" id="sample6_postcode" placeholder="우편번호" readonly>
+									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면장소(멘토링) 주소찾기<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input_address" name = "useraddr" id="sample6_address" placeholder="주소" readonly>
+									<input type="text" class="comment_input_detail" name = "addrdetail" id="sample6_detailAddress" placeholder="상세주소"><br>
 									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="주소찾기"><br>
-									<input type="text" class="comment_input_address" name = "useraddr" id="sample6_address" placeholder="주소" readonly><br>
-									<input type="text" class="comment_input_detail" name = "addrdetail" id="sample6_detailAddress" placeholder="상세주소">
-									<input type="text" class="comment_input_detail" name = "addrextra" id="sample6_extraAddress" placeholder="참고항목" readonly>
 								</div>
 								
 								<div>
-									<label for = "mentorcom" class="form_title">멘토링 등록날짜<span style="color:red"> *</span></label><br>
+									<label for = "mrdate" class="form_title">멘토링 등록날짜<span style="color:red"> *</span></label><br>
 									<input type="date" id="now_date" style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;" readonly>
 									<script>
 										document.getElementById('now_date').valueAsDate = new Date();
@@ -369,4 +362,25 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 			</div>
 		</div>
 	</div>
+<script>
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>
