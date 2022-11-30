@@ -53,7 +53,7 @@ class InsertPurchase {
 			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,purchase.getMentoringoption_mentoringoptionid(), r, 0, "x", purchase.getPurdate(), 
 					purchase.getPurprice(), purchase.getPurpay(), purchase.getPurcard(),purchase.getMentoring_mtitle(),purchase.getMentor_userid(),purchase.getUser_mentorname(), 
 					purchase.getMentoring_mentoringdate(), purchase.getMentoringoption_mentoringtime(), 
-					mentoring.getMentorurl(), purchase.getMentoring_mplace(),0 , mentoring.getMcaring(), mentoring.getMentorid());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
+					mentoring.getMentorurl(), purchase.getMentoring_mplace(),0 , mentoring.getMcaring(), mentoring.getMentorid(),mentoring.getMentoringid());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
 			
 			//해당 mentoringoption을 불러옴

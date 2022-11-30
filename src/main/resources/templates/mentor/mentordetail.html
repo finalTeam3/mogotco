@@ -10,19 +10,6 @@
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 
-<script>
-$(doucument).ready(function(){
-	
-	/* 댓글 등록 */
-	$('#reviewregi_btn').click(function(){
-		$.ajax({
-			url : '[[@{/reviewregister}]]',
-			
-		});
-	});
-	
-});
-</script>
 </head>
 
 	
@@ -390,12 +377,21 @@ $(doucument).ready(function(){
 															
 															<!-- 별점 -->
 															<div class="comment_rating">
-															<div class="star-ratings-base">
-															<i class="fa-solid fa-star"></i>
-															<i class="fa-solid fa-star"></i>
-															<i class="fa-solid fa-star"></i>
-															<i class="fa-solid fa-star"></i>
-															<i class="fa-solid fa-star"></i>
+															<div name="${mreview.rating}"
+																class="star-ratings-fill space-x-2 text-lg"
+																th:style="${'width:'+mreview.rating * 20+'%'}">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+															</div>
+															<div class="star-ratings-base space-x-2 text-lg">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
 															</div>
 															</div>
 															
@@ -403,10 +399,6 @@ $(doucument).ready(function(){
 														</div>
 														<div class="comment_text" th:text = "${mreview.reviewcon}">
 															<p>review</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
 														</div>
 													</div>
 												</div>
@@ -421,24 +413,24 @@ $(doucument).ready(function(){
 												<fieldset>
 													<span class="text-bold">별점을 선택해주세요</span>
 													
-													<input type="radio" name="reviewStar" value="5" id="rate1">
+													<input type="radio" name="rating" value="5" id="rate1">
 													<label for="rate1" class="fa-solid fa-star fa-xl"></label>
 														
-													<input type="radio" name="reviewStar" value="4" id="rate2">
+													<input type="radio" name="rating" value="4" id="rate2">
 													<label for="rate2" class="fa-solid fa-star fa-xl"></label>
 													
-													<input type="radio" name="reviewStar" value="3" id="rate3">
+													<input type="radio" name="rating" value="3" id="rate3">
 													<label for="rate3" class="fa-solid fa-star fa-xl"></label>
 													
-													<input type="radio" name="reviewStar" value="2" id="rate4">
+													<input type="radio" name="rating" value="2" id="rate4">
 													<label for="rate4" class="fa-solid fa-star fa-xl"></label>
 													
-													<input type="radio" name="reviewStar" value="1" id="rate5">
+													<input type="radio" name="rating" value="1" id="rate5">
 													<label for="rate5" class="fa-solid fa-star fa-xl"></label>
 													
 												</fieldset>
 												
-												<input type="text" class="comment_input_review" placeholder="좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다!">
+												<input type="text" class="comment_input_review" name = "reviewcon" id = "reviewcon" placeholder="좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다!">
 												<div class = "reviewbtn"><button type='button' id = "reviewregi_btn" class="comment_button_review trans_200">등록하기</button></div>
 											</form>
 										</div>
@@ -488,6 +480,24 @@ $(document).ready(function(){
 		});
 		
 	});
+	
+ 	/* 댓글 등록 */
+ 	$('#reviewregi_btn').click(function(){
+		var mentoringid = '[[${mtlist.mentoring_mentoringid}]]';
+		alert(mentoringid);
+		var userid = '[[${session.loginuser.userid}]]';
+		alert(userid);
+		var rating = $(':radio[name = "rating"]:checked').val();
+		alert(rating);
+		var reviewcon = $('#reviewcon').val();
+		alert(reviewcon);
+		$.ajax({
+			url : '[[@{/addreview}]]',
+ 			data : {'mentoringid' : mentoringid, 'userid' : userid, 'rating' : rating, 'reviewcon' : reviewcon},
+ 			success : alert("리뷰작성완료")
+		});
+	});  
+	
 });
 </script>
 <script>

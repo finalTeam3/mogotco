@@ -1319,11 +1319,12 @@ section
 	top: 0;
 	left: 0;
 	overflow: hidden;
-	-webkit-text-fill-color: #212121;
+	-webkit-text-fill-color: gold;
 }
 
 .star-ratings-base {
 	z-index: 0;
+	display: flex;
 	padding: 0;
 }
 .comments_container
