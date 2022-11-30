@@ -2,8 +2,6 @@ package com.mogotco.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +12,12 @@ import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
-import com.mogotco.dto.UserDTO;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.PurchaseDetailService;
-import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -44,10 +40,7 @@ public class MentoringController {
 	
 	@Autowired
 	PurchaseDetailService service1;
-	
-	@Autowired
-	UserService user_service;
-	
+		
 	String mentoring = "mentoring/";
 	
 	//멘토링목록
