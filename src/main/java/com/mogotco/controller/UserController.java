@@ -3,12 +3,12 @@ package com.mogotco.controller;
 import java.util.HashMap;
 import java.util.Random;
 
-import javax.mail.internet.MimeMessage;
+//import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+//import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.UserDTO;
-import com.mogotco.service.KakaologinAPI;
+//import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.UserService;
 
@@ -31,14 +31,14 @@ public class UserController {
 	@Autowired
 	UserService user_service;
 	
-	@Autowired
-	KakaologinAPI kakao_service;
+	//@Autowired
+	//KakaologinAPI kakao_service;
 	
 	@Autowired
 	MentorService mentor_service;
 	
-	@Autowired
-	JavaMailSender mailSender;
+	//@Autowired
+	//JavaMailSender mailSender;
 	
 	public void maincenter(Model model) {
 	}
@@ -73,7 +73,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//로그아웃
@@ -82,7 +82,7 @@ public class UserController {
 		if(session != null) {
 			session.invalidate();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//카카오 로그인
@@ -90,13 +90,13 @@ public class UserController {
 	public String kakaologin(@RequestParam(value = "code", required = false) String kakaocode, Model model, HttpSession session) throws Exception {
 		model.addAttribute("center", dir + "kakaologin");
 		System.out.println(kakaocode);
-		String accessToken = kakao_service.getAccessToken(kakaocode);
-		System.out.println("kakao access token : " + accessToken);
+		//String accessToken = kakao_service.getAccessToken(kakaocode);
+		//System.out.println("kakao access token : " + accessToken);
 		
-		HashMap<String, Object> userInfo = kakao_service.getUserInfo(accessToken);
-		System.out.println("access Token : " + accessToken);
-		System.out.println("nickname : " + userInfo.get("profile_nickname"));
-		System.out.println("email : " + userInfo.get("account_email"));
+		//HashMap<String, Object> userInfo = kakao_service.getUserInfo(accessToken);
+		//System.out.println("access Token : " + accessToken);
+		//System.out.println("nickname : " + userInfo.get("profile_nickname"));
+		//System.out.println("email : " + userInfo.get("account_email"));
 		
 		
 //		  if(userInfo.get("account_email") != null) { 
@@ -183,17 +183,17 @@ public class UserController {
 		String content = "인증번호는 " + num + " 입니다. 인증번호를 입력 후 인증 버튼을 눌러주세요."; 	// 메일 내용
 		
 		// 단순 텍스트 메일 전송용
-		MimeMessage msg = mailSender.createMimeMessage();
-		MimeMessageHelper msgHelper = new MimeMessageHelper(msg, "UTF-8");
+		//MimeMessage msg = mailSender.createMimeMessage();
+		//MimeMessageHelper msgHelper = new MimeMessageHelper(msg, "UTF-8");
 		
 		// 메일 작성
-		msgHelper.setFrom("상부3조 <mogotcomentoring@gmail.com>");
-		msgHelper.setTo(toMail);
-		msgHelper.setSubject(title);
-		msgHelper.setText(content);
+		//msgHelper.setFrom("상부3조 <mogotcomentoring@gmail.com>");
+		//msgHelper.setTo(toMail);
+		//msgHelper.setSubject(title);
+		//msgHelper.setText(content);
 		
 		// 메일 보내기
-		mailSender.send(msg);
+		//mailSender.send(msg);
 		
 		// ajax 이용시 데이터 타입은 string만 가능하기에 형 변환
 		String confirmNum = Integer.toString(num);

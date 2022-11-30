@@ -7,6 +7,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <!-- Customized Bootstrap Stylesheet -->
 <link th:href="@{/ordercss/style.css}" rel="stylesheet">
+<link th:href="@{/table/restable.css}" rel="stylesheet">
 
 <style>
 .home {
@@ -54,8 +55,7 @@
 	color: #14bdee;
 }
 /* button */
-.comment_button1
-{
+.comment_button1 {
 	width: 150px;
 	height: 46px;
 	background: #14bdee;
@@ -69,9 +69,9 @@
 	border-radius: 3px;
 	margin-top: 15px;
 }
-.comment_button1:hover
-{
-	box-shadow: 0px 5px 40px rgba(0,0,0,0.25);
+
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
 }
 </style>
 <script
@@ -92,7 +92,6 @@
 			location.href = '[[@{/purchase/purchasedetail?id=}]]' + userid;
 		}
 	}
-
 </script>
 </head>
 
@@ -120,44 +119,46 @@
 	<!-- Checkout Start -->
 	<div class="container">
 		<h1 id="orderfinish">주문이 완료되었습니다.</h1>
-		<span class="bg-secondary pr-3"></span> <span
-			class="bg-secondary pr-3"></span>
 		<h5 class="section-title position-relative text-uppercase mb-3">
 			<span class="bg-secondary pr-3">Product</span>
 		</h5>
-		<table id="otb" class="table">
+		<table class="responsive-table">
 			<thead>
-				<tr class="active">
-					<th>Mentoringid</th>
-					<th>Mentoringtitle</th>
-					<th>Mentoringdate</th>
-					<th>Mentoringtime</th>
-					<th>Mentoringplace</th>
-					<th>Purprice</th>
-					<th>Purchasedate</th>
-					<th>Purchasepay</th>
-					<th>Purchasecard</th>
-
+				<tr>
+					<th scope="col">Mentoringtitle</th>
+					<th scope="col">Mentoringid</th>
+					<th scope="col">Mentoringdate</th>
+					<th scope="col">Mentoringtime</th>
+					<th scope="col">Mentoringplace</th>
+					<th scope="col">Purprice</th>
+					<th scope="col">Purchasedate</th>
+					<th scope="col">Purchasepay</th>
+					<th scope="col">Purchasecard</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- 연결시에는 furnishop orderdetail참고 -->
-				<tr class="active1">
-					<td th:text="${list.mentoring_mentoringid}"></td>
-					<td th:text="${list.mentoring_mtitle}"></td>
-					<td th:text="${list.mentoring_mentoringdate}"></td>
-					<td th:text="${list.mentoringoption_mentoringtime}"></td>
-					<td th:text="${list.mentoring_mplace}"></td>
-					<td th:text="${list.purprice}"></td>
-					<td th:text="${list.purdate}"></td>
-					<td th:text="${list.purpay}"></td>
-					<td th:text="${list.purcard}"></td>
+				<tr>
+					<th scope="row" th:text="${list.mentoring_mtitle}"></th>
+					<td data-title="Mentoringid"
+						th:text="${list.mentoring_mentoringid}"></td>
+					<td data-title="Mentoringdate"
+						th:text="${list.mentoring_mentoringdate}"></td>
+					<td data-title="Mentoringtime"
+						th:text="${list.mentoringoption_mentoringtime}"></td>
+					<td data-title="Mentoringplace" th:text="${list.mentoring_mplace}"></td>
+					<td data-title="Purprice" th:text="${list.purprice}"></td>
+					<td data-title="Purchasedate" th:text="${list.purdate}"></td>
+					<td data-title="Purchasepay" th:text="${list.purpay}"></td>
+					<td data-title="Purchasecard" th:text="${list.purcard}"></td>
 					<!-- 내 구매이력으로 갈 것인지에 대한 버튼 -->
 					<td>
-						<button th:onclick="go([[${session.loginuser.userid}]]);" type="submit" class="comment_button1">Go to detail</button>
+						<button th:onclick="go([[${session.loginuser.userid}]]);"
+							type="submit" class="comment_button1">Go to detail</button>
 					</td>
 					<input type="hidden" id="itemimghide" th:value="${404}">
-					<td type="hidden" id="itemimghide" th:value="${404}" style="display:none"></td>
+					<td type="hidden" id="itemimghide" th:value="${404}"
+						style="display: none"></td>
 				</tr>
 			</tbody>
 		</table>
