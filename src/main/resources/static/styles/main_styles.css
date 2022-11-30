@@ -862,7 +862,34 @@ section
 	font-weight: 400 !important;
 	color: #b5b8be !important;
 }
-
+.home_search_input:-moz-placeholder
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	color: #b5b8be !important;
+}
+.home_search_input::-moz-placeholder
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	color: #b5b8be !important;
+} 
+.home_search_input:-ms-input-placeholder
+{ 
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	color: #b5b8be !important;
+}
+.home_search_input::input-placeholder
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	color: #b5b8be !important;
+}
 .dropdown_item_select
 {
 	position: relative;
@@ -894,7 +921,40 @@ section
 	letter-spacing: 0.1em;
 	cursor: pointer;
 }
-
+.home_slider_nav
+{
+	position: absolute;
+	top: 55.8%;
+	width: 50px;
+	background: #b6b7bd;
+	border-radius: 50%;
+	text-align: center;
+	z-index: 10;
+	cursor: pointer;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.home_slider_prev
+{
+	left: 75px;
+}
+.home_slider_next
+{
+	right: 75px;
+}
+.home_slider_nav i
+{
+	line-height: 50px;
+	color: #FFFFFF;
+	font-size: 22px;
+}
+.home_slider_nav:hover
+{
+	background: #14bdee;
+}
 /*********************************
 7. Features
 *********************************/

@@ -3,7 +3,6 @@
 <head>
 <title>MOGOTCO</title>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
@@ -44,7 +43,7 @@ var stompClient = null;
 
 
 function wsconnect() {
-	var socket = new SockJS('http://127.0.0.1/mogotco/wss');
+	var socket = new SockJS('http://49.50.174.57:8080/mogotco/wss');
 	stompClient = Stomp.over(socket);
 
 	stompClient.connect({}, function(frame) {
@@ -156,7 +155,7 @@ $(document).ready(function(){
             <div class="row">
                <div class="col">
                   <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
-                     <form class="header_search_form" id="search_form">>
+                     <form class="header_search_form" id="search_form">
                         <input type="text" name="txt" class="search_input" placeholder="Search" required="required">
                         <button id="search_button" class="header_search_button d-flex flex-column align-items-center justify-content-center"><i class="fa fa-search"></i>
                         </button>
@@ -223,10 +222,10 @@ $(document).ready(function(){
                            </div>
                            <div class="footer_social">
                               <ul>
-                                 <li><a href="https://ko-kr.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://www.google.com/"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://www.instagram.com/7lsehdwns/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://twitter.com/?lang=ko"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                               </ul>
                            </div>
                         </div>

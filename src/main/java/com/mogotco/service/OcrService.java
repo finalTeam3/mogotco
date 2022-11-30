@@ -32,7 +32,7 @@ public class OcrService {
 		StringBuffer response = null;
 		Object jo = null;
 	    String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","img").toString(); // 로컬 이미지 저장 경로
-//	    String imgpath = ""; // ncp 서버 이미지 저장 경로
+//	    String imgpath = "/root/tomcat/webapps/mogotco/WEB-INF/classes/static/img"; // ncp 서버 이미지 저장 경로
 	    String imageFile = imgpath + "/" + mcardimgname;
 //	    System.out.println("mcardimgname: " + imageFile);
 	    
