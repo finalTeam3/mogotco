@@ -210,7 +210,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								
 								<div>
 									<label for = "mentorid" class="form_title">멘토번호</label>
-									<input type="text" class="userid comment_input" id = "userid" name = "userid" readonly="readonly">
+									<input type="text" th:value="${m.mentorid}" class="userid comment_input" id = "userid" name = "userid" readonly="readonly">
 								</div>
 																
 								<div>
