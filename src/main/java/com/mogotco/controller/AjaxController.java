@@ -127,10 +127,9 @@ public class AjaxController {
 	}
 	
 	@RequestMapping("/addreview")
-	public Object addreview(String mentoringid, String userid, String rating, String reviewcon) {
-		int mentoring_id = Integer.parseInt(mentoringid);
-		int ratingstar = Integer.parseInt(rating);
-		ReviewDTO review = new ReviewDTO(0, mentoring_id, userid, ratingstar, reviewcon, null, 0, null, 0, null, null, null, null, null, 0);
+	public Object addreview(String userid, String starrating, String reviewcon) {
+		int rating = Integer.parseInt(starrating);
+		ReviewDTO review = new ReviewDTO(0, 0, userid, rating, reviewcon, null, 0, null, 0, null, null, null, null, null, 0);
 		try {
 			review_service.register(review);
 		} catch (Exception e) {

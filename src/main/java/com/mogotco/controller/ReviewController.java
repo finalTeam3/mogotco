@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.ReviewService;
 
 @Controller
@@ -13,16 +12,6 @@ public class ReviewController {
 	
 	@Autowired
 	ReviewService review_service;
-	
-	@RequestMapping("/reviewregister")
-	public String reviewregister(ReviewDTO review) {
-		try {
-			review_service.register(review);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "main";
-	}
 	
 	
 }

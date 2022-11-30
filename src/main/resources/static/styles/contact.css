@@ -17,6 +17,7 @@
 5. Section
 6. Home
 7. Contact
+8. REVIEW
 8. Newsletter
 9. Footer
 
@@ -1256,7 +1257,60 @@ section
 	font-weight: 500;
 	letter-spacing: 0.1em;
 }
+/*********************************
+8. REVIEW
+*********************************/
+.review_form input[type=radio]
+{
+	display: none;
+}
+.fa-star
+{
+	color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+.fa-star:hover
+{
+	text-shadow: 0 0 0 #14bdee;
+}
+.fa-star:hover ~ label
+{
+	text-shadow: 0 0 0 #14bdee;
+}
+.review_form fieldset
+{
+	direction : rtl;
+	margin : 5px auto 5px auto;
+}
+.review_form input[type=radio]:checked ~ label
+{
+	text-shadow: 0 0 0 #14bdee;
+}
+.star-ratings {
+	color: #aaa9a9;
+	position: relative;
+	unicode-bidi: bidi-override;
+	width: max-content;
+	-webkit-text-fill-color: transparent;
+}
 
+.star-ratings-fill {
+	color: #fff58c;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-text-fill-color: gold;
+}
+
+.star-ratings-base {
+	z-index: 0;
+	display: flex;
+	padding: 0;
+}
 /*********************************
 9. Footer
 *********************************/

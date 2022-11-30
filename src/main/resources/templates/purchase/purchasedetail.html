@@ -186,6 +186,22 @@
 					+ '[[@{mentor_userid=}]]' + mentor_userid;
 		}
 	};
+	
+	$(document).ready(function(){
+ 		$('#reviewregi_btn').click(function(){
+			var userid = '[[${session.loginuser.userid}]]';
+			console.log(userid);
+			var starrating = $("input[name='rating']:checked").val();
+			console.log(starrating);
+			var reviewcon = $('#reviewcon').val();
+			console.log(reviewcon);
+			$.ajax({
+				url : '[[@{/addreview}]]',
+				data : {'userid' : userid, 'starrating' : starrating, 'reviewcon' : reviewcon},
+				success : location.href = '[[@{/mentoring/mentoring}]]'
+			});
+		}); 
+	});
 </script>
 </head>
 
@@ -257,6 +273,9 @@
 							th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])"
 							type="submit" class="comment_button1">Review</button>
 					</td>
+					<td>
+						<button type="button" id = "review_btn" data-toggle="modal" data-target="#reviewmodal" class="comment_button1">Review Modal</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -291,5 +310,56 @@
 	</div>
 	</div>
 	</div>
+	
+<!-- Review Modal -->
+<div class="modal fade" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+    
+			<div class="modal-header">
+				<h6 class="modal-title" id="exampleModalLabel">멘토에게 리뷰남기기</h6>
+			</div>
+      
+			<div class="modal-body">
+				<div class="add_comment_container">
+				
+					<div class="add_comment_title">좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다! 여기에 멘토사진이랑 멘토링 이름정도..</div>
+					
+					<form name = "review_form" id = "review_form" class = "review_form">
+					<!-- rating -->
+						<fieldset>
+							<span class="text-bold">별점을 선택해주세요</span>
+														
+							<input type="radio" class = "rating" name="rating" value="5" id="rate1">
+							<label for="rate1" class="fa-solid fa-star fa-xl"></label>
+								
+							<input type="radio" class = "rating" name="rating" value="4" id="rate2">
+							<label for="rate2" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="3" id="rate3">
+							<label for="rate3" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="2" id="rate4">
+							<label for="rate4" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="1" id="rate5">
+							<label for="rate5" class="fa-solid fa-star fa-xl"></label>
+								
+						</fieldset>
+													
+						<input type="text" class="comment_input_review" name = "reviewcon" id = "reviewcon" placeholder="후기 남기면 500포인트 줄까요..?">
+					
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal-body-btn">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id = "reviewregi_btn" class="btn btn-secondary" style = "background-color: #14bdee; border-color:#14bdee" data-dismiss="modal">등록하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+    
 </body>
 </html>

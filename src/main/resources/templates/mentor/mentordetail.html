@@ -481,23 +481,6 @@ $(document).ready(function(){
 		
 	});
 	
- 	/* 댓글 등록 */
- 	$('#reviewregi_btn').click(function(){
-		var mentoringid = '[[${mtlist.mentoring_mentoringid}]]';
-		alert(mentoringid);
-		var userid = '[[${session.loginuser.userid}]]';
-		alert(userid);
-		var rating = $(':radio[name = "rating"]:checked').val();
-		alert(rating);
-		var reviewcon = $('#reviewcon').val();
-		alert(reviewcon);
-		$.ajax({
-			url : '[[@{/addreview}]]',
- 			data : {'mentoringid' : mentoringid, 'userid' : userid, 'rating' : rating, 'reviewcon' : reviewcon},
- 			success : alert("리뷰작성완료")
-		});
-	});  
-	
 });
 </script>
 <script>
