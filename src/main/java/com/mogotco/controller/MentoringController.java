@@ -11,12 +11,13 @@ import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
+import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
-import com.mogotco.service.UserService;
+import com.mogotco.service.PurchaseDetailService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -36,6 +37,9 @@ public class MentoringController {
 	
 	@Autowired
 	MentoringMapper mtmapper;
+	
+	@Autowired
+	PurchaseDetailService service1;
 	
 	String mentoring = "mentoring/";
 	
@@ -101,21 +105,78 @@ public class MentoringController {
 		return "main";
 	}
 
-	//mservice page
-	@RequestMapping("/mservice")
-	public String mservice() {
-		return mentoring+"mservice";
+	//mentoringstart page
+	@RequestMapping("/mentoringstart")
+	public String mentoringstart(Model model, String id) {
+		model.addAttribute("moptionid", id);
+		return mentoring+"mentoringstart";
 	}
 	
+	//멘토링에서 카테고리별 검색
 	@RequestMapping("/search")
-	public String search(Model model, String txt) {
+	public String search(Model model, String txt, String mname) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		String all = "all";
 		try {
-			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			if(mname.equals(all)) {
+				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+				searchlist = mtmapper.mentoringsearch(txt);			
+				model.addAttribute("txt", txt);
+				model.addAttribute("mtr", searchlist);
+				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+				model.addAttribute("center", mentoring+"mentoring");
+			}else {
+				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+				searchlist = mtmapper.mcatesearch(mname, txt);
+				model.addAttribute("mname", mname);
+				model.addAttribute("txt", txt);
+				model.addAttribute("mtr", searchlist);
+				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+				model.addAttribute("center", mentoring+"mentoring");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
+	
+	//내 멘토링 이력 보기(멘티입장 멘토링 한거)(choyunyoung add)
+	@RequestMapping("/mymentoringdetail")
+	public String mymentoringdetail(Model model, String id) {
+		List<PurchaseDetailDTO> detail = null;
+		PurchaseDetailDTO detailmember = null;
+		try {
+			//비대면
+			//멘토링 정보를 불러오고
+			detail = service1.wholedetail(id);
+			//향상 for문에 first라는 개별 객체에 넣어줌
+			for(PurchaseDetailDTO first : detail) {
+				//멘토링 멤버수를 뽑기위해 mentoringoptionid를 불러오고
+				Integer mentoringoptionid = first.getMentoringoptionid();
+				//뽑은 멤버수 정보를
+				detailmember = service1.groupcount(mentoringoptionid);
+				//다시 first객체에 setting해준다.
+				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
+			}
+			model.addAttribute("list", detail);			
+			//화면
+			model.addAttribute("center", mentoring+"mymentoringdetail");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//main에서 전체검색(choyunyoung add)
+	@RequestMapping("/mainsearch")
+	public String mainsearch(Model model, String txt) {
+		List<MentoringDTO> searchlist = null;
+		try {
 			searchlist = mtmapper.mentoringsearch(txt);
 			model.addAttribute("mtr", searchlist);
-			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,6 +185,94 @@ public class MentoringController {
 		return "main";
 	}
 	
+	//메인에서 카테고리, select type순서별 검색
+	@RequestMapping("/multimainsearch")
+	public String multimainsearch(Model model, String txt, String mname, String mtype) {
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		List<MentoringDTO> searchlist = null;
+		String all = "all";
+		String lowprice = "lowprice";
+		String orderreview = "orderreview";
+		String recentmen = "recentmen";
+		String mcaringok = "mcaringok";
+		try {
+			
+			//전체골랐을 때
+			if(mname.equals(all)) {
+				//기격
+				if(mtype.equals(lowprice)) {
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.allpricesearch(txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//리뷰
+				}if(mtype.equals(orderreview)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.allreviewsearch(txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//최근 멘토링
+				}if(mtype.equals(recentmen)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.allrecentsearch(txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//사후관리
+				}if(mtype.equals(mcaringok)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.allmcaringoksearch(txt,1);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				}
+			}else {
+				//기격
+				if(mtype.equals(lowprice)) {
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.mcatepricesearch(mname, txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//리뷰
+				}if(mtype.equals(orderreview)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.mcatereviewsearch(mname, txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//최근 멘토링
+				}if(mtype.equals(recentmen)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.mcaterecentsearch(mname, txt);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				//사후관리
+				}if(mtype.equals(mcaringok)){
+					catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+					searchlist = mtmapper.mcatemcaringoksearch(mname, txt,1);
+					model.addAttribute("txt", txt);
+					model.addAttribute("mtr", searchlist);
+					model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+					model.addAttribute("center", mentoring+"mentoring");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
 	
 	
 }

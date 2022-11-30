@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE w.userid= #{userid}
 	</select>
 
+	<select id="wishcheck" resultType="WishlistDTO">
+		SELECT * FROM wishlist WHERE userid= #{userid} and mentorid = #{mentorid} 
+	</select>
+
 	<select id="select" parameterType="Integer" resultType="WishlistDTO">
 		SELECT * FROM wishlist WHERE wishlistid=#{wishlistid}
 	</select>

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
 <title>MOGOTCO</title>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
@@ -29,13 +28,22 @@
 <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 <script src="https://kit.fontawesome.com/3394dbed7b.js" crossorigin="anonymous"></script>	 
 </head>
-
+<style>
+.search_input
+{
+	width: 90%;
+	height: 40px;
+	border: none;
+	outline: none;
+	padding-left: 20px;
+}
+</style>
 <script>
 var stompClient = null;
 
 
 function wsconnect() {
-	var socket = new SockJS('http://127.0.0.1/mogotco/wss');
+	var socket = new SockJS('http://49.50.174.57:8080/mogotco/wss');
 	stompClient = Stomp.over(socket);
 
 	stompClient.connect({}, function(frame) {
@@ -48,10 +56,20 @@ function wsconnect() {
 	});
 }; 
 </script>
-        
- 
-   
+<script>
+$(document).ready(function(){
+	$('#search_button').click(function(){
+		$('#search_form').attr({
+			method:'get',
+			action:'[[@{/mentoring/mainsearch}]]'
+			
+		});
+		$('#search_form').submit();
 
+	});
+});
+	
+</script>
 <body>
    <!-- Header -->
 
@@ -114,15 +132,12 @@ function wsconnect() {
                            <li><a th:href="@{/notice}">Notice</a></li>
                            <li><a th:href="@{/about}">About</a></li>
                            <li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
-                           <li><a th:href="@{/mentoring/mservice}">Mentoring Service</a></li>
-                           <li th:if = "${session.loginuser != null}"><a th:href="@{/wishlist/wishlist(id=${session.loginuser.userid})}">WishList</a></li>
-                           <li><a th:href="@{/contact}">Contact</a></li>
                         </ul>
-                        <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <div class="search_button"><i class="fa-solid fa-magnifying-glass"aria-hidden="true"></i></div>
 
                         <!-- Hamburger -->
 
-                        <div class="shopping_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+                        <div class="shopping_cart" th:if = "${session.loginuser != null}"><a th:href="@{/wishlist/wishlist(id=${session.loginuser.userid})}"><i class="fa-solid fa-heart" aria-hidden="true"></i></a></div>
                         <div class="hamburger menu_mm">
                            <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
                         </div>
@@ -140,10 +155,9 @@ function wsconnect() {
             <div class="row">
                <div class="col">
                   <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
-                     <form action="#" class="header_search_form">
-                        <input type="search" class="search_input" placeholder="Search" required="required">
-                        <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
-                           <i class="fa fa-search" aria-hidden="true"></i>
+                     <form class="header_search_form" id="search_form">
+                        <input type="text" name="txt" class="search_input" placeholder="Search" required="required">
+                        <button id="search_button" class="header_search_button d-flex flex-column align-items-center justify-content-center"><i class="fa fa-search"></i>
                         </button>
                      </form>
                   </div>
@@ -157,20 +171,22 @@ function wsconnect() {
    <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
       <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
       <div class="search">
-         <form action="#" class="header_search_form menu_mm">
-            <input type="search" class="search_input menu_mm" placeholder="Search" required="required">
-            <button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
+         <form class="header_search_form menu_mm" id="search_form">
+            <input type="text" name="txt" class="search_input menu_mm" placeholder="Search" required="required">
+            <button id="search_button" class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
                <i class="fa fa-search menu_mm" aria-hidden="true"></i>
             </button>
          </form>
       </div>
       <nav class="menu_nav">
          <ul class="menu_mm">
+         	<li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/user/login}"><i class="fa-solid fa-user"></i></a></li>
             <li class="menu_mm"><a th:href="@{/}">Home</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/mypage(userid = ${session.loginuser.userid})}">Mypage</a></li>
             <li class="menu_mm"><a th:href="@{/notice}">Notice</a></li>
-            <li class="menu_mm"><a th:href="@{/mentoring}">Mentoring</a></li>
-            <li class="menu_mm"><a th:href="@{/blog}">Blog</a></li>
-            <li class="menu_mm"><a th:href="@{/contack}">Contact</a></li>
+            <li class="menu_mm"><a th:href="@{/about}">About</a></li>
+            <li class="menu_mm"><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/logout}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
          </ul>
       </nav>
    </div>
@@ -178,34 +194,10 @@ function wsconnect() {
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
 <div class="super_container"th:insert = "${center} ? ${center} : maincenter">
-   
-   <!-- Home -->
-
-
-   <!-- Features -->
-
-
-   <!-- Popular Courses -->
-
-
-   <!-- Counter -->
-
-
-   <!-- Events -->
-
-
-   <!-- Team -->
-
-
-   <!-- Latest News -->
-
-
-   <!-- Newsletter -->
-
-
 
  </div>  
 </body>
+  <!-- Maincenter finish------------------------------------------------------------------------------------>
    <!-- Footer -->
 
    <footer class="footer">
@@ -230,10 +222,10 @@ function wsconnect() {
                            </div>
                            <div class="footer_social">
                               <ul>
-                                 <li><a href="https://ko-kr.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://www.google.com/"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://www.instagram.com/7lsehdwns/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                 <li><a href="https://twitter.com/?lang=ko"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                               </ul>
                            </div>
                         </div>

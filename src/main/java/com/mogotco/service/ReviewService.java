@@ -52,6 +52,10 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 	public List<ReviewDTO> topmentors() throws Exception{
 		return mapper.topmentors();
 	}
+	//mentor들의 cate뽑기(review에 있음)(choyunyoung add)
+	public List<ReviewDTO>mentorwish(int mentorid) throws Exception{
+		return mapper.mentorwish(mentorid);
+	}
 
 
 }

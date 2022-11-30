@@ -37,11 +37,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insert" parameterType="MentorDTO">
-		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentorcareer, mentorapply) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE())
+		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentorcareer, mentorapply, mcardposition) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE(),#{mcardposition})
+		<selectKey keyProperty="mentorid" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>	
 	</insert>
 	
 	<update id="update" parameterType="MentorDTO">
-		UPDATE mentor SET mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},cancelmentoring=#{cancelmentoring},mentorcareer=#{mentorcareer} WHERE mentorid=#{mentorid}
+		UPDATE mentor SET mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},cancelmentoring=#{cancelmentoring},mentorcareer=#{mentorcareer},mcardposition=#{mcardposition} WHERE mentorid=#{mentorid}
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

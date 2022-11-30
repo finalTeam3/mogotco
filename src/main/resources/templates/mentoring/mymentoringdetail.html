@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- Customized Bootstrap Stylesheet -->
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<link th:href="@{/table/restable.css}" rel="stylesheet">
+<style>
+
+/* button */
+.comment_button1 {
+	width: 70px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script>
+	function gomentoring(mentoringoptionid) {
+
+		var c = confirm('멘토링을 시작하시겠습니까?');
+		if (c == true) {
+			location.href = '[[@{/mentoring/mentoringstart?id=}]]'
+					+ mentoringoptionid;
+		}
+	};
+</script>
+</head>
+
+
+<body>
+	<!-- Home -->
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/user/mypage}">Mypage</a></li>
+								<li>mymentoringdetail</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+		<!-- Checkout Start -->
+		<div class="contact">
+	<!-- Checkout Start -->
+			<div class="contact_info_container">
+	<div class="container">
+				<div class="row">
+			<div class="col-lg-8">
+			<div class="contact_form">
+			<div class="contact_info_title">MyMentoringdetail</div>
+		<table class="responsive-table">
+			<thead>
+				<tr>
+					<th scope="col">Mentoringtitle</th>
+					<th scope="col">Mentoringdate</th>
+					<th scope="col">Member</th>
+					<th scope="col">MentoringUrl</th>
+					<th scope="col">Mentoringplace</th>
+					<th scope="col">Progress</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c:${list}">
+					<th scope="row" th:text="${c.mentoring_mtitle}"></th>
+					<td data-title="Mentoringdate"
+						th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
+					<td data-title="Member" th:text="${c.mentoringmembercnt}"></td>
+					<td data-title="MentoringUrl" th:text="${c.mentoring_mentorurl}"></td>
+					<td data-title="Mentoringplace" th:text="${c.mentoring_mplace}"></td>
+					<td data-title="Progress" th:text="${c.progresspur}" id="progresspuresult"></td>
+					<td>
+						<button th:if="${c.mentoring_mplace} == ${'비대면'}"
+							th:onclick="gomentoring([[${c.mentoringoptionid}]])"
+							type="submit" class="comment_button1">start</button>
+					</td>
+				</tr>
+			</tbody>
+</table>
+</div>
+</div>
+					<!-- Contact Info -->
+					<div class="col-lg-4">
+						<div class="contact_info">
+							<div class="contact_info_title">Contact Info</div>
+							<div class="contact_info_text">
+								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">New York Office</div>
+								<ul class="location_list">
+									<li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">Australia Office</div>
+								<ul class="location_list">
+									<li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -513,7 +513,7 @@ section
 }
 .search_input
 {
-	width: 100%;
+	width: 90%;
 	height: 40px;
 	border: none;
 	outline: none;
@@ -802,6 +802,22 @@ section
 {
 	color: #14bdee;
 }
+/*********************************
+6-1. Modal
+*********************************/
+
+.modal
+{
+	top : 50%;
+	left : 50%;
+	transform : translate(-50%, -50%);
+}
+.modal-body-btn
+{
+	text-align: right;
+	margin : 10px;
+	display: inline;
+}
 
 /*********************************
 7. Contact
@@ -927,6 +943,14 @@ section
 	font-weight: 400;
 	color: #2c3145;
 }
+.correct
+{
+	color : green;
+}
+.incorrect
+{
+	color : red;
+}
 .comment_form > div:not(:last-child)
 {
 	margin-bottom: 25px;
@@ -1005,6 +1029,52 @@ section
 	outline: none;
 	border-radius: 3px;
 	margin-top: 15px;
+}
+.comment_button_regi
+{
+	width: 150px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.comment_button_mail
+{
+	width: 160px;
+	height: 40px;
+	background: #33c8f2;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 5px;
+}
+.comment_button_login
+{
+	width: 150px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+	display : block;
 }
 .comment_button:hover
 {

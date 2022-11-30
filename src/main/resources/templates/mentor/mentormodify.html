@@ -8,7 +8,6 @@
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-
 #pubutton{
 margin-left: 22%;
 }
@@ -135,7 +134,7 @@ function upload() {
 								<div>
 									<label class="form_title"> 
 										<div>
-											<img id="uploadprofile" th:src="@{/images/}+${m.mentorimg}" style="width:200px"/>
+											<img id="uploadprofile" th:src="@{/img/}+${m.mentorimg}" style="width:200px"/>
 										</div>
 									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px">프로필 수정</label>
 									</label>
@@ -178,13 +177,13 @@ function upload() {
 								</div>
 
 								<div>
-									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
-									<textarea class="comment_input" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
+									<label for = "mcardposition" class="form_title">Mcardposition<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" th:value="${m.mcardposition}" id="mcardposition" name="mcardposition">
 								</div>
 
 								<div>
-									<label for = "cancelmentoring" class="form_title">Cancelmentoring<span style="color:red"> *</span></label>
-									<input type="text" class="userid comment_input" th:value="${m.cancelmentoring}" name="cancelmentoring" id="cancelmentoring" readonly="readonly">
+									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<textarea class="comment_input" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
 								</div>
 
 								<div>
@@ -192,55 +191,65 @@ function upload() {
 									<textarea class="comment_input" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
 								</div>
 
+								<div>
+										<label for = "mwishcate" class="form_title">Category<span style="color:red"> *</span></label><br>
+										<div class="form-check-inline">
+									       	<label class="form-check-label" for="web">
+									          <input type="checkbox" class="form-check-input" id="web" name="mcateid" value=10>
+									          web
+									        </label>
+								        </div>
+								        <div class="form-check-inline"> 
+									        <label class="form-check-label" for="secure">
+									          <input type="checkbox" class="form-check-input" id="secure" name="mcateid" value=20>
+									          secure
+									        </label>
+								        </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="network">
+									        <input type="checkbox" class="form-check-input" id="network" name="mcateid" value=30>
+									        network
+									      </label>
+									    </div>							        
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="ds">
+									        <input type="checkbox" class="form-check-input" id="ds" name="mcateid" value=40>
+									        Data Science
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="game">
+									        <input type="checkbox" class="form-check-input" id="game" name="mcateid" value=50>
+									        Game
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="ai">
+									        <input type="checkbox" class="form-check-input" id="ai" name="mcateid" value=60>
+									        AI
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="cloud">
+									        <input type="checkbox" class="form-check-input" id="cloud" name="mcateid" value=70>
+									       	Cloud
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="etc">
+									        <input type="checkbox" class="form-check-input" id="etc" name="mcateid" value=80>
+									        etc
+									      </label>
+								    </div>
+								    
+								    <div>&nbsp</div>
+								    
+								</div>
+
 								<button id = "update_btn" class="comment_button trans_200">Modify</button>
 								
 							</form>
-														
-<!-- 							  <form>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check1">
-							        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">웹
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check2">
-							        <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something">보안
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check3">
-							        <input type="checkbox" class="form-check-input" id="check3" name="vehicle3" value="something">네트워크
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check4">
-							        <input type="checkbox" class="form-check-input" id="check4" name="vehicle4" value="something">데이터사이언스
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check5">
-							        <input type="checkbox" class="form-check-input" id="check5" name="vehicle5" value="something">게임
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check6">
-							        <input type="checkbox" class="form-check-input" id="check6" name="vehicle6" value="something">AI
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check7">
-							        <input type="checkbox" class="form-check-input" id="check7" name="vehicle7" value="something">Cloud
-							      </label>
-							    </div>
-							    <div class="form-check">
-							      <label class="form-check-label" for="check8">
-							        <input type="checkbox" class="form-check-input" id="check8" name="vehicle8" value="something">기타
-							      </label>
-							    </div>
-							    <button id = "register_btn" class="comment_button trans_200">Submit</button>
-							  </form> -->							
-							
-							
+																					
 						</div>
 					</div>
 				</div>

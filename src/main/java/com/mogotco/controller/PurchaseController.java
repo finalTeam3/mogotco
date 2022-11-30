@@ -1,7 +1,11 @@
 package com.mogotco.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +51,43 @@ public class PurchaseController {
 	@Autowired
 	UserService service5;
 	
+	// 아이디값 유무 판단
+	@RequestMapping("/idcheck")
+	public void idcheck(PurchaseDTO purchase, HttpServletRequest request, HttpServletResponse response) {
+		// current session이 없으면 없는채로 두는 것
+		HttpSession session = request.getSession(false);
+		// session정보가 없을 때
+		if (session == null) {
+			try {
+				// session이 없을 때 controller주소로 감
+				response.sendRedirect("/mogotco/user/login");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			try {// session이 있을 때 controller주소로 감
+				
+				//한국어 encode해줘야 함
+				String mentoring_mtitle = request.getParameter("mentoring_mtitle");
+				String encodeMentoring_mtitle = URLEncoder.encode(mentoring_mtitle, "UTF-8");
+
+				String mentoring_mplace = request.getParameter("mentoring_mplace");
+				String encodeMentoring_mplace = URLEncoder.encode(mentoring_mplace, "UTF-8");
+
+				response.sendRedirect("/mogotco/purchase?mentoring_mentoringid=" +request.getParameter("mentoring_mentoringid")+"&mentoringoption_mentoringtime="+request.getParameter("mentoringoption_mentoringtime")
+				+ "&mentoring_mtitle="+encodeMentoring_mtitle + "&mentoring_mentoringdate="+request.getParameter("mentoring_mentoringdate") + "&mentoring_mplace="+encodeMentoring_mplace
+				+ "&mentoring_mentoringprice="+request.getParameter("mentoring_mentoringprice") + "&mentor_userid="+request.getParameter("mentor_userid"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	//구매페이지
 	@RequestMapping("")
-	public String purchase(Model model, HttpSession session, PurchaseDTO pur) {
-		
+	public String purchase(Model model, HttpSession session,PurchaseDTO pur) {
 		//mentoringid제외한 것
 		model.addAttribute("pur", pur);
 		
@@ -58,6 +95,7 @@ public class PurchaseController {
 		MentoringOptionDTO mto = null;
 		try {
 			mto = service4.viewmentoringoptionid(pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime());
+			System.out.println(mto);
 			model.addAttribute("mto", mto);
 			model.addAttribute("center", purchase+"purchase");
 		} catch (Exception e) {
@@ -115,7 +153,7 @@ public class PurchaseController {
 			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,pur.getMentoringoption_mentoringoptionid(), r, 0, "x", pur.getPurdate(), 
 					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getMentor_userid(), pur.getUser_mentorname(), 
 					pur.getMentoring_mentoringdate(), pur.getMentoringoption_mentoringtime(), 
-					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
+					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring(), mentoring.getMentorid());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
 			
 			//해당 mentoringoption을 불러옴
