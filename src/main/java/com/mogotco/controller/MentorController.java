@@ -80,7 +80,6 @@ public class MentorController {
 	@RequestMapping("/mentordetail")
 	public String mentordetail(Model model, Integer mentorid) {
 		MentorDTO mta = null;
-		MentorDTO mtd = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		List<ReviewDTO> rlist= null;
@@ -92,7 +91,6 @@ public class MentorController {
 			model.addAttribute("mta", mta);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
-			
 			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
@@ -111,7 +109,6 @@ public class MentorController {
 	@RequestMapping("/nonid")
 	public String nonid(Model model, int mentorid) {
 		MentorDTO mta = null;
-		MentorDTO mtd = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		List<ReviewDTO> rlist= null;
@@ -124,13 +121,12 @@ public class MentorController {
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
 			
-			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
 			model.addAttribute("mentorreview", rlist);
 			review = review_service.indivirating(mentorid);
 			model.addAttribute("avgrating", review);
-			model.addAttribute("center", mentor + "mentordetail");
+			model.addAttribute("center", mentor + "mentordetail1");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
