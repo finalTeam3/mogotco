@@ -1,4 +1,7 @@
 <html lang="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <script>
 function request(mentor_mentorid){
 		location.href='[[@{/mentor/idcheck?mentorid=}]]'+mentor_mentorid;
@@ -157,11 +160,11 @@ function request(mentor_mentorid){
 						</div>
 						<div class="course_body">
 							<h3 class="course_title">
-								<a th:href="@{/mentoring/mentoringdetail?(mentoringid=${i.mentoringid})}" th:text="${i.mtitle}"></a>
+								<a th:href="@{/mentoring/mentoringdetail?(mentoringid=${i.mentoringid})}" th:text="${i.mtitle}" style="font-family: 'IBM Plex Sans KR', sans-serif;"></a>
 							</h3>
-							<div class="course_teacher" th:text="${i.user_username}">Mr. John Taylor</div>
+							<div class="course_teacher" th:text="${i.user_username}" style="font-family: 'IBM Plex Sans KR', sans-serif;">Mr. John Taylor</div>
 							<div class="course_text">
-								<p th:text="${i.mcontents}"></p>
+								<p th:text="${i.mcontents}" style="font-family: 'IBM Plex Sans KR', sans-serif;"></p>
 							</div>
 						</div>
 						<div class="course_footer">
@@ -213,7 +216,7 @@ function request(mentor_mentorid){
 								<input type='hidden' th:value="${t.mentor_mentorid}" name='mentorid'
 								id="mentorid"> 
 							</div>
-							<div class="team_subtitle" th:text="${t.mentor_mentorcom}"></div>
+							<div class="team_subtitle" th:text="${t.mentor_mentorcom}" style="font-family: 'IBM Plex Sans KR', sans-serif;"></div>
 							<div class="social_list">
 								<ul>
 									<li><a th:href="${t.user_snsgit}"><i
