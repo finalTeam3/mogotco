@@ -159,10 +159,8 @@ public class UserController {
 	//회원가입기능
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model model, UserDTO user) {
-		System.out.println(user);
 		try {
 			user_service.register(user);
-			model.addAttribute("center", dir+"login");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

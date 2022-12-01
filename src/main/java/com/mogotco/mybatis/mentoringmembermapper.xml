@@ -10,6 +10,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="MentoringmemberDTO">
 		SELECT * FROM mentoringmember
 	</select>
+
+	<!-- 멘토링 옵션id로 멘토링 멤버의 userid 가져올 때(mentoringmemeber 페이지) -->
+	<select id="mmemberuserid" parameterType="Integer" resultType="MentoringmemberDTO">
+		SELECT * FROM mentoringmember WHERE mentoringoptionid=#{mentoringoptionid}
+	</select>	
+	
 	<insert id="insert" parameterType="MentoringmemberDTO">
 		INSERT INTO mentoringmember VALUES (NULL,#{mentoringoptionid},#{userid})
 		<selectKey keyProperty="mmemberid" resultType="Integer"

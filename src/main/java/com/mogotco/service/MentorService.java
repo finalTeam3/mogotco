@@ -47,6 +47,10 @@ public class MentorService implements MyService<Integer, MentorDTO> {
 	public List<MentorDTO> mentoritem(int mentorid) throws Exception {
 		return mapper.mentoritem(mentorid);
 	}
+	
+	public MentorDTO mentoritem1(int mentorid) throws Exception {
+		return mapper.mentoritem1(mentorid);
+	}
 
 	public MentorDTO adminupdate(String userid) throws Exception {
 		return mapper.adminupdate(userid);

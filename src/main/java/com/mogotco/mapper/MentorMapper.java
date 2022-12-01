@@ -13,6 +13,7 @@ import com.mogotco.frame.MyMapper;
 public interface MentorMapper extends MyMapper<Integer, MentorDTO>{
 	public MentorDTO mentorAll(String userid) throws Exception;
 	public List<MentorDTO> mentoritem(int mentorid) throws Exception;
+	public MentorDTO mentoritem1(int mentorid) throws Exception;
 	public MentorDTO adminupdate(String userid) throws Exception;
 	public MentorDTO mentordetail(int mentorid) throws Exception;
 }

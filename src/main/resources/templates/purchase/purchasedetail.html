@@ -180,13 +180,27 @@
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script>
 	function review(purchaseid, mentor_userid) {
-
 		var c = confirm('리뷰를 작성하시겠습니까?');
 		if (c == true) {
 			location.href = '[[@{/review/review?id=}]]' + purchaseid
 					+ '[[@{mentor_userid=}]]' + mentor_userid;
 		}
 	};
+	
+	$(document).ready(function(){
+ 		$('#reviewregi_btn').click(function(mentorid){
+ 			var mentorid = $('#mentorid').val();
+ 			var mentoringid = $('#mentoringid').val();
+			var userid = '[[${session.loginuser.userid}]]';
+			var starrating = $("input[name='rating']:checked").val();
+			var reviewcon = $('#reviewcon').val();
+			$.ajax({
+				url : '[[@{/addreview}]]',
+				data : {'mentoringid' : mentoringid,'userid' : userid, 'starrating' : starrating, 'reviewcon' : reviewcon},
+				success : location.href = '[[@{/mentor/mentordetail?mentorid=}]]' + mentorid
+			});
+		}); 
+	});
 </script>
 </head>
 
@@ -202,7 +216,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/user/mypage}">Mypage</a></li>
+								<li><a th:href="@{/user/mypage(userid=${userid})}">Mypage</a></li>
 								<li>Purchasedetail</li>
 							</ul>
 						</div>
@@ -217,7 +231,7 @@
 		<!-- Contact Info -->
 
 		<div class="contact_info_container">
-	<div class="container">
+	<div class="container" th:each="c:${list}">
 			<div class="row">
 			<div class="col-lg-8">
 			<div class="contact_form">
@@ -240,7 +254,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="c:${list}">
+				<tr>
 					<th scope="row" th:text="${c.mentoring_mtitle}"></th>
 					<td data-title="Purchaseid" th:text="${c.purchaseid}"></td>
 					<td data-title="Purchasedate" th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
@@ -254,10 +268,10 @@
 					<td data-title="Mentoringplace" th:text="${c.mentoring_mplace}"></td>
 					<td data-title="Progress" th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button
-							th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])"
-							type="submit" class="comment_button1">Review</button>
+						<button type="button" id = "review_btn" data-toggle="modal" data-target="#reviewmodal" class="comment_button1">Review Modal</button>
 					</td>
+					
+
 				</tr>
 			</tbody>
 		</table>
@@ -288,9 +302,72 @@
 							</div>
 						</div>
 					</div>
+	
+	</div>
+	
+<!-- Review Modal -->
+<div class="modal fade" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+    
+			<div class="modal-header">
+				<h6 class="modal-title" id="exampleModalLabel">멘토에게 리뷰남기기</h6>
+			</div>
+      
+			<div class="modal-body">
+				<div class="add_comment_container">
+				
+					<div class="add_comment_title">좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다!
+						<div class="teacher_image review_mentoring_title"><img th:src="@{/images/}+${c.mentor_mentorimg}" style="width:100px; height:100px;" alt=""></div>
+						<div class = "review_mentoring_title" th:text="${c.mentoring_mtitle}">멘토링 제목</div>
+					</div>
+					
+					<form name = "review_form" id = "review_form" class = "review_form">
+					<!-- rating -->
+						<fieldset>
+							<!-- secret -->
+							<input type = "hidden" class = "mentoringid" id = "mentoringid" name = "mentoringid" th:value = "${c.mentoring_mentoringid}">
+							<input type = "hidden" class = "mentorid" id = "mentorid" name = "mentorid" th:value = "${c.mentor_mentorid}">
+							
+							<!-- rating -->
+							<span class="text-bold">별점을 선택해주세요</span>
+														
+							<input type="radio" class = "rating" name="rating" value="5" id="rate1">
+							<label for="rate1" class="fa-solid fa-star fa-xl"></label>
+								
+							<input type="radio" class = "rating" name="rating" value="4" id="rate2">
+							<label for="rate2" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="3" id="rate3">
+							<label for="rate3" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="2" id="rate4">
+							<label for="rate4" class="fa-solid fa-star fa-xl"></label>
+							
+							<input type="radio" class = "rating" name="rating" value="1" id="rate5">
+							<label for="rate5" class="fa-solid fa-star fa-xl"></label>
+								
+						</fieldset>
+													
+						<input type="text" class="comment_input_review" name = "reviewcon" id = "reviewcon" placeholder="후기 남기면 500포인트 줄까요..?">
+					
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal-body-btn">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id = "reviewregi_btn" class="btn btn-secondary" style = "background-color: #14bdee; border-color:#14bdee" data-dismiss="modal">등록하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+	
 	</div>
 	</div>
 	</div>
-	</div>
+	
+
+    
 </body>
 </html>

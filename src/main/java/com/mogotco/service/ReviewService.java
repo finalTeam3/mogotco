@@ -40,13 +40,13 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 		return mapper.selectAll();
 	}
 	
-	public List<ReviewDTO> getmentorreview(String userid) throws Exception {
-	      return mapper.getmentorreview(userid);
+	public List<ReviewDTO> getmentorreview(int mentorid) throws Exception {
+	      return mapper.getmentorreview(mentorid);
 	}
 	
 	//개인 mentor 평점 avg(choyunyoung add)
-	public ReviewDTO indivirating(String userid) throws Exception{
-		return mapper.indivirating(userid);
+	public ReviewDTO indivirating(int mentorid) throws Exception{
+		return mapper.indivirating(mentorid);
 	}
 	//mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로)
 	public List<ReviewDTO> topmentors() throws Exception{

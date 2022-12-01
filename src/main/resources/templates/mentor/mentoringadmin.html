@@ -36,28 +36,78 @@
 		</div>			
 	</div>
 
-	<!-- Contact -->
+		<!-- Courses -->
 
-	<div class="contact">
-
-		<!-- Contact Info -->
-
-		<div class="contact_info_container">
-			<div class="container">
-				<div class="row">
-
-					<!-- Contact Form -->
-					<div class="col-lg-8">
-						<div class="contact_form">
-							<div class="contact_info_title">Mentoring Admin</div>
+	<div class="courses">
+		<div class="container">
+			<div class="row">
+				<div class="contact_info_title">Mentoring Admin</div>
+				<!-- Courses Main Content -->
+				<div class="col-lg-12">
+					<div class="courses_search_container">
+	
+					</div>
+					<div class="courses_container">
+						<div class="row courses_row">
 							
-							
-														
+							<!-- Course -->
+<!-- 							<div class="col-lg-6 course_col">
+								<div class="course" th:each="mtlist:${mtlist}">
+									<div class="course_image"></div>
+									<div class="course_body">
+										<h3 class="course_title" style="float:left;"><a></a></h3>
+										<ul style="list-style:none;"><li><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}"><img th:src="@{/images/}+${mtlist.mentoring_mentoringimg}" alt="멘토링 대표 이미지" style="width:100%" /></a></li></ul>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span th:text="${mtlist.mentoring_mtitle}"></span>
+											</div>
+ 											<div class="course_info">
+												<i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 
+												<span>등록일자:</span>
+												<span th:text="${mtlist.mentoring_mentoringdate}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+
+				<div class="col-lg-8 news_col">
+					<div class="news_posts_small" th:each="mtlist:${mtlist}">
+
+						<!-- News Posts Small -->
+						<div class="news_post_small">
+							<div class="news_post_small_title"><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}">Home-based business insurance issue (Spring 2017 - 2018)</a></div>
+							<div class="news_post_meta">
+								<ul>
+									<li><span class="badge badge-pill badge-dark" style="color:#FFFFFF" th:text="${mtlist.mentoring_mentoringdate}">대면</span></li>
+									<li><span th:text="${mtlist.mentoring_mplace}"></span></li>
+								</ul>
+							</div>
 						</div>
+
+						<!-- News Posts Small -->
+
+						<!-- News Posts Small -->
+
+						<!-- News Posts Small -->
+
 					</div>
 				</div>
-			</div>
+
+
+
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Courses Sidebar -->
+
 		</div>
+	</div>
 	</div>
 
 

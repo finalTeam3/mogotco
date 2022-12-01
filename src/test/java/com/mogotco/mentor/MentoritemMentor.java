@@ -25,9 +25,11 @@ class MentoritemMentor {
 			e.printStackTrace();
 		}
 		
-		for(MentorDTO c:list) {
-			System.out.println(c);
+		for (MentorDTO m:list) {
+			System.out.println(m);
+			
 		}
+		
 		
 	}
 

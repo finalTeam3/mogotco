@@ -29,31 +29,29 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="reviewDTO">
 		SELECT * FROM review
 	</select>
-
-	<select id="getmentorreview" parameterType="String"
+	
+	<!-- 멘토상세페이지에서 해당 멘토 리뷰조회 -->
+	<select id="getmentorreview" parameterType="Integer"
 		resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, r.userid, r.rating,
-		r.reviewcon, r.reviewdate FROM review r
-		INNER JOIN mentoring ming ON
-		r.mentoringid = ming.mentoringid
-		INNER JOIN mentor m ON ming.mentorid =
-		m.mentorid
-		WHERE m.userid = #{userid}
+		SELECT m.userid AS mentor_userid, r.userid, r.rating, r.reviewcon, r.reviewdate, m.mentorid AS mentor_mentorid 
+		FROM review r
+		INNER JOIN mentoring ming ON r.mentoringid = ming.mentoringid
+		INNER JOIN mentor m ON ming.mentorid = m.mentorid
+		WHERE m.mentorid = #{mentorid}
 	</select>
 
 	<!-- 개인 mentor 평점 avg(choyunyoung add) -->
-	<select id="indivirating" parameterType="String"
-		resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS
+	<select id="indivirating" parameterType="Integer" resultType="reviewDTO">
+		SELECT m.mentorid, ROUND(avg(r.rating),1) AS
 		avgrate
-		FROM mentor m
+		FROM review r
 		INNER JOIN mentoring men ON
-		m.mentorid=men.mentorid
+		r.mentoringid=men.mentoringid
+		INNER JOIN mentor m ON men.mentorid=m.mentorid
 		INNER
-		JOIN review r ON
-		men.mentoringid=r.mentoringid
-		WHERE m.userid =
-		#{userid}
+		JOIN user u ON
+		r.userid=u.userid
+		WHERE men.mentorid = #{mentorid}
 	</select>
 
 	<!-- mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로) -->

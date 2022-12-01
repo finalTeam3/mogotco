@@ -20,7 +20,7 @@ class GetMentorReview {
 		
 		List<ReviewDTO> list = null;
 		try {
-			list = service.getmentorreview("qkrgPwjd1541");
+			list = service.getmentorreview(100);
 			System.out.println("OK");
 		} catch (Exception e) {
 			e.printStackTrace();
