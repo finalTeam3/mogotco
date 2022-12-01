@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MCateDTO;
+import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
+import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.PurchaseDetailService;
@@ -31,23 +33,29 @@ public class MentoringController {
 	MCateService mcateservice;
 	
 	@Autowired
+	MentorService mentor_service;
+	
+	@Autowired
 	MentoringMapper mtmapper;
 	
 	@Autowired
 	PurchaseDetailService service1;
-	
+		
 	String mentoring = "mentoring/";
 	
 	//멘토링목록
 	@RequestMapping("/mentoring")
-	public String mentoring(Model model) {
+	public String mentoring(Model model, String userid) {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		MentorDTO ment = null;
 		try {
 			mlist = mservice.viewMentoringAll(); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
 			model.addAttribute("center", mentoring+"mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,8 +103,15 @@ public class MentoringController {
 	
 	//멘토링 등록페이지
 	@RequestMapping("/mentoringregister")
-	public String mentoringregister(Model model) {
-		model.addAttribute("center", mentoring+"mregister");
+	public String mentoringregister(Model model, String userid) {
+		MentorDTO mentorall = null;
+		try {
+			mentorall = mentor_service.mentorAll(userid);
+			model.addAttribute("m", mentorall);
+			model.addAttribute("center", mentoring+"mregister");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "main";
 	}
 

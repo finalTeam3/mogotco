@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
 	<select id="viewMentoringAll" resultType="MentoringDTO">
-		SELECT mt.mentoringid,
+		SELECT mt.mentoringid, mt.mentorid,
 		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
 		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring
 		mt

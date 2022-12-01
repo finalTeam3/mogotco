@@ -143,14 +143,14 @@ $(document).ready(function(){
 
 						<!-- Latest Course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Mentoring Register</div>
+							<div th:if="${ms != null}" class="sidebar_section_title">Mentoring Register</div>
 							<div class="sidebar_latest">
 
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
 									<div>
 										&nbsp&nbsp&nbsp&nbsp
-										<button type="button" th:onclick="|location.href='@{/mentoring/mentoringregister}'|" class="home_search_button" style="width:180px; font-weight:bold;">멘토링 등록하기</button>
+										<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|" class="home_search_button" style="width:180px; font-weight:bold;">멘토링 등록하기</button>
 									</div>
 								</div>
 

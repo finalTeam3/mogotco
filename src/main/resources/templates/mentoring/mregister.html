@@ -5,11 +5,17 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/example-styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/demo-styles.css}">
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
+<script th:src="@{/path/to/cdn/jquery.slim.min.js}"></script>
+<script th:src="@{/path/to/src/jquery.multi-select.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
 <style>
-
 #pubutton{
 margin-left: 11%;
 }
@@ -18,9 +24,120 @@ margin-left: 11%;
 margin-left: 1%;
 }
 </style>
+<style>
+.multi-select-container {
+  display: inline-block;
+  position: relative;
+}
+
+.multi-select-menu {
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  float: left;
+  min-width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  padding: 0.4em 0;
+  border: 2px solid #d3d3d3;;
+  box-shadow: none;
+  display: none;
+}
+
+.multi-select-menu input {
+  margin-right: 0.3em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-button {
+  display: inline-block;
+  font-size: 15px;
+  padding: 0.2em 0.6em;
+  max-width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: -0.5em;
+  background-color: #fff;
+  border: 1px solid #d3d3d3;;
+  border-radius: 4px;
+  box-shadow: none;
+  cursor: default;
+  color:black; 
+  height:40px;
+}
+
+.multi-select-button:after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.4em 0.4em 0 0.4em;
+  border-color: #999 transparent transparent transparent;
+  margin-left: 0.4em;
+  vertical-align: 0.1em;
+}
+
+.multi-select-container--open .multi-select-menu { display: block; color:black;}
+
+.multi-select-container--open .multi-select-button:after {
+  border-width: 0 0.4em 0.4em 0.4em;
+  border-color: transparent transparent #999 transparent;
+}
+
+</style>
 
 
 <script>
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("sample6_extraAddress").value = extraAddr;
+            
+            } else {
+                document.getElementById("sample6_extraAddress").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("sample6_detailAddress").focus();
+        }
+    }).open();
+}
+
 $(document).ready(function(){
 	$('#register_btn').click(function(){
 		$('#register_form').attr({
@@ -32,23 +149,6 @@ $(document).ready(function(){
 	});
 });
 
-function display(data) {
-	var name = data.images[0].fields[0].inferText
-	var position = data.images[0].fields[1].inferText
-	var company = data.images[0].fields[2].inferText
-	//JSNO 형태로 영화이름 출력 : data.images[0].fields[0].inferText
-	//JSNO 형태로 날짜정보 출력 : data.images[0].fields[1].inferText - 2022/07/24(일)
-	//JSNO 형태로 좌석정보 출력 : data.images[0].fields[2].inferText
-	//JSNO 형태로 가격정보 출력 : data.images[0].fields[3].inferText - 10,000
-	//JSNO 형태로 프로젝트명 출력 : data.images[0].fields[4].inferText
-	//JSNO 형태로 바코드번호 출력 : data.images[0].fields[5].inferText
-
-	alert(name);
-	alert(position);
-	alert(company);
-
-}
-
 function previewprofile(event) {// 프로필 이미지 미리 보여주기
 	    var reader = new FileReader();
 
@@ -59,55 +159,8 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 	    reader.readAsDataURL(event.target.files[0]);
 	  }
 
-function previewimg(event) {// 명함 이미지 미리 보여주기
-/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
-	
-	$('#context').hide(); */
-    var reader = new FileReader();
-
-    reader.onload = function(event) {
-    	$('#uploadimg').attr('src',event.target.result);
-    	$('#uploadimg').attr('style','width:300px; hight:300px;');
-    	
-    };
-    reader.readAsDataURL(event.target.files[0]);
-    //alert('reader.readAsDataURL : ' + event.target.files[0]);
-  }
-
-function upload() {
-	const imageInput = $("#mcf")[0];
-	console.log("mcf: ", imageInput.files)
-
-	if (imageInput.files.length === 0) {
-		alert("파일을 선택해주세요");
-		return;
-	}
-
-	const formData = new FormData();
-	formData.append("image", imageInput.files[0]);
-
-	
-/* 		for (var value of formData.values()) {
-	   console.log(value);
-	} */
-
-	$.ajax({
-		type : "POST",
-		url : '/ocrresult',
-		processData : false,
-		contentType : false,
-	 	data: formData,
-		success : function(data) {
-			//alert(data);
-			alert(data.images[0].fields[0].inferText);
-			display(data);
-		}
-	});
-}
-
 </script>
 </head>
-
 	<!-- Home -->
 
 	<div class="home">
@@ -146,7 +199,7 @@ function upload() {
 								
 								<div>
 									<label class="form_title"> 
-										  파일 업로드 버튼을 눌러 프로필 이미지를 등록해주세요.
+										  파일 업로드 버튼을 눌러 멘토링 대표사진을 등록해주세요.
 										<div>
 											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
 										</div>
@@ -156,33 +209,148 @@ function upload() {
 								</div>
 								
 								<div>
-									<label for = "userid" class="form_title">Userid</label>
-									<input type="text" class="userid comment_input" id = "userid" name = "userid" value = "" readonly="readonly">
+									<label for = "mentorid" class="form_title">멘토번호</label>
+									<input type="text" th:value="${m.mentorid}" class="userid comment_input" id = "userid" name = "userid" readonly="readonly">
 								</div>
-
+																
 								<div>
-									<label for = "username" class="form_title">Username</label>
-									<input type="text" class="userid comment_input" id = "username" name = "username" value = "" readonly="readonly">
-								</div>
+									<label for = "mentoringdate" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
+										<input class="form-control border-0" type="date" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
+							   </div>
+							   
+							   	<div>
+									<label for = "mentoringtime" class="form_title">멘토링 시간 선택<span style="color:red"> *</span></label><br>
+										<select id="languages" name="languages" multiple>
+										  <option>10:00</option>
+										  <option>11:00</option>
+										  <option>12:00</option>
+										  <option>13:00</option>
+										  <option>14:00</option>
+										  <option>15:00</option>
+										  <option>16:00</option>
+										  <option>17:00</option>
+										  <option>18:00</option>
+										  <option>19:00</option>
+										  <option>20:00</option>
+										  <option>21:00</option>
+										  <option>22:00</option>
+										</select>
+										    <script type="text/javascript" th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    										<script type="text/javascript" th:src="@{/js/jquery.multi-select.js}"></script>
+    										<script type="text/javascript">
+											    $(function(){
+											    	$('#languages').multiSelect({
 
-								<div style = "display:none">
-									<label for = "adminid" class="form_title">Adminid</label>
-									<input type="text" class="comment_input" id = "adminid" name = "adminid">
-								</div>
+											    		  // Custom templates
+											    		  'containerHTML': '<div class="multi-select-container">',
+											    		  'menuHTML': '<div class="multi-select-menu">',
+											    		  'buttonHTML': '<span class="multi-select-button">',
+											    		  'menuItemsHTML': '<div class="multi-select-menuitems">',
+											    		  'menuItemHTML': '<label class="multi-select-menuitem">',
+											    		  'presetsHTML': '<div class="multi-select-presets">',
+
+											    		  // sets some HTML (eg: <div class="multi-select-modal">) to enable the modal overlay.
+											    		  'modalHTML': undefined,
+
+											    		  // Active CSS class
+											    		  'activeClass': 'multi-select-container--open',
+
+											    		  // Text to show when no option is selected
+											    		  'noneText': '시간선택',
+
+											    		  // Text to show when all options are selected
+											    		  'allText': undefined,
+
+											    		  // an array of preset option groups
+											    		  // presets: [{
+											    		  //   name: 'All categories',
+											    		  //   all: true // select all
+											    		  // },{
+											    		  //   name: 'My categories',
+											    		  //   options: ['a', 'c']
+											    		  // }]
+											    		  'presets': undefined,
+
+											    		  // CSS class added to the container, when the menu is about to extend beyond the right edge of the position<a href="https://www.jqueryscript.net/menu/">Menu</a>Within element
+											    		  'positionedMenuClass': 'multi-select-container--positioned',
+
+											    		  // If you provide a jQuery object here, the plugin will add a class (see positionedMenuClass option) to the container when the right edge of the dropdown menu is about to extend outside the specified element, giving you the opportunity to use CSS to prevent the menu extending, for example, by allowing the option labels to wrap onto multiple lines.
+											    		  'positionMenuWithin': undefined,
+
+											    		  // The plugin will attempt to keep this distance, in pixels, clear between the bottom of the menu and the bottom of the viewport, by setting a fixed height style if the menu would otherwise approach this distance from the bottom edge of the viewport.
+											    		  'viewportBottomGutter': 20,
+
+											    		  // minimal height
+											    		  'menuMinHeight': 200
+											    		  
+											    		});
+											    	});
+											    </script>
+										
+										
+							   </div>
+							   
+							   <div>
+									<label for = "mcate" class="form_title">카테고리 선택<span style="color:red"> *</span></label><br>
+										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;">
+											<option value=10>웹</option>
+											<option value=20>보안</option>
+											<option value=30>네트워크</option>
+											<option value=40>데이터사이언스</option>
+											<option value=50>게임</option>
+											<option value=60>AI</option>
+											<option value=70>CLOUD</option>
+											<option value=80>기타질문</option>
+										</select>
+							   </div>
+							   
+							   	<div>
+									<label for = "mcaring" class="form_title">케어 서비스<span style="color:red"> *</span></label><br>
+										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius: 2px; outline:2px solid #d3d3d3">
+											<option value=1>있음</option>
+											<option value=0>없음</option>
+										</select>
+							   </div>
 												
 								<div>
-									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
-									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
+									<label for = "mmemberidcnt" class="form_title">모집정원<span style="color:red"> *</span></label><br>
+									<input type="number" min="1" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
 								</div>
+								
+								<div>
+									<label for = "mentoringprice" class="form_title">멘토링 가격<span style="color:red"> *</span></label><br>
+									<input type="number" min="0" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
+								</div>
+								
 
 								<div>
-									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<label for = "mtitle" class="form_title">멘토링 제목<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
 								</div>
 
 								<div>
-									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
-									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
+									<label for = "mcontents" class="form_title">멘토링 내용<span style="color:red"> *</span></label>
+									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer" style="height:160px;"></textarea>
+								</div>
+								
+								<div>
+									<label for = "mentorurl" class="form_title">비대면 멘토링 URL<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom" placeholder="URL을 입력해주세요">
+								</div>
+								
+								<div>
+									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면장소(멘토링) 주소찾기<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input_address" name = "useraddr" id="sample6_address" placeholder="주소" readonly>
+									<input type="text" class="comment_input_detail" name = "addrdetail" id="sample6_detailAddress" placeholder="상세주소"><br>
+									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="주소찾기"><br>
+								</div>
+								
+								<div>
+									<label for = "mrdate" class="form_title">멘토링 등록날짜<span style="color:red"> *</span></label><br>
+									<input type="date" id="now_date" style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;" readonly>
+									<script>
+										document.getElementById('now_date').valueAsDate = new Date();
+									</script>
 								</div>
 								
 							</form>
@@ -194,8 +362,24 @@ function upload() {
 			</div>
 		</div>
 	</div>
+<script>
 
-	<!-- Newsletter -->
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
