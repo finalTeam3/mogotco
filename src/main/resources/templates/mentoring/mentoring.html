@@ -4,11 +4,16 @@
 <link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/courses.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/courses_responsive.css}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/courses.js}"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 </head>
+<style>
+</style>
 <script>
 $(document).ready(function(){
 	$('#search_button1').click(function(){
@@ -92,26 +97,26 @@ function checkOnlyOne(element) {
 								<div class="course">
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
-										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left;"></h3>
+										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
 										<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<br>
 										<br>
-										<div style="display:inline; color:black;"><span>등록:</span></div>
+										<div style="display:inline; color:black;"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">등록:</span></div>
 										<div style="display:inline; color:black;" class="course_teacher" th:text="${mtr.user_userid}"></div>
 										<br>
-										<div style="display:inline; color:black;"><span>모집정원:</span></div>
+										<div style="display:inline; color:black;"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">모집정원:</span></div>
 										<div style="display:inline; color:black;" class="course_text" th:text="${mtr.mmemberidcnt}"></div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
 											<div class="course_info">
 												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>현직:</span>
+												<span style="font-family: 'IBM Plex Sans KR', sans-serif;">현직:</span>
 												<span th:text="${mtr.mentor_mentorcom}">20 Student</span>
 											</div>
 											<div class="course_info">
 												<i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> 
-												<span>가격:</span>
+												<span style="font-family: 'IBM Plex Sans KR', sans-serif;">가격:</span>
 												<span th:text="${mtr.mentoringprice}">5 Ratings</span>
 											</div>
 											

@@ -4,6 +4,9 @@
 <link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
@@ -48,26 +51,26 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 				<div class="col-lg-8">
 					
 					<div class="course_container">
-						<div class="course_title" id="mtitle" th:text="${mto.mtitle}" style="float:left;">Software Training</div>
+						<div class="course_title" id="mtitle" th:text="${mto.mtitle}" style="float:left; font-family: 'IBM Plex Sans KR', sans-serif;">Software Training</div>
 						<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mto.mentoringid}]],[[${mto.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">모집정원</div>
+								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">모집정원</div>
 								<div class="course_info_text" th:text="${mto.mmemberidcnt}"><a href="#">Jacke Masito</a></div>
 							</div>
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">멘토링 진행 날짜</div>
+								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">멘토링 진행 날짜</div>
 								<div class="rating_r rating_r_4" id="mentoringdate" th:text="${#dates.format(mto.mentoringdate,'yyyy-MM-dd')}"></div>
 							</div>
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title">카테고리</div>
-								<div class="course_info_text" th:text="${mto.mcate_mname}"><a href="#">Languages</a></div>
+								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">카테고리</div>
+								<div class="course_info_text" th:text="${mto.mcate_mname}" style="font-family: 'IBM Plex Sans KR', sans-serif;"><a href="#">Languages</a></div>
 							</div>
 
 						</div>
@@ -86,7 +89,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<p class="tab_panel_content" th:text="${mto.mcontents}" style="font-weight:bold; font-size:18px;"></p>
+									<p class="tab_panel_content" th:text="${mto.mcontents}" style="font-weight:bold; font-size:18px; font-family:'IBM Plex Sans KR', sans-serif;"></p>
 								</div>
 
 								<!-- Curriculum -->
@@ -205,7 +208,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Mentoring Price</div>
 							<div class="sidebar_feature">
-								<span style = " font-size:1.5em;"><strong>가격 : </strong></span>
+								<span style = " font-size:24px; font-weight:bold; font-family: 'IBM Plex Sans KR', sans-serif;">가격 : </span>
 								<div style="display:inline-block;" id="mentoring_price" class="course_price" th:text="${mto.mentoringprice}"></div>
 								<br>
 								<br>
@@ -248,8 +251,8 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 										<div style="display:inline; color:#808080;"><span>Mentor ID :</span></div>
 										<div style="display:inline; color:#808080;" class="teacher_name" th:text="${mto.user_userid}" th:href="@{/mentor/mentordetail}"><a href="#"></a></div>
 										<br>
-										<div style="display:inline; color:#808080;"><span>현직 회사 :</span></div>
-										<div style="display:inline; color:#808080;" class="teacher_name" th:text="${mto.mentor_mentorcom}"><a href="#"></a></div>
+										<div style="display:inline; color:#808080;"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">현직 회사 :</span></div>
+										<div style="display:inline; color:#808080; font-family: 'IBM Plex Sans KR', sans-serif;" class="teacher_name" th:text="${mto.mentor_mentorcom}"><a href="#"></a></div>
 									</div>		
 								</div>
 								&nbsp
@@ -259,20 +262,20 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<!-- 대면 -->
 										<div class="teacher_meta_title">MentoringService:</div>
-										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mentorurl}">4.7</span></div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mentorurl}" style="font-family: 'IBM Plex Sans KR', sans-serif;">4.7</span></div>
 									</div>
 									<!-- Teacher Review -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<!-- 비대면 -->
 										<div class="teacher_meta_title">MentoringPlace:</div>
 										<div class="teacher_meta_text ml-auto">
-											<span th:text="${mto.mplace}">12k</span></div>
+											<span th:text="${mto.mplace}" style="font-family: 'IBM Plex Sans KR', sans-serif;">12k</span></div>
 									</div>
 									<!-- Teacher Quizzes -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title">CaringService:</div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 1}"><span>있음</span></div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 0}"><span>없음</span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 1}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">있음</span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 0}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">없음</span></div>
 									</div>
 								</div>
 							</div>

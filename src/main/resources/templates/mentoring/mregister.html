@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/example-styles.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/demo-styles.css}">
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
 <script th:src="@{/path/to/cdn/jquery.slim.min.js}"></script>
@@ -207,7 +206,9 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>APPLY</li>
+								<li>Mentoring</li>
+								<li>Mentoring Register</li>
+								
 							</ul>
 						</div>
 					</div>
@@ -246,36 +247,36 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								
 								<div>
 									<label for = "mentorid" class="form_title">멘토번호</label>
-									<input type="text" th:value="${m.mentorid}" class="userid comment_input" id = "userid" name = "userid" readonly="readonly">
+									<input type="text" th:value="${m.mentorid}" class="userid comment_input" id = "mentorid" name = "mentorid" readonly="readonly">
 								</div>
 																
 								<div>
 									<label for = "mentoringdate" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
-										<input class="form-control border-0" type="date" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
+										<input class="form-control border-0" type="date" id="mentoringdate" name="mentoringdate" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
 							   </div>
 							   
 							   	<div>
 									<label for = "mentoringtime" class="form_title">멘토링 시간 선택<span style="color:red"> *</span></label><br>
-										<select id="languages" name="languages" multiple>
-										  <option>10:00</option>
-										  <option>11:00</option>
-										  <option>12:00</option>
-										  <option>13:00</option>
-										  <option>14:00</option>
-										  <option>15:00</option>
-										  <option>16:00</option>
-										  <option>17:00</option>
-										  <option>18:00</option>
-										  <option>19:00</option>
-										  <option>20:00</option>
-										  <option>21:00</option>
-										  <option>22:00</option>
+										<select id="mentoringtime" name="mentoringtime" multiple>
+										  <option value="10:00">10:00</option>
+										  <option value="11:00">11:00</option>
+										  <option value="12:00">12:00</option>
+										  <option value="13:00">13:00</option>
+										  <option value="14:00">14:00</option>
+										  <option value="15:00">15:00</option>
+										  <option value="16:00">16:00</option>
+										  <option value="17:00">17:00</option>
+										  <option value="18:00">18:00</option>
+										  <option value="19:00">19:00</option>
+										  <option value="20:00">20:00</option>
+										  <option value="21:00">21:00</option>
+										  <option value="22:00">22:00</option>
 										</select>
 										    <script type="text/javascript" th:src="@{/js/jquery-2.2.4.min.js}"></script>
     										<script type="text/javascript" th:src="@{/js/jquery.multi-select.js}"></script>
     										<script type="text/javascript">
 											    $(function(){
-											    	$('#languages').multiSelect({
+											    	$('#mentoringtime').multiSelect({
 
 											    		  // Custom templates
 											    		  'containerHTML': '<div class="multi-select-container">',
@@ -327,8 +328,8 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 							   </div>
 							   
 							   <div>
-									<label for = "mcate" class="form_title">카테고리 선택<span style="color:red"> *</span></label><br>
-										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;">
+									<label for = "mcateid" class="form_title">카테고리 선택<span style="color:red"> *</span></label><br>
+										<select id="mcateid" name="mcateid" style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;">
 											<option value=10>웹</option>
 											<option value=20>보안</option>
 											<option value=30>네트워크</option>
@@ -342,7 +343,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 							   
 							   	<div>
 									<label for = "mcaring" class="form_title">케어 서비스<span style="color:red"> *</span></label><br>
-										<select style="font-size:15px; width:150px; height:40px; border-style: none; border-radius: 2px; outline:2px solid #d3d3d3">
+										<select id="mcaring" name="mcaring" style="font-size:15px; width:150px; height:40px; border-style: none; border-radius: 2px; outline:2px solid #d3d3d3">
 											<option value=1>있음</option>
 											<option value=0>없음</option>
 										</select>
@@ -350,69 +351,74 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 												
 								<div>
 									<label for = "mmemberidcnt" class="form_title">모집정원<span style="color:red"> *</span></label><br>
-									<input type="number" min="1" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
+									<input type="number" min="1" class="comment_input" id = "mmemberidcnt" name = "mmemberidcnt" style="width:160px; height:40px;">
 								</div>
 								
 								<div>
 									<label for = "mentoringprice" class="form_title">멘토링 가격<span style="color:red"> *</span></label><br>
-									<input type="number" min="0" class="comment_input" id = "mentorcom" name = "mentorcom" style="width:160px; height:40px;">
+									<input type="number" min="0" class="comment_input" id = "mentoringprice" name = "mentoringprice" style="width:160px; height:40px;">
 								</div>
 								
 
 								<div>
 									<label for = "mtitle" class="form_title">멘토링 제목<span style="color:red"> *</span></label>
-									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
+									<textarea class="comment_input" id = "mtitle" name = "mtitle"></textarea>
 								</div>
 
 								<div>
 									<label for = "mcontents" class="form_title">멘토링 내용<span style="color:red"> *</span></label>
-									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer" style="height:160px;"></textarea>
+									<textarea class="comment_input" id = "mcontents" name = "mcontents" style="height:160px;"></textarea>
 								</div>
 								
 								<div>
 									<label for = "mentorurl" class="form_title">비대면 멘토링 URL<span style="color:red"> *</span></label>
-									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom" placeholder="URL을 입력해주세요">
+									<input type="text" class="comment_input" id = "mentorurl" name = "mentorurl" placeholder="URL을 입력해주세요">
 								</div>
 								
 								<div>
-									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면장소(멘토링) 주소찾기<span style="color:red"> *</span></label>							
+									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면 멘토링 장소 주소<span style="color:red"> *</span></label>
+									<input type="text" class="comment_input" id = "mplace" name = "mplace" placeholder="페이지 하단에서 장소 검색 후 주소를 입력해 주세요">							
 								</div>
 								
 								<div>
 									<label for = "mrdate" class="form_title">멘토링 등록날짜<span style="color:red"> *</span></label><br>
-									<input type="date" id="now_date" style="font-size:15px; width:150px; height:40px; border-style: none; border-radius:2px; outline:2px solid #d3d3d3;" readonly>
+									<span id="mrdate" style="font-size:16px;"></span>
 									<script>
-										document.getElementById('now_date').valueAsDate = new Date();
+									date = new Date();
+									year = date.getFullYear();
+									month = date.getMonth() + 1;
+									day = date.getDate();
+									document.getElementById("mrdate").innerHTML = year + "-" +month + "-" + day;
 									</script>
 								</div>
 								
 							</form>
-								<button id = "register_btn" type="button" class="comment_button trans_200">Register</button>
-														
-						</div>
+								<button id="register_btn" type="button" class="comment_button trans_200" style="margin-top:40px;">Register</button>								
+						</div>	
+						<label for = "mcontents" class="form_title" style="margin-top:70px; font-weight:bold; font-size:20x;">장소 검색 후 대면 멘토링 주소란에 주소를 입력하세요<span style="color:red"> *</span></label>
+						<div class="map_wrap">
+						    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+						
+						    <div id="menu_wrap" class="bg_white">
+						        <div class="option">
+						            <div>
+						                <form onsubmit="searchPlaces(); return false;">
+						                    키워드 : <input type="text" value="멀티캠퍼스 선릉" id="keyword" size="15"> 
+						                    <button type="submit">검색하기</button> 
+						                </form>
+						            </div>
+						        </div>
+						        <hr>
+						        <ul id="placesList"></ul>
+						        <div id="pagination"></div>
+						    </div>
+						</div>						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="map_wrap">
-	    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-	
-	    <div id="menu_wrap" class="bg_white">
-	        <div class="option">
-	            <div>
-	                <form onsubmit="searchPlaces(); return false;">
-	                    키워드 : <input type="text" value="멀티캠퍼스 선릉" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
-	                </form>
-	            </div>
-	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
-	        <div id="pagination"></div>
-	    </div>
-	</div>		
+		
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa0b8f301544c68fe928d59bb6b4f627&libraries=services"></script>	
 <script>
 //마커를 담을 배열입니다
