@@ -43,8 +43,10 @@ public class PurchaseDetailDTO {
 	
 	//멘토 상세페이지로 넘어가기 위한 멘토아이디
 	private int mentor_mentorid;
-	private int mentoring_mentoringid;
 	
+	//리뷰를 위한 멘토링아이디, 멘토이미지
+	private int mentoring_mentoringid;
+	private String mentor_mentorimg;
 	
 	
 

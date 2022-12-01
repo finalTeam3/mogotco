@@ -113,6 +113,7 @@ public class MentorController {
 		MentorDTO mtd = null;
 		List<MentorDTO> mtlist = null;
 		List<MWishcateDTO> mwclist = null;
+		List<ReviewDTO> rlist = null;	// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtd = mservice.mentordetail(mentorid);
@@ -123,6 +124,10 @@ public class MentorController {
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentordetail1");
+			
+			// 해당 멘토의 리뷰리스트 조회_혜정
+			rlist = review_service.getmentorreview(mentorid);
+			model.addAttribute("mentorreview", rlist);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

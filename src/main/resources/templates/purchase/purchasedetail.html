@@ -188,17 +188,16 @@
 	};
 	
 	$(document).ready(function(){
- 		$('#reviewregi_btn').click(function(){
+ 		$('#reviewregi_btn').click(function(mentorid){
+ 			var mentorid = $('#mentorid').val();
+ 			var mentoringid = $('#mentoringid').val();
 			var userid = '[[${session.loginuser.userid}]]';
-			console.log(userid);
 			var starrating = $("input[name='rating']:checked").val();
-			console.log(starrating);
 			var reviewcon = $('#reviewcon').val();
-			console.log(reviewcon);
 			$.ajax({
 				url : '[[@{/addreview}]]',
-				data : {'userid' : userid, 'starrating' : starrating, 'reviewcon' : reviewcon},
-				success : location.href = '[[@{/mentoring/mentoring}]]'
+				data : {'mentoringid' : mentoringid,'userid' : userid, 'starrating' : starrating, 'reviewcon' : reviewcon},
+				success : location.href = '[[@{/mentor/mentordetail?mentorid=}]]' + mentorid
 			});
 		}); 
 	});
@@ -232,7 +231,7 @@
 		<!-- Contact Info -->
 
 		<div class="contact_info_container">
-	<div class="container">
+	<div class="container" th:each="c:${list}">
 			<div class="row">
 			<div class="col-lg-8">
 			<div class="contact_form">
@@ -255,7 +254,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="c:${list}">
+				<tr>
 					<th scope="row" th:text="${c.mentoring_mtitle}"></th>
 					<td data-title="Purchaseid" th:text="${c.purchaseid}"></td>
 					<td data-title="Purchasedate" th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
@@ -269,13 +268,10 @@
 					<td data-title="Mentoringplace" th:text="${c.mentoring_mplace}"></td>
 					<td data-title="Progress" th:text="${c.progresspur}" id="progresspuresult"></td>
 					<td>
-						<button
-							th:onclick="review([[${c.purchaseid}]],[[${c.mentor_userid}]])"
-							type="submit" class="comment_button1">Review</button>
-					</td>
-					<td>
 						<button type="button" id = "review_btn" data-toggle="modal" data-target="#reviewmodal" class="comment_button1">Review Modal</button>
 					</td>
+					
+
 				</tr>
 			</tbody>
 		</table>
@@ -306,9 +302,7 @@
 							</div>
 						</div>
 					</div>
-	</div>
-	</div>
-	</div>
+	
 	</div>
 	
 <!-- Review Modal -->
@@ -323,11 +317,19 @@
 			<div class="modal-body">
 				<div class="add_comment_container">
 				
-					<div class="add_comment_title">좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다! 여기에 멘토사진이랑 멘토링 이름정도..</div>
+					<div class="add_comment_title">좋은 수강평을 남겨주시면 MOGOTCO와 멘토님께 큰 힘이 됩니다!
+						<div class="teacher_image review_mentoring_title"><img th:src="@{/images/}+${c.mentor_mentorimg}" style="width:100px; height:100px;" alt=""></div>
+						<div class = "review_mentoring_title" th:text="${c.mentoring_mtitle}">멘토링 제목</div>
+					</div>
 					
 					<form name = "review_form" id = "review_form" class = "review_form">
 					<!-- rating -->
 						<fieldset>
+							<!-- secret -->
+							<input type = "hidden" class = "mentoringid" id = "mentoringid" name = "mentoringid" th:value = "${c.mentoring_mentoringid}">
+							<input type = "hidden" class = "mentorid" id = "mentorid" name = "mentorid" th:value = "${c.mentor_mentorid}">
+							
+							<!-- rating -->
 							<span class="text-bold">별점을 선택해주세요</span>
 														
 							<input type="radio" class = "rating" name="rating" value="5" id="rate1">
@@ -360,6 +362,12 @@
 		</div>
 	</div>
 </div>
+	
+	</div>
+	</div>
+	</div>
+	
+
     
 </body>
 </html>

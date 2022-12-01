@@ -1311,6 +1311,16 @@ section
 	display: flex;
 	padding: 0;
 }
+.teacher_image
+{
+	width: 100px;
+	height: 100px;
+}
+.review_mentoring_title
+{
+	font-size : 20px;
+	font-weight: bold;
+}
 /*********************************
 9. Footer
 *********************************/
