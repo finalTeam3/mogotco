@@ -4,59 +4,82 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mogotco.mapper.MentorMapper">
 
-	<select id="mentorAll" parameterType="String" resultType="MentorDTO">
+	<select id="mentorAll" parameterType="String"
+		resultType="MentorDTO">
 		SELECT * FROM mentor WHERE userid=#{userid}
 	</select>
 
-	<select id="mentoritem" parameterType="Integer" resultType="MentorDTO">
+	<select id="mentoritem" parameterType="Integer"
+		resultType="MentorDTO">
 		SELECT m.mentorid, m.userid, mr.mentoringid as mentoring_mentoringid,
 		mr.mtitle as mentoring_mtitle,
 		mr.mentoringimg as mentoring_mentoringimg,
 		mr.mentoringdate as mentoring_mentoringdate,
 		mr.mplace as mentoring_mplace FROM mentor m
-		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
-		WHERE m.mentorid=#{mentorid}
+		WHERE
+		m.mentorid=#{mentorid}
 	</select>
-	
-	<!-- 멘토상세페이지에서 mentorid로 멘토 정보 가져올 때 -->
-	<select id="mentordetail" parameterType="Integer" resultType="MentorDTO">
-		SELECT m.mentorid, m.userid, u.username as user_username,
-		mr.mtitle as mentoring_mtitle,
-		mr.mentoringimg as mentoring_mentoringimg,
-		mr.mentoringdate as mentoring_mentoringdate FROM mentor m
-		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
-		INNER JOIN user u ON u.userid = m.userid
-		WHERE m.mentorid=#{mentorid}
-	</select>	
 
-	<select id="select" parameterType="Integer" resultType="MentorDTO">
-		SELECT * FROM mentor WHERE mentorid=#{mentorid}
+	<select id="mentoritem1" parameterType="Integer"
+		resultType="MentorDTO">
+		mr.mentoringimg as
+		mentoring_mentoringimg,
+		mr.mentoringdate as mentoring_mentoringdate
+		FROM mentor m
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
+		WHERE
+		m.mentorid=#{mentorid} and DATEDIFF(sysdate(),mentoringdate)>=0 ORDER BY DATEDIFF(mentoringdate,sysdate()) DESC LIMIT 1
 	</select>
-	
+
+	<!-- 멘토상세페이지에서 mentorid로 멘토 정보 가져올 때 -->
+	<select id="mentordetail" parameterType="Integer"
+		resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, u.username as user_username
+		FROM mentor m
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
+		INNER
+		JOIN user u ON u.userid = m.userid
+		WHERE m.mentorid=#{mentorid}
+	</select>
+
+	<select id="select" parameterType="Integer"
+		resultType="MentorDTO">
+		SELECT *, u.username AS user_username FROM mentor m INNER
+		JOIN user u ON m.userid=u.userid WHERE mentorid=#{mentorid}
+	</select>
+
 	<select id="selectAll" resultType="MentorDTO">
 		SELECT * FROM mentor
 	</select>
-	
+
 	<insert id="insert" parameterType="MentorDTO">
-		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon, mentorimg, mcardimg, mentorok, mentorcareer, mentorapply, mcardposition) VALUES (NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE(),#{mcardposition})
+		INSERT INTO mentor (mentorid, userid, adminid, mentorcom, mentorcon,
+		mentorimg, mcardimg, mentorok, mentorcareer, mentorapply,
+		mcardposition) VALUES
+		(NULL,#{userid},#{adminid},#{mentorcom},#{mentorcon},#{mentorimg},#{mcardimg},#{mentorok},#{mentorcareer},SYSDATE(),#{mcardposition})
 		<selectKey keyProperty="mentorid" resultType="Integer"
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
-		</selectKey>	
+		</selectKey>
 	</insert>
-	
+
 	<update id="update" parameterType="MentorDTO">
-		UPDATE mentor SET mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},cancelmentoring=#{cancelmentoring},mentorcareer=#{mentorcareer},mcardposition=#{mcardposition} WHERE mentorid=#{mentorid}
+		UPDATE mentor SET
+		mentorcom=#{mentorcom},mentorcon=#{mentorcon},mentorimg=#{mentorimg},mcardimg=#{mcardimg},cancelmentoring=#{cancelmentoring},mentorcareer=#{mentorcareer},mcardposition=#{mcardposition}
+		WHERE mentorid=#{mentorid}
 	</update>
-	
+
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM mentor WHERE mentorid=#{mentorid}
+		DELETE FROM mentor WHERE
+		mentorid=#{mentorid}
 	</delete>
-	
+
 	<update id="adminupdate" parameterType="MentorDTO">
-		UPDATE mentor SET adminid=#{adminid},mentorok=#{mentorok},mentordate=sysdate() WHERE mentorid=#{mentorid}
+		UPDATE mentor SET
+		adminid=#{adminid},mentorok=#{mentorok},mentordate=sysdate() WHERE
+		mentorid=#{mentorid}
 	</update>
-	
+
 
 </mapper>
 

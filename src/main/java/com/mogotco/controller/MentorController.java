@@ -18,6 +18,7 @@ import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.MentoringmemberDTO;
+import com.mogotco.dto.ReviewDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.service.MWishcateService;
@@ -25,6 +26,7 @@ import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
+import com.mogotco.service.ReviewService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -47,6 +49,9 @@ public class MentorController {
 	
 	@Autowired
 	MentoringOptionService moservice;
+	
+	@Autowired
+	ReviewService review_service;
 
 	@Autowired
 	MentoringmemberService mmservice;
@@ -59,7 +64,7 @@ public class MentorController {
 
 	// 아이디값 유무 판단
 	@RequestMapping("/idcheck")
-	public void idcheck(int mentorid, HttpServletRequest request, HttpServletResponse response) {
+	public void idcheck(Integer mentorid, HttpServletRequest request, HttpServletResponse response) {
 		// current session이 없으면 없는채로 두는 것
 		HttpSession session = request.getSession(false);
 		// session정보가 없을 때
@@ -83,22 +88,26 @@ public class MentorController {
 
 	// 멘토 상세페이지
 	@RequestMapping("/mentordetail")
-	public String mentordetail(Model model, int mentorid) {
+	public String mentordetail(Model model, Integer mentorid) {
 		MentorDTO mta = null;
-		MentorDTO mtd = null;
-		List<MentorDTO> mtlist = null;
+		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
+		List<ReviewDTO> rlist= null;
+		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
-			mtd = mservice.mentordetail(mentorid);
-			mtlist = mservice.mentoritem(mentorid);
+			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("mta", mta);
-			model.addAttribute("mtd", mtd);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
+			
+			// 해당 멘토의 리뷰리스트 조회_혜정
+			rlist = review_service.getmentorreview(mentorid);
+			model.addAttribute("mentorreview", rlist);
+			review = review_service.indivirating(mentorid);
+			model.addAttribute("avgrating", review);
 			model.addAttribute("center", mentor + "mentordetail");
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,19 +119,25 @@ public class MentorController {
 	@RequestMapping("/nonid")
 	public String nonid(Model model, int mentorid) {
 		MentorDTO mta = null;
-		MentorDTO mtd = null;
-		List<MentorDTO> mtlist = null;
+		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
+		List<ReviewDTO> rlist= null;
+		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
-			mtd = mservice.mentordetail(mentorid);
-			mtlist = mservice.mentoritem(mentorid);
+			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("mta", mta);
-			model.addAttribute("mtd", mtd);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
+			
+			// 해당 멘토의 리뷰리스트 조회_혜정
+			rlist = review_service.getmentorreview(mentorid);
+			model.addAttribute("mentorreview", rlist);
+			review = review_service.indivirating(mentorid);
+			model.addAttribute("avgrating", review);
 			model.addAttribute("center", mentor + "mentordetail1");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

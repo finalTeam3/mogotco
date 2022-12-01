@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.dto.ReviewDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.dto.WishlistDTO;
 import com.mogotco.frame.Util;
@@ -18,6 +20,7 @@ import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.OcrService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
+import com.mogotco.service.ReviewService;
 import com.mogotco.service.UserService;
 import com.mogotco.service.WishlistService;
 
@@ -54,6 +57,9 @@ public class AjaxController {
 	
 	@Value("${userdir}")
 	String userdir;
+	
+	@Autowired
+	ReviewService review_service;
 
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
@@ -119,6 +125,18 @@ public class AjaxController {
 		obj = ocrservice.ocrresult(mfile.getOriginalFilename());
 		System.out.println(obj);
 		return obj;
+	}
+	
+	@RequestMapping("/addreview")
+	public Object addreview(Integer mentoringid, String userid, String starrating, String reviewcon) {
+		int rating = Integer.parseInt(starrating);
+		ReviewDTO review = new ReviewDTO(0, mentoringid, userid, rating, reviewcon, null, 0, null, 0, null, null, null, null, null, 0);
+		try {
+			review_service.register(review);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 }
