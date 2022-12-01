@@ -9,12 +9,22 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 </head>
+<style>
+      input[id="b"] {
+        position: relative;
+        top: 1.5px;
+      }
+      label[for="c"] {
+        position: relative;
+        top: -1.5px;
+      }
+    </style>
 <script>
 $(document).ready(function(){
 	$('#search_button1').click(function(){
 		$('#search_form_mentoring').attr({
 			method:'get',
-			action:'[[@{/mentoring/search}]]'
+			action:'[[@{/mentoring/mainsearch}]]'
 			
 		});
 		$('#search_form_mentoring').submit();
@@ -53,11 +63,7 @@ $(document).ready(function(){
 				<div class="col-lg-8">
 					<div class="courses_search_container">
 						<form id="search_form_mentoring" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-							<input name="txt" type="text" class="courses_search_input" placeholder="Search Mentorng" required="required">
-							<select name="mname" id="courses_search_select1" class="courses_search_select courses_search_input">
-								<option value="all">전체</option>
-								<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
-							</select> 
+							<input name="txt" type="text" class="courses_search_input" placeholder="Search Mentorng" required="required" style="width:100%;">
 							<button id="search_button1" class="courses_search_button ml-auto" type="submit">search now</button>
 						</form>
 					</div>
@@ -87,9 +93,9 @@ $(document).ready(function(){
 												<span th:text="${mtr.mentor_mentorcom}">20 Student</span>
 											</div>
 											<div class="course_info">
-												<i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 
-												<span>등록일자:</span>
-												<span th:text="${#dates.format(mtr.mrdate,'yyyy-MM-dd')}">5 Ratings</span>
+												<i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> 
+												<span>가격:</span>
+												<span th:text="${mtr.mentoringprice}">5 Ratings</span>
 											</div>
 											
 											
@@ -130,18 +136,7 @@ $(document).ready(function(){
 				<!-- Courses Sidebar -->
 				<div class="col-lg-4">
 					<div class="sidebar">
-
-						<!-- Categories -->
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
-							<div class="sidebar_categories">
-								<ul>
-									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mcateid=${mtc.mcateid})}" th:text="${mtc.mname}">Art & Design</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Latest Course -->
+												<!-- Latest Course -->
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Mentoring Register</div>
 							<div class="sidebar_latest">
@@ -153,16 +148,27 @@ $(document).ready(function(){
 										<button type="button" th:onclick="|location.href='@{/mentoring/mentoringregister}'|" class="home_search_button" style="width:180px; font-weight:bold;">멘토링 등록하기</button>
 									</div>
 								</div>
-
-
 						</div>
-
-
-
-
-						<!-- Banner -->
-
 					</div>
+						<!-- Categories -->
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_categories">
+								<ul>
+									<li><a th:href="@{/mentoring/mentoring}" th:text="${'ALL'}"></a></li>
+									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mcateid=${mtc.mcateid})}" th:text="${mtc.mname}" th:style="${mtc.mcateid == selcateid ? 'color: #14bdee;' : ''}"></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Type</div>
+							<div class="sidebar_categories">
+    							<p><input type="checkbox" id="a"> <label for="a">가격순</label></p>
+   								<p><input type="checkbox" id="b"> <label for="b">가장 빠른순</label></p>
+   								<p><input type="checkbox" id="c"> <label for="c">별점순</label></p>
+   								<p><input type="checkbox" id="d"> <label for="d">사후관리</label></p>
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>

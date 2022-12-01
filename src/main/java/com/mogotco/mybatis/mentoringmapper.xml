@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="viewMentoringAll" resultType="MentoringDTO">
 		SELECT mt.mentoringid,
 		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
-		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring
+		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring, mt.mentoringprice FROM mentoring
 		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu
