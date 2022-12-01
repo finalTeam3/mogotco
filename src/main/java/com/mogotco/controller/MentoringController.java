@@ -155,6 +155,7 @@ public class MentoringController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			model.addAttribute("userid", id);	
 			model.addAttribute("list", detail);			
 			//화면
 			model.addAttribute("center", mentoring+"mymentoringdetail");

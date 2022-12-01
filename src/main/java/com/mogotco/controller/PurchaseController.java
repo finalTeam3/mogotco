@@ -123,6 +123,7 @@ public class PurchaseController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			model.addAttribute("userid", id);
 			model.addAttribute("list", detail);
 			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
@@ -170,7 +171,11 @@ public class PurchaseController {
 
 			//수정 point
 			int modipoint = 0;
-			modipoint = beforeuser.getUserpoint() - willusepoint + mentoringprice/100;
+			if(pur.getPurprice() >=30000) {
+				modipoint = beforeuser.getUserpoint() - willusepoint + (mentoringprice*3/100);
+			}else {
+				modipoint = beforeuser.getUserpoint() - willusepoint + mentoringprice/100;
+			}
 
 			//수정할 회원 정보
 			UserDTO afteruser = new UserDTO(beforeuser.getUserid(), beforeuser.getUserpwd(), beforeuser.getUsername(), beforeuser.getUseraddr(), beforeuser.getUsertel(), beforeuser.getUseremail(), 
