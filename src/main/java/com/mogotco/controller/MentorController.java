@@ -54,7 +54,7 @@ public class MentorController {
 
 	// 아이디값 유무 판단
 	@RequestMapping("/idcheck")
-	public void idcheck(int mentorid, HttpServletRequest request, HttpServletResponse response) {
+	public void idcheck(Integer mentorid, HttpServletRequest request, HttpServletResponse response) {
 		// current session이 없으면 없는채로 두는 것
 		HttpSession session = request.getSession(false);
 		// session정보가 없을 때
@@ -81,26 +81,25 @@ public class MentorController {
 	public String mentordetail(Model model, Integer mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtd = null;
-		List<MentorDTO> mtlist = null;
+		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
-		List<ReviewDTO> rlist, review= null;	// 해당 멘토 리뷰 노출_혜정
+		List<ReviewDTO> rlist= null;
+		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
-			mtd = mservice.mentordetail(mentorid);
 			mtlist = mservice.mentoritem(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("mta", mta);
-			model.addAttribute("mtd", mtd);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
-			model.addAttribute("center", mentor + "mentordetail");
+			
 			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
 			model.addAttribute("mentorreview", rlist);
-			
 			review = review_service.indivirating(mentorid);
 			model.addAttribute("avgrating", review);
+			model.addAttribute("center", mentor + "mentordetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,24 +112,25 @@ public class MentorController {
 	public String nonid(Model model, int mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtd = null;
-		List<MentorDTO> mtlist = null;
+		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
-		List<ReviewDTO> rlist = null;	// 해당 멘토 리뷰 노출_혜정
-		ReviewDTO review = null;
+		List<ReviewDTO> rlist= null;
+		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
 		try {
 			mta = mservice.get(mentorid);
-			mtd = mservice.mentordetail(mentorid);
 			mtlist = mservice.mentoritem(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("mta", mta);
-			model.addAttribute("mtd", mtd);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
-			model.addAttribute("center", mentor + "mentordetail1");
+			
 			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
 			model.addAttribute("mentorreview", rlist);
+			review = review_service.indivirating(mentorid);
+			model.addAttribute("avgrating", review);
+			model.addAttribute("center", mentor + "mentordetail");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

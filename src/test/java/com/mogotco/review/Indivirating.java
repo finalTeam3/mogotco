@@ -18,16 +18,16 @@ class Indivirating {
 	@Test
 	void contextLoads() {
 		
-		List<ReviewDTO> list = null;
+		ReviewDTO list = null;
 		try {
 			list = service.indivirating(100);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		for(ReviewDTO r:list) {
-			System.out.println(r);
-		}
+	
+			System.out.println(list);
+		
 	}
 	
 }

@@ -45,7 +45,7 @@ public class ReviewService implements MyService<Integer, ReviewDTO>{
 	}
 	
 	//개인 mentor 평점 avg(choyunyoung add)
-	public List<ReviewDTO> indivirating(int mentorid) throws Exception{
+	public ReviewDTO indivirating(int mentorid) throws Exception{
 		return mapper.indivirating(mentorid);
 	}
 	//mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로)

@@ -17,7 +17,7 @@ class MentoritemMentor {
 	
 	@Test
 	void contextLoads() {
-		List<MentorDTO> list = null;
+		MentorDTO list = null;
 		try {
 			list = service.mentoritem(101);
 		} catch (Exception e) {
@@ -25,9 +25,9 @@ class MentoritemMentor {
 			e.printStackTrace();
 		}
 		
-		for(MentorDTO c:list) {
-			System.out.println(c);
-		}
+		
+			System.out.println(list);
+		
 		
 	}
 

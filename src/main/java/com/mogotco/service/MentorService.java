@@ -44,7 +44,7 @@ public class MentorService implements MyService<Integer, MentorDTO> {
 		return mapper.mentorAll(userid);
 	}
 
-	public List<MentorDTO> mentoritem(int mentorid) throws Exception {
+	public MentorDTO mentoritem(int mentorid) throws Exception {
 		return mapper.mentoritem(mentorid);
 	}
 
