@@ -17,7 +17,7 @@ import com.mogotco.service.MentoringService;
 	void contextLoads() {
 		List<MentoringDTO> mlist = null;
 		try {
-			mlist = service.selectMentoringAll(10);
+			mlist = service.selectMentoringAll("웹");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
