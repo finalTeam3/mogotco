@@ -41,9 +41,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 개인 mentor 평점 avg(choyunyoung add) -->
-	<select id="indivirating" parameterType="String"
-		resultType="reviewDTO">
-		SELECT m.userid AS mentor_userid, ROUND(avg(r.rating),1) AS
+	<select id="indivirating" resultType="reviewDTO">
+		SELECT m.mentorid, ROUND(avg(r.rating),1) AS
 		avgrate
 		FROM mentor m
 		INNER JOIN mentoring men ON
@@ -51,8 +50,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER
 		JOIN review r ON
 		men.mentoringid=r.mentoringid
-		WHERE m.userid =
-		#{userid}
+		WHERE m.mentorid = #{mentorid}
 	</select>
 
 	<!-- mentor전체들의 평점 avg(choyunyoung add)(4명 순서대로) -->

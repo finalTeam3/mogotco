@@ -1,5 +1,7 @@
 package com.mogotco.review;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,12 +18,15 @@ class Indivirating {
 	@Test
 	void contextLoads() {
 		
-		ReviewDTO list = null;
+		List<ReviewDTO> list = null;
 		try {
-			list = service.indivirating("qkrgPwjd1541");
-			System.out.println(list);
+			list = service.indivirating(100);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		for(ReviewDTO r:list) {
+			System.out.println(r);
 		}
 	}
 	
