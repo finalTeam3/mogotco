@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 멘토링 옵션의 시간 출력 -->
 	<select id="viewMentorigTime" parameterType="Integer"
 		resultType="MentoringOptionDTO">
-		SELECT mto.mentoringid, mto.mentoringtime FROM
+		SELECT mto.mentoringoptionid, mto.mentoringid, mto.mentoringtime FROM
 		mentoringoption mto
 		INNER JOIN mentoring mt ON mto.mentoringid =
 		mt.mentoringid

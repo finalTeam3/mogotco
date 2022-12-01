@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM purchasedetail
 	</select>
 
-	<!-- 전체구매이력(구매번호,구매날짜,가격,결제카드,멘토링제목,멘토이름,멘토링 날짜,시간,대면장소, 비대면 url,진행여부,케어유무) -->
+	<!-- 전체구매이력(구매번호,구매날짜,가격,결제카드,멘토링제목,멘토이름,멘토링 날짜,시간,대면장소, 비대면 url,진행여부,케어유무, 멘토번호, 벤토링번호) -->
 	<select id="wholedetail" parameterType="String"
 		resultType="PurchaseDetailDTO">
 		SELECT purde.purchaseid, pur.purdate AS purchase_purdate, pur.purprice AS
@@ -24,7 +24,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentoringoption.mentoringtime AS mentoringoption_mentoringtime,
 		purde.mentoringoptionid,
 		mentoring.mplace AS mentoring_mplace, mentoring.mentorurl AS mentoring_mentorurl,
-		purde.progresspur,mentoring.mcaring AS mentoring_mcaring, mentor.mentorid AS mentor_mentorid
+		purde.progresspur,mentoring.mcaring AS mentoring_mcaring, 
+		mentor.mentorid AS mentor_mentorid, mentoring.mentoringid AS mentoring_mentoringid, mentor.mentorimg AS mentor_mentorimg
 		FROM purchasedetail purde
 		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
 		INNER JOIN mentoringoption mentoringoption ON

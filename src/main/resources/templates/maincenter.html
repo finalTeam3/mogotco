@@ -4,20 +4,6 @@ function request(mentor_mentorid){
 		location.href='[[@{/mentor/idcheck?mentorid=}]]'+mentor_mentorid;
 };
 </script>
-<script>
-$(document).ready(function(){
-	$('#search_button3').click(function(){
-		alert();
-		$('#search_form_mentoring3').attr({
-			method:'get',
-			action:'[[@{/mogotco/mentoring/multimainsearch}]]'
-			
-		});
-		$('#search_form_mentoring3').submit();
-
-	});
-});
-</script> 
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 <body>
@@ -41,7 +27,7 @@ $(document).ready(function(){
 								<div class="home_slider_subtitle">Future Of Education
 									Technology</div>
 								<div class="home_slider_form_container">
-									<form th:action="@{/mentoring/multimainsearch}" id="search_form_mentoring3" 
+									<form th:action="@{/mentoring/multimainsearch}" id="search_form_mentoring3"
 										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
 										<div
 											class="d-flex flex-row align-items-center justify-content-start">
@@ -171,7 +157,7 @@ $(document).ready(function(){
 						</div>
 						<div class="course_body">
 							<h3 class="course_title">
-								<a th:href="@{/courses/course}" th:text="${i.mtitle}"></a>
+								<a th:href="@{/mentoring/mentoringdetail?(mentoringid=${i.mentoringid})}" th:text="${i.mtitle}"></a>
 							</h3>
 							<div class="course_teacher" th:text="${i.user_username}">Mr. John Taylor</div>
 							<div class="course_text">
@@ -193,7 +179,7 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col">
 					<div class="courses_button trans_200">
-						<a href="#">view all courses</a>
+						<a th:href="@{/mentoring/mentoring}">view all courses</a>
 					</div>
 				</div>
 			</div>
@@ -259,23 +245,23 @@ Kakao.Share.sendDefault({
           '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: 'http://127.0.0.1//mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-        webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+        mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+        webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
       },
     },
     buttons: [
       {
         title: 'web',
         link: {
-          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         },
       },
       {
         title: 'app',
         link: {
-          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         },
       },
     ],

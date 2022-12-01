@@ -58,9 +58,9 @@
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
 									<div class="teacher_title">
-										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name"><a href="#" th:text="${mtd.user_username}"></a></div>
-										<ul><li><a id="kakaotalksharingbtn"><img style="width:25px;height:25px;"  th:onclick="shareMessage([[${mtd.mentorid}]],[[${mtd.userid}]])" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
+										<div class="teacher_name"><a href="#" th:text="${mta.user_username}"></a></div>
+										<ul><li><a id="kakaotalksharingbtn"><img style="width:25px;height:25px;"  th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<!-- <input class="comment_input" th:text="${session.loginuser.userid}" style = "display:none" name="userid" id="userid"> -->
 									</div>
 								</div>
@@ -364,71 +364,44 @@
 									
 									<!-- Comments -->
 									<div class="comments_container">
-										<ul class="comments_list">
-											<li>
+										<ul class="comments_list" >
+											<li th:each = "mreview:${mentorreview}">
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_image"><div><img th:src="@{/images/comment_1.jpg}" alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
-														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-														</div>
-													</div>
-												</div>
-												<ul>
-													<li>
-														<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-															<div class="comment_image"><div><img th:src="@{/images/comment_2.jpg}" alt=""></div></div>
-															<div class="comment_content">
-																<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-																	<div class="comment_author"><a href="#">John Tyler</a></div>
-																	<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-																	<div class="comment_time ml-auto">1 day ago</div>
-																</div>
-																<div class="comment_text">
-																	<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-																</div>
-																<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-																	<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-																	<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-																</div>
+															<div class="comment_author" th:text = "${mreview.userid}">Milley Cyrus</div>
+															
+															<!-- 별점 -->
+															<div class="comment_rating">
+															<div name="${mreview.rating}"
+																class="star-ratings-fill space-x-2 text-lg"
+																th:style="${'width:'+mreview.rating * 20+'%'}">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
 															</div>
+															<div class="star-ratings-base space-x-2 text-lg">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+															</div>
+															</div>
+															
+															<div class="comment_time ml-auto" th:text = "${#dates.format(mreview.reviewdate, 'yyyy-MM-dd')}">1 day ago</div>
 														</div>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-													<div class="comment_image"><div><img th:src="@{/images/comment_3.jpg}" alt=""></div></div>
-													<div class="comment_content">
-														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
-														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+														<div class="comment_text" th:text = "${mreview.reviewcon}">
+															<p>review</p>
 														</div>
 													</div>
 												</div>
 											</li>
 										</ul>
-<!-- 										<div class="add_comment_container">
-											<div class="add_comment_title">Add a review</div>
-											<div class="add_comment_text">You must be <a href="#">logged</a> in to post a comment.</div>
-										</div> -->
+										
 									</div>
 								</div>
 
@@ -456,23 +429,23 @@ Kakao.Share.sendDefault({
           '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: 'http://127.0.0.1//mogotco/',
-        webUrl: 'http://127.0.0.1/mogotco/'
+        mobileWebUrl:'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
+        webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
       }
     },
     buttons: [
       {
         title: 'web',
         link: {
-          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
-          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
+          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
         },
       },
       {
         title: 'app',
         link: {
-          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
-          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
+          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
+          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentorid,
         },
       },
     ],

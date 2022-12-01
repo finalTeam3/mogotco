@@ -28,13 +28,13 @@ public class OcrService {
 	
 	public Object ocrresult(String mcardimgname) {
 		
-		System.out.println("ocrresult 실행");
+//		System.out.println("ocrresult 실행");
 		StringBuffer response = null;
 		Object jo = null;
 	    String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","img").toString(); // 로컬 이미지 저장 경로
-//	    String imgpath = ""; // ncp 서버 이미지 저장 경로
+//	    String imgpath = "/root/tomcat/webapps/mogotco/WEB-INF/classes/static/img"; // ncp 서버 이미지 저장 경로
 	    String imageFile = imgpath + "/" + mcardimgname;
-	    System.out.println("mcardimgname: " + imageFile);
+//	    System.out.println("mcardimgname: " + imageFile);
 	    
 		try {
 			URL url = new URL(apiURL);
@@ -65,9 +65,9 @@ public class OcrService {
 			long start = System.currentTimeMillis();
 			File file = new File(imageFile);
 			
-			System.out.println("----------"+file.getName());
-			System.out.println("----------"+file.getPath());
-			System.out.println("----------"+file.getAbsolutePath());
+//			System.out.println("----------"+file.getName());
+//			System.out.println("----------"+file.getPath());
+//			System.out.println("----------"+file.getAbsolutePath());
 			writeMultiPart(wr, postParams, file, boundary);
 			wr.close();
 
@@ -84,8 +84,8 @@ public class OcrService {
 				response.append(inputLine);
 			}
 			br.close();
-			System.out.println("REsult:");
-			System.out.println(response);   // 여기서 데이터를 어떻게 잘 풀어서 뽑아내야 할 지 알아보기
+//			System.out.println("REsult:");
+//			System.out.println(response);   // 여기서 데이터를 어떻게 잘 풀어서 뽑아내야 할 지 알아보기
 			
 			JSONParser jsonparser = new JSONParser();
 			jo = (JSONObject)jsonparser.parse(response.toString());

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+
+<head>
+<meta charset="utf-8">
+<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/course.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/js/course.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<style>
+
+</style>
+
+<script>
+
+</script>
+</head>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/courses}">Mentor</a></li>
+								<li>Mentoring Admin Details</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+
+	
+		<!-- Courses -->
+
+	<!-- Course -->
+
+	<div class="course">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="course_container">
+
+						<!-- Feature_course -->
+						<div class="sidebar_section">
+							<!-- <div class="course_title">Course Feature</div> -->
+							<div class="sidebar_feature">
+
+								<!-- Features -->
+
+							</div>
+						</div>
+
+						<!-- Feature -->
+						<div class="sidebar_section">
+							<!-- <div class="sidebar_section_title">Mentoring admin detail</div> -->
+							<div class="sidebar_teacher">
+								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
+									<div ><img th:src="@{/images/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
+									<div class="teacher_title">
+										<div class="teacher_name" style="float:left;"></div>
+										<ul><li><a id="kakaotalksharingbtn"></a></li></ul>
+									</div>
+								</div>
+								<br>
+								<div class="teacher_meta_container">
+									<!-- Teacher Rating -->
+									<hr>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>멘토링 제목:</b></div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mtitle}"></span></div>
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>멘토링 내용:</b></div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mcontents}"></span></div>
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>멘토링 가격:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text="${mti.mentoringprice}"></span>원
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>멘토링 등록일:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text="${#dates.format(mti.mrdate,'yyyy-MM-dd')}" ></span>
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>멘토링 날짜:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text="${#dates.format(mti.mentoringdate,'yyyy-MM-dd')}" ></span>
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>비대면 시 영상 url:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text="${mti.mentorurl}" ></span>
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>모집 정원:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text=${mti.mmemberidcnt} ></span>명
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>대면 시 멘토링 장소:</b></div>
+										<div class="teacher_meta_text ml-auto">
+										  <span th:text="${mti.mplace}" ></span>
+										 </div> 
+									</div>
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title"><b>케어 서비스:</b></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mti.mcaring == 1}"><span class="badge badge-pill badge-primary" style="color:#FFFFFF">있음</span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mti.mcaring == 0}"><span class="badge badge-pill badge-danger" style="color:#FFFFFF">없음</span></div>
+									</div>
+									<hr>
+									
+								</div>
+								<div class="teacher_info">
+									<p></p>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Latest Course -->
+
+					</div>
+				</div>
+
+
+				<!-- Course -->
+				<div class="col-lg-6">
+					
+					<div class="course_container" >
+						<!-- <div class="course_title">Mentor Detail</div> -->
+
+
+						<!-- Course Image -->
+
+						<!-- Course Tabs -->
+						<div class="course_tabs_container">
+<!-- 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
+								<div th:each="molist:${molist}">
+									<div class="tab" th:text="${molist.mentoringtime}">09:00</div>
+								</div>
+							</div> -->
+							<div class="tab_panels">
+
+								<!-- Description -->
+
+								<!-- Reviews -->
+								<div class="tab_panel active">
+									<div class="tab_panel_title">Mentoring Time</div>
+
+									<!-- Rating -->
+<!-- 									<div class="review_rating_container">
+ 										<div class="review_rating">
+											<div class="review_rating_num">4.5</div>
+											<div class="review_rating_stars">
+												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+											</div>
+											<div class="review_rating_text">(28 Ratings)</div>
+										</div>
+ 										<div class="review_rating_bars">
+											<ul>
+												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
+												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
+												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
+												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
+												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
+											</ul>
+										</div>
+									</div> -->
+									
+									<!-- Comments -->
+									<div class="review_rating_container">
+										<ul class="comments_list" th:each="molist:${molist}">
+											<li>
+												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
+													<div class="comment_content">
+														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+															<h4><a th:href="@{/mentor/mentoringmember(mentoringid=${molist.mentoringid}, mentoringoptionid=${molist.mentoringoptionid})}"><div th:text="${molist.mentoringtime}"></div></a></h4>
+														</div>
+													</div>
+												</div>
+											</li>
+<!-- 											<li>
+												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
+													<div class="comment_image"><div><img  alt=""></div></div>
+													<div class="comment_content">
+														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+															<h4><div>Milley Cyrus</div></h4>
+														</div>
+													</div>
+												</div>
+											</li> -->
+											
+										</ul>
+
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Course Sidebar -->
+			</div>
+		</div>
+	</div>
+
+
+
+
+</html>

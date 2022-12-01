@@ -16,7 +16,7 @@ class InsertPurchaseDetail {
 	@Test
 	void contextLoads() {
 		//id는 자동증가이므로 초기화값인 아무것들만 넣어주면됨
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(0, 202, 403,0,"x", null, 0, null, null,null,null, null, null, null, null, null, 0,0,0) ;
+		PurchaseDetailDTO purchase = new PurchaseDetailDTO(0, 202, 403,0,"x", null, 0, null, null,null,null, null, null, null, null, null, 0,0,0, 0,null) ;
 		try {
 			service.register(purchase);
 		} catch (Exception e) {

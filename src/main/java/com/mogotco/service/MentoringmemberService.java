@@ -39,5 +39,9 @@ public class MentoringmemberService implements MyService<Integer,Mentoringmember
 	public List<MentoringmemberDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
+	
+	public List<MentoringmemberDTO> mmemberuserid(int mentoringoptionid) throws Exception{
+		return mapper.mmemberuserid(mentoringoptionid);
+	}
 
 }

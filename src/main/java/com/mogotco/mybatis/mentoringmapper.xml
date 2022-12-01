@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 등록된 멘토링 리스트 출력을 위한 mybatis 연동 -->
-	<select id="selectMentoringAll" parameterType="Integer"
+	<select id="selectMentoringAll" parameterType="String"
 		resultType="MentoringDTO">
 		SELECT mtc.mcateid, mt.mentoringid, mu.userid AS
 		user_userid, mr.mentorcom AS
@@ -28,14 +28,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		ON mr.userid = mu.userid
 		INNER JOIN mcate mtc ON mt.mcateid =
 		mtc.mcateid
-		WHERE mtc.mcateid = #{mcateid}
+		WHERE mtc.mname = #{mname}
 	</select>
 
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
 	<select id="viewMentoringAll" resultType="MentoringDTO">
-		SELECT mt.mentoringid,
+		SELECT mt.mentoringid, mt.mentorid,
 		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
-		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring FROM mentoring
+		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring, mt.mentoringprice FROM mentoring
 		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu
@@ -286,5 +286,136 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE mt.mtitle
 		LIKE
 		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring}
+	</select>
+
+	<!-- txt없을 때 -->
+	<!-- 카테고리, 리뷰순(choyunyoung add) -->
+	<select id="nmcatereviewsearch" resultType="MentoringDTO"
+		parameterType="string">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid
+		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') GROUP BY mt.mentoringid ORDER BY avgrate
+		DESC
+
+	</select>
+
+	<!-- 카테고리, 가격순(choyunyoung add) -->
+	<select id="nmcatepricesearch" resultType="MentoringDTO"
+		parameterType="string">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid
+		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') GROUP BY mt.mentoringid ORDER BY
+		mt.mentoringprice DESC
+
+	</select>
+
+	<!-- 카테고리, 가장빨리 멘토링 가능한 순(choyunyoung add) -->
+	<select id="nmcaterecentsearch" resultType="MentoringDTO"
+		parameterType="string">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
+		date_difference FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid =
+		mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN
+		user mu ON mr.userid = mu.userid
+		WHERE mc.mname LIKE
+		CONCAT('%',#{mname},'%') and
+		DATEDIFF(mentoringdate,sysdate())>=0 ORDER BY
+		date_difference DESC
+	</select>
+
+	<!-- 카테고리, 사후관리 유무(choyunyoung add) -->
+	<select id="nmcatemcaringoksearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		WHERE mc.mname LIKE
+		CONCAT('%',#{mname},'%') and mt.mcaring=#{mcaring}
+	</select>
+	
+	
+		<!-- 전체 , 가격순(choyunyoung add) -->
+	<select id="nallreviewsearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid GROUP BY mt.mentoringid ORDER BY avgrate
+		DESC
+	</select>
+		<!-- 전체 , 리뷰순(choyunyoung add) -->
+	<select id="nallpricesearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate FROM
+		mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN
+		mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN review r ON
+		mt.mentoringid=r.mentoringid
+		INNER JOIN user mu ON mr.userid =
+		mu.userid GROUP BY mt.mentoringid ORDER BY
+		mt.mentoringprice DESC
+	</select>
+		<!-- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)-->
+	<select id="nallrecentsearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid,
+		mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
+		date_difference FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid =
+		mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN
+		user mu ON mr.userid = mu.userid WHERE
+		DATEDIFF(mentoringdate,sysdate())>=0 ORDER BY
+		date_difference DESC
+	</select>
+		<!-- 전체, 사후관리 유무(choyunyoung add) -->
+	<select id="nallmcaringoksearch" resultType="MentoringDTO">
+		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
+		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
+		mt.mmemberidcnt, mt.mcaring FROM mentoring mt
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		WHERE mt.mcaring=#{mcaring}
 	</select>
 </mapper>

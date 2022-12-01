@@ -23,7 +23,6 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/courses}">Mentor</a></li>
 								<li>Mentor Details</li>
 							</ul>
 						</div>
@@ -56,14 +55,14 @@
 							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}" alt=""></div>
+									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}"></div>
 									<div class="teacher_title">
-										<input type="text" class="comment_input" th:value="${mtd.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name" style="float:left;"><a href="#" th:text="${mtd.user_username}"></a></div>
-										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mtd.mentorid}]],[[${mtd.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
+										<div class="teacher_name" style="float:left;"><a href="#" th:text="${mta.user_username}"></a></div>
+										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button>
 										
-										<!-- <input class="comment_input" th:text="${session.loginuser.userid}" style = "display:none" name="userid" id="userid"> -->
+										<!--  <input class="comment_input" th:value="${session.loginuser.userid}" type="hidden" name="userid" id="userid">-->
 									</div>
 								</div>
 								<br>
@@ -127,30 +126,7 @@
 				<div class="col-lg-8">
 					
 					<div class="course_container">
-						<!-- <div class="course_title">Mentor Detail</div> -->
-<!-- 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
-							Course Info Item
-							<div class="course_info_item">
-								<div class="course_info_title">Teacher:</div>
-								<div class="course_info_text"><a href="#">Jacke Masito</a></div>
-							</div>
-
-							Course Info Item
-							<div class="course_info_item">
-								<div class="course_info_title">Reviews:</div>
-								<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
-							</div>
-
-							Course Info Item
-							<div class="course_info_item">
-								<div class="course_info_title">Categories:</div>
-								<div class="course_info_text"><a href="#">Languages</a></div>
-							</div>
-						</div> -->
-
-						<!-- Course Image -->
-						<!-- <div class="course_image"><img th:src="@{/images/course_image.jpg}" alt=""></div> -->
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
@@ -182,164 +158,9 @@
 	 									<h4 class="tab_panel_text" th:text="${mta.mentorcareer}">
 										</h4>
 									</div>
-<!-- 										<div class="tab_panel_text">
-											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-										</div>
-										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">Requirements</div>
-											<ul class="tab_panel_bullets">
-												<li>Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent.</li>
-												<li>Cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a.</li>
-												<li>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat.</li>
-												<li>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</li>
-											</ul>
-										</div>
-										<div class="tab_panel_section">
-											<div class="tab_panel_subtitle">What is the target audience?</div>
-											<div class="tab_panel_text">
-												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-											</div>
-										</div>
-										<div class="tab_panel_faq">
-											<div class="tab_panel_title">FAQ</div>
 
-											Accordions
-											<div class="accordions">
-												
-												<div class="elements_accordions">
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Can I just enroll in a single course?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center active"><div>I'm not interested in the entire Specialization?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-													<div class="accordion_container">
-														<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific order?</div></div>
-														<div class="accordion_panel">
-															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-														</div>
-													</div>
-
-												</div>
-
-											</div>
-										</div> -->
 								</div>
 
-								<!-- Curriculum -->
-<!-- 								<div class="tab_panel tab_panel_2">
-									<div class="tab_panel_content">
-										<div class="tab_panel_title">Software Training</div>
-										<div class="tab_panel_content">
-											<div class="tab_panel_text">
-												<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
-											</div>
-
-											Dropdowns
-											<ul class="dropdowns">
-												<li class="has_children">
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-													<ul>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 1.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 1.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</li>
-												<li class="has_children">
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-													<ul>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 2.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="dropdown_item">
-																<div class="dropdown_item_title"><span>Lecture 2.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-																<div class="dropdown_item_text">
-																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 3:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 4:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="dropdown_item">
-														<div class="dropdown_item_title"><span>Lecture 5:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
-														<div class="dropdown_item_text">
-															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div> -->
 
 								<!-- Reviews -->
 								<div class="tab_panel tab_panel_3">
@@ -348,7 +169,7 @@
 									<!-- Rating -->
 									<div class="review_rating_container">
 										<div class="review_rating">
-											<div class="review_rating_num">4.5</div>
+											<div class="review_rating_num" th:text = "${avgrating.avgrate}">review rate</div>
 											<div class="review_rating_stars">
 												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
 											</div>
@@ -367,71 +188,44 @@
 									
 									<!-- Comments -->
 									<div class="comments_container">
-										<ul class="comments_list">
-											<li>
+										<ul class="comments_list" >
+											<li th:each = "mreview:${mentorreview}">
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_image"><div><img th:src="@{/images/comment_1.jpg}" alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
-														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-														</div>
-													</div>
-												</div>
-												<ul>
-													<li>
-														<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-															<div class="comment_image"><div><img th:src="@{/images/comment_2.jpg}" alt=""></div></div>
-															<div class="comment_content">
-																<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-																	<div class="comment_author"><a href="#">John Tyler</a></div>
-																	<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-																	<div class="comment_time ml-auto">1 day ago</div>
-																</div>
-																<div class="comment_text">
-																	<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-																</div>
-																<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-																	<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-																	<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-																</div>
+															<div class="comment_author" th:text = "${mreview.userid}">Milley Cyrus</div>
+															
+															<!-- 별점 -->
+															<div class="comment_rating">
+															<div name="${mreview.rating}"
+																class="star-ratings-fill space-x-2 text-lg"
+																th:style="${'width:'+mreview.rating * 20+'%'}">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
 															</div>
+															<div class="star-ratings-base space-x-2 text-lg">
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+																<i class="fa-solid fa-star"></i>
+															</div>
+															</div>
+															
+															<div class="comment_time ml-auto" th:text = "${#dates.format(mreview.reviewdate, 'yyyy-MM-dd')}">1 day ago</div>
 														</div>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-													<div class="comment_image"><div><img th:src="@{/images/comment_3.jpg}" alt=""></div></div>
-													<div class="comment_content">
-														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
-															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
-															<div class="comment_time ml-auto">1 day ago</div>
-														</div>
-														<div class="comment_text">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-														</div>
-														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+														<div class="comment_text" th:text = "${mreview.reviewcon}">
+															<p>review</p>
 														</div>
 													</div>
 												</div>
 											</li>
 										</ul>
-<!-- 										<div class="add_comment_container">
-											<div class="add_comment_title">Add a review</div>
-											<div class="add_comment_text">You must be <a href="#">logged</a> in to post a comment.</div>
-										</div> -->
+										
 									</div>
 								</div>
 
@@ -478,6 +272,7 @@ $(document).ready(function(){
 		});
 		
 	});
+	
 });
 </script>
 <script>
@@ -495,7 +290,7 @@ Kakao.Share.sendDefault({
           '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-          mobileWebUrl: 'http://127.0.0.1//mogotco/mentor/nonid?mentorid='+mentorid,
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
           webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentorid,
       }
     },
