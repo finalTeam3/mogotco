@@ -9,16 +9,6 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 </head>
-<style>
-      input[id="b"] {
-        position: relative;
-        top: 1.5px;
-      }
-      label[for="c"] {
-        position: relative;
-        top: -1.5px;
-      }
-    </style>
 <script>
 $(document).ready(function(){
 	$('#search_button1').click(function(){
@@ -32,6 +22,33 @@ $(document).ready(function(){
 	});
 });
 	
+</script>
+<script>
+function checkOnlyOne(element) {
+	  //중복선택 방지
+	  const checkboxes 
+	      = document.getElementsByName("mentoringtype");
+	  
+	  checkboxes.forEach((cb) => {
+	    cb.checked = false;
+	  })
+	  
+	  element.checked = true;
+	  
+	  //선택 값 가져오기
+	  var mtype;
+	  $('input:checkbox[name=mentoringtype]').each(function (index) {
+		if($(this).is(":checked")==true){
+    	mtype=$(this).val();
+    	}
+	
+	  });
+	  
+	  //선택된 것으로 mentoring 출력
+	 var selcatename = $('#selcatename').val(); 
+	location.href = '[[@{/mentoring/multimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype;
+
+	}
 </script>
 	
 	<!-- Home -->
@@ -75,7 +92,7 @@ $(document).ready(function(){
 								<div class="course">
 									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
-										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left;"><a th:href="@{/course}"></a></h3>
+										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left;"></h3>
 										<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<br>
 										<br>
@@ -103,8 +120,6 @@ $(document).ready(function(){
 									</div>
 								</div>
 							</div>
-
-
 						</div>
 						<div class="row pagination_row">
 							<div class="col">
@@ -150,25 +165,27 @@ $(document).ready(function(){
 								</div>
 						</div>
 					</div>
-						<!-- Categories -->
+					<form id="typeselectmentoring">
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Categories</div>
 							<div class="sidebar_categories">
 								<ul>
-									<li><a th:href="@{/mentoring/mentoring}" th:text="${'ALL'}"></a></li>
-									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mcateid=${mtc.mcateid})}" th:text="${mtc.mname}" th:style="${mtc.mcateid == selcateid ? 'color: #14bdee;' : ''}"></a></li>
+									<li><a th:href="@{/mentoring/mentoring}" th:text="${'all'}" th:value="${'all'}"><input type="hidden" name='mname' th:value="${'all'}" th:text="${'all'}"></a></li>
+									<li th:each="mtc:${mtcatelist}"><a th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}" th:value="${mtc.mname}" th:text="${mtc.mname}" th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input type="hidden" th:text="${mtc.mname}" name='mname' th:value="${mtc.mname}"></a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Type</div>
 							<div class="sidebar_categories">
-    							<p><input type="checkbox" id="a"> <label for="a">가격순</label></p>
-   								<p><input type="checkbox" id="b"> <label for="b">가장 빠른순</label></p>
-   								<p><input type="checkbox" id="c"> <label for="c">별점순</label></p>
-   								<p><input type="checkbox" id="d"> <label for="d">사후관리</label></p>
+    							<p><input type="checkbox" name='mentoringtype' value='lowprice' th:onclick="checkOnlyOne(this)" id="lowprice"> <label for="lowprice">가격순</label></p>
+   								<p><input type="checkbox" name='mentoringtype' value='recentmen' th:onclick="checkOnlyOne(this)" id="recentmen"> <label for="recentmen">가장 빠른순</label></p>
+   								<p><input type="checkbox" name='mentoringtype' value='orderreview' th:onclick="checkOnlyOne(this)" id="orderreview"> <label for="orderreview">별점순</label></p>
+   								<p><input type="checkbox" name='mentoringtype' value='mcaringok' th:onclick="checkOnlyOne(this)" id="mcaringok"> <label for="mcaringok">사후관리</label></p>
 							</div>
 						</div>
+						<input type="hidden" id='selcatename' th:value="${selcatename}">
+						</form>
 				</div>
 			</div>
 		</div>
