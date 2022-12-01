@@ -64,71 +64,66 @@
 							<!-- <div class="sidebar_section_title">Mentoring admin detail</div> -->
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div ><img th:src="@{/images/}+${mti.mentoringimg}" alt="멘토링 대표이미지"></div>
+									<div ><img th:src="@{/images/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
 									<div class="teacher_title">
-										<div class="teacher_name" style="float:left;"><!-- <a href="#" th:text="${mtd.user_username}"></a> --></div>
+										<div class="teacher_name" style="float:left;"></div>
 										<ul><li><a id="kakaotalksharingbtn"></a></li></ul>
-										
 									</div>
 								</div>
 								<br>
 								<div class="teacher_meta_container">
 									<!-- Teacher Rating -->
+									<hr>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">멘토링 제목:</div>
-										<div class="teacher_meta_text ml-auto"><span class="badge badge-pill badge-light" th:text="${mti.mtitle}"></span></div>
+										<div class="teacher_meta_title"><b>멘토링 제목:</b></div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mtitle}"></span></div>
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">멘토링 내용:</div>
-										<div class="teacher_meta_text ml-auto"><span class="badge badge-pill badge-light" th:text="${mti.mcontents}"></span></div>
-										<!-- <div class="teacher_meta_text ml-auto" th:if="${mta.mentorok == 1}"><span class="badge badge-pill badge-primary" style="color:#FFFFFF">승인</span></div>
-										<div class="teacher_meta_text ml-auto" th:if="${mta.mentorok == 0}"><span class="badge badge-pill badge-danger" style="color:#FFFFFF">미승인</span></div> -->
+										<div class="teacher_meta_title"><b>멘토링 내용:</b></div>
+										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mcontents}"></span></div>
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">멘토링 가격:</div>
+										<div class="teacher_meta_title"><b>멘토링 가격:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text="${mti.mentoringprice}"></span>원
+										  <span th:text="${mti.mentoringprice}"></span>원
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">멘토링 등록일:</div>
+										<div class="teacher_meta_title"><b>멘토링 등록일:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text="${#dates.format(mti.mrdate,'yyyy-MM-dd')}" ></span>
+										  <span th:text="${#dates.format(mti.mrdate,'yyyy-MM-dd')}" ></span>
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">멘토링 날짜:</div>
+										<div class="teacher_meta_title"><b>멘토링 날짜:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text="${#dates.format(mti.mentoringdate,'yyyy-MM-dd')}" ></span>
+										  <span th:text="${#dates.format(mti.mentoringdate,'yyyy-MM-dd')}" ></span>
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">비대면 시 영상 url:</div>
+										<div class="teacher_meta_title"><b>비대면 시 영상 url:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text="${mti.mentorurl}" ></span>
+										  <span th:text="${mti.mentorurl}" ></span>
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">모집 정원:</div>
+										<div class="teacher_meta_title"><b>모집 정원:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text=${mti.mmemberidcnt} ></span>명
+										  <span th:text=${mti.mmemberidcnt} ></span>명
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">대면 시 멘토링 장소:</div>
+										<div class="teacher_meta_title"><b>대면 시 멘토링 장소:</b></div>
 										<div class="teacher_meta_text ml-auto">
-										  <span class="badge badge-pill badge-light" th:text="${mti.mplace}" ></span>
+										  <span th:text="${mti.mplace}" ></span>
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">케어 서비스:</div>
+										<div class="teacher_meta_title"><b>케어 서비스:</b></div>
 										<div class="teacher_meta_text ml-auto" th:if="${mti.mcaring == 1}"><span class="badge badge-pill badge-primary" style="color:#FFFFFF">있음</span></div>
 										<div class="teacher_meta_text ml-auto" th:if="${mti.mcaring == 0}"><span class="badge badge-pill badge-danger" style="color:#FFFFFF">없음</span></div>
 									</div>
-									
-									
-									
-									
+									<hr>
 									
 								</div>
 								<div class="teacher_info">
@@ -137,36 +132,14 @@
 							</div>
 						</div>
 						
-
 						<!-- Latest Course -->
-<!-- 						<div class="sidebar_section">
-							<div class="sidebar_section_title"><a th:href="@{/mentor/mentoringadmin(mentorid=${mtd.mentorid})}">Latest Mentoring</a></div>
-							<div class="sidebar_latest">
-
-								Latest Course
-								<div class="latest d-flex flex-row align-items-start justify-content-start" th:each="mtlist:${mtlist}">
-									<div class="latest_image">
-										<div>
-											<a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtlist.mentoring_mentoringid})}">
-											<img th:src="@{/images/}+${mtlist.mentoring_mentoringimg}" alt="">
-											</a>
-										</div>
-									</div>
-									<div class="latest_content">
-										<div class="latest_title"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}"></a></div>
-										<div class="latest_price" th:text="${mtlist.mentoring_mentoringdate}"></div>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
 
 					</div>
 				</div>
 
 
 				<!-- Course -->
-				<div class="col-lg-8">
+				<div class="col-lg-6">
 					
 					<div class="course_container" >
 						<!-- <div class="course_title">Mentor Detail</div> -->
@@ -187,36 +160,18 @@
 
 								<!-- Reviews -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Mentoring Time</div>
+									<div class="tab_panel_title">Mentoring Member</div>
 
 									<!-- Rating -->
-<!-- 									<div class="review_rating_container">
- 										<div class="review_rating">
-											<div class="review_rating_num">4.5</div>
-											<div class="review_rating_stars">
-												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
-											</div>
-											<div class="review_rating_text">(28 Ratings)</div>
-										</div>
- 										<div class="review_rating_bars">
-											<ul>
-												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
-												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
-												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
-												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
-												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
-											</ul>
-										</div>
-									</div> -->
 									
 									<!-- Comments -->
 									<div class="review_rating_container">
-										<ul class="comments_list" th:each="molist:${molist}">
+										<ul class="comments_list" th:each="mmlist:${mmlist}">
 											<li>
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<h4><div th:text="${molist.mentoringtime}"></div></h4>
+															<h4><div th:text="${mmlist.userid}"></div></h4>
 														</div>
 													</div>
 												</div>
