@@ -133,6 +133,20 @@ public class AjaxController {
 		ReviewDTO review = new ReviewDTO(0, mentoringid, userid, rating, reviewcon, null, 0, null, 0, null, null, null, null, null, 0);
 		try {
 			review_service.register(review);
+			//point값 수정
+			//지금 로그인된 회원 정보
+			UserDTO beforeuser = null;
+			beforeuser = user_service.get(userid);
+
+			//수정 point
+			int modipoint = 0;
+				modipoint = beforeuser.getUserpoint() + 50;
+				//수정할 회원 정보
+			UserDTO afteruser = new UserDTO(beforeuser.getUserid(), beforeuser.getUserpwd(), beforeuser.getUsername(), beforeuser.getUseraddr(), beforeuser.getUsertel(), beforeuser.getUseremail(), 
+					beforeuser.getUserdate(), beforeuser.getWithdraw(), beforeuser.getUserbirth(), modipoint, beforeuser.getNaverid(), beforeuser.getKakaoid(), beforeuser.getGoogleid(), beforeuser.getUsergen(), 
+					beforeuser.getAddrnum(), beforeuser.getAddrdetail(), beforeuser.getAddrextra(), beforeuser.getSnsinsta(), beforeuser.getSnsgit(), beforeuser.getMentor_mentorok());
+			//수정
+			user_service.modify(afteruser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
