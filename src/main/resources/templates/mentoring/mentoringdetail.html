@@ -153,7 +153,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						</div>
 
 						<!-- Course Image -->
-						<div class="course_image"><img th:src="@{/images/}+${mto.mentoringimg}" alt=""></div>
+						<div class="course_image"><img th:src="@{/img/}+${mto.mentoringimg}" alt=""></div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
@@ -429,7 +429,7 @@ geocoder.addressSearch('[[${mto.mplace}]]', function(result, status) {
 
      // 인포윈도우로 장소에 대한 설명을 표시합니다
      var infowindow = new kakao.maps.InfoWindow({
-         content: '<div style="width:150px;text-align:center;padding:6px 0; color:black;">대면 멘토링 장소</div>'
+         content: '<div style="width:150px;text-align:center;padding:6px 0; color:black;"><strong style="color:#14bdee; font-size:16px;">대면 멘토링 장소</strong><br>[[${mto.mplace}]]</div>' 
      });
      infowindow.open(map, marker);
 

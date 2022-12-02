@@ -1,7 +1,9 @@
 package com.mogotco.dto;
 
-
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +21,10 @@ public class MentoringDTO {
 	private int mentorid;
 	private int mcateid;
 	private int mentoringprice;
+	
+	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date mentoringdate;
+	
 	private String mentoringimg;
 	private String mentorurl;
 	private int mmemberidcnt;
@@ -43,6 +48,8 @@ public class MentoringDTO {
 	
 	//리뷰 전체 평점(choyunyoung add)
 	private float avgrate;
+	// mentoring 대표 이미지를 위한 추가
+	private MultipartFile mtrimg;
 	
 	
 	
