@@ -1,7 +1,8 @@
 package com.mogotco.dto;
 
-
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,6 +41,9 @@ public class MentoringDTO {
 	//지금 당장 롸잇나우 할 수 있는 멘토링
 	private int date_difference;
 	private String user_username;
+	
+	// mentoring 대표 이미지를 위한 추가
+	private MultipartFile mtrimg;
 	
 	
 	

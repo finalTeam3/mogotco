@@ -178,7 +178,7 @@ $(document).ready(function(){
 		$('#register_form').attr({
 			'enctpe':'multipart/form-data',
 			'method':'post',
-			'action':'[[@{/mentor/registerimpl}]]'
+			'action':'[[@{/mentoring/registerimpl}]]'
 		});
 		$('#register_form').submit();
 	});
@@ -240,9 +240,9 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 										<div>
 											<img id="uploadprofile" th:src="@{/images/defaultprofileupload.jpg}" style="width:200px">
 										</div>
-									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
+									<label id="pubutton" class="btn btn-dark" for="mentoringimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
 									</label>
-									<input type="file" style="display:none" name="mpimg" id="mpimg" onchange="previewprofile(event);">
+									<input type="file" style="display:none" name="mentoringimg" id="mentoringimg" onchange="previewprofile(event);">
 								</div>
 								
 								<div>
@@ -382,7 +382,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								
 								<div>
 									<label for = "mrdate" class="form_title">멘토링 등록날짜<span style="color:red"> *</span></label><br>
-									<span id="mrdate" style="font-size:16px;"></span>
+									<span id="mrdate" name="mrdate" style="font-size:16px;"></span>
 									<script>
 									date = new Date();
 									year = date.getFullYear();

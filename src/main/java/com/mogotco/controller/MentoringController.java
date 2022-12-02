@@ -1,17 +1,22 @@
 package com.mogotco.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotco.dto.MCateDTO;
+import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.frame.Util;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
 import com.mogotco.service.MentorService;
@@ -40,6 +45,12 @@ public class MentoringController {
 
 	@Autowired
 	PurchaseDetailService service1;
+	
+	@Value("${admindir}")
+	String admindir;
+
+	@Value("${userdir}")
+	String userdir;
 	
 	
 	String mentoring = "mentoring/";
@@ -203,6 +214,31 @@ public class MentoringController {
 
 		return "main";
 	}
+	
+	@RequestMapping("/registerimpl")
+	public String register(Model model, MentoringDTO mentoringdto, String[] mentoringtime, MentoringOptionDTO mentoringoption) {
+		String mtrimgname = mentoringdto.getMtrimg().getOriginalFilename();
+		mentoringdto.setMentoringimg(mtrimgname);
+
+		try {
+			Util.saveMentoringFile(mentoringdto.getMtrimg(), admindir, userdir);		
+			mservice.register(mentoringdto);;
+			int a = mentoringdto.getMentoringid();
+			int b = mentoringdto.getMmemberidcnt();
+			for(int i=0;i<mentoringtime.length;i++) {
+				MentoringOptionDTO mo = null;
+				mo = new MentoringOptionDTO(0,a,mentoringtime[i],b);
+				moservice.register(mo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "main";
+	}
+	
+
+	
 	
 	// txt가 있을 때
 	// 메인에서 카테고리, select type순서별 검색( 검색창에 text가 있을 때)
