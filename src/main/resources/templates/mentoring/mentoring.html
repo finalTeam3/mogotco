@@ -95,7 +95,7 @@ function checkOnlyOne(element) {
 							<!-- Course -->
 							<div th:each="mtr:${mtr}" class="col-lg-6 course_col">
 								<div class="course">
-									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/images/}+${mtr.mentoringimg}" alt=""></a></div>
+									<div class="course_image"><a th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"><img th:src="@{/img/}+${mtr.mentoringimg}" alt=""></a></div>
 									<div class="course_body">
 										<h3 class="course_title" th:text="${mtr.mtitle}" style="float:left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
 										<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>

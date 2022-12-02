@@ -2,6 +2,7 @@ package com.mogotco.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,10 @@ public class MentoringDTO {
 	private int mentorid;
 	private int mcateid;
 	private int mentoringprice;
+	
+	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date mentoringdate;
+	
 	private String mentoringimg;
 	private String mentorurl;
 	private int mmemberidcnt;

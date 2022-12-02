@@ -217,6 +217,7 @@ public class MentoringController {
 	
 	@RequestMapping("/registerimpl")
 	public String register(Model model, MentoringDTO mentoringdto, String[] mentoringtime, MentoringOptionDTO mentoringoption) {
+		System.out.println(mentoringdto);
 		String mtrimgname = mentoringdto.getMtrimg().getOriginalFilename();
 		mentoringdto.setMentoringimg(mtrimgname);
 
