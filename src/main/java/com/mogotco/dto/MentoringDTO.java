@@ -41,6 +41,9 @@ public class MentoringDTO {
 	private int date_difference;
 	private String user_username;
 	
+	//리뷰 전체 평점(choyunyoung add)
+	private float avgrate;
+	
 	
 	
 	
