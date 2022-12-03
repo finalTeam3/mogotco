@@ -19,5 +19,10 @@ public interface ReviewMapper extends MyMapper<Integer, ReviewDTO>{
 	public List<ReviewDTO> topmentors() throws Exception;
 	//mentor들의 cate뽑기(review에 있음)(choyunyoung add)
 	public List<ReviewDTO> mentorwish(int mentorid) throws Exception;
+	
+	//개인 멘토 리뷰 개수
+	public ReviewDTO reviewcnt(int mentorid) throws Exception;
+	//개인 멘토 star 별 리뷰 개수
+	public ReviewDTO starcnt(int mentorid) throws Exception;
 }
 
