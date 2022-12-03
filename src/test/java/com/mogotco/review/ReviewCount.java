@@ -8,7 +8,7 @@ import com.mogotco.dto.ReviewDTO;
 import com.mogotco.service.ReviewService;
 
 @SpringBootTest
-class UpdateReview {
+class ReviewCount {
 	
 	@Autowired
 	ReviewService service;
@@ -16,13 +16,16 @@ class UpdateReview {
 	@Test
 	void contextLoads() {
 		
-		ReviewDTO review = new ReviewDTO(504, 200, "qkrgPwjd1541", 5, "너무 좋았습니다.",null, 1, null,0,null,null,null,null,null,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		ReviewDTO review = null;
+		
 		try {
-			service.modify(review);
-			System.out.println("OK");
+			review = service.reviewcnt(100);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(review);
+		
 	}
 	
 }

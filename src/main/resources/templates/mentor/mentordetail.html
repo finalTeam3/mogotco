@@ -171,20 +171,39 @@
 									<div class="review_rating_container">
 										<div class="review_rating">
 											<div class="review_rating_num" th:text = "${avgrating.avgrate}">review rate</div>
+											
 											<div class="review_rating_stars">
-												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+												<div class="comment_rating_avg">
+													<div name="${avgrating.rating}" class="star-ratings-fill_avg space-x-2 text-lg" th:style="${'width:'+avgrating.avgrate * 20+'%'}">
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+													</div>
+													<div class="star-ratings-base_avg space-x-2 text-lg">
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+													</div>
+												</div>
 											</div>
-											<div class="review_rating_text">(28 Ratings)</div>
+											
+											<div class="review_rating_text" th:text = "${'(' + reviewcnt.viewreviewcnt + ' Ratings)'}">review count</div>
 										</div>
+										
 										<div class="review_rating_bars">
 											<ul>
-												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
-												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
-												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
-												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
-												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
+												<li><span>5 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star5cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar5cnt}">Star Count</span></li>
+												<li><span>4 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
+												<li><span>3 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star3cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar3cnt}">Star Count</span></li>
+												<li><span>2 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star2cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar2cnt}">Star Count</span></li>
+												<li><span>1 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star1cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar1cnt}">Star Count</span></li>
 											</ul>
 										</div>
+										
 									</div>
 									
 									<!-- Comments -->
