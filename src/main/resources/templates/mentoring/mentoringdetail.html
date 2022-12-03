@@ -134,7 +134,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">모집정원</div>
+								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별 모집 정원</div>
 								<div class="course_info_text" th:text="${mto.mmemberidcnt}"><a href="#">Jacke Masito</a></div>
 							</div>
 
@@ -305,7 +305,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 									<article class="cont-select">
         							<button id="time" value="" class="btn-select">시간을 선택하세요</button>
         								<ul class="list-member">
-            								<li th:each="mttime:${mttime}"><button type="button"  th:text="${mttime.mentoringtime}">Python</button></li>
+            								<li th:if="${mttime.moptionstock != 0}" th:each="mttime:${mttime}"><button type="button" th:text="${mttime.mentoringtime}">Python</button></li>
        									 </ul>
     								</article>
     								<script>
