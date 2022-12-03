@@ -348,14 +348,15 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<!-- 대면 -->
 										<div class="teacher_meta_title">MentoringService:</div>
-										<div class="teacher_meta_text ml-auto"><span style="font-family: 'IBM Plex Sans KR', sans-serif;" th:text="${mto.mentorurl}" >없음</span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mentorurl != ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;" th:text="${mto.mentorurl}"></span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mentorurl == ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;"></span>대면</div>
 									</div>
 									<!-- Teacher Review -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<!-- 비대면 -->
-										<div class="teacher_meta_title">MentoringPlace:</div>
-										<div class="teacher_meta_text ml-auto">
-											<span th:text="${mto.mplace}" style="font-family: 'IBM Plex Sans KR', sans-serif;">12k</span></div>
+									<div class="teacher_meta_title">MentoringPlace:</div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mplace != ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;" th:text="${mto.mplace}"></span></div>
+										<div class="teacher_meta_text ml-auto" th:if="${mto.mplace == ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">비대면</span></div>
 									</div>
 									<!-- Teacher Quizzes -->
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
