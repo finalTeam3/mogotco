@@ -18,4 +18,10 @@ public class MWishcateDTO {
 	
 	private String mcate_mname; // 희망 분야 이름
 	private String mentor_userid;
+	
+	//mentorlist에서 cate선택했을 때 나오는 것
+	//같은 이름의 객체에 넣어줘야 하기 때문에 이름에 _를 붙일수가 없음!
+	private String mentorimg;
+	private String userid;
+	private String mentorcom;
 }

@@ -15,7 +15,7 @@ class InsertMWishcate {
 	
 	@Test
 	void contextLoads() {
-		MWishcateDTO mwishcate = new MWishcateDTO(0, 50, 104, null, null);
+		MWishcateDTO mwishcate = new MWishcateDTO(0, 50, 104, null, null,null,null,null);
 		try {
 			service.register(mwishcate);
 		} catch (Exception e) {

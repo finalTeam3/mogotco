@@ -285,7 +285,8 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						<div class="sidebar_section">
 							<div class="sidebar_section_title">Purchase</div>
 							<div>
-								<button type="submit" class="home_search_button" th:onclick="purchase()" style="margin-top:20px; width:150px; font-family: 'IBM Plex Sans KR', sans-serif;">구매하기</button>
+								<button type="submit" class="home_search_button" th:if="${mto.date_difference >= 0 }" th:onclick="purchase()" style="margin-top:20px; width:150px; font-family: 'IBM Plex Sans KR', sans-serif;">구매하기</button>
+								<button type="submit" class="home_search_button" th:if="${mto.date_difference < 0 }" style="margin-top:20px; width:170px; background-color:#BFBCBB; font-family: 'IBM Plex Sans KR', sans-serif;">이미 진행된 멘토링입니다</button>
 							</div>
 							
 							<div class="sidebar_feature">
