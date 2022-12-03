@@ -11,6 +11,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN mentor m ON m.mentorid = mw.mentorid
 		WHERE m.mentorid = #{mentorid}
 	</select>
+	
+	<select id="mwcatelist" parameterType="String" resultType="MWishcateDTO">
+		SELECT mw.mwishcateid, mw.mentorid, mw.mcateid, mc.mname as mcate_mname, m.userid as userid, m.mentorimg as mentorimg, m.mentorcom as mentorcom FROM mwishcate mw
+		INNER JOIN mcate mc ON mc.mcateid = mw.mcateid
+		INNER JOIN mentor m ON m.mentorid = mw.mentorid
+		WHERE mc.mname = #{mname}
+	</select>
 
 	<select id="select" parameterType="Integer" resultType="MWishcateDTO">
 		SELECT * FROM mwishcate WHERE mwishcateid=#{mwishcateid}

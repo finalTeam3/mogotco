@@ -58,7 +58,7 @@
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}"></div>
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name" style="float:left;"><a href="#" th:text="${mta.user_username}"></a></div>
+										<div class="teacher_name" style="float:left;"><a th:href="@{/mentor/mentoringlist(mentorid=${mta.mentorid})}" th:text="${mta.user_username}"></a></div>
 										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button>
 										

@@ -44,5 +44,7 @@ public class MWishcateService implements MyService<Integer, MWishcateDTO>{
 		return mapper.mwcate(mentorid);
 	}
 	
-
+	public List<MWishcateDTO> mwcatelsiList(String manme) throws Exception{
+		return mapper.mwcatelist(manme);
+	}
 }

@@ -133,6 +133,8 @@ $(document).ready(function(){
                            <li><a th:href="@{/about}">About</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/mentoring(userid=${session.loginuser.userid})}">Mentoring</a></li>
                            <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
+                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentor/mentorlist(userid=${session.loginuser.userid})}">Mentor</a></li>
+                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
                         </ul>
                         <div class="search_button"><i class="fa-solid fa-magnifying-glass"aria-hidden="true"></i></div>
 
@@ -187,6 +189,7 @@ $(document).ready(function(){
             <li class="menu_mm"><a th:href="@{/notice}">Notice</a></li>
             <li class="menu_mm"><a th:href="@{/about}">About</a></li>
             <li class="menu_mm"><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
+            <li class="menu_mm"><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
             <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/logout}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
          </ul>
       </nav>
