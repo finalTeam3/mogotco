@@ -3,12 +3,12 @@ package com.mogotco.controller;
 import java.util.HashMap;
 import java.util.Random;
 
-//import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +37,8 @@ public class UserController {
 	@Autowired
 	MentorService mentor_service;
 	
-	//@Autowired
-	//JavaMailSender mailSender;
+	@Autowired
+	JavaMailSender mailSender;
 	
 	public void maincenter(Model model) {
 	}
@@ -183,17 +183,17 @@ public class UserController {
 		String content = "인증번호는 " + num + " 입니다. 인증번호를 입력 후 인증 버튼을 눌러주세요."; 	// 메일 내용
 		
 		// 단순 텍스트 메일 전송용
-		//MimeMessage msg = mailSender.createMimeMessage();
-		//MimeMessageHelper msgHelper = new MimeMessageHelper(msg, "UTF-8");
+		MimeMessage msg = mailSender.createMimeMessage();
+		MimeMessageHelper msgHelper = new MimeMessageHelper(msg, "UTF-8");
 		
 		// 메일 작성
-		//msgHelper.setFrom("상부3조 <mogotcomentoring@gmail.com>");
-		//msgHelper.setTo(toMail);
-		//msgHelper.setSubject(title);
-		//msgHelper.setText(content);
+		msgHelper.setFrom("상부3조 <mogotcomentoring@gmail.com>");
+		msgHelper.setTo(toMail);
+		msgHelper.setSubject(title);
+		msgHelper.setText(content);
 		
 		// 메일 보내기
-		//mailSender.send(msg);
+		mailSender.send(msg);
 		
 		// ajax 이용시 데이터 타입은 string만 가능하기에 형 변환
 		String confirmNum = Integer.toString(num);
