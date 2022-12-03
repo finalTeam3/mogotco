@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
@@ -21,6 +22,7 @@ import com.mogotco.dto.MentoringmemberDTO;
 import com.mogotco.dto.ReviewDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
+import com.mogotco.service.MCateService;
 import com.mogotco.service.MWishcateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
@@ -56,6 +58,9 @@ public class MentorController {
 	@Autowired
 	MentoringmemberService mmservice;
 	
+	@Autowired
+	MCateService mcateservice;
+	
 	@Value("${admindir}")
 	String admindir;
 
@@ -85,6 +90,63 @@ public class MentorController {
 			}
 		}
 	}
+	
+	// 멘토 listpage
+	@RequestMapping("/mentorlist")
+	public String mentorlist(Model model, String userid) {
+		List<MentorDTO> mentorlist = null;
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			mentorlist = mservice.get();
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("list", mentorlist);
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentor + "mentorlist");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//mentor cate별로 뽑기
+	@RequestMapping("/mentoringCate")
+	public String mentoringCate(Model model, String mname) {
+		List<MWishcateDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			citemlist = mwservice.mwcatelsiList(mname);// 카테고리별 멘토링 정보 넣어주기
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("selcatename", mname);
+			model.addAttribute("list", citemlist); // 등록된 mentor 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentor + "mentorlist");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "main";
+	}
+	
+	//mentor의 mentoringlist
+	@RequestMapping("/mentormentoring")
+	public String mentormentoring(Model model, int mentorid) {
+		List<MentorDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			//citemlist = mservice.selectMentoringAll(mname);// 카테고리별 멘토링 정보 넣어주기
+			//catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			//model.addAttribute("selcatename", mname);
+			model.addAttribute("list", citemlist); // 등록된 mentor 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentor + "mentorlist");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "main";
+	}
+	
 
 	// 멘토 상세페이지
 	@RequestMapping("/mentordetail")
@@ -177,7 +239,7 @@ public class MentorController {
 			mwservice.remove(r);
 			for(int i=0;i<mcateid.length;i++) {
 				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null);
+				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
 				mwservice.register(mw);
 			}			
 		} catch (Exception e) {
@@ -217,7 +279,7 @@ public class MentorController {
 			int r = mentordto.getMentorid();
 			for(int i=0;i<mcateid.length;i++) {
 				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null);
+				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
 				mwservice.register(mw);
 			}
 		} catch (Exception e) {
