@@ -23,6 +23,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
 								<li>Mentor Details</li>
 							</ul>
 						</div>
@@ -231,6 +232,13 @@
 
 							</div>
 						</div>
+										<div class="row">
+				<div class="col">
+					<div class="courses_button trans_200">
+						<a th:href="@{/mentor/mentormentoring(mentorid=${mentorid},userid=${mta.userid})}">멘토링 보러가기</a>
+					</div>
+				</div>
+			</div>
 					</div>
 				</div>
 

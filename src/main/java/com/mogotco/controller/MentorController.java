@@ -130,16 +130,17 @@ public class MentorController {
 	
 	//mentor의 mentoringlist
 	@RequestMapping("/mentormentoring")
-	public String mentormentoring(Model model, int mentorid) {
+	public String mentormentoring(Model model, int mentorid, String userid) {
 		List<MentorDTO> citemlist = null; // 카테고리별 리스트용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		try {
-			//citemlist = mservice.selectMentoringAll(mname);// 카테고리별 멘토링 정보 넣어주기
+			citemlist = mservice.mentormentoring(mentorid);// 카테고리별 멘토링 정보 넣어주기
 			//catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			//model.addAttribute("selcatename", mname);
+			model.addAttribute("mentorid", mentorid);
+			model.addAttribute("userid", userid);
 			model.addAttribute("list", citemlist); // 등록된 mentor 리스트
-			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-			model.addAttribute("center", mentor + "mentorlist");
+			model.addAttribute("center", mentor + "mentormentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -160,6 +161,7 @@ public class MentorController {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
+			model.addAttribute("mentorid", mentorid);
 			model.addAttribute("mta", mta);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
@@ -189,6 +191,7 @@ public class MentorController {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
+			model.addAttribute("mentorid", mentorid);
 			model.addAttribute("mta", mta);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);

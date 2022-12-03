@@ -39,6 +39,9 @@ public class MentorDTO {
 	private String mentoring_mentoringdate;
 	private String mentoring_mplace;
 	private String user_username;
+	private int mentoring_mmemberidcnt;
+	private int date_difference;
+	private int mentoring_mentoringprice;
 	
 	
 }
