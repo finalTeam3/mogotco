@@ -10,7 +10,7 @@
 
 
 $(document).ready(function(){
-	//var code = "";	// 이메일 인증번호 저장
+	var code = "";	// 이메일 인증번호 저장
 	
 	/* 회원가입 */
 	$('#register_btn').click(function(){
@@ -49,36 +49,36 @@ $(document).ready(function(){
 	});
 	
 	/* 이메일 인증번호 보내기 */
-	//$('#emailcheck_btn').click(function(){
+	$('#emailcheck_btn').click(function(){
 		
-		//mailregexcheck();	// 이메일 정규식 검증 - true
+		mailregexcheck();	// 이메일 정규식 검증 - true
 		
-		//var email = $('#email').val();	// 사용자가 입력한 이메일
+		var email = $('#email').val();	// 사용자가 입력한 이메일
 
 		
-		//$.ajax({
-		//	type : 'get',
-			//url : '[[@{/user/emailCheck}]]?email=' + email, // 컨트롤러로 사용자가 입력한 이메일을 보내줌
-			//success : function (data) {	// 컨트롤러의 data가 반환
-			//	$('#emailconfirm').attr('disabled', false);
-			//	code = data;
-			//}
-	   //});
+		$.ajax({
+			type : 'get',
+			url : '[[@{/user/emailCheck}]]?email=' + email, // 컨트롤러로 사용자가 입력한 이메일을 보내줌
+			success : function (data) {	// 컨트롤러의 data가 반환
+				$('#emailconfirm').attr('disabled', false);
+				code = data;
+			}
+	   });
 		
-	//});
+	});
 	
 	/* 인증번호 일치여부 검사 */
-	//$('#codecheck_btn').click(function(){
-		//var emailconfirm = document.register_form.emailconfirm.value;	// 사용자가 입력한 인증번호 값
+	$('#codecheck_btn').click(function(){
+		var emailconfirm = document.register_form.emailconfirm.value;	// 사용자가 입력한 인증번호 값
 		
-		//if(emailconfirm == code) {
-			//$('#espan2').text('인증번호가 일치합니다');
-			//$('#espan2').attr('class', 'correct');
-		//} else {
-			//$('#espan2').text('인증번호가 일치하지 않습니다. 다시 확인해주세요');
-			//$('#espan2').attr('class', 'incorrect');
-		//}
-	//});
+		if(emailconfirm == code) {
+			$('#espan2').text('인증번호가 일치합니다');
+			$('#espan2').attr('class', 'correct');
+		} else {
+			$('#espan2').text('인증번호가 일치하지 않습니다. 다시 확인해주세요');
+			$('#espan2').attr('class', 'incorrect');
+		}
+	});
 });
 	
 	/* 이메일 정규직 검증 */
@@ -225,10 +225,10 @@ $(document).ready(function(){
 								<div>
 									<label for = "email" class="form_title">Email</label>
 									<div><input type="text" class="comment_input col-lg-5" id = "email" name = "useremail">
-									<!-- <button id = "emailcheck_btn" type="button" th:onclick = "mailregexcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button>--></div>
+									<button id = "emailcheck_btn" type="button" th:onclick = "mailregexcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button></div>
 									<div><span id = "espan1"></span></div>
 									<input type="text" class="comment_input col-lg-5" id = "emailconfirm" placeholder = "인증번호 6자리를 입력해주세요" disabled = "disabled" maxlength = "6">
-									<!--  <button id = "codecheck_btn" type="button" class="comment_button_mail trans_200">인증</button>-->
+									<button id = "codecheck_btn" type="button" class="comment_button_mail trans_200">인증</button>
 									<div><span id = "espan2"></span></div>
 								</div>
 								
