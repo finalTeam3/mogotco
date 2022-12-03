@@ -33,6 +33,19 @@ public class ReviewDTO {
 	//리뷰 전체 평점(choyunyoung add)
 	private float avgrate;
 	
+	//표출 리뷰 수
+	private int viewreviewcnt;
+	private int viewstar5cnt;
+	private int viewstar4cnt;
+	private int viewstar3cnt;
+	private int viewstar2cnt;
+	private int viewstar1cnt;
+		
 	//리뷰 수
-	private int revewcnt;
+	private float reviewcnt;
+	private float star5cnt;
+	private float star4cnt;
+	private float star3cnt;
+	private float star2cnt;
+	private float star1cnt;
 }
