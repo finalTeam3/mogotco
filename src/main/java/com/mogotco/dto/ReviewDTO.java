@@ -32,4 +32,7 @@ public class ReviewDTO {
 	
 	//리뷰 전체 평점(choyunyoung add)
 	private float avgrate;
+	
+	//리뷰 수
+	private int revewcnt;
 }

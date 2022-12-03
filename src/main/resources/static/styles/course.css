@@ -873,6 +873,35 @@ section
 {
 	color: #14bdee;
 }
+.comment_rating_avg
+{
+	margin-top: 7px;
+}
+.comment_rating_avg i
+{
+	font-size: 14px;
+	margin-right: 4px;
+	width : 100px;
+}
+.star-ratings-fill_avg {
+	color: #fff58c;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-text-fill-color: gold;
+	width : 100px;
+}
+
+.star-ratings-base_avg {
+	z-index: 0;
+	display: flex;
+	padding: 0;
+	width : 100px;
+}
 .rating_r
 {
 	margin-top: 7px;
