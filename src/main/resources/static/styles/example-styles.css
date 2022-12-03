@@ -22,6 +22,7 @@
     font-size: 0.875em;
     padding: 0.6em 1em 0.6em 30px;
     white-space: nowrap;
+    font-size: 15px;
 }
 
 .multi-select-menuitem--titled:before {
