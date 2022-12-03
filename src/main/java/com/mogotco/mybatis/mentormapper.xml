@@ -8,6 +8,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		resultType="MentorDTO">
 		SELECT * FROM mentor WHERE userid=#{userid}
 	</select>
+	
+	<select id="mentormentoring" parameterType="Integer"
+		resultType="MentorDTO">
+		SELECT m.mentorid, m.userid, mr.mentoringid as mentoring_mentoringid,
+		mr.mtitle as mentoring_mtitle, m.mentorcom, mr.mentoringprice as mentoring_mentoringprice,
+		mr.mentoringimg as mentoring_mentoringimg, mr.mmemberidcnt as mentoring_mmemberidcnt,
+		mr.mentoringdate as mentoring_mentoringdate,DATEDIFF(mr.mentoringdate,sysdate()) as date_difference,
+		mr.mplace as mentoring_mplace FROM mentor m
+		INNER JOIN mentoring mr ON mr.mentorid = m.mentorid
+		WHERE
+		m.mentorid=#{mentorid} ORDER BY DATEDIFF(mr.mentoringdate,sysdate()) DESC
+	</select>
 
 	<select id="mentoritem" parameterType="Integer"
 		resultType="MentorDTO">

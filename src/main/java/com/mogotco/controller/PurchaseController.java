@@ -95,7 +95,6 @@ public class PurchaseController {
 		MentoringOptionDTO mto = null;
 		try {
 			mto = service4.viewmentoringoptionid(pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime());
-			System.out.println(mto);
 			model.addAttribute("mto", mto);
 			model.addAttribute("center", purchase+"purchase");
 		} catch (Exception e) {

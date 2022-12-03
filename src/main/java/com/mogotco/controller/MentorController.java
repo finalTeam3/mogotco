@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MCateDTO;
 import com.mogotco.dto.MWishcateDTO;
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
@@ -21,6 +22,7 @@ import com.mogotco.dto.MentoringmemberDTO;
 import com.mogotco.dto.ReviewDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
+import com.mogotco.service.MCateService;
 import com.mogotco.service.MWishcateService;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
@@ -56,6 +58,9 @@ public class MentorController {
 	@Autowired
 	MentoringmemberService mmservice;
 	
+	@Autowired
+	MCateService mcateservice;
+	
 	@Value("${admindir}")
 	String admindir;
 
@@ -85,6 +90,64 @@ public class MentorController {
 			}
 		}
 	}
+	
+	// 멘토 listpage
+	@RequestMapping("/mentorlist")
+	public String mentorlist(Model model, String userid) {
+		List<MentorDTO> mentorlist = null;
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			mentorlist = mservice.get();
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("list", mentorlist);
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentor + "mentorlist");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//mentor cate별로 뽑기
+	@RequestMapping("/mentoringCate")
+	public String mentoringCate(Model model, String mname) {
+		List<MWishcateDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			citemlist = mwservice.mwcatelsiList(mname);// 카테고리별 멘토링 정보 넣어주기
+			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("selcatename", mname);
+			model.addAttribute("list", citemlist); // 등록된 mentor 리스트
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("center", mentor + "mentorlist");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "main";
+	}
+	
+	//mentor의 mentoringlist
+	@RequestMapping("/mentormentoring")
+	public String mentormentoring(Model model, int mentorid, String userid) {
+		List<MentorDTO> citemlist = null; // 카테고리별 리스트용
+		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		try {
+			citemlist = mservice.mentormentoring(mentorid);// 카테고리별 멘토링 정보 넣어주기
+			//catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			//model.addAttribute("selcatename", mname);
+			model.addAttribute("mentorid", mentorid);
+			model.addAttribute("userid", userid);
+			model.addAttribute("list", citemlist); // 등록된 mentor 리스트
+			model.addAttribute("center", mentor + "mentormentoring");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "main";
+	}
+	
 
 	// 멘토 상세페이지
 	@RequestMapping("/mentordetail")
@@ -92,22 +155,30 @@ public class MentorController {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
-		List<ReviewDTO> rlist= null;
-		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
+		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
+		ReviewDTO review, reviewcount, starcnt= null;// 해당 멘토 평균 별점, 리뷰갯수_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
+			model.addAttribute("mentorid", mentorid);
 			model.addAttribute("mta", mta);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
+			model.addAttribute("center", mentor + "mentordetail");
 			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
 			model.addAttribute("mentorreview", rlist);
+			// 해당 멘토의 평균 별점_혜정
 			review = review_service.indivirating(mentorid);
 			model.addAttribute("avgrating", review);
-			model.addAttribute("center", mentor + "mentordetail");
+			// 해당 멘토의 리뷰 개수_혜정
+			reviewcount = review_service.reviewcnt(mentorid);
+			model.addAttribute("reviewcnt", reviewcount);
+			// 별점 별 리뷰 갯수
+			starcnt = review_service.starcnt(mentorid);
+			model.addAttribute("starcnt", starcnt);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,22 +192,27 @@ public class MentorController {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
-		List<ReviewDTO> rlist= null;
-		ReviewDTO review= null;// 해당 멘토 리뷰 노출_혜정
+		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
+		ReviewDTO review, reviewcount= null;// 해당 멘토 평균 별점, 리뷰 갯수_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
 			mwclist = mwservice.mwcate(mentorid);
+			model.addAttribute("mentorid", mentorid);
 			model.addAttribute("mta", mta);
 			model.addAttribute("mtlist", mtlist);
 			model.addAttribute("mwclist", mwclist);
+			model.addAttribute("center", mentor + "mentordetail1");
 			
 			// 해당 멘토의 리뷰리스트 조회_혜정
 			rlist = review_service.getmentorreview(mentorid);
 			model.addAttribute("mentorreview", rlist);
+			// 해당 멘토의 평균 별점_혜정
 			review = review_service.indivirating(mentorid);
 			model.addAttribute("avgrating", review);
-			model.addAttribute("center", mentor + "mentordetail1");
+			// 해당 멘토의 리뷰 개수_혜정
+			reviewcount = review_service.reviewcnt(mentorid);
+			model.addAttribute("reviewcnt", reviewcount);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -177,7 +253,7 @@ public class MentorController {
 			mwservice.remove(r);
 			for(int i=0;i<mcateid.length;i++) {
 				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null);
+				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
 				mwservice.register(mw);
 			}			
 		} catch (Exception e) {
@@ -217,7 +293,7 @@ public class MentorController {
 			int r = mentordto.getMentorid();
 			for(int i=0;i<mcateid.length;i++) {
 				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null);
+				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
 				mwservice.register(mw);
 			}
 		} catch (Exception e) {

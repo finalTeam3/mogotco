@@ -16,4 +16,5 @@ public interface MentorMapper extends MyMapper<Integer, MentorDTO>{
 	public MentorDTO mentoritem1(int mentorid) throws Exception;
 	public MentorDTO adminupdate(String userid) throws Exception;
 	public MentorDTO mentordetail(int mentorid) throws Exception;
+	public List<MentorDTO> mentormentoring(int mentorid) throws Exception;
 }

@@ -16,7 +16,7 @@ class UpdateMWishcate {
 	
 	@Test
 	void contextLoads() {
-		MWishcateDTO mwishcate = new MWishcateDTO(1108, 70, 102, null, null);
+		MWishcateDTO mwishcate = new MWishcateDTO(1108, 70, 102, null, null,null,null,null);
 		try {
 			service.modify(mwishcate);
 		} catch (Exception e) {

@@ -23,6 +23,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
 								<li>Mentor Details</li>
 							</ul>
 						</div>
@@ -58,7 +59,7 @@
 									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}"></div>
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name" style="float:left;"><a href="#" th:text="${mta.user_username}"></a></div>
+										<div class="teacher_name" style="float:left;"><a th:href="@{/mentor/mentoringlist(mentorid=${mta.mentorid})}" th:text="${mta.user_username}"></a></div>
 										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
 										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button>
 										
@@ -170,20 +171,39 @@
 									<div class="review_rating_container">
 										<div class="review_rating">
 											<div class="review_rating_num" th:text = "${avgrating.avgrate}">review rate</div>
+											
 											<div class="review_rating_stars">
-												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+												<div class="comment_rating_avg">
+													<div name="${avgrating.rating}" class="star-ratings-fill_avg space-x-2 text-lg" th:style="${'width:'+avgrating.avgrate * 20+'%'}">
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+													</div>
+													<div class="star-ratings-base_avg space-x-2 text-lg">
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+													</div>
+												</div>
 											</div>
-											<div class="review_rating_text">(28 Ratings)</div>
+											
+											<div class="review_rating_text" th:text = "${'(' + reviewcnt.viewreviewcnt + ' Ratings)'}">review count</div>
 										</div>
+										
 										<div class="review_rating_bars">
 											<ul>
-												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
-												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
-												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
-												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
-												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
+												<li><span>5 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star5cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar5cnt}">Star Count</span></li>
+												<li><span>4 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
+												<li><span>3 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star3cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar3cnt}">Star Count</span></li>
+												<li><span>2 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star2cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar2cnt}">Star Count</span></li>
+												<li><span>1 Star</span><div class="review_rating_bar"><div th:style="'width:' + ${starcnt.star1cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar1cnt}">Star Count</span></li>
 											</ul>
 										</div>
+										
 									</div>
 									
 									<!-- Comments -->
@@ -231,6 +251,13 @@
 
 							</div>
 						</div>
+										<div class="row">
+				<div class="col">
+					<div class="courses_button trans_200">
+						<a th:href="@{/mentor/mentormentoring(mentorid=${mentorid},userid=${mta.userid})}">멘토링 보러가기</a>
+					</div>
+				</div>
+			</div>
 					</div>
 				</div>
 
