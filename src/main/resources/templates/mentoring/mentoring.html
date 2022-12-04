@@ -117,8 +117,7 @@ function checkOnlyOne(element) {
 										th:src="@{/img/}+${mtr.mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title" th:text="${mtr.mtitle}"
-										style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
+									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${mtr.mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a></h3>
 									<ul style="list-style: none;">
 										<li><a id="kakaotalksharingbtn"><img
 												th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])"
@@ -134,7 +133,7 @@ function checkOnlyOne(element) {
 										class="course_teacher" th:text="${mtr.user_userid}"></div>
 									<br>
 									<div style="display: inline; color: black;">
-										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">모집정원:</span>
+										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별 모집 정원:</span>
 									</div>
 									<div style="display: inline; color: black;" class="course_text"
 										th:text="${mtr.mmemberidcnt}"></div>
@@ -142,13 +141,28 @@ function checkOnlyOne(element) {
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference >= 0 }">
 										<span class="badge badge-pill badge-primary"
-											style="color: #FFFFFF">진행가능</span>
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference < 0}">
 										<span class="badge badge-pill badge-danger"
-											style="color: #FFFFFF">진행완료</span>
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
 									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mtr.mentorurl == 'nonface'}">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+									</div>
+ 									<div class="teacher_meta_text ml-auto"
+										th:if="${mtr.mentorurl == 'face'}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+									</div>
+									 <div class="teacher_meta_text ml-auto"
+										th:if="${mtr.mcaring == 1}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
+									</div> 
 
 								</div>
 								<div class="course_footer">
@@ -208,10 +222,9 @@ function checkOnlyOne(element) {
 				<div class="sidebar">
 					<!-- Latest Course -->
 					<div class="sidebar_section">
-						<div th:if="${ms != null}" class="sidebar_section_title">Mentoring
+						<div style="margin-top:50px;" th:if="${ms != null}" class="sidebar_section_title">Mentoring
 							Register</div>
 						<div class="sidebar_latest">
-
 							<!-- Latest Course -->
 							<div
 								class="latest d-flex flex-row align-items-start justify-content-start">

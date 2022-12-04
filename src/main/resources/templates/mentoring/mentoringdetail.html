@@ -129,12 +129,37 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 					
 					<div class="course_container">
 						<div class="course_title" id="mtitle" th:text="${mto.mtitle}" style="float:left; font-family: 'IBM Plex Sans KR', sans-serif;">Software Training</div>
-						<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mto.mentoringid}]],[[${mto.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+						<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mto.mentoringid}]],[[${mto.mtitle}]])" style="margin-top:10px; margin-bottom:18px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+						<div class="teacher_meta_text ml-auto"
+										th:if="${mto.date_difference >= 0 }">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
+									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.date_difference < 0}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
+									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.mentorurl == 'nonface'}">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+									</div>
+ 									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.mentorurl == 'face'}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+									</div>
+									 <div class="teacher_meta_text ml-auto"
+										th:if="${mto.mcaring == 1}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
+									</div> 
 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
 							<!-- Course Info Item -->
 							<div class="course_info_item">
-								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">모집정원</div>
+								<div class="course_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별 모집 정원</div>
 								<div class="course_info_text" th:text="${mto.mmemberidcnt}"><a href="#">Jacke Masito</a></div>
 							</div>
 
@@ -166,7 +191,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<p class="tab_panel_content" th:text="${mto.mcontents}" style="font-weight:bold; font-size:18px; font-family:'IBM Plex Sans KR', sans-serif;"></p>
+									<p class="tab_panel_content" th:text="${mto.mcontents}" style="font-weight:bold; font-size:18px; color:black; font-family:'IBM Plex Sans KR', sans-serif;"></p>
 								</div>
 
 								<!-- Curriculum -->
@@ -291,8 +316,15 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 							
 							<div class="sidebar_feature">
 								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px;">Mentoring Price</div>
-								<span style = " font-size:22px; font-weight:bold; font-family: 'IBM Plex Sans KR', sans-serif;">가격 : </span>
-								<span style="display:inline-block;" id="mentoring_price" class="course_price" th:text="${mto.mentoringprice}"></span>
+								<span style = "font-size:22px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;">가격 : </span>
+								<span style="display:inline-block; font-weight:bold; font-family:'IBM Plex Sans KR', sans-serif;" id="mentoring_price" class="course_price" th:text="${mto.mentoringprice}"></span>
+								<span style = "font-size:18px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;">￦</span>
+								
+								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px;">Remaining</div>
+								<div th:each="mttime:${mttime}">
+								<span style="display:inline-block; font-size:18px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;" 
+								id="remaining" class="course_price" th:text="${mttime.mentoringtime} + '시' + '&emsp;' + ${mttime.moptionstock} + '명'"></span>
+								</div>
 								<br>
 								<br>
 
@@ -305,7 +337,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 									<article class="cont-select">
         							<button id="time" value="" class="btn-select">시간을 선택하세요</button>
         								<ul class="list-member">
-            								<li th:each="mttime:${mttime}"><button type="button"  th:text="${mttime.mentoringtime}">Python</button></li>
+            								<li th:if="${mttime.moptionstock != 0}" th:each="mttime:${mttime}"><button type="button" th:text="${mttime.mentoringtime}">Python</button></li>
        									 </ul>
     								</article>
     								<script>
@@ -343,27 +375,6 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								</div>
 								&nbsp
 								&nbsp
-								<div class="teacher_meta_container">
-									<!-- Teacher Rating -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<!-- 대면 -->
-										<div class="teacher_meta_title">MentoringService:</div>
-										<div class="teacher_meta_text ml-auto"><span th:text="${mto.mentorurl}" style="font-family: 'IBM Plex Sans KR', sans-serif;">4.7</span></div>
-									</div>
-									<!-- Teacher Review -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<!-- 비대면 -->
-										<div class="teacher_meta_title">MentoringPlace:</div>
-										<div class="teacher_meta_text ml-auto">
-											<span th:text="${mto.mplace}" style="font-family: 'IBM Plex Sans KR', sans-serif;">12k</span></div>
-									</div>
-									<!-- Teacher Quizzes -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">CaringService:</div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 1}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">있음</span></div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 0}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">없음</span></div>
-									</div>
-								</div>
 							</div>
 						</div>
 

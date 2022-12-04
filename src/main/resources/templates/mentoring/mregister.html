@@ -76,6 +76,7 @@ margin-left: 1%;
   border-color: #999 transparent transparent transparent;
   margin-left: 0.4em;
   vertical-align: 0.1em;
+  
 }
 
 .multi-select-container--open .multi-select-menu { display: block; color:black;}
@@ -83,6 +84,7 @@ margin-left: 1%;
 .multi-select-container--open .multi-select-button:after {
   border-width: 0 0.4em 0.4em 0.4em;
   border-color: transparent transparent #999 transparent;
+  
 }
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -206,7 +208,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Mentoring</li>
+								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
 								<li>Mentoring Register</li>
 								
 							</ul>
@@ -242,7 +244,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 										</div>
 									<label id="pubutton" class="btn btn-dark" for="mtrimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
 									</label>
-									<input type="file" style="display:none" name="mtrimg" id="mtrimg" onchange="previewprofile(event);">
+									<input type="file" style="display:none" name="mtrimg" id="mtrimg" th:onchange="previewprofile(event);">
 								</div>
 								
 								<div>
@@ -253,6 +255,13 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								<div>
 									<label for = "mentoringdate" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
 										<input class="form-control border-0" type="date" id="mentoringdate" name="mentoringdate" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
+									<!-- 오늘 날짜 이후로만 선택 가능 -->
+									<script>
+									var now_utc = Date.now()
+									var timeOff = new Date().getTimezoneOffset()*60000;
+									var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+									document.getElementById("mentoringdate").setAttribute("min", today);
+									</script>
 							   </div>
 							   
 							   	<div>
@@ -350,7 +359,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 							   </div>
 												
 								<div>
-									<label for = "mmemberidcnt" class="form_title">모집정원<span style="color:red"> *</span></label><br>
+									<label for = "mmemberidcnt" class="form_title">시간별 모집 정원<span style="color:red"> *</span></label><br>
 									<input type="number" min="1" class="comment_input" id = "mmemberidcnt" name = "mmemberidcnt" style="width:160px; height:40px;">
 								</div>
 								
@@ -371,12 +380,35 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								</div>
 								
 								<div>
-									<label for = "mentorurl" class="form_title">비대면 멘토링 URL<span style="color:red"> *</span></label>
-									<input type="text" class="comment_input" id = "mentorurl" name = "mentorurl" placeholder="URL을 입력해주세요">
+									<label for = "mentorurl" class="form_title">대면 또는 비대면 멘토링 여부(<strong>선택</strong>)<span style="color:red"> *</span></label><br>
+										<div class="form-check-inline">
+									       	<label class="form-check-label" for="mentorurl">
+									         <input type="checkbox" class="form-check-input" th:onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" th:value="${'face'}" >
+									          <span style="font-size:16px; color:black">대면 멘토링</span>
+									        </label>
+									        <label class="form-check-label" for="mentorurl">
+									         <input type="checkbox" class="form-check-input" th:onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" th:value="${'nonface'}">
+									          <span style="font-size:16px; color:black;">비대면 멘토링</span>
+									        </label>
+									        <!-- 둘중에 하나만 체크 가능 -->
+									        <script>
+									        function checkOnlyOne(element) {
+									        	  
+									        	  const checkboxes 
+									        	      = document.getElementsByName("mentorurl");
+									        	  
+									        	  checkboxes.forEach((cb) => {
+									        	    cb.checked = false;
+									        	  })
+									        	  
+									        	  element.checked = true;
+									        	}
+									        </script>
+								        </div>
 								</div>
 								
 								<div>
-									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면 멘토링 장소 주소<span style="color:red"> *</span></label>
+									<label for = "mplace" class="address_form" style="margin-bottom:10px;">대면 멘토링 장소 주소(<strong>대면 멘토링 진행 시에만</strong>)<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id = "mplace" name = "mplace" placeholder="페이지 하단에서 장소 검색 후 주소를 입력해 주세요">							
 								</div>
 								
@@ -399,11 +431,11 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 						<div class="map_wrap">
 						    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 						
-						    <div id="menu_wrap" class="bg_white">
+						    <div id="menu_wrap" class="bg_white" style="width:35%;">
 						        <div class="option">
 						            <div>
-						                <form onsubmit="searchPlaces(); return false;">
-						                    키워드 : <input type="text" value="멀티캠퍼스 선릉" id="keyword" size="15"> 
+						                <form th:onsubmit="searchPlaces(); return false;">
+						                    키워드 : <input type="text" th:value="${'멀티캠퍼스 선릉'}" id="keyword" size="15"> 
 						                    <button type="submit">검색하기</button> 
 						                </form>
 						            </div>
