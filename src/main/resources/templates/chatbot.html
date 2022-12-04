@@ -36,7 +36,7 @@ function setConnected(connected) {
     $("#msg").html("");
 }
 
-// 소켓을 통해 메시지를 전송 후 전달 받음
+// 소켓을 통해 메시지를 챗봇 컨트롤러로 전송 후 답변을 받음
 function connect() {
     var socket = new SockJS('http://127.0.0.1/mogotco/ws');
     stompClient = Stomp.over(socket);
