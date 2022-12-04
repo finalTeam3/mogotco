@@ -129,7 +129,32 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 					
 					<div class="course_container">
 						<div class="course_title" id="mtitle" th:text="${mto.mtitle}" style="float:left; font-family: 'IBM Plex Sans KR', sans-serif;">Software Training</div>
-						<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mto.mentoringid}]],[[${mto.mtitle}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+						<ul style="list-style:none;"><li><a id="kakaotalksharingbtn"><img  th:onclick="shareMessage([[${mto.mentoringid}]],[[${mto.mtitle}]])" style="margin-top:10px; margin-bottom:18px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
+						<div class="teacher_meta_text ml-auto"
+										th:if="${mto.date_difference >= 0 }">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
+									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.date_difference < 0}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
+									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.mentorurl == 'nonface'}">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+									</div>
+ 									<div class="teacher_meta_text ml-auto"
+										th:if="${mto.mentorurl == 'face'}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+									</div>
+									 <div class="teacher_meta_text ml-auto"
+										th:if="${mto.mcaring == 1}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
+									</div> 
 						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 
 							<!-- Course Info Item -->
@@ -350,27 +375,6 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								</div>
 								&nbsp
 								&nbsp
-								<div class="teacher_meta_container">
-									<!-- Teacher Rating -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<!-- 대면 -->
-										<div class="teacher_meta_title">MentoringService:</div>
-										<div class="teacher_meta_text ml-auto"><span style="font-family: 'IBM Plex Sans KR', sans-serif;" th:text="${mto.mentorurl}"></span></div>
-									</div>
-									<!-- Teacher Review -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<!-- 비대면 -->
-									<div class="teacher_meta_title">MentoringPlace:</div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mplace != ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;" th:text="${mto.mplace}"></span></div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mplace == ''}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">비대면</span></div>
-									</div>
-									<!-- Teacher Quizzes -->
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title">CaringService:</div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 1}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">있음</span></div>
-										<div class="teacher_meta_text ml-auto" th:if="${mto.mcaring == 0}"><span style="font-family: 'IBM Plex Sans KR', sans-serif;">없음</span></div>
-									</div>
-								</div>
 							</div>
 						</div>
 
