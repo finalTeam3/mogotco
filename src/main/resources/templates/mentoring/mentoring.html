@@ -66,137 +66,6 @@ function checkOnlyOne(element) {
 
 	}
 </script>
-<script>
-//JSON 데이터는 아래 URL 참조
-//https://jsonplaceholder.typicode.com/
-let todoData = [];
-
-const countPerPage = 6; // 페이지당 데이터 건수
-const showPageCnt = 5; // 화면에 보일 페이지 번호 개수
-
-$(function() {
-const todosUrl = '[[${mtr}]]';
-axios.get(todosUrl)
-//==================url부터 다시 넣기!!=========================
- .then(res => {
-   // 총 200개의 todo(userId, id, title, completed)를 가져옵니다.
-   console.log(res.data);
-   todoData = res.data;
-
-   // 별도의 서버에 페이지별로 요청하는 게 아니기 때문에
-   // 데이터를 한 번에 가져와서 페이지별로 화면에 출력합니다.
-   setTable(1);
-   setPaging(1);
- })
- .catch(err => console.error(err))
- .then(() => {
-   // finally
- });
-
-$(document).on('click', 'div.paging>div.pages>span', function() {
- if (!$(this).hasClass('active')) {
-   $(this).parent().find('span.active').removeClass('active');
-   $(this).addClass('active');
-
-   setTable(Number($(this).text()));
- }
-});
-
-$(document).on('click', 'div.paging>i', function() {
- const totalPage = Math.floor(todoData.length / countPerPage) + (todoData.length % countPerPage == 0 ? 0 : 1);
- const id = $(this).attr('id');
- //console.log(id);
-
- if (id == 'first_page') {
-   setTable(1);
-   setPaging(1);
- } else if (id == 'prev_page') {
-   let arrPages = [];
-   $('div.paging>div.pages>span').each(function(idx, item) {
-     arrPages.push(Number($(this).text()));
-   });
-   
-   const prevPage = _.min(arrPages) - showPageCnt;
-   setTable(prevPage);
-   setPaging(prevPage);
- } else if (id == 'next_page') {
-   let arrPages = [];
-   $('div.paging>div.pages>span').each(function(idx, item) {
-     arrPages.push(Number($(this).text()));
-   });
-   
-   const nextPage = _.max(arrPages) + 1;
-   setTable(nextPage);
-   setPaging(nextPage);
- } else if (id == 'last_page') {
-   const lastPage = Math.floor((totalPage - 1) / showPageCnt) * showPageCnt + 1;
-   setTable(lastPage);
-   setPaging(lastPage);
- }
-});
-});
-
-/**
-* 테이블에 데이터를 세팅합니다.
-* @param {int} pageNum - Page Number
-*/
-function setTable(pageNum) {
-$('#tblTodo>tbody').empty();
-
-// filtering data
-const filteredData = _.slice(todoData, (pageNum - 1) * countPerPage, pageNum * countPerPage);
-//console.log(filteredData);
-
-let sTbodyHtml = '';
-for (let i = 0; i < filteredData.length; i++) {
- sTbodyHtml += '<tr>';
- sTbodyHtml += '  <td class="center">' + filteredData[i].id + '</td>';
- sTbodyHtml += '  <td class="center">' + filteredData[i].userId + '</td>';
- sTbodyHtml += '  <td>' + filteredData[i].title + '</td>';
- sTbodyHtml += '  <td class="center"><input type="checkbox" ' + (filteredData[i].completed ? 'checked' : '') + ' onclick="return false" /></td>';
- sTbodyHtml += '</tr>';
-}
-$('#tblTodo>tbody').append(sTbodyHtml);
-}
-
-/**
-* 페이징 정보를 세팅합니다.
-* @param {int} pageNum - Page Number
-*/
-function setPaging(pageNum) {
-const currentPage = pageNum;
-const totalPage = Math.floor(todoData.length / countPerPage) + (todoData.length % countPerPage == 0 ? 0 : 1);
-//console.log(currentPage, totalPage);
-
-showAllIcon();
-
-if (currentPage <= showPageCnt) {
- $('#first_page').hide();
- $('#prev_page').hide();
-}
-if (
- totalPage <= showPageCnt ||
- Math.floor((currentPage - 1) / showPageCnt) * showPageCnt + showPageCnt + 1 > totalPage
-) {
- $('#next_page').hide();
- $('#last_page').hide();
-}
-
-let start = Math.floor((currentPage - 1) / showPageCnt) * showPageCnt + 1;
-let sPagesHtml = '';
-for (const end = start + showPageCnt; start < end && start <= totalPage; start++) {
- sPagesHtml += '<span class="' + (start == currentPage ? 'active' : '') + '">' + start + '</span>';
-}
-$('div.paging>div.pages').html(sPagesHtml);
-}
-
-function showAllIcon() {
-$('#first_page').show();
-$('#prev_page').show();
-$('#next_page').show();
-$('#last_page').show();
-}
-</script>
 <!-- Home -->
 
 <div class="home">
@@ -325,97 +194,94 @@ $('#last_page').show();
 						<div class="col">
 							<div
 								class="pagination_container d-flex flex-row align-items-center justify-content-start">
-								<ul class="pagination_list">
-									<li><a href="#"><i class="fa fa-angles-left"
-											aria-hidden="true" id="first_page"></i></a></li>
-									<li><a href="#"><i class="fa fa-angle-left"
-											aria-hidden="true" id="prev_page"></i></a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#"><i class="fa fa-angle-right"
-											aria-hidden="true" id="next_page"></i></a></li>
-									<li><a href="#"><i class="fa fa-angles-right"
-											aria-hidden="true" id="last_page"></i></a></li>
+								<ul class="pagination_list" style="width:630px;float:left;">
+									<li><a 
+										th:href="@{/mentoring/mentoring(meningnum=${meningnum}-6)}"><i
+											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
+								</ul>
+								<ul class="pagination_list" style="float:right;">
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+6)}"><i class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
 								</ul>
 							</div>
+							<!-- 									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">1</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+6)}">2</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+12)}">3</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+18)}">4</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+24)}">5</a></li> -->
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Courses Sidebar -->
-			<div class="col-lg-4">
-				<div class="sidebar">
-					<!-- Latest Course -->
-					<div class="sidebar_section">
-						<div style="margin-top: 50px;" th:if="${ms != null}"
-							class="sidebar_section_title">Mentoring Register</div>
-						<div class="sidebar_latest">
-							<!-- Latest Course -->
-							<div
-								class="latest d-flex flex-row align-items-start justify-content-start">
-								<div>
-									&nbsp&nbsp&nbsp&nbsp
-									<button type="button" th:if="${ms != null}"
-										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
-										class="home_search_button"
-										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
-								</div>
+		<!-- Courses Sidebar -->
+		<div class="col-lg-4">
+			<div class="sidebar">
+				<!-- Latest Course -->
+				<div class="sidebar_section">
+					<div style="margin-top: 50px;" th:if="${ms != null}"
+						class="sidebar_section_title">Mentoring Register</div>
+					<div class="sidebar_latest">
+						<!-- Latest Course -->
+						<div
+							class="latest d-flex flex-row align-items-start justify-content-start">
+							<div>
+								&nbsp&nbsp&nbsp&nbsp
+								<button type="button" th:if="${ms != null}"
+									th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
+									class="home_search_button"
+									style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
 							</div>
 						</div>
 					</div>
-					<form id="typeselectmentoring">
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
-							<div class="sidebar_categories">
-								<ul>
-									<li><a th:href="@{/mentoring/mentoring}"
-										th:text="${'all'}" th:value="${'all'}"><input
-											type="hidden" name='mname' th:value="${'all'}"
-											th:text="${'all'}"></a></li>
-									<li th:each="mtc:${mtcatelist}"><a
-										th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
-										th:value="${mtc.mname}" th:text="${mtc.mname}"
-										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-											type="hidden" th:text="${mtc.mname}" name='mname'
-											th:value="${mtc.mname}"></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Type</div>
-							<div class="sidebar_categories">
-								<p>
-									<input type="checkbox" name='mentoringtype' value='lowprice'
-										th:onclick="checkOnlyOne(this)" id="lowprice"> <label
-										for="lowprice">가격순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='recentmen'
-										th:onclick="checkOnlyOne(this)" id="recentmen"> <label
-										for="recentmen">가장 빠른순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='orderreview'
-										th:onclick="checkOnlyOne(this)" id="orderreview"> <label
-										for="orderreview">별점순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='mcaringok'
-										th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
-										for="mcaringok">사후관리</label>
-								</p>
-							</div>
-						</div>
-						<input type="hidden" id='selcatename' th:value="${selcatename}">
-					</form>
 				</div>
+				<form id="typeselectmentoring">
+					<div class="sidebar_section">
+						<div class="sidebar_section_title">Categories</div>
+						<div class="sidebar_categories">
+							<ul>
+								<li><a th:href="@{/mentoring/mentoring}" th:text="${'all'}"
+									th:value="${'all'}"><input type="hidden" name='mname'
+										th:value="${'all'}" th:text="${'all'}"></a></li>
+								<li th:each="mtc:${mtcatelist}"><a
+									th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
+									th:value="${mtc.mname}" th:text="${mtc.mname}"
+									th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
+										type="hidden" th:text="${mtc.mname}" name='mname'
+										th:value="${mtc.mname}"></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="sidebar_section">
+						<div class="sidebar_section_title">Type</div>
+						<div class="sidebar_categories">
+							<p>
+								<input type="checkbox" name='mentoringtype' value='lowprice'
+									th:onclick="checkOnlyOne(this)" id="lowprice"> <label
+									for="lowprice">가격순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='recentmen'
+									th:onclick="checkOnlyOne(this)" id="recentmen"> <label
+									for="recentmen">가장 빠른순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='orderreview'
+									th:onclick="checkOnlyOne(this)" id="orderreview"> <label
+									for="orderreview">별점순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='mcaringok'
+									th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
+									for="mcaringok">사후관리</label>
+							</p>
+						</div>
+					</div>
+					<input type="hidden" id='selcatename' th:value="${selcatename}">
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <script>
   Kakao.init('b67794657ed6e950ec05402c7a55d07f'); // 사용하려는 앱의 JavaScript 키 입력
