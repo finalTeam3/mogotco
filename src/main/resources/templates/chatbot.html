@@ -20,6 +20,7 @@ body {
 </style>
 
 <script>
+
 var stompClient = null;
 
 function setConnected(connected) {
@@ -35,6 +36,7 @@ function setConnected(connected) {
     $("#msg").html("");
 }
 
+// 소켓을 통해 메시지를 전송 후 전달 받음
 function connect() {
     var socket = new SockJS('http://127.0.0.1/mogotco/ws');
     stompClient = Stomp.over(socket);
@@ -42,7 +44,9 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/public', function (message) {
+        	alert(message);
             showMessage("받은 메시지: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
+            alert(message.body)
         });
     });
 }
@@ -55,12 +59,14 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+// 인풋창에서 메시지를 입력 후 전송
 function sendMessage() {
     let message = $("#msg").val()
     showMessage("보낸 메시지: " + message);
 
     stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
 }
+
 
 function showMessage(message) {
     $("#communicate").append("<tr><td>" + message + "</td></tr>");
@@ -74,6 +80,7 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMessage(); });
 });
+
 </script>
 
 <head>
@@ -105,8 +112,8 @@ $(function () {
     <!-- Template Javascript -->
     <script th:src="@{/js/main.js}"></script>
     
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>    
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>    
 </head>
 
 <body>
@@ -121,8 +128,10 @@ $(function () {
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+    
 <div id="main-content" class="container">
     <div class="row">
+    
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
@@ -133,6 +142,7 @@ $(function () {
                 </div>
             </form>
         </div>
+        
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
@@ -143,6 +153,7 @@ $(function () {
             </form>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
@@ -151,11 +162,15 @@ $(function () {
                     <th>안녕하세요 모같코입니다. 상담을 원하시면 '문의하기'를 입력해주세요</th>
                 </tr>
                 </thead>
+                
                 <tbody id="communicate">
                 </tbody>
             </table>
         </div>
     </div>
+    
+    
 </div>
-    </body>
-    </html>
+
+</body>
+</html>
