@@ -81,8 +81,7 @@ $(document).ready(function(){
 										th:src="@{/img/}+${list.mentoring_mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title" th:text="${list.mentoring_mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${list.mentoring_mentoringid})}"
-										style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
+									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${list.mentoring_mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${list.mentoring_mentoringid})}"></a></h3>
 									<ul style="list-style: none;">
 									</ul>
 									<br> <br>

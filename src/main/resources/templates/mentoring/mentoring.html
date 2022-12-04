@@ -117,8 +117,7 @@ function checkOnlyOne(element) {
 										th:src="@{/img/}+${mtr.mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title" th:text="${mtr.mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"
-										style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
+									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${mtr.mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a></h3>
 									<ul style="list-style: none;">
 										<li><a id="kakaotalksharingbtn"><img
 												th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])"
