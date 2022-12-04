@@ -54,16 +54,18 @@ public class MentoringController {
 
 	// 멘토링목록
 	@RequestMapping("/mentoring")
-	public String mentoring(Model model, String userid) {
+	public String mentoring(Model model, String userid, Integer meningnum) {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
-		String place = "nonface";
 		try {
-			mlist = mservice.viewMentoringAll(); // 모든 멘토링 정보 넣어주기
+			int page = 0;
+			page = page + meningnum;
+			int meningnum1 = page;
+			mlist = mservice.viewMentoringAll(meningnum); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
-			model.addAttribute("place", place);
+			model.addAttribute("meningnum", meningnum1);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
@@ -77,12 +79,18 @@ public class MentoringController {
 	}
 
 	@RequestMapping("/mentoringCate")
-	public String mentoringCate(Model model, String mname) {
+	public String mentoringCate(Model model, String userid, String mname, Integer meningnum) {
 		List<MentoringDTO> citemlist = null; // 카테고리별 리스트용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		MentorDTO ment = null;
 		try {
-			citemlist = mservice.selectMentoringAll(mname);// 카테고리별 멘토링 정보 넣어주기
+			int page = 0;
+			page = page + meningnum;
+			int meningnum1 = page;
+			citemlist = mservice.selectMentoringAll(mname,meningnum);// 카테고리별 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			ment = mentor_service.mentorAll(userid);
+			model.addAttribute("meningnum", meningnum1);
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
