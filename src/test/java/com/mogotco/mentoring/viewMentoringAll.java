@@ -17,7 +17,7 @@ import com.mogotco.service.MentoringService;
 	void contextLoads() {
 		List<MentoringDTO> metoring = null;
 		try {
-			metoring = service.viewMentoringAll();
+			metoring = service.viewMentoringAll(0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -67,7 +67,6 @@ function checkOnlyOne(element) {
 
 	}
 </script>
-
 <!-- Home -->
 
 <div class="home">
@@ -119,7 +118,12 @@ function checkOnlyOne(element) {
 										th:src="@{/img/}+${mtr.mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${mtr.mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a></h3>
+									<h3 class="course_title">
+										<a
+											style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"
+											th:text="${mtr.mtitle}"
+											th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a>
+									</h3>
 									<ul style="list-style: none;">
 										<li><a id="kakaotalksharingbtn"><img
 												th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])"
@@ -135,7 +139,8 @@ function checkOnlyOne(element) {
 										class="course_teacher" th:text="${mtr.user_userid}"></div>
 									<br>
 									<div style="display: inline; color: black;">
-										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별 모집 정원:</span>
+										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별
+											모집 정원:</span>
 									</div>
 									<div style="display: inline; color: black;" class="course_text"
 										th:text="${mtr.mmemberidcnt}"></div>
@@ -143,28 +148,28 @@ function checkOnlyOne(element) {
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference >= 0 }">
 										<span class="badge badge-pill badge-primary"
-											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; color: #FFFFFF">진행가능</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference < 0}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; color: #FFFFFF">진행완료</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mentorurl == 'nonface'}">
 										<span class="badge badge-pill badge-primary"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #006400; color: #FFFFFF;">비대면</span>
 									</div>
- 									<div class="teacher_meta_text ml-auto"
+									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mentorurl == 'face'}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #FF8C00; color: #FFFFFF;">대면</span>
 									</div>
-									 <div class="teacher_meta_text ml-auto"
+									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mcaring == 1}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
-									</div> 
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #4B0082; color: #FFFFFF;">care</span>
+									</div>
 
 								</div>
 								<div class="course_footer">
@@ -191,104 +196,94 @@ function checkOnlyOne(element) {
 						<div class="col">
 							<div
 								class="pagination_container d-flex flex-row align-items-center justify-content-start">
-								<ul class="pagination_list">
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#"><i class="fa fa-angle-right"
-											aria-hidden="true"></i></a></li>
+								<ul class="pagination_list" style="width:630px;float:left;">
+									<li><a 
+										th:href="@{/mentoring/mentoring(meningnum=${meningnum}-6)}"><i
+											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
 								</ul>
-								<div class="courses_show_container ml-auto clearfix">
-									<div class="courses_show_text">
-										Showing <span class="courses_showing">1-6</span> of <span
-											class="courses_total">26</span> results:
-									</div>
-									<div class="courses_show_content">
-										<span>Show: </span> <select id="courses_show_select"
-											class="courses_show_select">
-											<option>06</option>
-											<option>12</option>
-											<option>24</option>
-											<option>36</option>
-										</select>
-									</div>
-								</div>
+								<ul class="pagination_list" style="float:right;">
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+6)}"><i class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+								</ul>
 							</div>
+							<!-- 									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">1</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+6)}">2</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+12)}">3</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+18)}">4</a></li>
+									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+24)}">5</a></li> -->
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Courses Sidebar -->
-			<div class="col-lg-4">
-				<div class="sidebar">
-					<!-- Latest Course -->
-					<div class="sidebar_section">
-						<div style="margin-top:50px;" th:if="${ms != null}" class="sidebar_section_title">Mentoring
-							Register</div>
-						<div class="sidebar_latest">
-							<!-- Latest Course -->
-							<div
-								class="latest d-flex flex-row align-items-start justify-content-start">
-								<div>
-									&nbsp&nbsp&nbsp&nbsp
-									<button type="button" th:if="${ms != null}"
-										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
-										class="home_search_button"
-										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
-								</div>
+		<!-- Courses Sidebar -->
+		<div class="col-lg-4">
+			<div class="sidebar">
+				<!-- Latest Course -->
+				<div class="sidebar_section">
+					<div style="margin-top: 50px;" th:if="${ms != null}"
+						class="sidebar_section_title">Mentoring Register</div>
+					<div class="sidebar_latest">
+						<!-- Latest Course -->
+						<div
+							class="latest d-flex flex-row align-items-start justify-content-start">
+							<div>
+								&nbsp&nbsp&nbsp&nbsp
+								<button type="button" th:if="${ms != null}"
+									th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
+									class="home_search_button"
+									style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
 							</div>
 						</div>
 					</div>
-					<form id="typeselectmentoring">
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
-							<div class="sidebar_categories">
-								<ul>
-									<li><a th:href="@{/mentoring/mentoring}"
-										th:text="${'all'}" th:value="${'all'}"><input
-											type="hidden" name='mname' th:value="${'all'}"
-											th:text="${'all'}"></a></li>
-									<li th:each="mtc:${mtcatelist}"><a
-										th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
-										th:value="${mtc.mname}" th:text="${mtc.mname}"
-										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-											type="hidden" th:text="${mtc.mname}" name='mname'
-											th:value="${mtc.mname}"></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Type</div>
-							<div class="sidebar_categories">
-								<p>
-									<input type="checkbox" name='mentoringtype' value='lowprice'
-										th:onclick="checkOnlyOne(this)" id="lowprice"> <label
-										for="lowprice">가격순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='recentmen'
-										th:onclick="checkOnlyOne(this)" id="recentmen"> <label
-										for="recentmen">가장 빠른순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='orderreview'
-										th:onclick="checkOnlyOne(this)" id="orderreview"> <label
-										for="orderreview">별점순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='mcaringok'
-										th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
-										for="mcaringok">사후관리</label>
-								</p>
-							</div>
-						</div>
-						<input type="hidden" id='selcatename' th:value="${selcatename}">
-					</form>
 				</div>
+				<form id="typeselectmentoring">
+					<div class="sidebar_section">
+						<div class="sidebar_section_title">Categories</div>
+						<div class="sidebar_categories">
+							<ul>
+								<li><a th:href="@{/mentoring/mentoring}" th:text="${'all'}"
+									th:value="${'all'}"><input type="hidden" name='mname'
+										th:value="${'all'}" th:text="${'all'}"></a></li>
+								<li th:each="mtc:${mtcatelist}"><a
+									th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
+									th:value="${mtc.mname}" th:text="${mtc.mname}"
+									th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
+										type="hidden" th:text="${mtc.mname}" name='mname'
+										th:value="${mtc.mname}"></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="sidebar_section">
+						<div class="sidebar_section_title">Type</div>
+						<div class="sidebar_categories">
+							<p>
+								<input type="checkbox" name='mentoringtype' value='lowprice'
+									th:onclick="checkOnlyOne(this)" id="lowprice"> <label
+									for="lowprice">가격순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='recentmen'
+									th:onclick="checkOnlyOne(this)" id="recentmen"> <label
+									for="recentmen">가장 빠른순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='orderreview'
+									th:onclick="checkOnlyOne(this)" id="orderreview"> <label
+									for="orderreview">별점순</label>
+							</p>
+							<p>
+								<input type="checkbox" name='mentoringtype' value='mcaringok'
+									th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
+									for="mcaringok">사후관리</label>
+							</p>
+						</div>
+					</div>
+					<input type="hidden" id='selcatename' th:value="${selcatename}">
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <script>
   Kakao.init('b67794657ed6e950ec05402c7a55d07f'); // 사용하려는 앱의 JavaScript 키 입력

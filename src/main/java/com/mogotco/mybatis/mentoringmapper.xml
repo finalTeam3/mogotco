@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 등록된 멘토링 리스트 출력을 위한 mybatis 연동 -->
-	<select id="selectMentoringAll" parameterType="String"
+	<select id="selectMentoringAll"
 		resultType="MentoringDTO">
 		SELECT mtc.mcateid, mt.mentoringid, mu.userid AS
 		user_userid, mr.mentorcom AS
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		ON mr.userid = mu.userid
 		INNER JOIN mcate mtc ON mt.mcateid =
 		mtc.mcateid
-		WHERE mtc.mname = #{mname} ORDER BY date_difference DESC
+		WHERE mtc.mname = #{mname} ORDER BY date_difference DESC LIMIT #{meningnum},6
 	</select>
 
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu
-		ON mr.userid = mu.userid ORDER BY date_difference DESC
+		ON mr.userid = mu.userid ORDER BY date_difference DESC LIMIT #{meningnum},6
 	</select>
 
 	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mentoringid,
 		mtitle, u.username AS user_username, mentoringprice,
 		mentoringimg,mentoringdate,
-		mcontents,DATEDIFF(mentoringdate,sysdate()) AS date_difference, mt.mentorurl, mt.mcaring FROM
+		mcontents,DATEDIFF(mentoringdate,sysdate()) AS date_difference, mentoring.mentorurl, mentoring.mcaring FROM
 		mentoring mentoring
 		INNER JOIN mentor men ON
 		mentoring.mentorid=men.mentorid
