@@ -208,7 +208,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>Mentoring</li>
+								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
 								<li>Mentoring Register</li>
 								
 							</ul>
@@ -244,7 +244,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 										</div>
 									<label id="pubutton" class="btn btn-dark" for="mtrimg" style="width:110px;height:35px;font-size:15px">파일 업로드</label>
 									</label>
-									<input type="file" style="display:none" name="mtrimg" id="mtrimg" onchange="previewprofile(event);">
+									<input type="file" style="display:none" name="mtrimg" id="mtrimg" th:onchange="previewprofile(event);">
 								</div>
 								
 								<div>
@@ -383,11 +383,11 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 									<label for = "mentorurl" class="form_title">대면 또는 비대면 멘토링 여부(<strong>선택</strong>)<span style="color:red"> *</span></label><br>
 										<div class="form-check-inline">
 									       	<label class="form-check-label" for="mentorurl">
-									         <input type="checkbox" class="form-check-input" onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" value="대면 멘토링">
+									         <input type="checkbox" class="form-check-input" th:onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" th:value="${'face'}" >
 									          <span style="font-size:16px; color:black">대면 멘토링</span>
 									        </label>
 									        <label class="form-check-label" for="mentorurl">
-									         <input type="checkbox" class="form-check-input" onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" value="비대면 멘토링">
+									         <input type="checkbox" class="form-check-input" th:onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" th:value="${'nonface'}">
 									          <span style="font-size:16px; color:black;">비대면 멘토링</span>
 									        </label>
 									        <!-- 둘중에 하나만 체크 가능 -->
@@ -434,8 +434,8 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 						    <div id="menu_wrap" class="bg_white" style="width:35%;">
 						        <div class="option">
 						            <div>
-						                <form onsubmit="searchPlaces(); return false;">
-						                    키워드 : <input type="text" value="멀티캠퍼스 선릉" id="keyword" size="15"> 
+						                <form th:onsubmit="searchPlaces(); return false;">
+						                    키워드 : <input type="text" th:value="${'멀티캠퍼스 선릉'}" id="keyword" size="15"> 
 						                    <button type="submit">검색하기</button> 
 						                </form>
 						            </div>

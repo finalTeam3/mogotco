@@ -58,10 +58,12 @@ public class MentoringController {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
+		String place = "nonface";
 		try {
 			mlist = mservice.viewMentoringAll(); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
+			model.addAttribute("place", place);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);

@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentor_mentorcom, mt.mtitle,
 		mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference FROM mentoring
+		date_difference, mt.mentorurl FROM mentoring
 		mt
 		INNER JOIN mentor mr ON
 		mt.mentorid = mr.mentorid
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mt.mentoringid, mt.mentorid,
 		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
 		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM mentoring
+		date_difference, mt.mentorurl FROM mentoring
 		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt.mentoringimg, mt.mentoringprice,
 		mt.mplace, mt.mentorurl,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference 
+		date_difference , mt.mentorurl
 		FROM mentoring mt
 		INNER JOIN mcate mc ON
 		mt.mcateid = mc.mcateid
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mentoringid,
 		mtitle, u.username AS user_username, mentoringprice,
 		mentoringimg,mentoringdate,
-		mcontents,DATEDIFF(mentoringdate,sysdate()) AS date_difference FROM
+		mcontents,DATEDIFF(mentoringdate,sysdate()) AS date_difference, mt.mentorurl FROM
 		mentoring mentoring
 		INNER JOIN mentor men ON
 		mentoring.mentorid=men.mentorid
@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentor_mentorcom, mt.mtitle,
 		mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM mentoring
+		date_difference , mt.mentorurl FROM mentoring
 		mt
 		INNER JOIN mentor mr ON
 		mt.mentorid = mr.mentorid
@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, mc.mname AS mcate_mname, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM mentoring mt
+		date_difference , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON
 		mt.mentorid = mr.mentorid
@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -174,7 +174,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -197,7 +197,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference, mt.mentoringprice FROM mentoring mt
+		date_difference, mt.mentoringprice, mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid =
 		mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -215,7 +215,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="mcatemcaringoksearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate, mt.mentoringprice,
-		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
+		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()), mt.mentorurl AS
 		date_difference  FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -233,7 +233,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, ROUND(avg(r.rating),1) AS avgrate, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -253,7 +253,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -273,7 +273,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference, mt.mentoringprice FROM mentoring mt
+		date_difference, mt.mentoringprice , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid =
 		mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -289,7 +289,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="allmcaringoksearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
-		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
+		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, mt.mentorurl, DATEDIFF(mt.mentoringdate,sysdate()) AS
 		date_difference  FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -307,7 +307,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -328,7 +328,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -349,7 +349,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference, mt.mentoringprice FROM mentoring mt
+		date_difference, mt.mentoringprice , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid =
 		mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -366,7 +366,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM mentoring mt
+		date_difference , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
@@ -381,7 +381,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -398,7 +398,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, ROUND(avg(r.rating),1) AS avgrate, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM
+		date_difference , mt.mentorurl FROM
 		mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN
@@ -415,7 +415,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference, mt.mentoringprice FROM mentoring mt
+		date_difference, mt.mentoringprice , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid =
 		mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
@@ -429,7 +429,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT mt.mentoringid, mu.userid AS user_userid, mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,mt.mentoringprice,
 		mt.mmemberidcnt, mt.mcaring, DATEDIFF(mt.mentoringdate,sysdate()) AS
-		date_difference  FROM mentoring mt
+		date_difference , mt.mentorurl FROM mentoring mt
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid

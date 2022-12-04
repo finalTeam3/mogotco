@@ -149,6 +149,16 @@ function checkOnlyOne(element) {
 										<span class="badge badge-pill badge-danger"
 											style="color: #FFFFFF">진행완료</span>
 									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${mtr.mentorurl == 'nonface'}">
+										<span class="badge badge-pill badge-primary"
+											style="background-color: #006400; color: #FFFFFF;">비대면</span>
+									</div>
+ 									<div class="teacher_meta_text ml-auto"
+										th:if="${mtr.mentorurl == 'face'}">
+										<span class="badge badge-pill badge-danger"
+											style="background-color: #FF8C00;color: #FFFFFF;">대면</span>
+									</div> 
 
 								</div>
 								<div class="course_footer">
