@@ -373,8 +373,31 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								</div>
 								
 								<div>
-									<label for = "mentorurl" class="form_title">비대면 멘토링 URL(<strong>멘토링 서비스 사용 시에만</strong>)<span style="color:red"> *</span></label>
-									<input type="text" class="comment_input" id = "mentorurl" name = "mentorurl" placeholder="URL을 입력해주세요">
+									<label for = "mentorurl" class="form_title">대면 또는 비대면 멘토링 여부<span style="color:red"> *</span></label><br>
+										<div class="form-check-inline">
+									       	<label class="form-check-label" for="mentorurl">
+									         <input type="checkbox" class="form-check-input" onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" value="대면 멘토링">
+									          <span style="font-size:16px; color:black">대면 멘토링</span>
+									        </label>
+									        <label class="form-check-label" for="mentorurl">
+									         <input type="checkbox" class="form-check-input" onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" value="비대면 멘토링">
+									          <span style="font-size:16px; color:black;">비대면 멘토링</span>
+									        </label>
+									        <!-- 둘중에 하나만 체크 가능 -->
+									        <script>
+									        function checkOnlyOne(element) {
+									        	  
+									        	  const checkboxes 
+									        	      = document.getElementsByName("mentorurl");
+									        	  
+									        	  checkboxes.forEach((cb) => {
+									        	    cb.checked = false;
+									        	  })
+									        	  
+									        	  element.checked = true;
+									        	}
+									        </script>
+								        </div>
 								</div>
 								
 								<div>
