@@ -255,6 +255,13 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								<div>
 									<label for = "mentoringdate" class="form_title">멘토링 날짜 선택<span style="color:red"> *</span></label>
 										<input class="form-control border-0" type="date" id="mentoringdate" name="mentoringdate" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
+									<!-- 오늘 날짜 이후로만 선택 가능 -->
+									<script>
+									var now_utc = Date.now()
+									var timeOff = new Date().getTimezoneOffset()*60000;
+									var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+									document.getElementById("mentoringdate").setAttribute("min", today);
+									</script>
 							   </div>
 							   
 							   	<div>
@@ -373,7 +380,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 								</div>
 								
 								<div>
-									<label for = "mentorurl" class="form_title">대면 또는 비대면 멘토링 여부<span style="color:red"> *</span></label><br>
+									<label for = "mentorurl" class="form_title">대면 또는 비대면 멘토링 여부(<strong>선택</strong>)<span style="color:red"> *</span></label><br>
 										<div class="form-check-inline">
 									       	<label class="form-check-label" for="mentorurl">
 									         <input type="checkbox" class="form-check-input" onclick='checkOnlyOne(this)' id="mentorurl" name="mentorurl" value="대면 멘토링">
