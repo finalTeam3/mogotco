@@ -1,16 +1,20 @@
 package com.mogotco.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.UserDTO;
+import com.mogotco.service.KakaologinAPI;
 //import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.UserService;
@@ -31,8 +36,8 @@ public class UserController {
 	@Autowired
 	UserService user_service;
 	
-	//@Autowired
-	//KakaologinAPI kakao_service;
+	@Autowired
+	KakaologinAPI kakao_service;
 	
 	@Autowired
 	MentorService mentor_service;
@@ -83,28 +88,6 @@ public class UserController {
 			session.invalidate();
 		}
 		return "redirect:/";
-	}
-	
-	//카카오 로그인
-	@RequestMapping(value = "/kakaologin", method = RequestMethod.GET)
-	public String kakaologin(@RequestParam(value = "code", required = false) String kakaocode, Model model, HttpSession session) throws Exception {
-		model.addAttribute("center", dir + "kakaologin");
-		System.out.println(kakaocode);
-		//String accessToken = kakao_service.getAccessToken(kakaocode);
-		//System.out.println("kakao access token : " + accessToken);
-		
-		//HashMap<String, Object> userInfo = kakao_service.getUserInfo(accessToken);
-		//System.out.println("access Token : " + accessToken);
-		//System.out.println("nickname : " + userInfo.get("profile_nickname"));
-		//System.out.println("email : " + userInfo.get("account_email"));
-		
-		
-//		  if(userInfo.get("account_email") != null) { 
-//			  session.setAttribute("userId", userInfo.get("account_email")); 
-//			  session.setAttribute("accessToken", accessToken); 
-//			}
-		 
-		return "main";
 	}
 	
 	//마이페이지
