@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.UserCouponMapper">
+
+	
+ 	<select id="select" parameterType="Integer" resultType="UserCouponDTO">
+		SELECT * FROM usercoupon WHERE usercouponid=#{usercouponid}
+	</select> 
+	
+	<select id="selectAll" resultType="UserCouponDTO">
+		SELECT * FROM usercoupon
+	</select>
+
+	<insert id="insert" parameterType="UserCouponDTO">
+		INSERT INTO usercoupon VALUES (#{usercouponid},#{userid},#{couponid})
+	</insert> 	
+	
+	<update id="update" parameterType="UserCouponDTO">
+		UPDATE usercoupon SET userid=#{userid},couponid=#{couponid} WHERE usercouponid=#{usercouponid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM usercoupon WHERE usercouponid=#{usercouponid}
+	</delete> 
+	
+	<select id="userCouponAll" parameterType="String"
+		resultType="UserCouponDTO">
+		SELECT uc.userid, c.couponid, c.couponname AS coupon_couponname, c.couponprice AS coupon_couponprice FROM usercoupon uc
+		INNER JOIN coupon c ON uc.couponid = c.couponid
+		WHERE uc.userid = #{userid}
+	</select>
+	
+	
+	
+	
+	
+</mapper>
