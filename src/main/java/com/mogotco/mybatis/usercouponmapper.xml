@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		resultType="UserCouponDTO">
 		SELECT uc.userid, c.couponid, c.couponname AS coupon_couponname, c.couponprice AS coupon_couponprice FROM usercoupon uc
 		INNER JOIN coupon c ON uc.couponid = c.couponid
+		INNER JOIN user u ON u.userid = uc.userid
 		WHERE uc.userid = #{userid}
 	</select>
 	

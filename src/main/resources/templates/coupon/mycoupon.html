@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- Customized Bootstrap Stylesheet -->
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<link th:href="@{/table/restable.css}" rel="stylesheet">
+<style>
+
+/* button */
+.comment_button1 {
+	width: 70px;
+	height: 46px;
+	background: #14bdee;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+</head>
+
+
+<body>
+	<!-- Home -->
+
+	<div class="home">
+		<div class="breadcrumbs_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/}">Home</a></li>
+								<li><a th:href="@{/user/mypage(userid=${userid})}">Mypage</a></li>
+								<li>mymentoringdetail</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+		<!-- Checkout Start -->
+		<div class="contact">
+	<!-- Checkout Start -->
+			<div class="contact_info_container">
+	<div class="container">
+				<div class="row">
+			<div class="col-lg-8">
+			<div class="contact_form">
+			<div class="contact_info_title">My Coupon</div>
+		<table class="responsive-table">
+			<thead>
+				<tr>
+					<th scope="col">CouponName</th>
+					<th scope="col">CouponPrice</th>
+					<th scope="col">CouponNumber</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cp:${cplist}">
+					<th scope="row" th:text="${cp.coupon_couponname}"></th>
+					<th data-title="CouponNumber" th:text="${cp.couponid}"></th>
+					<td data-title="CouponPrice" th:text="${cp.coupon_couponprice}"></td>
+				</tr>
+			</tbody>
+</table>
+</div>
+</div>
+					<!-- Contact Info -->
+					<div class="col-lg-4">
+						<div class="contact_info">
+							<div class="contact_info_title">Contact Info</div>
+							<div class="contact_info_text">
+								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">New York Office</div>
+								<ul class="location_list">
+									<li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+							<div class="contact_info_location">
+								<div class="contact_info_location_title">Australia Office</div>
+								<ul class="location_list">
+									<li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
+									<li>1-234-567-89011</li>
+									<li>info.deercreative@gmail.com</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
