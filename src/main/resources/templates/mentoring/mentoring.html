@@ -63,7 +63,8 @@ function checkOnlyOne(element) {
 	  
 	  //선택된 것으로 mentoring 출력
 	 var selcatename = $('#selcatename').val(); 
-	location.href = '[[@{/mentoring/multimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype;
+	 var meningnum = $('#meningnum').val();
+	location.href = '[[@{/mentoring/multimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype+'&[[@{meningnum=}]]' + meningnum;
 
 	}
 </script>
@@ -198,11 +199,11 @@ function checkOnlyOne(element) {
 								class="pagination_container d-flex flex-row align-items-center justify-content-start">
 								<ul class="pagination_list" style="width:630px;float:left;">
 									<li><a 
-										th:href="@{/mentoring/mentoring(meningnum=${meningnum}-6)}"><i
+										th:href="@{/mentoring/pagingcheck(meningnum=${meningnum}-6)}"><i
 											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
 								</ul>
 								<ul class="pagination_list" style="float:right;">
-									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum}+6)}"><i class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+									<li><a th:href="@{/mentoring/pagingcheck(meningnum=${meningnum}+6)}"><i class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
 								</ul>
 							</div>
 							<!-- 									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">1</a></li>
@@ -242,13 +243,13 @@ function checkOnlyOne(element) {
 						<div class="sidebar_categories">
 							<ul>
 								<li><a th:href="@{/mentoring/mentoring}" th:text="${'all'}"
-									th:value="${'all'}"><input type="hidden" name='mname'
+									th:value="${'all'}"><input type="hidden" name='mname' id="mname"
 										th:value="${'all'}" th:text="${'all'}"></a></li>
 								<li th:each="mtc:${mtcatelist}"><a
-									th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
+									th:href="@{/mentoring/mentoringCate(mname=${mtc.mname},meningnum=${page})}"
 									th:value="${mtc.mname}" th:text="${mtc.mname}"
 									th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-										type="hidden" th:text="${mtc.mname}" name='mname'
+										type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
 										th:value="${mtc.mname}"></a></li>
 							</ul>
 						</div>
@@ -279,6 +280,7 @@ function checkOnlyOne(element) {
 						</div>
 					</div>
 					<input type="hidden" id='selcatename' th:value="${selcatename}">
+					<input type="hidden" id='meningnum' th:value="${page}">
 				</form>
 			</div>
 		</div>
