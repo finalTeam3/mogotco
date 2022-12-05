@@ -55,7 +55,7 @@
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
 								<li><a th:href="@{/user/mypage(userid=${userid})}">Mypage</a></li>
-								<li>mymentoringdetail</li>
+								<li>mycoupon</li>
 							</ul>
 						</div>
 					</div>
@@ -76,14 +76,14 @@
 			<thead>
 				<tr>
 					<th scope="col">CouponName</th>
-					<th scope="col">CouponPrice</th>
 					<th scope="col">CouponNumber</th>
+					<th scope="col">CouponPrice</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="cp:${cplist}">
+				<tr th:each="cp:${cp}">
 					<th scope="row" th:text="${cp.coupon_couponname}"></th>
-					<th data-title="CouponNumber" th:text="${cp.couponid}"></th>
+					<td data-title="CouponNumber" th:text="${cp.couponid}"></td>
 					<td data-title="CouponPrice" th:text="${cp.coupon_couponprice}"></td>
 				</tr>
 			</tbody>

@@ -26,7 +26,7 @@ public class CouponController {
 		try {
 			cplist = ucservice.userCouponAll(id);
 			model.addAttribute("userid", id);
-			model.addAttribute("cp", cplist);
+			model.addAttribute("cp",cplist);
 			System.out.println(cplist);
 			model.addAttribute("center", coupon + "mycoupon");
 			
