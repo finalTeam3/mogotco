@@ -78,11 +78,10 @@ $(document).ready(function(){
 								<div class="course_image">
 									<a
 										th:href="@{/mentoring/mentoringdetail(mentoringid=${list.mentoring_mentoringid})}"><img
-										th:src="@{/images/}+${list.mentoring_mentoringimg}" alt=""></a>
+										th:src="@{/img/}+${list.mentoring_mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title" th:text="${list.mentoring_mtitle}"
-										style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"></h3>
+									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${list.mentoring_mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${list.mentoring_mentoringid})}"></a></h3>
 									<ul style="list-style: none;">
 									</ul>
 									<br> <br>
@@ -101,13 +100,28 @@ $(document).ready(function(){
 									<div class="teacher_meta_text ml-auto"
 										th:if="${list.date_difference >= 0 }">
 										<span class="badge badge-pill badge-primary"
-											style="color: #FFFFFF">진행가능</span>
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${list.date_difference < 0}">
 										<span class="badge badge-pill badge-danger"
-											style="color: #FFFFFF">진행완료</span>
+											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
 									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${list.mentoring_mentorurl == 'nonface'}">
+										<span class="badge badge-pill badge-primary"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+									</div>
+ 									<div class="teacher_meta_text ml-auto"
+										th:if="${list.mentoring_mentorurl == 'face'}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+									</div>
+									<div class="teacher_meta_text ml-auto"
+										th:if="${list.mentoring_mcaring == 1}">
+										<span class="badge badge-pill badge-danger"
+											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
+									</div> 
 
 								</div>
 								<div class="course_footer">
