@@ -31,7 +31,7 @@ $(document).ready(function(){
 	$('#search_button1').click(function(){
 		$('#search_form_mentoring').attr({
 			method:'get',
-			action:'[[@{/mentoring/mainsearch}]]'
+			action:'[[@{/mentoring/defaultmainsearch}]]'
 			
 		});
 		$('#search_form_mentoring').submit();
@@ -63,8 +63,7 @@ function checkOnlyOne(element) {
 	  
 	  //선택된 것으로 mentoring 출력
 	 var selcatename = $('#selcatename').val(); 
-	 var meningnum = $('#meningnum').val();
-	location.href = '[[@{/mentoring/multimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype+'&[[@{meningnum=}]]' + meningnum;
+	location.href = '[[@{/mentoring/defaultmultimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype;
 
 	}
 </script>
@@ -197,13 +196,15 @@ function checkOnlyOne(element) {
 						<div class="col">
 							<div
 								class="pagination_container d-flex flex-row align-items-center justify-content-start">
-								<ul class="pagination_list" style="width:630px;float:left;">
-									<li><a 
+								<ul class="pagination_list" style="width: 630px; float: left;">
+									<li><a th:if="${meningnum > 1}"
 										th:href="@{/mentoring/pagingcheck(meningnum=${meningnum}-6)}"><i
 											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
 								</ul>
-								<ul class="pagination_list" style="float:right;">
-									<li><a th:href="@{/mentoring/pagingcheck(meningnum=${meningnum}+6)}"><i class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+								<ul class="pagination_list" style="float: right;">
+									<li><a
+										th:href="@{/mentoring/pagingcheck(meningnum=${meningnum}+6)}"><i
+											class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
 								</ul>
 							</div>
 							<!-- 									<li><a th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">1</a></li>
@@ -216,76 +217,76 @@ function checkOnlyOne(element) {
 				</div>
 			</div>
 
-		<!-- Courses Sidebar -->
-		<div class="col-lg-4">
-			<div class="sidebar">
-				<!-- Latest Course -->
-				<div class="sidebar_section">
-					<div style="margin-top: 50px;" th:if="${ms != null}"
-						class="sidebar_section_title">Mentoring Register</div>
-					<div class="sidebar_latest">
-						<!-- Latest Course -->
-						<div
-							class="latest d-flex flex-row align-items-start justify-content-start">
-							<div>
-								&nbsp&nbsp&nbsp&nbsp
-								<button type="button" th:if="${ms != null}"
-									th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
-									class="home_search_button"
-									style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
+			<!-- Courses Sidebar -->
+			<div class="col-lg-4">
+				<div class="sidebar">
+					<!-- Latest Course -->
+					<div class="sidebar_section">
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
+						<div class="sidebar_latest">
+							<!-- Latest Course -->
+							<div
+								class="latest d-flex flex-row align-items-start justify-content-start">
+								<div>
+									&nbsp&nbsp&nbsp&nbsp
+									<button type="button" th:if="${ms != null}"
+										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
+										class="home_search_button"
+										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
+								</div>
 							</div>
 						</div>
 					</div>
+					<form id="typeselectmentoring">
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_categories">
+								<ul>
+									<li><a th:href="@{/mentoring/defaultmentoring}"
+										th:text="${'all'}" th:value="${'all'}"><input
+											type="hidden" name='mname' id="mname" th:value="${'all'}"
+											th:text="${'all'}"></a></li>
+									<li th:each="mtc:${mtcatelist}"><a
+										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname})}"
+										th:value="${mtc.mname}" th:text="${mtc.mname}"
+										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
+											type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
+											th:value="${mtc.mname}"></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Type</div>
+							<div class="sidebar_categories">
+								<p>
+									<input type="checkbox" name='mentoringtype' value='lowprice'
+										th:onclick="checkOnlyOne(this)" id="lowprice"> <label
+										for="lowprice">가격순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='recentmen'
+										th:onclick="checkOnlyOne(this)" id="recentmen"> <label
+										for="recentmen">가장 빠른순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='orderreview'
+										th:onclick="checkOnlyOne(this)" id="orderreview"> <label
+										for="orderreview">별점순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='mcaringok'
+										th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
+										for="mcaringok">사후관리</label>
+								</p>
+							</div>
+						</div>
+						<input type="hidden" id='selcatename' th:value="${selcatename}">
+					</form>
 				</div>
-				<form id="typeselectmentoring">
-					<div class="sidebar_section">
-						<div class="sidebar_section_title">Categories</div>
-						<div class="sidebar_categories">
-							<ul>
-								<li><a th:href="@{/mentoring/mentoring}" th:text="${'all'}"
-									th:value="${'all'}"><input type="hidden" name='mname' id="mname"
-										th:value="${'all'}" th:text="${'all'}"></a></li>
-								<li th:each="mtc:${mtcatelist}"><a
-									th:href="@{/mentoring/mentoringCate(mname=${mtc.mname},meningnum=${page})}"
-									th:value="${mtc.mname}" th:text="${mtc.mname}"
-									th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-										type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
-										th:value="${mtc.mname}"></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="sidebar_section">
-						<div class="sidebar_section_title">Type</div>
-						<div class="sidebar_categories">
-							<p>
-								<input type="checkbox" name='mentoringtype' value='lowprice'
-									th:onclick="checkOnlyOne(this)" id="lowprice"> <label
-									for="lowprice">가격순</label>
-							</p>
-							<p>
-								<input type="checkbox" name='mentoringtype' value='recentmen'
-									th:onclick="checkOnlyOne(this)" id="recentmen"> <label
-									for="recentmen">가장 빠른순</label>
-							</p>
-							<p>
-								<input type="checkbox" name='mentoringtype' value='orderreview'
-									th:onclick="checkOnlyOne(this)" id="orderreview"> <label
-									for="orderreview">별점순</label>
-							</p>
-							<p>
-								<input type="checkbox" name='mentoringtype' value='mcaringok'
-									th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
-									for="mcaringok">사후관리</label>
-							</p>
-						</div>
-					</div>
-					<input type="hidden" id='selcatename' th:value="${selcatename}">
-					<input type="hidden" id='meningnum' th:value="${page}">
-				</form>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <script>
   Kakao.init('b67794657ed6e950ec05402c7a55d07f'); // 사용하려는 앱의 JavaScript 키 입력

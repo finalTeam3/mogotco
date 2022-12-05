@@ -131,8 +131,8 @@ $(document).ready(function(){
                            <li class="active"><a th:href="@{/}">Home</a></li>
                            <li><a th:href="@{/notice}">Notice</a></li>
                            <li><a th:href="@{/about}">About</a></li>
-                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/mentoring(userid=${session.loginuser.userid},meningnum=${meningnum})}">Mentoring</a></li>
-                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">Mentoring</a></li>
+                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}">Mentoring</a></li>
+                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/defaultmentoring}">Mentoring</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/mentor/mentorlist(userid=${session.loginuser.userid})}">Mentor</a></li>
                            <li th:if = "${session.loginuser == null}"><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
                         </ul>
@@ -188,8 +188,8 @@ $(document).ready(function(){
             <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/mypage(userid = ${session.loginuser.userid})}">Mypage</a></li>
             <li class="menu_mm"><a th:href="@{/notice}">Notice</a></li>
             <li class="menu_mm"><a th:href="@{/about}">About</a></li>
-            <li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/mentoring/mentoring(meningnum=${meningnum})}">Mentoring</a></li>
-            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/mentoring/mentoring(userid=${session.loginuser.userid},meningnum=${meningnum})}">Mentoring</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/mentoring/defaultmentoring}">Mentoring</a></li>
+            <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}">Mentoring</a></li>
             <li class="menu_mm"><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
             <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/logout}"><i class="fa-solid fa-right-from-bracket"></i></a></li>
          </ul>
@@ -261,13 +261,10 @@ $(document).ready(function(){
                            <div class="footer_links_container">
                               <ul>
                                  <li><a th:href="@{/}">Home</a></li>
-                                 <li><a th:href="@{/about}">Notice</a></li>
-                                 <li><a th:href="@{/contact}">Contact</a></li>
-                                 <li><a href="#">Features</a></li>
-                                 <li><a th:href="@{/courses}">Mentoring</a></li>
-                                 <li><a href="#">Events</a></li>
-                                 <li><a href="#">Gallery</a></li>
-                                 <li><a href="#">FAQs</a></li>
+                                 <li><a th:href="@{/notice}">Notice</a></li>
+                                 <li><a th:href="@{/about}">About</a></li>
+                                 <li><a th:href="@{/mentoring/defaultmentoring}">Mentoring</a></li>
+                                 <li><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
                               </ul>
                            </div>
                         </div>

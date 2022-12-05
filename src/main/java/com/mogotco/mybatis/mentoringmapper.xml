@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
-	<select id="viewMentoringAll" resultType="MentoringDTO">
+	<select id="viewMentoringAll" parameterType="Integer" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mt.mentorid,
 		mu.userid AS user_userid, mr.mentorcom AS mentor_mentorcom, mt.mtitle,
 		mt.mentoringimg, mt.mrdate, mt.mmemberidcnt, mt.mcaring, mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) AS
@@ -109,8 +109,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</delete>
 
 	<!-- 전체검색 -->
-	<select id="mentoringsearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="mentoringsearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid,
 		mu.userid AS user_userid,
 		mr.mentorcom AS
@@ -128,8 +127,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리별로 전체검색(mentoringpage에서) (choyunyoung add) -->
-	<select id="mcatesearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="mcatesearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -145,8 +143,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리, 리뷰순(choyunyoung add) -->
-	<select id="mcatereviewsearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="mcatereviewsearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -168,8 +165,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리, 가격순(choyunyoung add) -->
-	<select id="mcatepricesearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="mcatepricesearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -191,8 +187,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리, 가장빨리 멘토링 가능한 순(choyunyoung add) -->
-	<select id="mcaterecentsearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="mcaterecentsearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -301,8 +296,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 	<!-- txt없을 때 -->
 	<!-- 카테고리, 리뷰순(choyunyoung add) -->
-	<select id="nmcatereviewsearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="nmcatereviewsearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -322,8 +316,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리, 가격순(choyunyoung add) -->
-	<select id="nmcatepricesearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="nmcatepricesearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
@@ -343,8 +336,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 카테고리, 가장빨리 멘토링 가능한 순(choyunyoung add) -->
-	<select id="nmcaterecentsearch" resultType="MentoringDTO"
-		parameterType="string">
+	<select id="nmcaterecentsearch" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mu.userid AS user_userid,
 		mr.mentorcom AS
 		mentor_mentorcom, mt.mtitle,mt.mentoringimg, mt.mrdate,
