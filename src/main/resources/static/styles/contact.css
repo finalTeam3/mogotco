@@ -1099,7 +1099,7 @@ section
 }
 .comment_button_login
 {
-	width: 150px;
+	width: 100%;
 	height: 46px;
 	background: #14bdee;
 	text-transform: uppercase;
@@ -1112,6 +1112,12 @@ section
 	border-radius: 3px;
 	margin-top: 15px;
 	display : block;
+}
+.contact_form_login a img
+{
+	width: 100%;
+	height: 46px;
+	margin-top: 15px;
 }
 .comment_button:hover
 {
