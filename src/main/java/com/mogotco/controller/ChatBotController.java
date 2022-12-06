@@ -1,5 +1,18 @@
 package com.mogotco.controller;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -8,16 +21,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Date;
 
 @Controller
 public class ChatBotController {
@@ -65,13 +68,67 @@ public class ChatBotController {
             //받아온 값을 세팅하는 부분
             JSONParser jsonparser = new JSONParser();
             try {
-                JSONObject json = (JSONObject)jsonparser.parse(jsonString);
-                JSONArray bubblesArray = (JSONArray)json.get("bubbles");
-                JSONObject bubbles = (JSONObject)bubblesArray.get(0);
-                JSONObject data = (JSONObject)bubbles.get("data");
-                String description = "";
-                description = (String)data.get("description");
-                chatMessage = description;
+            	// 들어온 메시지 확인
+            	System.out.println("chatmessage:"+chatMessage);
+            	
+            	JSONObject json = (JSONObject)jsonparser.parse(jsonString);
+            	JSONArray bubblesArray = (JSONArray)json.get("bubbles");
+            	JSONObject bubbles = (JSONObject)bubblesArray.get(0);
+            	JSONObject data = (JSONObject)bubbles.get("data");
+//            	System.out.println("data: "+data);
+            	
+            	String descriptionvalue = "";
+            	descriptionvalue = (String)data.get("description");
+//            	System.out.println("descriptionvalue: " + descriptionvalue);
+            	
+            	
+            	// 각 요청 메시지에 따라 다른 답변을 응답
+            	if(descriptionvalue == null) {
+//            		System.out.println("ok");
+            		JSONObject cover = (JSONObject)data.get("cover");//data 객체 -> cover 객체
+//            		System.out.println("cover: "+cover);
+            		JSONObject coverdata = (JSONObject)cover.get("data");//cover 객체-> data 객체
+            		JSONObject description = (JSONObject)coverdata.get(0);//data 객체->0번째 key값 desciption
+            		
+            		descriptionvalue = (String)coverdata.get("description");					
+//            		System.out.println("descriptionvalue: "+descriptionvalue);
+            		
+            		JSONArray contentTable = (JSONArray)data.get("contentTable");//data->contenTable
+            		JSONArray cm = new JSONArray();
+            		
+            		String contentvalue = "";
+            		String buttonarray = "";
+            		List<String> buttonlist = new ArrayList<>();
+            		for(int i = 0; i < contentTable.size(); i++) {
+            			JSONObject co = new JSONObject();
+            			
+            			JSONArray contentTable1 = (JSONArray)contentTable.get(i);//data->contenTable
+            			JSONObject contenTable2 = (JSONObject)contentTable1.get(0);//contenTable의 첫번째
+            			JSONObject contentdata = (JSONObject)contenTable2.get("data");//contenTable의 첫번째->data
+            			contentvalue = (String)contentdata.get("title");
+            			
+            			co.put("button", contentvalue);
+            			cm.add(co);
+            			
+            			JSONObject buttons = (JSONObject)cm.get(i);
+            			buttonarray = (String)buttons.get("button");
+            			buttonlist.add(buttonarray);
+            			
+            		} // ------ 내부 for문 종료 -----
+            		
+//            		System.out.println("cv: "+contentvalue);
+//            		System.out.println("cm: "+cm);
+//            		System.out.println(buttonlist);
+            		
+            		chatMessage = descriptionvalue +" "+ buttonlist;
+            		
+            		
+            	} else {
+            		
+            		chatMessage = descriptionvalue;
+            	} // 각 요청 메시지에 따라 다른 답변을 응답 if - else문 끝
+            	
+            	
             } catch (Exception e) {
                 System.out.println("error");
                 e.printStackTrace();
@@ -81,9 +138,11 @@ public class ChatBotController {
         } else {  // 에러 발생
             chatMessage = con.getResponseMessage();
         }
+		System.out.println("REsult:"+chatMessage);
         return chatMessage;
     }
 
+    
     //보낼 메세지를 네이버에서 제공해준 암호화로 변경해주는 메소드
     public static String makeSignature(String message, String secretKey) {
 
