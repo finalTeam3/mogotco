@@ -65,37 +65,49 @@ public class MentoringController {
 		List<MentoringDTO> mlist = null; // 모든 멘토링 아이템용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
-		String place = "nonface";
 		try {
-			int meningnum = 0;
+			Integer meningnum = 0;
 			mlist = mservice.viewMentoringAll(meningnum); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("meningnum", meningnum);
-			model.addAttribute("place", place);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String txt = null;
+			String mname =null;
+			String mtype = null;
+			model.addAttribute("txt", txt);
+			model.addAttribute("selecatename", mname);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring+"mentoring");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return "main";
 	}
 
 	@RequestMapping("/defaultmentoringCate")
-	public String defaultmentoringCate(Model model, String mname) {
+	public String defaultmentoringCate(Model model,String userid, String mname) {
 		List<MentoringDTO> citemlist = null; // 카테고리별 리스트용
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
+		MentorDTO ment = null;
 		try {
-			int meningnum = 0;
+			Integer meningnum = 0;
 			citemlist = mservice.selectMentoringAll(mname,meningnum);// 카테고리별 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String txt = null;
+			String mtype = null;
+			model.addAttribute("txt", txt);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,28 +118,31 @@ public class MentoringController {
 	
 	// 멘토링에서 카테고리별 검색
 	@RequestMapping("/defaultsearch")
-	public String defaultsearch(Model model, String txt, String mname) {
+	public String defaultsearch(Model model, String userid,String txt, String mname) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		String all = "all";
 		try {
-			int meningnum = 0;
+			ment = mentor_service.mentorAll(userid);
+			Integer meningnum = 0;
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt,meningnum);
-				model.addAttribute("txt", txt);
-				model.addAttribute("mtr", searchlist);
-				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-				model.addAttribute("center", mentoring + "mentoring");
+
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mcatesearch(mname, txt,meningnum);
-				model.addAttribute("mname", mname);
-				model.addAttribute("txt", txt);
-				model.addAttribute("mtr", searchlist);
-				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-				model.addAttribute("center", mentoring + "mentoring");
+				model.addAttribute("selcatename", mname);
 			}
+			model.addAttribute("txt", txt);
+			model.addAttribute("mtr", searchlist);
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String mtype = null;
+			model.addAttribute("mtype", mtype);
+			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,15 +152,24 @@ public class MentoringController {
 	
 	// main에서 전체검색(choyunyoung add)
 	@RequestMapping("/defaultmainsearch")
-	public String defaultmainsearch(Model model, String txt) {
+	public String defaultmainsearch(Model model, String userid,String txt) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		try {
-			int meningnum = 0;
+			Integer meningnum = 0;
 			searchlist = mtmapper.mentoringsearch(txt,meningnum);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			model.addAttribute("txt", txt);
+			String mname = null;
+			String mtype = null;
+			model.addAttribute("selecatename", mname);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,16 +181,18 @@ public class MentoringController {
 	// txt가 있을 때
 	// 메인에서 카테고리, select type순서별 검색( 검색창에 text가 있을 때)
 	@RequestMapping("/defaultmultimainsearch")
-	public String defaultmultimainsearch(Model model, String txt, String mname, String mtype) {
+	public String defaultmultimainsearch(Model model, String userid,String txt, String mname, String mtype) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		String all = "all";
 		String lowprice = "lowprice";
 		String orderreview = "orderreview";
 		String recentmen = "recentmen";
 		String mcaringok = "mcaringok";
 		try {
-			int meningnum = 0;
+			ment = mentor_service.mentorAll(userid);
+			Integer meningnum = 0;
 				// 전체골랐을 때
 				if (mname.equals(all)) {
 					// 기격
@@ -202,12 +228,16 @@ public class MentoringController {
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.mcatemcaringoksearch(mname, txt, 1,meningnum);
 					}
+					model.addAttribute("selcatename", mname);
 				
 			}
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("txt", txt);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,16 +248,18 @@ public class MentoringController {
 	
 	// 메인에서 카테고리, select type순서별 검색( 검색창에 text가 없을 때)
 	@RequestMapping("/defaultmultimainsearch1")
-	public String defaultmultimainsearch1(Model model, String mname, String mtype) {
+	public String defaultmultimainsearch1(Model model,String userid,String mname, String mtype) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		String all = "all";
 		String lowprice = "lowprice";
 		String orderreview = "orderreview";
 		String recentmen = "recentmen";
 		String mcaringok = "mcaringok";
 		try {
-			int meningnum = 0;
+			ment = mentor_service.mentorAll(userid);
+			Integer meningnum = 0;
 				if(mname.equals(all)) {
 					if (mtype.equals(lowprice)) {
 						searchlist = mtmapper.nallpricesearch(meningnum);
@@ -260,13 +292,18 @@ public class MentoringController {
 					}
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.nmcatemcaringoksearch(mname, 1,meningnum);
-					}	
+					}
+					model.addAttribute("selcatename", mname);
 				}
 
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
-			model.addAttribute("selcatename", mname);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String txt = null;
+			model.addAttribute("txt", txt);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -279,60 +316,51 @@ public class MentoringController {
 
 	// 페이징 처리를 위한 id값 유무 판단
 	@RequestMapping("/pagingcheck")
-	public void pagingcheck(HttpServletRequest request, HttpServletResponse response, int meningnum) {
+	public void pagingcheck(HttpServletRequest request, HttpServletResponse response, int meningnum, String userid, String txt, String mtype, String mname) {
 		// current session이 없으면 없는채로 두는 것
 		HttpSession session = request.getSession(false);
 		try {// session이 있을 때 controller주소로 감
-
-			// 한국어 mname해줘야 함
-			String mname = request.getParameter("mname");
-			String encodeMname = URLEncoder.encode(mname, "UTF-8");
-
-			String mtype = request.getParameter("selcatename");
-			String txt = request.getParameter("txt");
-			String encodeTxt = URLEncoder.encode(txt, "UTF-8");
-
-			if (meningnum == 0) {
-				if (mtype == null) {
-					if (encodeMname == null) {
-						if (encodeTxt == null) {
-							// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
-							response.sendRedirect("/mogotco/mentoring/mentoring?useridid="
-									+ request.getParameter("userid") + "&meningnum=" + meningnum);
-						} else {
-							// mentoring/mentoring인데 검색을 했을 때(mainsearch)
-							response.sendRedirect(
-									"/mogotco/mentoring/mainsearch?txt=" + encodeTxt + "&meningnum=" + meningnum);
-						}
-					} else {
-						// cate고리별로 검색(mname있는 거)
-						if (encodeTxt == null) {
-							// 카테고리 자체만을 클릭 mentoring/mentoringCate
-							response.sendRedirect(
-									"/mogotco/mentoring/mentoringCate?userid=" + request.getParameter("userid")
-											+ "&meningnum=" + meningnum + "&mname=" + encodeMname);
-
-						} else {
-							// 카테고리 안에서의 검색 mentoring/search
-							response.sendRedirect("/mogotco/mentoring/search?txt=" + encodeTxt + "&meningnum="
-									+ meningnum + "&mname=" + encodeMname);
-						}
-					}
-				} else {
-					if (encodeTxt == null) {
-						// cate와 type둘다 선택되었을 때 mentoring/multimainsearch1
-						response.sendRedirect("/mogotco/mentoring/multimainsearch1?mtype=" + mtype + "&meningnum="
-								+ meningnum + "&mname=" + encodeMname);
-					} else {
-						// txt가 있고 cate와 type둘다 선택되었을 때 mentoring/multimainsearch
-						response.sendRedirect("/mogotco/mentoring/multimainsearch?txt=" + encodeTxt + "&meningnum="
-								+ meningnum + "&mname=" + encodeMname + "&mtype=" + mtype);
-					}
+			
+			System.out.println(meningnum);
+			System.out.println(userid);
+			System.out.println(txt);
+			System.out.println(mtype);
+			System.out.println(mname);
+				if ((mtype != null) && (mname!= null)&&(txt!= null)) {
+					// txt가 있고 cate와 type둘다 선택되었을 때 mentoring/multimainsearch
+					response.sendRedirect("/mogotco/mentoring/multimainsearch?txt=" + txt + "&meningnum="
+							+ meningnum + "&mname=" + mname + "&mtype=" + mtype + "&userid=" + userid);
 				}
+				
+				if ((mtype == null)&&(mname == null)&&(txt == null)) {
+					// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
+					response.sendRedirect("/mogotco/mentoring/mentoring?userid="
+							+ userid + "&meningnum=" + meningnum);
+				}
+				
+				if ((mtype != null)&&(mname!= null)&&(txt== null)) {
+					// cate와 type둘다 선택되었을 때 mentoring/multimainsearch1
+					response.sendRedirect("/mogotco/mentoring/multimainsearch1?mtype=" + mtype + "&meningnum="
+							+ meningnum + "&mname=" + mname + "&userid=" + userid);
+				}
+				if ((mtype == null)&&(mname!= null)&&(txt!= null)) {
+					// 카테고리 안에서의 검색 mentoring/search
+					response.sendRedirect("/mogotco/mentoring/search?txt=" + txt + "&meningnum="
+							+ meningnum + "&mname=" + mname + "&userid=" + userid);
+				}
+				if ((mtype == null)&&(mname!= null)&&(txt== null)) {
+					// 카테고리 자체만을 클릭 mentoring/mentoringCate
+					response.sendRedirect(
+							"/mogotco/mentoring/mentoringCate?userid=" + userid
+									+ "&meningnum=" + meningnum + "&mname=" + mname);
+				}
+				if ((mtype == null)&&(mname== null)&&(txt!= null)) {
+					// mentoring/mentoring인데 검색을 했을 때(mainsearch)
+					response.sendRedirect(
+							"/mogotco/mentoring/mainsearch?txt=" + txt + "&meningnum=" + meningnum + "&userid=" + userid);
+				}
+				
 
-			} else {
-
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -347,19 +375,23 @@ public class MentoringController {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
 		try {
-			int page = 0;
-			int resort = 1;
-			page = page + meningnum;
-			int meningnum1 = page;
+
 			mlist = mservice.viewMentoringAll(meningnum); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			// 다시 paging을 0으로 맞추기 위해서
-			model.addAttribute("page", page);
-			model.addAttribute("meningnum", meningnum1);
+
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String txt = null;
+			String mname = null;
+			String mtype = null;
+			model.addAttribute("txt", txt);
+			model.addAttribute("selcatename", mname);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 
 		} catch (Exception e) {
@@ -375,19 +407,22 @@ public class MentoringController {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
 		try {
-			int page = 0;
-			page = page + meningnum;
-			int meningnum1 = page;
+
 			citemlist = mservice.selectMentoringAll(mname, meningnum);// 카테고리별 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			// 다시 paging을 0으로 맞추기 위해서
-			model.addAttribute("page", page);
-			model.addAttribute("meningnum", meningnum1);
+
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
 			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			String txt = null;
+			String mtype = null;
+			model.addAttribute("txt", txt);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -398,27 +433,31 @@ public class MentoringController {
 
 	// 멘토링에서 카테고리별 검색
 	@RequestMapping("/search")
-	public String search(Model model, String txt, String mname, Integer meningnum) {
+	public String search(Model model,String userid, String txt, String mname, Integer meningnum) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
 		String all = "all";
+		MentorDTO ment = null;
 		try {
+			ment = mentor_service.mentorAll(userid);
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt, meningnum);
-				model.addAttribute("txt", txt);
-				model.addAttribute("mtr", searchlist);
-				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-				model.addAttribute("center", mentoring + "mentoring");
+
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mcatesearch(mname, txt, meningnum);
-				model.addAttribute("mname", mname);
-				model.addAttribute("txt", txt);
-				model.addAttribute("mtr", searchlist);
-				model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-				model.addAttribute("center", mentoring + "mentoring");
+				model.addAttribute("selcatename", mname);
 			}
+			model.addAttribute("meningnum", meningnum);
+			model.addAttribute("txt", txt);
+			model.addAttribute("mtr", searchlist);
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			String mtype = null;
+			model.addAttribute("mtype", mtype);
+			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -428,14 +467,24 @@ public class MentoringController {
 
 	// main에서 전체검색(choyunyoung add)
 	@RequestMapping("/mainsearch")
-	public String mainsearch(Model model, String txt, Integer meningnum) {
+	public String mainsearch(Model model, String userid,String txt, Integer meningnum) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		try {
+			ment = mentor_service.mentorAll(userid);
 			searchlist = mtmapper.mentoringsearch(txt, meningnum);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("meningnum", meningnum);
+			model.addAttribute("txt", txt);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String mname = null;
+			String mtype = null;
+			model.addAttribute("selcatename", mname);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -447,15 +496,17 @@ public class MentoringController {
 	// txt가 있을 때
 	// 메인에서 카테고리, select type순서별 검색( 검색창에 text가 있을 때)
 	@RequestMapping("/multimainsearch")
-	public String multimainsearch(Model model, String txt, String mname, String mtype, Integer meningnum) {
+	public String multimainsearch(Model model,String userid, String txt, String mname, String mtype, Integer meningnum) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		String all = "all";
 		String lowprice = "lowprice";
 		String orderreview = "orderreview";
 		String recentmen = "recentmen";
 		String mcaringok = "mcaringok";
 		try {
+			ment = mentor_service.mentorAll(userid);
 			// 전체골랐을 때
 			if (mname.equals(all)) {
 				// 기격
@@ -491,12 +542,16 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.mcatemcaringoksearch(mname, txt, 1, meningnum);
 				}
-
+				model.addAttribute("selcatename", mname);
 			}
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("txt", txt);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -507,15 +562,17 @@ public class MentoringController {
 
 	// 메인에서 카테고리, select type순서별 검색( 검색창에 text가 없 때)
 	@RequestMapping("/multimainsearch1")
-	public String multimainsearch1(Model model, String mname, String mtype, Integer meningnum) {
+	public String multimainsearch1(Model model,String userid, String mname, String mtype, Integer meningnum) {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		List<MentoringDTO> searchlist = null;
+		MentorDTO ment = null;
 		String all = "all";
 		String lowprice = "lowprice";
 		String orderreview = "orderreview";
 		String recentmen = "recentmen";
 		String mcaringok = "mcaringok";
 		try {
+			ment = mentor_service.mentorAll(userid);
 			if (mname.equals(all)) {
 				if (mtype.equals(lowprice)) {
 					searchlist = mtmapper.nallpricesearch(meningnum);
@@ -549,12 +606,18 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.nmcatemcaringoksearch(mname, 1, meningnum);
 				}
+				model.addAttribute("selcatename", mname);
 			}
 
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
-			model.addAttribute("selcatename", mname);
+			model.addAttribute("meningnum", meningnum);
+			model.addAttribute("mtype", mtype);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
+			model.addAttribute("ms", ment);
+			model.addAttribute("userid", userid);
+			String txt = null;
+			model.addAttribute("txt", txt);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
 			e.printStackTrace();
