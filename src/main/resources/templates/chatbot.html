@@ -182,7 +182,7 @@ function disconnect() {
 
 // 인풋창에서 메시지를 입력 후 전송
 function sendMessage() {
-    let message = $("#msg").val()
+    let message = $("#msg").val();
     showMessage("보낸 메시지: " + message);
 
     stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
@@ -190,17 +190,17 @@ function sendMessage() {
 
 
 function showMessage(message) {
-    $("#communicate").append("<tr><td>" + message + "</td></tr>");
+    $("#me").append("<tr><td>" + message + "</td></tr>");
 }
 
-$(function () {
+/* $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMessage(); });
-});
+}); */
 
 
 
@@ -208,20 +208,19 @@ $(document).ready(function() {
 	$("#openmodal").click(function() {
 		connect();
 		$("#me").append("<div id='answer'><img id='answerchat'><div id='ina'>안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</div></div>");
-		return;
 	});
 	
 	$("#send").click(function() {
-		$('#msg').val('');
+		//$('#msg').val('');
 		sendMessage();
 	    
 	});
-	$('#msg').keypress(function(event){
+/* 	$('#msg').keypress(function(event){
 	     if ( event.which == 13 ) {
 	         $('#send').click();
 	         return false;
-	     }
-	});
+	     } 
+	});*/
 	$('#modalclose').click(function() {
 		 disconnect();
 		});
@@ -289,7 +288,7 @@ $(document).ready(function() {
             </form>
         </div>
         
-        <div class="col-md-6">
+<!--         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="msg"></label>
@@ -297,10 +296,10 @@ $(document).ready(function() {
                 </div>
                 <button id="send" class="btn btn-default" disabled type="submit">보내기</button>
             </form>
-        </div>
+        </div> -->
     </div>
     
-    <div class="row">
+<!--     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
@@ -314,7 +313,7 @@ $(document).ready(function() {
             </table>
             
         </div>
-    </div>
+    </div> -->
 				<a style="position:fixed;right:0.00001%;" href="#" title="챗봇 테스트" id="openmodal" data-toggle="modal" data-target="#myModal">
 				<img src="img/clovaicon.jpg" alt="화면 고정 버튼" style="width:20%;">
 				</a>
@@ -339,7 +338,7 @@ $(document).ready(function() {
 							
 							<div id="btnsend">
 							<textarea id="msg" style="width:90%;" rows="3"></textarea>
-							<button id="send" type="button"><img id="sentimg" src="img/sent.png" ></button>
+							<button id="send" disabled type="submit"><img id="sentimg" src="img/sent.png" ></button>
 							</div>
 							
 							<div class="modal-footer">
