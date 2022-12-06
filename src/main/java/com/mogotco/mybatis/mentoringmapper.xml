@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE
-		mt.mentoringid = #{mentoringid} ORDER BY date_difference DESC LIMIT #{meningnum},6
+		mt.mentoringid = #{mentoringid}
 	</select>
 	<!-- main에서 멘토링바로 할 수 있는 것들부터 하기 -->
 	<select id="mentoringimmed" resultType="MentoringDTO">
