@@ -20,15 +20,18 @@ public class KakaologinAPI {
 
 	public String getAccessToken (String code) throws Exception{
 		
+		// 인가코드를 이용해 엑세스 토큰을 받아옴
 		String host = "https://kauth.kakao.com/oauth/token";
 		URL url = new URL(host);
 		HttpURLConnection hucon = (HttpURLConnection) url.openConnection();
 		String token = "";
 		
 		try {
+			// post방식으로 json타입의 유저정보를 주세요
 			hucon.setRequestMethod("POST");
 			hucon.setDoOutput(true);
 
+			// post에 필요한 키값 전송
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(hucon.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
@@ -37,10 +40,12 @@ public class KakaologinAPI {
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
-
+            
+            // 200 서버 통신 정상
             int responseCode = hucon.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+//            System.out.println("responseCode : " + responseCode);
 
+            // 받아온 데이터 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(hucon.getInputStream()));
             String line = "";
             String result = "";
@@ -48,16 +53,17 @@ public class KakaologinAPI {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+//            System.out.println("response body : " + result);
 
+            // JSON 파싱
             JSONParser parser = new JSONParser();
             JSONObject elem = (JSONObject)parser.parse(result);
             
             String access_token = elem.get("access_token").toString();
             String refresh_token = elem.get("refresh_token").toString();
 
-            System.out.println("access_token : " + access_token);
-            System.out.println("refresh_token : " + refresh_token);
+//            System.out.println("access_token : " + access_token);
+//            System.out.println("refresh_token : " + refresh_token);
             
             token = access_token;
 
@@ -73,19 +79,23 @@ public class KakaologinAPI {
 	
 	public Map<String, Object> getUserInfo (String access_token) throws Exception{
 
+		// 엑세스 토큰을 이용해서 유저 정보를 받아옴
 		String host = "https://kapi.kakao.com/v2/user/me";
 		Map<String, Object> result = new HashMap<>();
 
         try {
             URL url = new URL(host);
             
+            // get 방식으로 json타입의 정보를 주세요
             HttpURLConnection hucon = (HttpURLConnection) url.openConnection();
             hucon.setRequestProperty("Authorization", "Bearer " + access_token);
             hucon.setRequestMethod("GET");
 
+            // 200 서버 통신 정상
             int responseCode = hucon.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+//            System.out.println("responseCode : " + responseCode);
 
+            // 받아온 데이터 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(hucon.getInputStream()));
             String line = "";
             String res = "";
@@ -93,13 +103,15 @@ public class KakaologinAPI {
             while ((line = br.readLine()) != null) {
                 res += line;
             }
-            System.out.println("response body : " + res);
+//            System.out.println("response body : " + res);
             
+            // JSON 파싱
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject)parser.parse(res);
             JSONObject kakao_account = (JSONObject)obj.get("kakao_account");
             JSONObject properties = (JSONObject)obj.get("properties");
             
+            // String 으로 대응되는 키값 추출
             String id = obj.get("id").toString();
             String nickname = properties.get("nickname").toString();
             String profile_image = properties.get("profile_image").toString();
@@ -107,7 +119,7 @@ public class KakaologinAPI {
             String gender = kakao_account.get("gender").toString();
             String birthday = kakao_account.get("birthday").toString();
             
-            
+            // result에 넣어줌
             result.put("id", id);
             result.put("nickname", nickname);
             result.put("profile_image", profile_image);
@@ -124,15 +136,18 @@ public class KakaologinAPI {
     }
 	
 	public String getAgreementInfo(String access_token) {
+		// 엑세스 토큰을 이용해서 동의한 유저 정보를 받아옴
 		String result = "";
         String host = "https://kapi.kakao.com/v2/user/scopes";
         
 		try {
+			// get 방식으로 정보를 주세요
 			URL url = new URL(host);
 			HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 			urlConnection.setRequestMethod("GET");
 			urlConnection.setRequestProperty("Authorization", "Bearer "+access_token);
 			
+			// 받아온 데이터 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String line = "";
             while((line=br.readLine())!=null)
@@ -140,8 +155,9 @@ public class KakaologinAPI {
                 result+=line;
             }
             
+            // 200 서버 통신 정상
             int responseCode = urlConnection.getResponseCode();
-            System.out.println("responseCode = " + responseCode);
+//            System.out.println("responseCode = " + responseCode);
             
             br.close();
             
