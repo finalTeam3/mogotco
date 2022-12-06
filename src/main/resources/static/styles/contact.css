@@ -268,7 +268,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .header.scrolled .top_bar
 {
@@ -393,7 +393,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header.scrolled .logo
 {
@@ -442,7 +442,7 @@ section
 .main_nav li a:hover,
 .main_nav li.active a
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .main_nav li.active::after
 {
@@ -452,7 +452,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #14bdee;
+	background: #005b00;
 	content: '';
 }
 .search_button
@@ -479,7 +479,7 @@ section
 .search_button:hover i,
 .shopping_cart:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header_search_form
 {
@@ -493,7 +493,7 @@ section
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 	z-index: -1;
 	opacity: 0;
 	-webkit-transition: all 400ms ease;
@@ -557,7 +557,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -655,7 +655,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .menu .search
 {
@@ -801,7 +801,7 @@ section
 }
 .breadcrumbs ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 /*********************************
 6-1. Modal
@@ -974,27 +974,27 @@ section
 }
 .comment_input_postno:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_input_review:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_input_address:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_input:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_input_detail:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_textarea
@@ -1022,7 +1022,7 @@ section
 {
 	width: 130px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 16px;
 	font-weight: 500;
@@ -1037,7 +1037,7 @@ section
 {
 	width: 150px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 500;
@@ -1052,7 +1052,7 @@ section
 {
 	width: 150px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 16px;
 	font-weight: 500;
@@ -1071,7 +1071,7 @@ section
 {
 	width: 150px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 16px;
 	font-weight: 500;
@@ -1101,7 +1101,7 @@ section
 {
 	width: 100%;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 500;
@@ -1259,7 +1259,7 @@ section
 	cursor: pointer;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: #14bdee;
+	color: #005b00;
 	font-weight: 500;
 	letter-spacing: 0.1em;
 }
@@ -1277,11 +1277,11 @@ section
 }
 .fa-star:hover
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .fa-star:hover ~ label
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .review_form fieldset
 {
@@ -1290,7 +1290,7 @@ section
 }
 .review_form input[type=radio]:checked ~ label
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .star-ratings {
 	color: #aaa9a9;
@@ -1369,7 +1369,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_title
 {
@@ -1425,7 +1425,7 @@ section
 }
 .footer_social ul li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .footer_contact
 {
@@ -1475,7 +1475,7 @@ section
 }
 .footer_links_container ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_mobile
 {
@@ -1515,7 +1515,7 @@ section
 }
 .cr_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .cr_list li:not(:last-child)
 {
@@ -1533,5 +1533,5 @@ section
 }
 .cr_list li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
