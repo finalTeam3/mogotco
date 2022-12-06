@@ -16,7 +16,7 @@ import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-public class KakaoController {
+public class SNSLoginController {
 
 	String dir = "user/";
 	
@@ -29,17 +29,17 @@ public class KakaoController {
 	@Autowired
 	GithubloginAPI github_service;
 	
-	//카카오 테스트 로그인 페이지
+	//카카오 로그인
 	@RequestMapping("/kakaologin")
 	public Object kakaologin(Model model, String code, HttpSession session) throws Exception {
 		model.addAttribute("center", dir+"kakaologin");
-		System.out.println("code inga controller = " + code);
+//		System.out.println("code inga controller = " + code);
 		
 		String accessToken = kakao_service.getAccessToken(code);
-		System.out.println("code accesstoken controller = " + accessToken);
+//		System.out.println("code accesstoken controller = " + accessToken);
 		
 		Map<String, Object> userInfo = kakao_service.getUserInfo(accessToken);
-		System.out.println("code userInfo controller = " + userInfo);
+//		System.out.println("code userInfo controller = " + userInfo);
 		
 		String userid = (String) userInfo.get("id");
 		String userbirth = (String) userInfo.get("birthday");
@@ -66,13 +66,13 @@ public class KakaoController {
 	@RequestMapping("/githublogin")
 	public String githublogin(Model model, String code, HttpSession session) throws Exception {
 		model.addAttribute("center", dir+"githublogin");
-		System.out.println("code inga controller = " + code);
+//		System.out.println("code inga controller = " + code);
 		
 		String accessToken = github_service.getAccessToken(code);
-		System.out.println("code accesstoken controller = " + accessToken);
+//		System.out.println("code accesstoken controller = " + accessToken);
 		
 		Map<String, Object> userInfo = github_service.getUserInfo(accessToken);
-		System.out.println("code userInfo controller = " + userInfo);
+//		System.out.println("code userInfo controller = " + userInfo);
 		
 		String userid = (String) userInfo.get("id");
 		String snsgit = (String) userInfo.get("git");
