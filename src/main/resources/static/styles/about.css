@@ -270,7 +270,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .header.scrolled .top_bar
 {
@@ -395,7 +395,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header.scrolled .logo
 {
@@ -444,7 +444,7 @@ section
 .main_nav li a:hover,
 .main_nav li.active a
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .main_nav li.active::after
 {
@@ -454,7 +454,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #14bdee;
+	background: #005b00;
 	content: '';
 }
 .search_button
@@ -481,7 +481,7 @@ section
 .search_button:hover i,
 .shopping_cart:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header_search_form
 {
@@ -495,7 +495,7 @@ section
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 	z-index: -1;
 	opacity: 0;
 	-webkit-transition: all 400ms ease;
@@ -559,7 +559,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -657,7 +657,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .menu .search
 {
@@ -803,7 +803,7 @@ section
 }
 .breadcrumbs ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -874,7 +874,7 @@ section
 }
 .about_item_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .about_item_text
 {
@@ -984,7 +984,7 @@ section
 .accordion.active::before
 {
 	content: '\f107';
-	color: #14bdee;
+	color: #005b00;
 }
 .accordion_panel
 {
@@ -1109,7 +1109,7 @@ section
 }
 .team_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .team_subtitle
 {
@@ -1142,7 +1142,7 @@ section
 }
 .social_list ul li:hover a i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .team_col .team_item
 {
@@ -1230,7 +1230,7 @@ section
 	font-size: 42px;
 	font-weight: 700;
 	line-height: 0.75;
-	color: #14bdee;
+	color: #005b00;
 }
 .milestone_text
 {
@@ -1348,7 +1348,7 @@ section
 	text-transform: uppercase;
 	border: none;
 	outline: none;
-	background: #14bdee;
+	background: #005b00;
 	cursor: pointer;
 	margin-top: 30px;
 	box-shadow: 0px 5px 40px rgba(29,34,47,0.15);
@@ -1453,7 +1453,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_title
 {
@@ -1509,7 +1509,7 @@ section
 }
 .footer_social ul li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .footer_contact
 {
@@ -1559,7 +1559,7 @@ section
 }
 .footer_links_container ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_mobile
 {
@@ -1599,7 +1599,7 @@ section
 }
 .cr_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .cr_list li:not(:last-child)
 {
@@ -1617,5 +1617,5 @@ section
 }
 .cr_list li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
