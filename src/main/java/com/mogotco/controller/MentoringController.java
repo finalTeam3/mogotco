@@ -67,6 +67,8 @@ public class MentoringController {
 		MentorDTO ment = null;
 		try {
 			Integer meningnum = 0;
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			mlist = mservice.viewMentoringAll(meningnum); // 모든 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
@@ -75,11 +77,11 @@ public class MentoringController {
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String txt = null;
-			String mname =null;
-			String mtype = null;
+			String txt = "null";
+			String mname ="null";
+			String mtype = "null";
 			model.addAttribute("txt", txt);
-			model.addAttribute("selecatename", mname);
+			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring+"mentoring");
 
@@ -96,16 +98,19 @@ public class MentoringController {
 		MentorDTO ment = null;
 		try {
 			Integer meningnum = 0;
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			citemlist = mservice.selectMentoringAll(mname,meningnum);// 카테고리별 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("selcatename", mname);
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String txt = null;
-			String mtype = null;
+			String txt = "null";
+			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
@@ -124,8 +129,11 @@ public class MentoringController {
 		MentorDTO ment = null;
 		String all = "all";
 		try {
+			
 			ment = mentor_service.mentorAll(userid);
 			Integer meningnum = 0;
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt,meningnum);
@@ -137,10 +145,11 @@ public class MentoringController {
 			}
 			model.addAttribute("txt", txt);
 			model.addAttribute("mtr", searchlist);
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String mtype = null;
+			String mtype = "null";
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
@@ -158,17 +167,20 @@ public class MentoringController {
 		MentorDTO ment = null;
 		try {
 			Integer meningnum = 0;
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			searchlist = mtmapper.mentoringsearch(txt,meningnum);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			model.addAttribute("mtr", searchlist);
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			model.addAttribute("txt", txt);
-			String mname = null;
-			String mtype = null;
-			model.addAttribute("selecatename", mname);
+			String mname = "null";
+			String mtype = "null";
+			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
@@ -232,8 +244,11 @@ public class MentoringController {
 				
 			}
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("txt", txt);
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
@@ -260,6 +275,8 @@ public class MentoringController {
 		try {
 			ment = mentor_service.mentorAll(userid);
 			Integer meningnum = 0;
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 				if(mname.equals(all)) {
 					if (mtype.equals(lowprice)) {
 						searchlist = mtmapper.nallpricesearch(meningnum);
@@ -299,10 +316,11 @@ public class MentoringController {
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("mtr", searchlist);
+			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String txt = null;
+			String txt = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
@@ -316,51 +334,49 @@ public class MentoringController {
 
 	// 페이징 처리를 위한 id값 유무 판단
 	@RequestMapping("/pagingcheck")
-	public void pagingcheck(HttpServletRequest request, HttpServletResponse response, int meningnum, String userid, String txt, String mtype, String mname) {
+	public void pagingcheck(HttpServletRequest request, HttpServletResponse response, Integer meningnum, String userid, String txt, String mtype, String mname) {
 		// current session이 없으면 없는채로 두는 것
 		HttpSession session = request.getSession(false);
 		try {// session이 있을 때 controller주소로 감
-			
-			System.out.println(meningnum);
-			System.out.println(userid);
-			System.out.println(txt);
-			System.out.println(mtype);
-			System.out.println(mname);
-				if ((mtype != null) && (mname!= null)&&(txt!= null)) {
-					// txt가 있고 cate와 type둘다 선택되었을 때 mentoring/multimainsearch
-					response.sendRedirect("/mogotco/mentoring/multimainsearch?txt=" + txt + "&meningnum="
-							+ meningnum + "&mname=" + mname + "&mtype=" + mtype + "&userid=" + userid);
-				}
-				
-				if ((mtype == null)&&(mname == null)&&(txt == null)) {
-					// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
-					response.sendRedirect("/mogotco/mentoring/mentoring?userid="
-							+ userid + "&meningnum=" + meningnum);
-				}
-				
-				if ((mtype != null)&&(mname!= null)&&(txt== null)) {
+			String null1 = "null";
+			String encodetxt = URLEncoder.encode(txt, "UTF-8");
+			String encodemname = URLEncoder.encode(mname, "UTF-8");
+			if(txt.equals(null1)) {
+				if(mtype.equals(null1)) {
+					if(mname.equals(null1)) {
+						// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
+						response.sendRedirect("/mogotco/mentoring/mentoring?userid="
+								+ userid + "&meningnum=" + meningnum);
+					}else {
+						// 카테고리 자체만을 클릭 mentoring/mentoringCate
+						response.sendRedirect(
+								"/mogotco/mentoring/mentoringCate?userid=" + userid
+										+ "&meningnum=" + meningnum + "&mname=" + encodemname);
+					}
+					
+				}else {
 					// cate와 type둘다 선택되었을 때 mentoring/multimainsearch1
 					response.sendRedirect("/mogotco/mentoring/multimainsearch1?mtype=" + mtype + "&meningnum="
-							+ meningnum + "&mname=" + mname + "&userid=" + userid);
+							+ meningnum + "&mname=" + encodemname + "&userid=" + userid);
 				}
-				if ((mtype == null)&&(mname!= null)&&(txt!= null)) {
-					// 카테고리 안에서의 검색 mentoring/search
-					response.sendRedirect("/mogotco/mentoring/search?txt=" + txt + "&meningnum="
-							+ meningnum + "&mname=" + mname + "&userid=" + userid);
-				}
-				if ((mtype == null)&&(mname!= null)&&(txt== null)) {
-					// 카테고리 자체만을 클릭 mentoring/mentoringCate
-					response.sendRedirect(
-							"/mogotco/mentoring/mentoringCate?userid=" + userid
-									+ "&meningnum=" + meningnum + "&mname=" + mname);
-				}
-				if ((mtype == null)&&(mname== null)&&(txt!= null)) {
-					// mentoring/mentoring인데 검색을 했을 때(mainsearch)
-					response.sendRedirect(
-							"/mogotco/mentoring/mainsearch?txt=" + txt + "&meningnum=" + meningnum + "&userid=" + userid);
+			}else {
+				if(mtype.equals(null1)) {
+					if(mname.equals(null1)) {
+						// mentoring/mentoring인데 검색을 했을 때(mainsearch)
+						response.sendRedirect(
+								"/mogotco/mentoring/mainsearch?txt=" + encodetxt + "&meningnum=" + meningnum + "&userid=" + userid);
+					}else {
+						// 카테고리 안에서의 검색 mentoring/search
+						response.sendRedirect("/mogotco/mentoring/search?txt=" + encodetxt + "&meningnum="
+								+ meningnum + "&mname=" + encodemname + "&userid=" + userid);
+					}
+				}else {
+					// txt가 있고 cate와 type둘다 선택되었을 때 mentoring/multimainsearch
+					response.sendRedirect("/mogotco/mentoring/multimainsearch?txt=" + encodetxt + "&meningnum="
+							+ meningnum + "&mname=" + encodemname + "&mtype=" + mtype + "&userid=" + userid);	
 				}
 				
-
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -380,15 +396,16 @@ public class MentoringController {
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			// 다시 paging을 0으로 맞추기 위해서
-
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtr", mlist); // 등록된 멘토링 리스트
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String txt = null;
-			String mname = null;
-			String mtype = null;
+			String txt = "null";
+			String mname = "null";
+			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
@@ -407,20 +424,20 @@ public class MentoringController {
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
 		MentorDTO ment = null;
 		try {
-
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			citemlist = mservice.selectMentoringAll(mname, meningnum);// 카테고리별 멘토링 정보 넣어주기
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			ment = mentor_service.mentorAll(userid);
 			// 다시 paging을 0으로 맞추기 위해서
-
 			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtr", citemlist); // 등록된 멘토링 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-			String txt = null;
-			String mtype = null;
+			String txt = "null";
+			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
@@ -449,13 +466,15 @@ public class MentoringController {
 				searchlist = mtmapper.mcatesearch(mname, txt, meningnum);
 				model.addAttribute("selcatename", mname);
 			}
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("txt", txt);
 			model.addAttribute("mtr", searchlist);
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
-			String mtype = null;
+			String mtype = "null";
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
@@ -472,6 +491,8 @@ public class MentoringController {
 		List<MentoringDTO> searchlist = null;
 		MentorDTO ment = null;
 		try {
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			ment = mentor_service.mentorAll(userid);
 			searchlist = mtmapper.mentoringsearch(txt, meningnum);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
@@ -481,8 +502,8 @@ public class MentoringController {
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String mname = null;
-			String mtype = null;
+			String mname = "null";
+			String mtype = "null";
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
 			model.addAttribute("center", mentoring + "mentoring");
@@ -544,6 +565,8 @@ public class MentoringController {
 				}
 				model.addAttribute("selcatename", mname);
 			}
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("txt", txt);
@@ -608,7 +631,8 @@ public class MentoringController {
 				}
 				model.addAttribute("selcatename", mname);
 			}
-
+			Integer page = (meningnum + 6)/6;
+			model.addAttribute("page", page);
 			catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 			model.addAttribute("meningnum", meningnum);
 			model.addAttribute("mtype", mtype);
@@ -616,7 +640,7 @@ public class MentoringController {
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String txt = null;
+			String txt = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("center", mentoring + "mentoring");
 		} catch (Exception e) {
