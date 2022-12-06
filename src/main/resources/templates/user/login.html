@@ -25,6 +25,25 @@
     		);
     		$('#login_form').submit();
     	});
+    	
+    	$('#kakaologin_btn').click(function(){
+    		$('#login_form').attr(
+    			{
+    				'action' : '[[@{/kakaologin}]]',
+    				'method' : 'post'
+    			}
+    		);
+    	});
+    	
+    	$('#githublogin_btn').click(function(){
+    		$('#login_form').attr(
+    			{
+    				'action' : '[[@{/githublogin}]]',
+    				'method' : 'post'
+    			}
+    		);
+    	});
+    	
     });
     </script>
 </head>
@@ -64,6 +83,17 @@
 								<button class="comment_button_login trans_200">LOGIN</button>
 							</form>
 								<a th:href="@{/user/register}"><button class="comment_button_login trans_200">REGISTER</button></a>
+								
+								<!-- 카카오 로그인 -->
+								<a id="kakaologin_btn" href="https://kauth.kakao.com/oauth/authorize?client_id=df5e3953f8c59b9326e8bd7fdeabcdcc&redirect_uri=http://127.0.0.1/mogotco/user/kakaologin&response_type=code">
+		 						 <img th:src="@{/images/kakao_login.png}" alt="카카오 로그인 버튼" >
+								</a>
+								
+								<!-- 깃허브 로그인 -->
+								<a id="githublogin_btn" href="https://github.com/login/oauth/authorize?client_id=d09e08d1edcc188a134c&redirect_uri=http://127.0.0.1/mogotco/user/githublogin&response_type=code">
+		 						 <img th:src="@{/images/github_login.png}" alt="깃허브 로그인 버튼" >
+								</a>
+								
 						</div>
 					</div>
 				</div>

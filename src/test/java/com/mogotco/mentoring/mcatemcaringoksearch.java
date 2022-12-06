@@ -18,7 +18,7 @@ import com.mogotco.service.MentoringService;
 	void contextLoads() {
 		List<MentoringDTO> metoring = null;
 		try {
-			metoring = mapper.mcatemcaringoksearch("웹","테",1);
+			metoring = mapper.mcatemcaringoksearch("웹","테",1,0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
