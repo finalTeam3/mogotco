@@ -18,12 +18,14 @@ import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.MentoringmemberDTO;
 import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
+import com.mogotco.service.UserCouponService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -50,6 +52,9 @@ public class PurchaseController {
 	
 	@Autowired
 	UserService service5;
+	
+	@Autowired
+	UserCouponService ucservice;
 	
 	// 아이디값 유무 판단
 	@RequestMapping("/idcheck")
@@ -87,10 +92,10 @@ public class PurchaseController {
 	
 	//구매페이지
 	@RequestMapping("")
-	public String purchase(Model model, HttpSession session,PurchaseDTO pur) {
+	public String purchase(Model model, HttpSession session, PurchaseDTO pur) {
 		//mentoringid제외한 것
 		model.addAttribute("pur", pur);
-		
+
 		//mentoringoptionid
 		MentoringOptionDTO mto = null;
 		try {

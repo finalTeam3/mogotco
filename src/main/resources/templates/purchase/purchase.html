@@ -242,8 +242,7 @@
 								<!-- session에서 cust의 poinr값을 가지고옴 -->
 								<label>My Point</label><span><input
 									class="form-control" type="text" id="writepoint"
-									placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()">
-									<input type="checkbox"
+									placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()"><input type="checkbox"
 									id="chk_use" th:onclick="chkPoint()">포인트 전체 사용</span><input
 									class="form-control" type="text" id="userpoint"
 									th:value="${session.loginuser.userpoint}" readonly="readonly">
