@@ -268,7 +268,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .header.scrolled .top_bar
 {
@@ -393,7 +393,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header.scrolled .logo
 {
@@ -442,7 +442,7 @@ section
 .main_nav li a:hover,
 .main_nav li.active a
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .main_nav li.active::after
 {
@@ -452,7 +452,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #14bdee;
+	background: #005b00;
 	content: '';
 }
 .search_button
@@ -479,7 +479,7 @@ section
 .search_button:hover i,
 .shopping_cart:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header_search_form
 {
@@ -493,7 +493,7 @@ section
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 	z-index: -1;
 	opacity: 0;
 	-webkit-transition: all 400ms ease;
@@ -557,7 +557,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -655,7 +655,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .menu .search
 {
@@ -801,7 +801,7 @@ section
 }
 .breadcrumbs ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -836,7 +836,7 @@ section
 }
 .courses_search_input:focus
 {
-	outline: solid 1px #14bdee;
+	outline: solid 1px #005b00;
 }
 .courses_search_form > input
 {
@@ -861,7 +861,7 @@ section
 {
 	width: 161px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	color: #FFFFFF;
 	font-size: 14px;
 	font-weight: 500;
@@ -934,7 +934,7 @@ section
 }
 .course_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .course_teacher
 {
@@ -979,7 +979,7 @@ section
 	font-family: 'Roboto Slab', serif;
 	font-size: 20px;
 	font-weight: 700;
-	color: #14bdee;
+	color: #005b00;
 }
 .course_price span
 {
@@ -995,7 +995,7 @@ section
 	width: 210px;
 	height: 46px;
 	border-radius: 3px;
-	background: #14bdee;
+	background: #005b00;
 	text-align: center;
 	margin: 0 auto;
 	margin-top: 41px;
@@ -1043,7 +1043,7 @@ section
 .pagination_list li:hover,
 .pagination_list li.active
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .pagination_list li a
 {
@@ -1180,7 +1180,7 @@ section
 .sidebar_categories ul li:hover a,
 .sidebar_categories ul li:hover a::before
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .sidebar_latest
 {
@@ -1221,14 +1221,14 @@ section
 }
 .latest_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .latest_price
 {
 	font-family: 'Roboto Slab', serif;
 	font-size: 14px;
 	font-weight: 700;
-	color: #14bdee;
+	color: #005b00;
 	line-height: 0.75;
 	margin-top: 16px;
 }
@@ -1299,7 +1299,7 @@ section
 }
 .tags_list li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .tags_list li:hover a
 {
@@ -1341,7 +1341,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #14bdee;
+	background: #005b00;
 	opacity: 0.7;
 }
 .banner_title
@@ -1367,7 +1367,7 @@ section
 .banner_button a
 {
 	display: block;
-	color: #14bdee;
+	color: #005b00;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0.1em;
@@ -1383,7 +1383,7 @@ section
 }
 .banner_button:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .banner_button:hover a
 {
@@ -1490,7 +1490,7 @@ section
 	cursor: pointer;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: #14bdee;
+	color: #005b00;
 	font-weight: 500;
 	letter-spacing: 0.1em;
 }
@@ -1537,7 +1537,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_title
 {
@@ -1593,7 +1593,7 @@ section
 }
 .footer_social ul li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .footer_contact
 {
@@ -1643,7 +1643,7 @@ section
 }
 .footer_links_container ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_mobile
 {
@@ -1683,7 +1683,7 @@ section
 }
 .cr_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .cr_list li:not(:last-child)
 {
@@ -1701,5 +1701,5 @@ section
 }
 .cr_list li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }

@@ -13,6 +13,7 @@
 	rel="stylesheet">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/courses.js}"></script>
+<script src="@{/js/jquery.twbsPagination.js}"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
 	integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/"
 	crossorigin="anonymous"></script>
@@ -27,10 +28,11 @@
 </style>
 <script>
 $(document).ready(function(){
+	 var userid = $('#userid').val();
 	$('#search_button1').click(function(){
 		$('#search_form_mentoring').attr({
 			method:'get',
-			action:'[[@{/mentoring/mainsearch}]]'
+			action:'[[@{/mentoring/defaultmainsearch}]]'
 			
 		});
 		$('#search_form_mentoring').submit();
@@ -62,11 +64,11 @@ function checkOnlyOne(element) {
 	  
 	  //선택된 것으로 mentoring 출력
 	 var selcatename = $('#selcatename').val(); 
-	location.href = '[[@{/mentoring/multimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype;
+	  var userid = $('#userid').val();
+	location.href = '[[@{/mentoring/defaultmultimainsearch1?mname=}]]'+selcatename + '&[[@{mtype=}]]' + mtype +'&[[@{userid=}]]' + userid;
 
 	}
 </script>
-
 <!-- Home -->
 
 <div class="home">
@@ -94,6 +96,7 @@ function checkOnlyOne(element) {
 
 			<!-- Courses Main Content -->
 			<div class="col-lg-8">
+
 				<div class="contact_info_title">Mentoring</div>
 				<div class="courses_search_container">
 					<form id="search_form_mentoring"
@@ -101,6 +104,7 @@ function checkOnlyOne(element) {
 						<input name="txt" type="text" class="courses_search_input"
 							placeholder="Search Mentorng" required="required"
 							style="width: 100%;">
+							<input type="hidden" id='userid' th:value="${userid}">
 						<button id="search_button1" class="courses_search_button ml-auto"
 							type="submit">search now</button>
 					</form>
@@ -117,7 +121,12 @@ function checkOnlyOne(element) {
 										th:src="@{/img/}+${mtr.mentoringimg}" alt=""></a>
 								</div>
 								<div class="course_body">
-									<h3 class="course_title"><a style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"th:text="${mtr.mtitle}" th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a></h3>
+									<h3 class="course_title">
+										<a
+											style="float: left; font-family: 'IBM Plex Sans KR', sans-serif;"
+											th:text="${mtr.mtitle}"
+											th:href="@{/mentoring/mentoringdetail(mentoringid=${mtr.mentoringid})}"></a>
+									</h3>
 									<ul style="list-style: none;">
 										<li><a id="kakaotalksharingbtn"><img
 												th:onclick="shareMessage([[${mtr.mentoringid}]],[[${mtr.mtitle}]])"
@@ -133,7 +142,8 @@ function checkOnlyOne(element) {
 										class="course_teacher" th:text="${mtr.user_userid}"></div>
 									<br>
 									<div style="display: inline; color: black;">
-										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별 모집 정원:</span>
+										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">시간별
+											모집 정원:</span>
 									</div>
 									<div style="display: inline; color: black;" class="course_text"
 										th:text="${mtr.mmemberidcnt}"></div>
@@ -141,28 +151,28 @@ function checkOnlyOne(element) {
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference >= 0 }">
 										<span class="badge badge-pill badge-primary"
-											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행가능</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; color: #FFFFFF">진행가능</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference < 0}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;color: #FFFFFF">진행완료</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; color: #FFFFFF">진행완료</span>
 									</div>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mentorurl == 'nonface'}">
 										<span class="badge badge-pill badge-primary"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #006400; color: #FFFFFF;">비대면</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #006400; color: #FFFFFF;">비대면</span>
 									</div>
- 									<div class="teacher_meta_text ml-auto"
+									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mentorurl == 'face'}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #FF8C00;color: #FFFFFF;">대면</span>
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #FF8C00; color: #FFFFFF;">대면</span>
 									</div>
-									 <div class="teacher_meta_text ml-auto"
+									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.mcaring == 1}">
 										<span class="badge badge-pill badge-danger"
-											style="margin-top:10px; margin-bottom:18px;float:right;background-color: #4B0082;color: #FFFFFF;">care</span>
-									</div> 
+											style="margin-top: 10px; margin-bottom: 18px; float: right; background-color: #4B0082; color: #FFFFFF;">care</span>
+									</div>
 
 								</div>
 								<div class="course_footer">
@@ -189,28 +199,21 @@ function checkOnlyOne(element) {
 						<div class="col">
 							<div
 								class="pagination_container d-flex flex-row align-items-center justify-content-start">
-								<ul class="pagination_list">
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#"><i class="fa fa-angle-right"
-											aria-hidden="true"></i></a></li>
+								<ul class="pagination_list" style="width: 630px; float: left;">
+									<li><a th:if="${meningnum > 0}"
+										th:href="@{/mentoring/pagingcheck(userid=${userid},mname=${selcatename},txt=${txt},mtype=${mtype},meningnum=${meningnum}-6)}"><i
+											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
 								</ul>
-								<div class="courses_show_container ml-auto clearfix">
-									<div class="courses_show_text">
-										Showing <span class="courses_showing">1-6</span> of <span
-											class="courses_total">26</span> results:
-									</div>
-									<div class="courses_show_content">
-										<span>Show: </span> <select id="courses_show_select"
-											class="courses_show_select">
-											<option>06</option>
-											<option>12</option>
-											<option>24</option>
-											<option>36</option>
-										</select>
-									</div>
-								</div>
+								<ul class="pagination_list" style="width: 600px; float: left;">
+									<li><a
+										th:text="${page}"><i
+											class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+								</ul>
+								<ul class="pagination_list" style="float: right;">
+									<li><a
+										th:href="@{/mentoring/pagingcheck(userid=${userid},mname=${selcatename},txt=${txt},mtype=${mtype},meningnum=${meningnum}+6)}"><i
+											class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -222,8 +225,8 @@ function checkOnlyOne(element) {
 				<div class="sidebar">
 					<!-- Latest Course -->
 					<div class="sidebar_section">
-						<div style="margin-top:50px;" th:if="${ms != null}" class="sidebar_section_title">Mentoring
-							Register</div>
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
 						<div class="sidebar_latest">
 							<!-- Latest Course -->
 							<div
@@ -243,15 +246,15 @@ function checkOnlyOne(element) {
 							<div class="sidebar_section_title">Categories</div>
 							<div class="sidebar_categories">
 								<ul>
-									<li><a th:href="@{/mentoring/mentoring}"
+									<li><a th:href="@{/mentoring/defaultmentoring}"
 										th:text="${'all'}" th:value="${'all'}"><input
-											type="hidden" name='mname' th:value="${'all'}"
+											type="hidden" name='mname' id="mname" th:value="${'all'}"
 											th:text="${'all'}"></a></li>
 									<li th:each="mtc:${mtcatelist}"><a
-										th:href="@{/mentoring/mentoringCate(mname=${mtc.mname})}"
+										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname},userid=${userid})}"
 										th:value="${mtc.mname}" th:text="${mtc.mname}"
 										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-											type="hidden" th:text="${mtc.mname}" name='mname'
+											type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
 											th:value="${mtc.mname}"></a></li>
 								</ul>
 							</div>
@@ -282,6 +285,7 @@ function checkOnlyOne(element) {
 							</div>
 						</div>
 						<input type="hidden" id='selcatename' th:value="${selcatename}">
+						<input type="hidden" id='txt' th:value="${txt}">
 					</form>
 				</div>
 			</div>

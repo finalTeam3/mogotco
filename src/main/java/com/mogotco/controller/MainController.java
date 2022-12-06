@@ -39,13 +39,13 @@ public class MainController {
 		List<MentoringDTO> immedmentoring = null;
 		List<ReviewDTO> topmentor = null;
 		List<MCateDTO> catelist = null; // 카테고리 리스트용
-
+		//처음 mentoring 뿌려줄 때
 		try {
 			//지금 즉시 받을 수 있는 가장 빠른 멘토링
 			immedmentoring = mentoring_service.mentoringimmed();
 			//평점이 가장 높은 순서대로 멘토 4명
 			topmentor = review_service.topmentors();
-
+			
 			model.addAttribute("imme", immedmentoring);
 			model.addAttribute("topm", topmentor);
 			

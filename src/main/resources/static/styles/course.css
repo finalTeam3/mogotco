@@ -267,7 +267,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .header.scrolled .top_bar
 {
@@ -392,7 +392,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header.scrolled .logo
 {
@@ -441,7 +441,7 @@ section
 .main_nav li a:hover,
 .main_nav li.active a
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .main_nav li.active::after
 {
@@ -451,7 +451,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #14bdee;
+	background: #005b00;
 	content: '';
 }
 .search_button
@@ -478,7 +478,7 @@ section
 .search_button:hover i,
 .shopping_cart:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header_search_form
 {
@@ -492,7 +492,7 @@ section
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 	z-index: -1;
 	opacity: 0;
 	-webkit-transition: all 400ms ease;
@@ -556,7 +556,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -654,7 +654,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .menu .search
 {
@@ -800,7 +800,7 @@ section
 }
 .breadcrumbs ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -871,7 +871,7 @@ section
 }
 .course_info_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comment_rating_avg
 {
@@ -912,7 +912,7 @@ section
 	font-style: normal;
 	font-size: 14px;
 	margin-right: 4px;
-	color: #14bdee;
+	color: #005b00;
 }
 .rating_r_1 i:first-child::before{content: "\f005";}
 .rating_r_2 i:first-child::before{content: "\f005";}
@@ -966,7 +966,7 @@ section
 .tab.active,
 .tab:hover
 {
-	background: #14bdee;
+	background: #005b00;
 	color: #FFFFFF;
 }
 .faq_panels
@@ -1310,7 +1310,7 @@ section
 .review_rating_bar > div
 {
 	height: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .review_form input[type=radio]
 {
@@ -1323,11 +1323,11 @@ section
 }
 .fa-star:hover
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .fa-star:hover ~ label
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .review_form fieldset
 {
@@ -1336,7 +1336,7 @@ section
 }
 .review_form input[type=radio]:checked ~ label
 {
-	text-shadow: 0 0 0 #14bdee;
+	text-shadow: 0 0 0 #005b00;
 }
 .star-ratings {
 	color: #aaa9a9;
@@ -1410,7 +1410,7 @@ section
 }
 .comment_author a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comments_container .rating_r
 {
@@ -1446,7 +1446,7 @@ section
 }
 .comment_extra a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comment_extra a span
 {
@@ -1454,7 +1454,7 @@ section
 }
 .comment_reply a i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comments_list li ul
 {
@@ -1477,7 +1477,7 @@ section
 }
 .add_comment_text a
 {
-	color: #14bdee;
+	color: #005b00;
 	text-decoration: underline;
 }
 
@@ -1512,7 +1512,7 @@ section
 	font-family: 'Roboto Slab', serif;
 	font-size: 24px;
 	font-weight: 400;
-	color: #14bdee;
+	color: #005b00;
 }
 .feature_list
 {
@@ -1537,7 +1537,7 @@ section
 	transform: translateY(-50%);
 	left: 0;
 	font-size: 18px;
-	color: #14bdee;
+	color: #005b00;
 }
 .sidebar_teacher
 {
@@ -1576,7 +1576,7 @@ section
 }
 .teacher_name a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .teacher_meta_container
 {
@@ -1599,7 +1599,7 @@ section
 }
 .teacher_meta_text i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .teacher_info
 {
@@ -1648,14 +1648,14 @@ section
 }
 .latest_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .latest_price
 {
 	font-family: 'Roboto Slab', serif;
 	font-size: 14px;
 	font-weight: 700;
-	color: #14bdee;
+	color: #005b00;
 	line-height: 0.75;
 	margin-top: 16px;
 }
@@ -1763,7 +1763,7 @@ section
 	cursor: pointer;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: #14bdee;
+	color: #005b00;
 	font-weight: 500;
 	letter-spacing: 0.1em;
 }
@@ -1810,7 +1810,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_title
 {
@@ -1866,7 +1866,7 @@ section
 }
 .footer_social ul li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .footer_contact
 {
@@ -1916,7 +1916,7 @@ section
 }
 .footer_links_container ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_mobile
 {
@@ -1956,7 +1956,7 @@ section
 }
 .cr_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .cr_list li:not(:last-child)
 {
@@ -1974,5 +1974,5 @@ section
 }
 .cr_list li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }

@@ -5,9 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>ConnectLive 화상회의</title>
- 
-			
+        <title>ConnectLive 화상회의</title>	
 		<style>
 		:root {
 		  --tw-bg-opacity: 1;
@@ -53,20 +51,26 @@
 		  text-align: center;
 		}
 		
-		#connect {
+		#connect,
+		#disconnect,
+		#share-screen,
+		#unshare-screen {
 		  padding: 0.5rem;
-		  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 		  color: white;
 		  border: 0;
-		  cursor: pointer;
 		}
 		
+		#connect {
+		  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+		}
 		#disconnect {
-		  padding: 0.5rem;
 		  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-		  color: white;
-		  border: 0;
-		  cursor: pointer;
+		}
+		#share-screen {
+		  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
+		}
+		#unshare-screen {
+		  background-color: rgb(249 115 22 / var(--tw-bg-opacity));
 		}
 		
 		#status {
@@ -116,13 +120,18 @@
 		}
 		
 		#local-video {
-		  width: 160px;
-		  margin-right: 0.5rem;
+		  width: 450px;
+		  margin-bottom: 1.25rem;
+		  transform: scaleY(var(--tw-scale-y));
+		}
+		#local-screen {
+		  width: 1600px;
+		  margin-bottom: 1.25rem;
 		  transform: scaleY(var(--tw-scale-y));
 		}
 		
 		#remote-video {
-		  width: 160px;
+		  width: 450px;
 		  margin-right: 0.5rem;
 		}
 		
@@ -145,24 +154,34 @@
 		.cursor-pointer {
 		  cursor: pointer;
 		}
-
-								
+		
+		.cursor-not-allowed {
+		  cursor: not-allowed;
+		}
+		
 		</style>
     <body>
         <main>
-		  <section>
-		    <h2>모두 같이 Live!</h2>
+		 <section>
+		    <h2>모두 다같이 코딩!</h2>
 		    <h1>MOGOTCO Mentoring Service</h1>
 		
 		    <div id="button-group">
-		      <button id="connect">Connect</button>
-		      <button id="disconnect">Disconnect</button>
+		      <button id="connect" class="cursor-pointer">Connect</button>
+		      <button id="disconnect" class="cursor-pointer">Disconnect</button>
+		    </div>
+		
+		    <div id="button-group">
+		      <button id="share-screen" class="cursor-not-allowed">Share Screen</button>
+		      <button id="unshare-screen" class="cursor-not-allowed">
+		        Unshare Screen
+		      </button>
 		    </div>
 		
 		    <div id="status">Disconnected</div>
 		
 		    <div id="video-list">
-		      <h3>Mentor</h3>
+		    	<h3>Mentor</h3>
 		      <ul id="local-container"></ul>
 		      <h3>Mentee</h3>
 		      <ul id="remote-container"></ul>
@@ -178,223 +197,299 @@
 		</main>
 		<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk@2.2.4/dist/connectlive-web-sdk.min.js"></script>
 		<script>
-    	// DATA
-    	let localMedia = null;
-    	let room = null;
-    	let remoteParticipants = [];
+		// DATA
+		let localMedia = null;
+		let localScreen = null;
+		let room = null;
+		let remoteParticipants = [];
 
-    	const roomId = '[[${moptionid}]]';
-    	const connectButton = document.querySelector('#connect');
-    	const disconnectButton = document.querySelector('#disconnect');
-    	const status = document.querySelector('#status');
-    	const log = document.querySelector('#log');
+		const roomId = '[[${moptionid}]]';
+		const connectButton = document.querySelector('#connect');
+		const disconnectButton = document.querySelector('#disconnect');
+		const shareScreenButton = document.querySelector('#share-screen');
+		const unshareScreenButton = document.querySelector('#unshare-screen');
+		const status = document.querySelector('#status');
+		const log = document.querySelector('#log');
 
-    	// METHODs
-    	const createConference = async () => {
-    	  room = ConnectLive.createRoom();
+		// METHODs
+		const createConferenceOptions = async (room) => {
+		  room.on('connected', async (evt) => {
+		    evt.remoteParticipants.forEach(async (participant) => {
+		      let videos = [];
+		      const unsubscribedVideos = participant.getUnsubscribedVideos();
 
-    	  if (!room) throw new Error('Fail to Create Conference');
+		      if (unsubscribedVideos.length) {
+		        const videoIds = unsubscribedVideos.map((video) => video.getVideoId());
+		        videos = await room.subscribe(videoIds);
+		      }
 
-    	  room.on('connected', async (evt) => {
-    	    evt.remoteParticipants.forEach(async (participant) => {
-    	      let videos = [];
-    	      const unsubscribedVideos = participant.getUnsubscribedVideos();
+		      remoteParticipants.push({ participant, videos });
+		      remoteParticipants.forEach((remoteParticipant) => {
+		        const isSameId = remoteParticipant.participant.id === participant.id;
+		        if (isSameId) addRemoteVideoNode(participant.videos);
+		      });
+		    });
+		  });
 
-    	      if (unsubscribedVideos.length) {
-    	        const videoIds = unsubscribedVideos.map((video) => video.getVideoId());
-    	        videos = await room.subscribe(videoIds);
-    	      }
+		  room.on('remoteVideoPublished', async (evt) => {
+		    const videos = await room.subscribe([evt.remoteVideo.videoId]);
 
-    	      remoteParticipants.push({ participant, videos });
-    	      remoteParticipants.forEach((remoteParticipant) => {
-    	        const isSameId = remoteParticipant.participant.id === participant.id;
-    	        if (isSameId) addRemoteVideoNode(participant.videos);
-    	      });
-    	    });
-    	  });
+		    if (videos.length) {
+		      const preJoinedParticipant = remoteParticipants.find(
+		        (item) => item.participant.id === evt.remoteParticipant.id
+		      );
 
-    	  room.on('remoteVideoPublished', async (evt) => {
-    	    const videos = await room.subscribe([evt.remoteVideo.videoId]);
+		      if (preJoinedParticipant) {
+		        preJoinedParticipant.videos =
+		          preJoinedParticipant.videos.concat(videos);
+		      }
+		    }
 
-    	    if (videos.length) {
-    	      const preJoinedParticipant = remoteParticipants.find(
-    	        (item) => item.participant.id === evt.remoteParticipant.id
-    	      );
+		    addRemoteVideoNode(videos);
+		  });
 
-    	      if (preJoinedParticipant) {
-    	        preJoinedParticipant.videos =
-    	          preJoinedParticipant.videos.concat(videos);
-    	      }
-    	    }
+		  room.on('remoteVideoUnpublished', (evt) => {
+		    const participantToRemove = remoteParticipants.find(
+		      (item) => item.participant.id === evt.remoteParticipant.id
+		    );
 
-    	    addRemoteVideoNode(videos);
-    	  });
+		    if (participantToRemove) {
+		      participantToRemove.videos = participantToRemove.videos.filter(
+		        (video) => video.videoId !== evt.remoteVideo.videoId
+		      );
+		    }
 
-    	  room.on('remoteVideoUnpublished', (evt) => {
-    	    const participantToRemove = remoteParticipants.find(
-    	      (item) => item.participant.id === evt.remoteParticipant.id
-    	    );
+		    removeRemoteVideoNode(evt.remoteVideo);
+		    addLog(`${evt.remoteParticipant.id} Left`);
+		  });
+		};
 
-    	    if (participantToRemove) {
-    	      participantToRemove.videos = participantToRemove.videos.filter(
-    	        (video) => video.videoId !== evt.remoteVideo.videoId
-    	      );
-    	    }
+		// DOM CONTROLS
+		const activateButton = () => {
+		  connectButton.className = 'cursor-pointer';
+		  shareScreenButton.className = unshareScreenButton.className =
+		    'cursor-not-allowed';
+		  connectButton.disabled = false;
+		  shareScreenButton.disabled = unshareScreenButton.disabled = true;
+		};
 
-    	    removeRemoteVideoNode(evt.remoteParticipant.id);
-    	    addLog(`${evt.remoteParticipant.id} Left`);
-    	  });
-    	};
+		const disableButton = () => {
+		  connectButton.className = 'cursor-wait';
+		  shareScreenButton.className = unshareScreenButton.className =
+		    'cursor-pointer';
+		  connectButton.disabled = true;
+		  shareScreenButton.disabled = unshareScreenButton.disabled = false;
+		};
 
-    	// DOM CONTROLS
-    	const activateButton = () => {
-    	  connectButton.disabled = false;
-    	  connectButton.className = 'cursor-pointer';
-    	};
+		const changeStatus = (text) => {
+		  status.innerHTML = text;
+		};
 
-    	const disableButton = () => {
-    	  connectButton.disabled = true;
-    	  connectButton.className = 'cursor-wait';
-    	};
+		const addLocalVideoNode = (localMedia, id) => {
+		  const localContainer = document.querySelector('#local-container');
 
-    	const changeStatus = (text) => {
-    	  status.innerHTML = text;
-    	};
+		  const videoItem = document.createElement('li');
+		  videoItem.id = 'local-video-item';
 
-    	const addLocalVideoNode = (localMedia, id) => {
-    	  const localContainer = document.querySelector('#local-container');
+		  const videoHeader = document.createElement('h3');
+		  videoHeader.innerHTML = `Me (${id})`;
 
-    	  const videoItem = document.createElement('li');
-    	  videoItem.id = 'local-video-item';
+		  const localVideo = localMedia.video?.attach();
+		  localVideo.id = 'local-video';
 
-    	  const videoHeader = document.createElement('h3');
-    	  videoHeader.innerHTML = `Me (${id})`;
+		  videoItem.appendChild(videoHeader);
+		  videoItem.appendChild(localVideo);
+		  localContainer.appendChild(videoItem);
+		};
 
-    	  const localVideo = localMedia.video?.attach();
-    	  localVideo.id = 'local-video';
+		const addLocalScreenNode = (localScreen) => {
+		  const localContainer = document.querySelector('#local-container');
 
-    	  videoItem.appendChild(videoHeader);
-    	  videoItem.appendChild(localVideo);
-    	  localContainer.appendChild(videoItem);
-    	};
+		  const videoItem = document.createElement('li');
+		  videoItem.id = 'local-screen-item';
 
-    	const addRemoteVideoNode = (videos) => {
-    	  const remoteContainer = document.querySelector('#remote-container');
+		  const localShare = localScreen.video?.attach();
+		  localShare.id = 'local-screen';
 
-    	  videos.forEach((video) => {
-    	    const videoItem = document.createElement('li');
-    	    videoItem.id = video.participantId;
+		  videoItem.appendChild(localShare);
+		  localContainer.appendChild(videoItem);
+		};
 
-    	    const videoHeader = document.createElement('h3');
-    	    videoHeader.innerHTML = `Remote User (${video.participantId})`;
-    	    addLog(`${video.participantId} Joined`);
+		const addRemoteVideoNode = (videos) => {
+		  const remoteContainer = document.querySelector('#remote-container');
 
-    	    const remoteVideo = video.attach();
-    	    remoteVideo.id = 'remote-video';
+		  videos.forEach((video) => {
+		    const videoItem = document.createElement('li');
+		    videoItem.id =
+		      video.extraValue === 'screen'
+		        ? `screen-${video.participantId}`
+		        : video.participantId;
 
-    	    videoItem.appendChild(videoHeader);
-    	    videoItem.appendChild(remoteVideo);
-    	    remoteContainer.appendChild(videoItem);
-    	  });
-    	};
+		    const videoHeader = document.createElement('h3');
+		    videoHeader.innerHTML =
+		      video.extraValue === 'screen'
+		        ? `Shared Screen (${video.participantId})`
+		        : `Remote User (${video.participantId})`;
+		    addLog(`${video.participantId} Joined`);
 
-    	const removeLocalVideoNode = () => {
-    	  const videoItem = document.querySelector('#local-video-item');
-    	  videoItem?.remove();
-    	};
+		    const remoteVideo = video.attach();
+		    remoteVideo.id = 'remote-video';
 
-    	const removeRemoteVideoNode = (id) => {
-    	  const remoteItem = document.querySelector(`#${id}`);
-    	  remoteItem?.remove();
-    	};
+		    videoItem.appendChild(videoHeader);
+		    videoItem.appendChild(remoteVideo);
+		    remoteContainer.appendChild(videoItem);
+		  });
+		};
 
-    	const removeRemoteVideoAll = () => {
-    	  const remoteContainer = document.querySelector('#remote-container');
-    	  remoteContainer.innerHTML = '';
-    	};
+		const removeLocalVideoNode = () => {
+		  const videoItem = document.querySelector('#local-video-item');
+		  videoItem?.remove();
+		};
 
-    	const addLog = (text) => {
-    	  const logNode = document.createElement('li');
-    	  logNode.innerHTML = text;
-    	  log.appendChild(logNode);
-    	};
+		const removeRemoteVideoNode = (video) => {
+		  const remoteItem = document.querySelector(
+		    video.extraValue === 'screen'
+		      ? `#screen-${video.participantId}`
+		      : `#${video.participantId}`
+		  );
 
-    	const resetLog = () => {
-    	  log.innerHTML = '';
-    	};
+		  remoteItem?.remove();
+		};
 
-    	// EVENTs
-    	const connectConference = async () => {
-    	  try {
-    	    resetLog();
-    	    disableButton();
-    	    changeStatus('Connecting...');
-    	    const roomId = '[[${moptionid}]]';
-    	    // Provisioning
-    	    await ConnectLive.signIn({
-    	      serviceId: 'J1YE3C9ZUFH9',
-    	      serviceSecret: 'J1YE3C9ZUFH9CDNU:AnN9g1p0rpS1wxgG',
-    	    });
-    	    addLog('User Signed In');
+		const removeRemoteVideoAll = () => {
+		  const remoteContainer = document.querySelector('#remote-container');
+		  remoteContainer.innerHTML = '';
+		};
 
-    	    // Create Local Media
-    	    localMedia = await ConnectLive.createLocalMedia({
-    	      audio: true,
-    	      video: true,
-    	    });
-    	    addLog('Local Media Created');
+		const removeLocalScreen = () => {
+		  const videoItem = document.querySelector('#local-screen-item');
+		  videoItem?.remove();
+		};
 
-    	    await createConference();
-    	    addLog('Conference Created');
+		const addLog = (text) => {
+		  const logNode = document.createElement('li');
+		  logNode.innerHTML = text;
+		  log.appendChild(logNode);
+		};
 
-    	    if (!room || !localMedia) throw new Error('No Conference to Connect');
+		const resetLog = () => {
+		  log.innerHTML = '';
+		};
 
-    	    await room.connect(roomId);
-    	    room.publish([localMedia]);
-    	    addLog('Video Connected');
+		// EVENTs
+		const connectConference = async () => {
+		  try {
+		    resetLog();
+		    disableButton();
+		    changeStatus('Connecting...');
+		    const roomId = '[[${moptionid}]]';
 
-    	    addLocalVideoNode(localMedia, room.localParticipant.id);
-    	    addLog('Participant Showed');
-    	    changeStatus('Connected');
-    	  } catch (error) {
-    	    console.error(error);
-    	    activateButton();
-    	    changeStatus('Failed to Connect');
-    	    alert('Failed to Start Service');
-    	  }
-    	};
+		    // Provisioning
+		    await ConnectLive.signIn({
+		      serviceId: 'J1YE3C9ZUFH9',
+		      serviceSecret: 'J1YE3C9ZUFH9CDNU:AnN9g1p0rpS1wxgG',
+		    });
+		    addLog('User Signed In');
 
-    	const disConnectConference = () => {
-    	  try {
-    	    if (!room || !localMedia) throw new Error('No Conference to Stop');
-    	    changeStatus('Disconnecting...');
+		    // Create Local Media
+		    localMedia = await ConnectLive.createLocalMedia({
+		      audio: true,
+		      video: true,
+		    });
+		    addLog('Local Media Created');
 
-    	    room.disconnect();
-    	    addLog('Conference Disconnected');
+		    // Create Conference
+		    room = ConnectLive.createRoom();
+		    createConferenceOptions(room);
+		    addLog('Conference Created');
 
-    	    localMedia.stop();
-    	    localMedia = null;
-    	    removeLocalVideoNode();
-    	    addLog('Video Disconnected');
+		    await room.connect(roomId);
+		    await room.publish([localMedia]);
+		    addLog('Video Connected');
 
-    	    remoteParticipants = [];
-    	    removeRemoteVideoAll();
-    	    addLog('Participants Cleared');
+		    addLocalVideoNode(localMedia, room.localParticipant.id);
+		    addLog('Participant Showed');
+		    changeStatus('Connected');
+		  } catch (error) {
+		    console.error(error);
+		    activateButton();
+		    changeStatus('Failed to Connect');
+		    alert('Failed to Start Service');
+		  }
+		};
 
-    	    ConnectLive.signOut();
-    	    addLog('User Signed Out');
+		const disConnectConference = () => {
+		  try {
+		    if (!room || !localMedia) throw new Error('No Conference to Stop');
+		    changeStatus('Disconnecting...');
 
-    	    activateButton();
-    	    changeStatus('Disconnected');
-    	  } catch (error) {
-    	    console.error(error);
-    	    changeStatus('Failed to Disconnect');
-    	  }
-    	};
+		    room.disconnect();
+		    addLog('Conference Disconnected');
 
-    	connectButton.onclick = connectConference;
-    	disconnectButton.onclick = disConnectConference;
+		    localMedia.stop();
+		    localMedia = null;
+		    removeLocalVideoNode();
+		    addLog('Video Disconnected');
 
+		    if (localScreen) unshareLocalScreen();
+
+		    remoteParticipants = [];
+		    removeRemoteVideoAll();
+		    addLog('Participants Cleared');
+
+		    ConnectLive.signOut();
+		    addLog('User Signed Out');
+
+		    activateButton();
+		    changeStatus('Disconnected');
+		  } catch (error) {
+		    console.error(error);
+		    changeStatus('Failed to Disconnect');
+		  }
+		};
+
+		const shareLocalScreen = async () => {
+		  try {
+		    localScreen = await ConnectLive.createLocalScreen({
+		      audio: true,
+		      video: true,
+		    });
+		    localScreen.video?.setExtraValue('screen');
+
+		    addLocalScreenNode(localScreen);
+
+		    room?.publish([localScreen]);
+		    addLog('Share Screen');
+		  } catch (error) {
+		    console.error(error);
+		    addLog('Failed to Share Screen');
+		  }
+		};
+
+		const unshareLocalScreen = () => {
+		  try {
+		    if (!localScreen) throw new Error('No Local Screen to Unshare');
+
+		    localScreen.video?.detach();
+		    localScreen.stop();
+
+		    room?.unpublish([localScreen]);
+		    localScreen = null;
+
+		    removeLocalScreen();
+
+		    addLog('Unshare Screen');
+		  } catch (error) {
+		    console.error(error);
+		    addLog('Failed to Unshare Screen');
+		  }
+		};
+
+		shareScreenButton.disabled = unshareScreenButton.disabled = true;
+		connectButton.onclick = connectConference;
+		disconnectButton.onclick = disConnectConference;
+		shareScreenButton.onclick = shareLocalScreen;
+		unshareScreenButton.onclick = unshareLocalScreen;
 		</script>
     </body>
 </html>

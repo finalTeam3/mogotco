@@ -268,7 +268,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 }
 .header.scrolled .top_bar
 {
@@ -393,7 +393,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header.scrolled .logo
 {
@@ -442,7 +442,7 @@ section
 .main_nav li a:hover,
 .main_nav li.active a
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .main_nav li.active::after
 {
@@ -452,7 +452,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #14bdee;
+	background: #005b00;
 	content: '';
 }
 .search_button
@@ -479,7 +479,7 @@ section
 .search_button:hover i,
 .shopping_cart:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .header_search_form
 {
@@ -493,7 +493,7 @@ section
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	background: #14bdee;
+	background: #005b00;
 	z-index: -1;
 	opacity: 0;
 	-webkit-transition: all 400ms ease;
@@ -557,7 +557,7 @@ section
 }
 .hamburger:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -655,7 +655,7 @@ section
 }
 .menu_nav ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .menu .search
 {
@@ -801,7 +801,7 @@ section
 }
 .breadcrumbs ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /*********************************
@@ -850,7 +850,7 @@ section
 }
 .blog_meta ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .blog_meta ul li:not(:last-child)::after
 {
@@ -884,7 +884,7 @@ section
 .blog_quote i
 {
 	font-size: 30px;
-	color: #14bdee;
+	color: #005b00;
 }
 .blog_quote div
 {
@@ -945,7 +945,7 @@ section
 }
 .blog_tags ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .blog_social span
 {
@@ -977,7 +977,7 @@ section
 }
 .blog_social ul li:hover i
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comments_container
 {
@@ -1036,7 +1036,7 @@ section
 }
 .comment_author a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comments_container .rating_r
 {
@@ -1079,7 +1079,7 @@ section
 }
 .comment_extra a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .comment_extra a span
 {
@@ -1121,7 +1121,7 @@ section
 }
 .comment_input:focus
 {
-	border: solid 1px #14bdee;
+	border: solid 1px #005b00;
 	outline: none;
 }
 .comment_textarea
@@ -1156,7 +1156,7 @@ section
 	appearance: none;
 	width: 14px;
     height: 14px;
-	background: #14bdee;
+	background: #005b00;
 	border-radius: 3px;
 	cursor: pointer;
 	vertical-align: middle;
@@ -1196,7 +1196,7 @@ section
 {
 	width: 150px;
 	height: 46px;
-	background: #14bdee;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 500;
@@ -1263,7 +1263,7 @@ section
 .sidebar_categories ul li:hover a,
 .sidebar_categories ul li:hover a::before
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .categories_list li a span
 {
@@ -1308,7 +1308,7 @@ section
 }
 .latest_title a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .latest_date
 {
@@ -1384,7 +1384,7 @@ section
 }
 .tags_list li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .tags_list li:hover a
 {
@@ -1426,7 +1426,7 @@ section
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #14bdee;
+	background: #005b00;
 	opacity: 0.7;
 }
 .banner_title
@@ -1452,7 +1452,7 @@ section
 .banner_button a
 {
 	display: block;
-	color: #14bdee;
+	color: #005b00;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0.1em;
@@ -1468,7 +1468,7 @@ section
 }
 .banner_button:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .banner_button:hover a
 {
@@ -1578,7 +1578,7 @@ section
 	cursor: pointer;
 	font-size: 14px;
 	text-transform: uppercase;
-	color: #14bdee;
+	color: #005b00;
 	font-weight: 500;
 	letter-spacing: 0.1em;
 }
@@ -1625,7 +1625,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_title
 {
@@ -1681,7 +1681,7 @@ section
 }
 .footer_social ul li:hover
 {
-	background: #14bdee;
+	background: #005b00;
 }
 .footer_contact
 {
@@ -1731,7 +1731,7 @@ section
 }
 .footer_links_container ul li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .footer_mobile
 {
@@ -1771,7 +1771,7 @@ section
 }
 .cr_text a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
 .cr_list li:not(:last-child)
 {
@@ -1789,5 +1789,5 @@ section
 }
 .cr_list li a:hover
 {
-	color: #14bdee;
+	color: #005b00;
 }
