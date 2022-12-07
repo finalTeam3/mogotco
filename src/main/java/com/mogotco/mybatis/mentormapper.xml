@@ -62,9 +62,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT *, u.username AS user_username FROM mentor m INNER
 		JOIN user u ON m.userid=u.userid WHERE mentorid=#{mentorid}
 	</select>
-
+	
+	<!-- 승인된 멘토만 보여주기 위한 -->
 	<select id="selectAll" resultType="MentorDTO">
-		SELECT * FROM mentor
+		SELECT * FROM mentor WHERE mentorok = 1
 	</select>
 
 	<insert id="insert" parameterType="MentorDTO">
