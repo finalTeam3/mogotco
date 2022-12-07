@@ -27,48 +27,46 @@ $(document).ready(function(){
 		$('#modify_form').submit();
 	});
 });
+function previewprofile(event) {// 프로필 이미지 미리 보여주기
+    var reader = new FileReader();
 
+    reader.onload = function(event) {
+    	$('#uploadprofile').attr('src',event.target.result);
+    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  </script>
+  <script>
+  
+  function previewimg(event) {// 명함 이미지 미리 보여주기
+	  /* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
+	  	
+	  	$('#context').hide(); */
+	      var reader = new FileReader();
+
+	      reader.onload = function(event) {
+	      	$('#uploadimg').attr('src',event.target.result);
+	      	$('#uploadimg').attr('style','width:300px; hight:300px;');
+	      	
+	      };
+	      reader.readAsDataURL(event.target.files[0]);
+	      //alert('reader.readAsDataURL : ' + event.target.files[0]);
+	    }
+  
 function display(data) {
 	var name = data.images[0].fields[0].inferText
 	var position = data.images[0].fields[1].inferText
 	var company = data.images[0].fields[2].inferText
-
-
-	alert(name);
-	alert(position);
-	alert(company);
-
+	$('#mentorcom').val(company);
+	$('#mcardposition').val(position);
 }
 
-function previewprofile(event) {// 프로필 이미지 미리 보여주기
-	    var reader = new FileReader();
-
-	    reader.onload = function(event) {
-	    	$('#uploadprofile').attr('src',event.target.result);
-	    	$('#uploadprofile').attr('style','width:300px; hight:300px;');
-	    };
-	    reader.readAsDataURL(event.target.files[0]);
-	  }
-
-function previewimg(event) {// 명함 이미지 미리 보여주기
-/* 	$('#msgText').hide();// 영수증 업로드 시 msg 내용 지우기 
-	
-	$('#context').hide(); */
-    var reader = new FileReader();
-
-    reader.onload = function(event) {
-    	$('#uploadimg').attr('src',event.target.result);
-    	$('#uploadimg').attr('style','width:300px; hight:300px;');
-    	
-    };
-    reader.readAsDataURL(event.target.files[0]);
-    //alert('reader.readAsDataURL : ' + event.target.files[0]);
-  }
 
 function upload() {
-	const imageInput = $("#mcf")[0];
+	const imageInput = $("#mcimg")[0];
 	console.log("mcf: ", imageInput.files)
-
+	alert("ocr 실행중입니다. 잠시만 기다려 주세요.")
 	if (imageInput.files.length === 0) {
 		alert("파일을 선택해주세요");
 		return;
@@ -84,10 +82,11 @@ function upload() {
 
 	$.ajax({
 		type : "POST",
-		url : '/ocrresult',
+		url : '[[@{/ocrresult}]]',
 		processData : false,
 		contentType : false,
 	 	data: formData,
+	 	dataType : "JSON",
 		success : function(data) {
 			//alert(data);
 			alert(data.images[0].fields[0].inferText);
@@ -138,7 +137,7 @@ function upload() {
 										</div>
 									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px;">프로필 수정</label>
 									</label>
-									<input type="file" style="display:none" name="mpimg" id="mpimg" onchange="previewprofile(event);">
+									<input type="file" style="display:none" name="mpimg" id="mpimg" th:onchange="previewprofile(event);">
 								</div>
 
 								<div>
@@ -171,9 +170,9 @@ function upload() {
 									<label class="btn btn-dark" for="mcimg" style="width:96px;height:31px;font-size:13px">명함 수정</label>
 									</div>
 									</label>
-									<input type="file" class="comment_input" style="display:none" name="mcimg" id="mcimg"  onchange="previewimg(event);">
+									<input type="file" class="comment_input" style="display:none" name="mcimg" id="mcimg"  th:onchange="previewimg(event);">
 									<div>
-									<button id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
+									<button type="button" id="mcbutton" th:onclick="upload()" class="comment_button trans_200" style="width:50px;height:24px">등록</button>
 									</div>
 								</div>			
 								

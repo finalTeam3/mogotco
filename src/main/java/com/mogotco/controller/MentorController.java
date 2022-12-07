@@ -250,82 +250,89 @@ public class MentorController {
 			e1.printStackTrace();
 		}
 		
-		if(mentordto.getMpimg() == null) {
-			mentordto.setMentorimg("null");
-		}
-		if(mentordto.getMcimg() == null) {
-			mentordto.setMcardimg("null");
-		}
-		
 		System.out.println("mentordto1: " + mentordto);
 		System.out.println("기존파일: "+mtd.getMentorimg());
-		System.out.println("수정파일: "+mentordto.getMpimg().getOriginalFilename());
+		System.out.println("수정안되었을 때파일: "+mentordto.getMentorimg());
+		System.out.println("수정파일: "+mentordto.getMpimg());
+		System.out.println("수정파일1: "+mentordto.getMpimg().getOriginalFilename());
+		System.out.println("수정파일길이: " +mentordto.getMpimg().getOriginalFilename().length());
 		System.out.println("기존파일: "+mtd.getMcardimg());
+		System.out.println("수정안되었을 때파일: "+mentordto.getMcardimg());
+		System.out.println("수정파일1: "+mentordto.getMcimg());
 		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename());
+		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename().length());
 		
-		if(mentordto.getMpimg().getOriginalFilename() != mtd.getMentorimg()) {
-			String mpimgname = mentordto.getMpimg().getOriginalFilename();
-			mentordto.setMentorimg(mpimgname);
-		}else {
-			mentordto.setMentorimg("null");
-			System.out.println(mentordto.getMentorimg());
-		}
-		
-		if(mentordto.getMcimg().getOriginalFilename() != mtd.getMcardimg()) {
-			String mcimgname = mentordto.getMcimg().getOriginalFilename();
-			mentordto.setMcardimg(mcimgname);
-		}else {
-			mentordto.setMcardimg("null");
-			System.out.println(mentordto.getMcardimg());
-		}
-		System.out.println("mentordto2: "+mentordto);
-		
-		try {
-			System.out.println("mtd:"+mtd);
-			
-			if(mentordto.getMentorimg() == null) {
-				if(mentordto.getMcardimg() == null) { // 멘토이미지가 없을 때 명함이미지도 없는 경우
-					MentorDTO mdto1 = null;
-					mdto1 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
-					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-					mservice.modify(mdto1);
-					System.out.println("mdto1:"+mdto1);
-				}else { // 멘토이미지가 없을 때 명함이미지는 수정되어 파일이 있는 경우
-					MentorDTO mdto2 = null;
-					mdto2 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mentordto.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
-					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-					mservice.modify(mdto2);
-					System.out.println("mdto2:"+mdto2);
+		//둘다 수정 안되었을 때
+		if(mentordto.getMcimg().getOriginalFilename().length() == 0) {
+			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
+				//둘다 수정 안되었을 때
+				try {
+					System.out.println("1번 실행");
+					mservice.modify(mtd);
+					System.out.println("1번 실행ok");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				};
+			}else {
+				//mentorimg만 수정 되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mtd.getMentorcom(), mtd.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					System.out.println("2번 실행");
+					mservice.modify(mta);
+					System.out.println("2번 실행ok");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-			} else {
-				if(mentordto.getMcardimg() == null) { // 멘토이미지가 수정되어 파일이 있을 때 명함이미지가 없는 경우
-					MentorDTO mdto3 = null;
-					mdto3 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
-					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-					mservice.modify(mdto3);
-					System.out.println("mdto3:"+mdto3);
-				}else { // 멘토이미지가 수정되어 파일이 있을 때 명함이미지도 파일이 있는 경우
-					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-					mservice.modify(mentordto);
-					System.out.println("mentordto: "+ mentordto);
+			}
+		}else {
+			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
+			//mcardimg만 수정되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					System.out.println("3번 실행");
+					mservice.modify(mta);
+					System.out.println("3번 실행ok");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-			} // 프로필, 명함 이미지 수정 if문 종료
+			}else {
+				// 둘다 수정 되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					System.out.println("4번 실행");
+					mservice.modify(mta);
+					System.out.println("4번 실행ok");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 			
 			if(mcateid != null) { // 카테고리를 수정하는 경우에만 실행
 				int r = mentordto.getMentorid();
-				mwservice.remove(r);
-				for(int i=0;i<mcateid.length;i++) {
-					MWishcateDTO mw = null;
-					mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
-					mwservice.register(mw);
+				try {
+					mwservice.remove(r);
+					for(int i=0;i<mcateid.length;i++) {
+						MWishcateDTO mw = null;
+						mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
+						mwservice.register(mw);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			} // 카테고리 수정 if문 종료
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return "redirect:mentormodify?id=" + mentordto.getUserid() + "&mentorid=" + mentordto.getMentorid();
 	}
 
