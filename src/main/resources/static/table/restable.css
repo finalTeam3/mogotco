@@ -1,5 +1,5 @@
 .responsive-table {
-  width: 105%;
+  width: 100%;
   margin-bottom: 1.5em;
 }
 .responsive-table thead {
@@ -14,8 +14,8 @@
   overflow: hidden;
 }
 .responsive-table thead th {
-  background-color: #14bdee;
-  border: 1px solid #14bdee;
+  background-color: #005b00;
+  border: 1px solid #005b00;
   font-weight: normal;
   text-align: center;
   color: white;
@@ -49,13 +49,13 @@
 }
 .responsive-table tbody tr {
   margin-bottom: 1em;
-  border: 2px solid #14bdee;
+  border: 2px solid #005b00;
 }
 .responsive-table tbody tr:last-of-type {
   margin-bottom: 0;
 }
 .responsive-table tbody th[scope="row"] {
-  background-color: #14bdee;
+  background-color: #005b00;
   color: white;
 }
 .responsive-table tbody td[data-type=currency] {
@@ -69,7 +69,7 @@
 }
 .responsive-table tbody td {
   text-align: right;
-  border-bottom: 1px solid #14bdee;
+  border-bottom: 1px solid #005b00;
 }
 
 
