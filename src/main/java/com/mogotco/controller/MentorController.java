@@ -242,24 +242,87 @@ public class MentorController {
 	// 멘토 정보 업데이트 기능
 	@RequestMapping("/modifyimpl")
 	public String update(Model model, MentorDTO mentordto, Integer[] mcateid, MWishcateDTO mwishcate) {
-		String mpimgname = mentordto.getMpimg().getOriginalFilename();
-		mentordto.setMentorimg(mpimgname);
-
-		String mcimgname = mentordto.getMcimg().getOriginalFilename();
-		mentordto.setMcardimg(mcimgname);
-
+		MentorDTO mtd = null; // 기존에 저장된 파일 불러오기 위한 용도
 		try {
-			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-			mservice.modify(mentordto);
-				if(mcateid != null) { // 카테고리를 수정하는 경우에만 실행
-					int r = mentordto.getMentorid();
-					mwservice.remove(r);
-					for(int i=0;i<mcateid.length;i++) {
-						MWishcateDTO mw = null;
-						mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
-						mwservice.register(mw);
-					}
-				}			
+			mtd = mservice.mentorAll(mentordto.getUserid());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(mentordto.getMpimg() == null) {
+			mentordto.setMentorimg("null");
+		}
+		if(mentordto.getMcimg() == null) {
+			mentordto.setMcardimg("null");
+		}
+		
+		System.out.println("mentordto1: " + mentordto);
+		System.out.println("기존파일: "+mtd.getMentorimg());
+		System.out.println("수정파일: "+mentordto.getMpimg().getOriginalFilename());
+		System.out.println("기존파일: "+mtd.getMcardimg());
+		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename());
+		
+		if(mentordto.getMpimg().getOriginalFilename() != mtd.getMentorimg()) {
+			String mpimgname = mentordto.getMpimg().getOriginalFilename();
+			mentordto.setMentorimg(mpimgname);
+		}else {
+			mentordto.setMentorimg("null");
+			System.out.println(mentordto.getMentorimg());
+		}
+		
+		if(mentordto.getMcimg().getOriginalFilename() != mtd.getMcardimg()) {
+			String mcimgname = mentordto.getMcimg().getOriginalFilename();
+			mentordto.setMcardimg(mcimgname);
+		}else {
+			mentordto.setMcardimg("null");
+			System.out.println(mentordto.getMcardimg());
+		}
+		System.out.println("mentordto2: "+mentordto);
+		
+		try {
+			System.out.println("mtd:"+mtd);
+			
+			if(mentordto.getMentorimg() == null) {
+				if(mentordto.getMcardimg() == null) { // 멘토이미지가 없을 때 명함이미지도 없는 경우
+					MentorDTO mdto1 = null;
+					mdto1 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
+					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+					mservice.modify(mdto1);
+					System.out.println("mdto1:"+mdto1);
+				}else { // 멘토이미지가 없을 때 명함이미지는 수정되어 파일이 있는 경우
+					MentorDTO mdto2 = null;
+					mdto2 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mentordto.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
+					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+					mservice.modify(mdto2);
+					System.out.println("mdto2:"+mdto2);
+				}
+				
+			} else {
+				if(mentordto.getMcardimg() == null) { // 멘토이미지가 수정되어 파일이 있을 때 명함이미지가 없는 경우
+					MentorDTO mdto3 = null;
+					mdto3 = new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null, null, null, null,null,null,null,null,0,0,0,null,0);
+					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+					mservice.modify(mdto3);
+					System.out.println("mdto3:"+mdto3);
+				}else { // 멘토이미지가 수정되어 파일이 있을 때 명함이미지도 파일이 있는 경우
+					Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+					mservice.modify(mentordto);
+					System.out.println("mentordto: "+ mentordto);
+				}
+				
+			} // 프로필, 명함 이미지 수정 if문 종료
+			
+			if(mcateid != null) { // 카테고리를 수정하는 경우에만 실행
+				int r = mentordto.getMentorid();
+				mwservice.remove(r);
+				for(int i=0;i<mcateid.length;i++) {
+					MWishcateDTO mw = null;
+					mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
+					mwservice.register(mw);
+				}
+			} // 카테고리 수정 if문 종료
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
