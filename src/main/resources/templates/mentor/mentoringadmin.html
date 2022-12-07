@@ -8,8 +8,173 @@
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style>
 
+<style type="text/css">
+.responsive-table {
+	width: 100%;
+	margin-bottom: 1.5em;
+}
+
+.responsive-table thead {
+	position: absolute;
+	clip: rect(1px, 1px, 1px, 1px);
+	/* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0;
+	border: 0;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.responsive-table thead th {
+	background-color: #005b00;
+	border: 1px solid #005b00;
+	font-weight: normal;
+	text-align: center;
+	color: white;
+}
+
+.responsive-table thead th:first-of-type {
+	text-align: left;
+}
+
+.responsive-table tbody, .responsive-table tr, .responsive-table th,
+	.responsive-table td {
+	display: block;
+	padding: 0;
+	text-align: left;
+	white-space: normal;
+}
+
+.responsive-table th, .responsive-table td {
+	padding: .5em;
+	vertical-align: middle;
+}
+
+.responsive-table caption {
+	margin-bottom: 1em;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+}
+
+.responsive-table tfoot {
+	font-size: .8em;
+	font-style: italic;
+}
+
+.responsive-table tbody tr {
+	margin-bottom: 1em;
+	border: 2px solid #005b00;
+}
+
+.responsive-table tbody tr:last-of-type {
+	margin-bottom: 0;
+}
+
+.responsive-table tbody th[scope="row"] {
+	background-color: #005b00;
+	color: white;
+}
+
+.responsive-table tbody td[data-type=currency] {
+	text-align: right;
+}
+
+.responsive-table tbody td[data-title]:before {
+	content: attr(data-title);
+	float: left;
+	font-size: .8em;
+	color: rgb(0, 0, 0);
+}
+
+.responsive-table tbody td {
+	text-align: right;
+	border-bottom: 1px solid #005b00;
+}
+
+@media ( min-width : 200em) {
+	.responsive-table {
+		font-size: .9em;
+	}
+	.responsive-table thead {
+		position: relative;
+		clip: auto;
+		height: auto;
+		width: auto;
+		overflow: auto;
+	}
+	.responsive-table tr {
+		display: table-row;
+	}
+	.responsive-table th, .responsive-table td {
+		display: table-cell;
+		padding: .5em;
+	}
+	.responsive-table caption {
+		font-size: 1.5em;
+	}
+	.responsive-table tbody {
+		display: table-row-group;
+	}
+	.responsive-table tbody tr {
+		display: table-row;
+		border-width: 1px;
+	}
+	.responsive-table tbody tr:nth-of-type(even) {
+		background-color: rgba(94, 93, 82, 0.1);
+	}
+	.responsive-table tbody th[scope="row"] {
+		background-color: transparent;
+		color: rgb(0, 0, 0);
+		text-align: left;
+	}
+	.responsive-table tbody td {
+		text-align: center;
+	}
+	.responsive-table tbody td[data-title]:before {
+		content: none;
+		color: rgb(0, 0, 0);
+	}
+}
+
+@media ( min-width : 62em) {
+	.responsive-table {
+		font-size: 1em;
+	}
+	.responsive-table th, .responsive-table td {
+		padding: .75em .5em;
+	}
+	.responsive-table tfoot {
+		font-size: .9em;
+	}
+}
+
+@media ( min-width : 75em) {
+	.responsive-table th, .responsive-table td {
+		padding: .75em;
+	}
+}
+/* button */
+.comment_button1 {
+	width: 70px;
+	height: 46px;
+	background: #005b00;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
+}
 </style>
 
 <script>
@@ -41,75 +206,68 @@
 	<div class="courses">
 		<div class="container">
 			<div class="row">
-				<div class="contact_info_title">Mentoring Admin</div>
+				
 				<!-- Courses Main Content -->
-				<div class="col-lg-12">
+<!-- 				<div class="col-lg-12">
 					<div class="courses_search_container">
-	
 					</div>
 					<div class="courses_container">
 						<div class="row courses_row">
 							
-							<!-- Course -->
-<!-- 							<div class="col-lg-6 course_col">
-								<div class="course" th:each="mtlist:${mtlist}">
-									<div class="course_image"></div>
-									<div class="course_body">
-										<h3 class="course_title" style="float:left;"><a></a></h3>
-										<ul style="list-style:none;"><li><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}"><img th:src="@{/images/}+${mtlist.mentoring_mentoringimg}" alt="멘토링 대표 이미지" style="width:100%" /></a></li></ul>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span th:text="${mtlist.mentoring_mtitle}"></span>
-											</div>
- 											<div class="course_info">
-												<i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 
-												<span>등록일자:</span>
-												<span th:text="${mtlist.mentoring_mentoringdate}"></span>
-											</div>
-										</div>
+
+						<div class="col-lg-8 news_col">
+							<div class="news_posts_small" th:each="mtlist:${mtlist}">
+		
+								News Posts Small
+								<div class="news_post_small">
+									<div class="news_post_small_title"><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}">Home-based business insurance issue (Spring 2017 - 2018)</a></div>
+									<div class="news_post_meta">
+										<ul>
+											<li><span class="badge badge-pill badge-dark" style="color:#FFFFFF" th:text="${mtlist.mentoring_mentoringdate}">대면</span></li>
+											<li><span th:text="${mtlist.mentoring_mplace}"></span></li>
+										</ul>
 									</div>
 								</div>
-							</div> -->
-
-				<div class="col-lg-8 news_col">
-					<div class="news_posts_small" th:each="mtlist:${mtlist}">
-
-						<!-- News Posts Small -->
-						<div class="news_post_small">
-							<div class="news_post_small_title"><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}">Home-based business insurance issue (Spring 2017 - 2018)</a></div>
-							<div class="news_post_meta">
-								<ul>
-									<li><span class="badge badge-pill badge-dark" style="color:#FFFFFF" th:text="${mtlist.mentoring_mentoringdate}">대면</span></li>
-									<li><span th:text="${mtlist.mentoring_mplace}"></span></li>
-								</ul>
+		
 							</div>
 						</div>
 
-						<!-- News Posts Small -->
-
-						<!-- News Posts Small -->
-
-						<!-- News Posts Small -->
-
 					</div>
+
 				</div>
+			</div> -->
 
-
+					<div class="col-lg-8">
+					<div class="contact_info_title">Mentoring Admin</div>
+					<div>&nbsp</div>
+						<div class="contact_form">
+							<table class="responsive-table">
+								<thead>
+									<tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">멘토링 목록</th>
+										<div th:each="mtlist:${mtlist}">
+										<th>
+											<h4><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}"></a></h4>
+											<th><span class="badge badge-pill badge-dark" style="color:#FFFFFF" th:text="${mtlist.mentoring_mentoringdate}"></span></th>
+										</th>
+											<td th:text="${mtlist.mentoring_mplace}"></td>
+										</div>
+									</tr>
+								</tbody>
+							</table>
+							<!-- Review Modal -->
 
 						</div>
 
 					</div>
-				</div>
-
-				<!-- Courses Sidebar -->
 
 		</div>
 	</div>
-	</div>
-
+</div>
 
 
 
