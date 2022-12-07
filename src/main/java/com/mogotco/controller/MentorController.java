@@ -250,26 +250,24 @@ public class MentorController {
 			e1.printStackTrace();
 		}
 		
-		System.out.println("mentordto1: " + mentordto);
-		System.out.println("기존파일: "+mtd.getMentorimg());
-		System.out.println("수정안되었을 때파일: "+mentordto.getMentorimg());
-		System.out.println("수정파일: "+mentordto.getMpimg());
-		System.out.println("수정파일1: "+mentordto.getMpimg().getOriginalFilename());
-		System.out.println("수정파일길이: " +mentordto.getMpimg().getOriginalFilename().length());
-		System.out.println("기존파일: "+mtd.getMcardimg());
-		System.out.println("수정안되었을 때파일: "+mentordto.getMcardimg());
-		System.out.println("수정파일1: "+mentordto.getMcimg());
-		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename());
-		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename().length());
+//		System.out.println("mentordto1: " + mentordto);
+//		System.out.println("기존파일: "+mtd.getMentorimg());
+//		System.out.println("수정안되었을 때파일: "+mentordto.getMentorimg());
+//		System.out.println("수정파일: "+mentordto.getMpimg());
+//		System.out.println("수정파일1: "+mentordto.getMpimg().getOriginalFilename());
+//		System.out.println("수정파일길이: " +mentordto.getMpimg().getOriginalFilename().length());
+//		System.out.println("기존파일: "+mtd.getMcardimg());
+//		System.out.println("수정안되었을 때파일: "+mentordto.getMcardimg());
+//		System.out.println("수정파일1: "+mentordto.getMcimg());
+//		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename());
+//		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename().length());
 		
 		//둘다 수정 안되었을 때
 		if(mentordto.getMcimg().getOriginalFilename().length() == 0) {
 			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
 				//둘다 수정 안되었을 때
 				try {
-					System.out.println("1번 실행");
 					mservice.modify(mtd);
-					System.out.println("1번 실행ok");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -280,9 +278,7 @@ public class MentorController {
 				MentorDTO mta = null;
 				mta= new MentorDTO(mentordto.getMentorid(), null, null, mtd.getMentorcom(), mtd.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
-					System.out.println("2번 실행");
 					mservice.modify(mta);
-					System.out.println("2번 실행ok");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -295,9 +291,7 @@ public class MentorController {
 				MentorDTO mta = null;
 				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
-					System.out.println("3번 실행");
 					mservice.modify(mta);
-					System.out.println("3번 실행ok");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -308,9 +302,7 @@ public class MentorController {
 				MentorDTO mta = null;
 				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
-					System.out.println("4번 실행");
 					mservice.modify(mta);
-					System.out.println("4번 실행ok");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
