@@ -14,6 +14,62 @@ margin-left: 2%;
 
 }
 </style>
+<style>
+     #ul {
+          list-style-type: none;
+          background-color: #D9D9D9;
+          width: 50%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 5% 12% 5% 12%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+     
+     @media (max-width: 768px) {
+    /* 모바일에 최적화된 예외 CSS 코드*/
+         #ul {
+          list-style-type: none;
+          background-color: #ccc;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 2% 8% 2% 8%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+}
+</style>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -155,17 +211,65 @@ $(document).ready(function(){
 			<div class="container">
 				<div class="row">
 
+						<!-- Courses Sidebar -->
+			<div class="col-lg-4">
+				<div class="sidebar">
+				<div class="contact_info_title">My Page</div>
+					<!-- Latest Course -->
+<!-- 					<div class="sidebar_section">
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
+						<div class="sidebar_latest">
+							Latest Course
+							<div
+								class="latest d-flex flex-row align-items-start justify-content-start">
+							</div>
+						</div>
+					</div> -->
+					<div>&nbsp</div>
+					<div>&nbsp</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title"></div>
+							<div class="sidebar_categories">
+								<ul id="ul" style="text-align: center">
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
+									</li>
+									<li id="li">
+										<a th:href="@{/mentor/idcheck(mentorid=${ms.mentorid})}">멘토 정보</a>
+									</li>
+									<li id="li">
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토 정보 수정</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|">구매 이력</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|">멘토링 이력</a>
+									</li>
+									<li id="li">
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${ms.mentorid})}'|">멘토링 관리</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|">내 쿠폰함</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+			</div>
+
 					<!-- Contact Form -->
 					<div class="col-lg-8">
 						<div class="contact_form">
-							<div class="contact_info_title">My Page</div>
+							<!-- <div class="contact_info_title">My Page</div> -->
 							<div>&nbsp</div>
-							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
-							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
+<!-- 							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
+							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
 							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>
 							<button type="button" th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토링이력</button>
 							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${ms.mentorid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토링 관리</button>
-							<button type="button" th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">내 쿠폰함</button>
+							<button type="button" th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">내 쿠폰함</button> -->
 
 							<form id = "mypage_update_form" class="comment_form">
 
@@ -226,7 +330,7 @@ $(document).ready(function(){
 					</div>
 
 					<!-- Contact Info -->
-					<div class="col-lg-4">
+<!-- 					<div class="col-lg-4">
 						<div class="contact_info">
 							<div class="contact_info_title">Contact Info</div>
 							<div class="contact_info_text">
@@ -249,7 +353,8 @@ $(document).ready(function(){
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
+					
 				</div>
 			</div>
 		</div>
