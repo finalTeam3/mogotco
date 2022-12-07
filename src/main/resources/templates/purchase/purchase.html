@@ -82,6 +82,27 @@
 	box-sizing: border-box;
 	padding: 5px;
 }
+
+.modal-title{
+ font-size: 17px;
+ text-align:left;
+ font-weight: bold;
+}
+.modal_table{
+  width:100%;
+}
+#modal_coupon{
+  width:200px;
+}
+#modal_usebtn{
+  margin:10px;
+  text-align: right;
+}
+#use_btn{
+  margin:10px;
+  text-align: right;
+  border-radius:10px;
+}
 </style>
 <!-- jQuery -->
 <script type="text/javascript"
@@ -149,7 +170,7 @@
 			document.getElementById("total_price1").value = p - u;
 			document.getElementById("userpoint").value = 0;
 		}
-	};
+	};	
 </script>
 </head>
 
@@ -223,11 +244,15 @@
 						<input type="hidden" id="mentoringoptionid"
 							th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
-							<div class="custom-control custom-checkbox">
+							<div class="custom-control custom-checkbox" style="margin-bottom:20px;">
 								<input type="checkbox" class="custom-control-input" id="shipto">
 								<label class="custom-control-label" for="shipto"
 									data-toggle="collapse" data-target="#shipping-address">Select
 									Point</label>
+							</div>
+							<!-- 쿠폰사용버튼 -->
+							<div>
+							<button type="button" id="couponmodal"  data-toggle="modal" data-target="#myModal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -292,8 +317,33 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
+	
+	<!------------- Modal --------------->
+	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:500px;">
+	      <!-- Modal content-->   
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">보유 쿠폰</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	
+	        </div>
+	        <div class="modal-body">
+	          <table class="modal_table">
+	            <tr>
+	              <td id="modal_coupon">couponnum</td>
+	              <td id="modal_coupon">couponname</td>
+	              <td id="modal_coupon">couponprice</td>
+	              <td id="modal_usebtn"><button id="use_btn" class="btn btn-outline-primary" style="float:right;">사용하기</button></td>
+	            </tr>
+	          </table>
+	        </div>
+	        <div id="count" value="1"></div>
+	      </div>
+	    </div>
+	</div>
+
 
 </body>
 <script>
