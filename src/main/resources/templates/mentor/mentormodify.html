@@ -155,6 +155,15 @@ function upload() {
 									<label for = "adminid" class="form_title">Adminid</label>
 									<input type="text" class="comment_input" th:value="${m.adminid}" name="adminid" id="adminid">
 								</div>
+								
+<!-- 								<div style = "display:none">
+									<label for = "mentordate" class="form_title">mentordate</label>
+									<input type="text" class="comment_input" th:value="${m.mentordate}" name="mentordate" id="mentordate">
+								</div>
+								<div style = "display:none">
+									<label for = "mentorapply" class="form_title">mentorapply</label>
+									<input type="text" class="comment_input" th:value="${m.mentorapply}" name="mentorapply" id="mentorapply">
+								</div> -->
 				
 			
 													
@@ -193,6 +202,18 @@ function upload() {
 
 								<div>
 										<label for = "mwishcate" class="form_title">Category<span style="color:red"> *</span></label><br>
+										<h4>
+										<tr th:each="mwclist:${mwclist}">
+											<th>
+											<span class="badge badge-pill badge-success" th:text="${mwclist.mcate_mname}" style="color:#FFFFFF"></span>
+											</th>
+										</tr>
+										</h4>
+										<br>
+									<label class="custom-control-label" data-toggle="collapse" data-target="#mcategory">수정하기</label>										
+										<br>
+										
+										<div class="collapse" id="mcategory">
 										<div class="form-check-inline">
 									       	<label class="form-check-label" for="web">
 									          <input type="checkbox" class="form-check-input" id="web" name="mcateid" value=10>
@@ -240,6 +261,7 @@ function upload() {
 									        <input type="checkbox" class="form-check-input" id="etc" name="mcateid" value=80>
 									        etc
 									      </label>
+								    	</div>
 								    </div>
 								    
 								    <div>&nbsp</div>

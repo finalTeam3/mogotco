@@ -154,7 +154,7 @@ public class MentorController {
 	public String mentordetail(Model model, Integer mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
-		List<MWishcateDTO> mwclist = null;
+		List<MWishcateDTO> mwclist = null; 
 		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
 		ReviewDTO review, reviewcount, starcnt= null;// 해당 멘토 평균 별점, 리뷰갯수_혜정
 		try {
@@ -223,11 +223,14 @@ public class MentorController {
 
 	// 멘토 수정페이지
 	@RequestMapping("/mentormodify")
-	public String mentormodify(Model model, String id) {
+	public String mentormodify(Model model, String id, int mentorid) {
 		MentorDTO mentorall = null;
+		List<MWishcateDTO> mwclist = null;
 		try {
 			mentorall = mservice.mentorAll(id);
+			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("m", mentorall);
+			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentormodify");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -239,7 +242,6 @@ public class MentorController {
 	// 멘토 정보 업데이트 기능
 	@RequestMapping("/modifyimpl")
 	public String update(Model model, MentorDTO mentordto, Integer[] mcateid, MWishcateDTO mwishcate) {
-
 		String mpimgname = mentordto.getMpimg().getOriginalFilename();
 		mentordto.setMentorimg(mpimgname);
 
@@ -249,17 +251,19 @@ public class MentorController {
 		try {
 			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 			mservice.modify(mentordto);
-			int r = mentordto.getMentorid();
-			mwservice.remove(r);
-			for(int i=0;i<mcateid.length;i++) {
-				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
-				mwservice.register(mw);
-			}			
+				if(mcateid != null) { // 카테고리를 수정하는 경우에만 실행
+					int r = mentordto.getMentorid();
+					mwservice.remove(r);
+					for(int i=0;i<mcateid.length;i++) {
+						MWishcateDTO mw = null;
+						mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
+						mwservice.register(mw);
+					}
+				}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:mentormodify?id=" + mentordto.getUserid();
+		return "redirect:mentormodify?id=" + mentordto.getUserid() + "&mentorid=" + mentordto.getMentorid();
 	}
 
 	// 멘토 등록페이지
