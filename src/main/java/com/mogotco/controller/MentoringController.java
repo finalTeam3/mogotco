@@ -78,7 +78,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			String txt = "null";
-			String mname ="null";
+			String mname ="all";
 			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
