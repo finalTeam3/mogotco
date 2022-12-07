@@ -170,7 +170,25 @@
 			document.getElementById("total_price1").value = p - u;
 			document.getElementById("userpoint").value = 0;
 		}
-	};	
+	};
+</script>
+<script>
+function usingcoupon() {
+	var userid = '[[${session.loginuser.userid}]]';
+	
+	$.ajax({
+		type:"POST",
+		data : {'userid' : userid},
+		url:"[[@{/coupon}]]",
+		success : function(data) {
+			list = data;
+	
+//	          $('#myModal').modal(data);
+	          console.log(data);
+		}
+	});
+	return list;
+}
 </script>
 </head>
 
@@ -252,7 +270,7 @@
 							</div>
 							<!-- 쿠폰사용버튼 -->
 							<div>
-							<button type="button" id="couponmodal"  data-toggle="modal" data-target="#myModal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
+							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#myNodal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -331,10 +349,10 @@
 	        </div>
 	        <div class="modal-body">
 	          <table class="modal_table">
-	            <tr>
-	              <td id="modal_coupon">couponnum</td>
-	              <td id="modal_coupon">couponname</td>
-	              <td id="modal_coupon">couponprice</td>
+	            <tr th:each="c:${list}">
+	              <td id="modal_coupon" th:text="${c.couponid}">couponid</td>
+	              <td id="modal_coupon" th:text="${c.coupon_couponname}">>couponname</td>
+	              <td id="modal_coupon" th:text="${c.coupon_couponprice}">>couponprice</td>
 	              <td id="modal_usebtn"><button id="use_btn" class="btn btn-outline-primary" style="float:right;">사용하기</button></td>
 	            </tr>
 	          </table>
