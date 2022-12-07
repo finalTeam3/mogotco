@@ -56,7 +56,7 @@
 							<div class="sidebar_section_title">Mentor</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img th:src="@{/images/}+${mta.mentorimg}"></div>
+									<div class="teacher_image"><img th:src="@{/img/}+${mta.mentorimg}"></div>
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
 										<div class="teacher_name" style="float:left;"><a th:href="@{/mentor/mentoringlist(mentorid=${mta.mentorid})}" th:text="${mta.user_username}"></a></div>
