@@ -99,17 +99,17 @@ function checkOnlyOne(element) {
 					<div class="row courses_row">
 
 						<!-- Course -->
-						<div th:each="list:${list}" class="col-lg-6 course_col">
-							<div class="course" style="width: 80%; height: 150%;">
-								<div class="course_image">
+						<div th:each="list:${list}" class="col-lg-6 course_col" style="margin-bottom:80px;">
+							<div class="course" style="width: 80%; height: 400px;">
+								<div class="course_image" style="margin-bottom:50px;">
 									<a th:href="@{/mentor/idcheck(mentorid=${list.mentorid})}"><img
 										th:src="@{/img/}+${list.mentorimg}" alt=""
-										style="width: 60%; height: 100%;"></a>
+										style="width: 60%; height: 120%;"></a>
 								</div>
 								<div class="course_footer">
 									<div
 										class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-										<div class="course_info">
+										<div class="course_info" style="margin-bottom:-150px;">
 											<i class="fa-solid fa-user" aria-hidden="true"></i> <span
 												style="font-family: 'IBM Plex Sans KR', sans-serif;">아이디:</span>
 											<span th:text="${list.userid}"></span> <br> <i

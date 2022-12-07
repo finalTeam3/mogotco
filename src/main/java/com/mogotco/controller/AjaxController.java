@@ -1,6 +1,7 @@
 package com.mogotco.controller;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.dto.ReviewDTO;
+import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.dto.WishlistDTO;
 import com.mogotco.frame.Util;
@@ -21,6 +22,7 @@ import com.mogotco.service.OcrService;
 import com.mogotco.service.PurchaseDetailService;
 import com.mogotco.service.PurchaseService;
 import com.mogotco.service.ReviewService;
+import com.mogotco.service.UserCouponService;
 import com.mogotco.service.UserService;
 import com.mogotco.service.WishlistService;
 
@@ -60,6 +62,9 @@ public class AjaxController {
 	
 	@Autowired
 	ReviewService review_service;
+	
+	@Autowired
+	UserCouponService ucservice;
 
 	@RequestMapping("/importsuccess")
 	public Object importsuccess() {
@@ -152,5 +157,19 @@ public class AjaxController {
 		}
 		return "";
 	}
+	
+	// 쿠폰모달
+	@RequestMapping("/coupon")
+	public Object coupon(String userid) {
+		List<UserCouponDTO> clist = null;
+		try {
+			clist = ucservice.userCouponAll(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(clist);
+		return clist;
+	}
+
 	
 }
