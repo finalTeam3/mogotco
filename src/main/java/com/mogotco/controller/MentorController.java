@@ -154,7 +154,7 @@ public class MentorController {
 	public String mentordetail(Model model, Integer mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
-		List<MWishcateDTO> mwclist = null;
+		List<MWishcateDTO> mwclist = null; 
 		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
 		ReviewDTO review, reviewcount, starcnt= null;// 해당 멘토 평균 별점, 리뷰갯수_혜정
 		try {
@@ -223,11 +223,14 @@ public class MentorController {
 
 	// 멘토 수정페이지
 	@RequestMapping("/mentormodify")
-	public String mentormodify(Model model, String id) {
+	public String mentormodify(Model model, String id, int mentorid) {
 		MentorDTO mentorall = null;
+		List<MWishcateDTO> mwclist = null;
 		try {
 			mentorall = mservice.mentorAll(id);
+			mwclist = mwservice.mwcate(mentorid);
 			model.addAttribute("m", mentorall);
+			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentormodify");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -239,27 +242,90 @@ public class MentorController {
 	// 멘토 정보 업데이트 기능
 	@RequestMapping("/modifyimpl")
 	public String update(Model model, MentorDTO mentordto, Integer[] mcateid, MWishcateDTO mwishcate) {
-
-		String mpimgname = mentordto.getMpimg().getOriginalFilename();
-		mentordto.setMentorimg(mpimgname);
-
-		String mcimgname = mentordto.getMcimg().getOriginalFilename();
-		mentordto.setMcardimg(mcimgname);
-
+		MentorDTO mtd = null; // 기존에 저장된 파일 불러오기 위한 용도
 		try {
-			Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
-			mservice.modify(mentordto);
-			int r = mentordto.getMentorid();
-			mwservice.remove(r);
-			for(int i=0;i<mcateid.length;i++) {
-				MWishcateDTO mw = null;
-				mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
-				mwservice.register(mw);
-			}			
-		} catch (Exception e) {
-			e.printStackTrace();
+			mtd = mservice.mentorAll(mentordto.getUserid());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		return "redirect:mentormodify?id=" + mentordto.getUserid();
+		
+//		System.out.println("mentordto1: " + mentordto);
+//		System.out.println("기존파일: "+mtd.getMentorimg());
+//		System.out.println("수정안되었을 때파일: "+mentordto.getMentorimg());
+//		System.out.println("수정파일: "+mentordto.getMpimg());
+//		System.out.println("수정파일1: "+mentordto.getMpimg().getOriginalFilename());
+//		System.out.println("수정파일길이: " +mentordto.getMpimg().getOriginalFilename().length());
+//		System.out.println("기존파일: "+mtd.getMcardimg());
+//		System.out.println("수정안되었을 때파일: "+mentordto.getMcardimg());
+//		System.out.println("수정파일1: "+mentordto.getMcimg());
+//		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename());
+//		System.out.println("수정파일: "+mentordto.getMcimg().getOriginalFilename().length());
+		
+		//둘다 수정 안되었을 때
+		if(mentordto.getMcimg().getOriginalFilename().length() == 0) {
+			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
+				//둘다 수정 안되었을 때
+				try {
+					mservice.modify(mtd);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				};
+			}else {
+				//mentorimg만 수정 되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mtd.getMentorcom(), mtd.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					mservice.modify(mta);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}else {
+			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
+			//mcardimg만 수정되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					mservice.modify(mta);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				// 둘다 수정 되었을 때
+				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mentordto.getMcimg().getOriginalFilename(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				try {
+					mservice.modify(mta);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+			
+			if(mcateid != null) { // 카테고리를 수정하는 경우에만 실행
+				int r = mentordto.getMentorid();
+				try {
+					mwservice.remove(r);
+					for(int i=0;i<mcateid.length;i++) {
+						MWishcateDTO mw = null;
+						mw = new MWishcateDTO(0,mcateid[i],r,null,null,null,null,null);
+						mwservice.register(mw);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} // 카테고리 수정 if문 종료
+			
+		return "redirect:mentormodify?id=" + mentordto.getUserid() + "&mentorid=" + mentordto.getMentorid();
 	}
 
 	// 멘토 등록페이지

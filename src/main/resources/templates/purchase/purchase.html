@@ -49,7 +49,7 @@
 }
 
 .breadcrumbs ul li a:hover {
-	color: #14bdee;
+	color: #005b00;
 }
 
 /* point */
@@ -81,6 +81,27 @@
 	font-size: 14px;
 	box-sizing: border-box;
 	padding: 5px;
+}
+
+.modal-title{
+ font-size: 17px;
+ text-align:left;
+ font-weight: bold;
+}
+.modal_table{
+  width:100%;
+}
+#modal_coupon{
+  width:200px;
+}
+#modal_usebtn{
+  margin:10px;
+  text-align: right;
+}
+#use_btn{
+  margin:10px;
+  text-align: right;
+  border-radius:10px;
 }
 </style>
 <!-- jQuery -->
@@ -150,6 +171,46 @@
 			document.getElementById("userpoint").value = 0;
 		}
 	};
+</script>
+<script>
+function usingcoupon() {
+	var userid = '[[${session.loginuser.userid}]]';
+	
+	$.ajax({
+		type:"POST",
+		data : {'userid' : userid},
+		url:"[[@{/coupon}]]",
+		dateType:"JSON",
+		success : function(data) {
+			list = data;
+//	          $('#myModal').modal(data);
+	          console.log(list);
+	          var size = Object.keys(list).length;
+	          console.log(size);
+	          var i =0;
+	          while(i<size){
+		          console.log(Object.keys(list[i]));
+		          var list1 = Object.keys(list[i]);
+		          console.log(Object.values(list[i]));
+		          var list2= Object.values(list[i]);
+		          console.log(JSON.stringify(list1[2]));
+		          console.log(JSON.stringify(list2[2]));
+				  
+		          document.getElementById("modal_couponid").text = JSON.stringify(list1[2]);//couponid
+				  document.getElementById("modal_couponid").value = JSON.stringify(list2[2]);//couponidvalue
+				  document.getElementById("modal_couponname").text = JSON.stringify(list1[3]);//couponname
+			      document.getElementById("modal_couponname").value = JSON.stringify(list2[3]);//couponnamevalue
+				  document.getElementById("modal_couponprice").text = JSON.stringify(list1[4]);//couponprice
+				  document.getElementById("modal_couponprice").value = JSON.stringify(list2[4]);//couponpricevalue 
+					
+		          i=i+1;
+		          
+	          }
+	          
+
+		}
+	});
+}
 </script>
 </head>
 
@@ -223,11 +284,15 @@
 						<input type="hidden" id="mentoringoptionid"
 							th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
-							<div class="custom-control custom-checkbox">
+							<div class="custom-control custom-checkbox" style="margin-bottom:20px;">
 								<input type="checkbox" class="custom-control-input" id="shipto">
 								<label class="custom-control-label" for="shipto"
 									data-toggle="collapse" data-target="#shipping-address">Select
 									Point</label>
+							</div>
+							<!-- 쿠폰사용버튼 -->
+							<div>
+							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#myNodal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -292,8 +357,33 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
+	
+	<!------------- Modal --------------->
+	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:500px;">
+	      <!-- Modal content-->   
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">보유 쿠폰</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	
+	        </div>
+	        <div class="modal-body">
+	          <table class="modal_table">
+	            <tr>
+	              <td id="modal_couponid">couponid</td>
+	              <td id="modal_couponname">couponname</td>
+	              <td id="modal_couponprice">couponprice</td>
+	              <td id="modal_usebtn"><button id="use_btn" class="btn btn-outline-primary" style="float:right;">사용하기</button></td>
+	            </tr>
+	          </table>
+	        </div>
+	        <div id="count" value="1"></div>
+	      </div>
+	    </div>
+	</div>
+
 
 </body>
 <script>

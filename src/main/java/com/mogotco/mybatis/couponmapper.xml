@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogotco.mapper.CouponMapper">
+
+	
+ 	<select id="select" parameterType="Integer" resultType="CouponDTO">
+		SELECT * FROM coupon WHERE couponid=#{couponid}
+	</select> 
+	
+	<select id="selectAll" resultType="CouponDTO">
+		SELECT * FROM coupon
+	</select>
+
+	<insert id="insert" parameterType="CouponDTO">
+		INSERT INTO coupon VALUES (#{couponid},#{couponname},#{couponprice})
+	</insert> 	
+	
+	<update id="update" parameterType="CouponDTO">
+		UPDATE coupon SET couponname=#{couponname}, couponprice=#{couponprice} WHERE couponid=#{couponid}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM coupon WHERE couponid=#{couponid}
+	</delete> 
+	
+</mapper>

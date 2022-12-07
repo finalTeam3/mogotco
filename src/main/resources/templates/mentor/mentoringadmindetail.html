@@ -28,7 +28,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/courses}">Mentor</a></li>
+								<li><a th:href="@{/user/mypage(userid=${session.loginuser.userid})}">Mentor</a></li>
 								<li>Mentoring Admin Details</li>
 							</ul>
 						</div>
@@ -64,7 +64,7 @@
 							<!-- <div class="sidebar_section_title">Mentoring admin detail</div> -->
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div ><img th:src="@{/images/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
+									<div ><img th:src="@{/img/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
 									<div class="teacher_title">
 										<div class="teacher_name" style="float:left;"></div>
 										<ul><li><a id="kakaotalksharingbtn"></a></li></ul>

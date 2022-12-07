@@ -63,7 +63,7 @@
 
 @media only screen and (max-width: 1199px)
 {
-	.course_info:first-child
+ 	.course_info:first-child
 	{
 		margin-right: 12px;
 	}
@@ -83,7 +83,7 @@
 	{
 	    width: calc((100% - 24px) / 3);
 	    margin-bottom: 12px;
-	}
+	} 
 }
 
 /************
@@ -110,7 +110,7 @@
 
 @media only screen and (max-width: 991px)
 {
-	.main_nav,
+ 	.main_nav,
 	.search_button
 	{
 		display: none;
@@ -136,8 +136,8 @@
 	}
 	.sidebar
 	{
-		margin-top: 100px;
-		padding-left: 0;
+		margin-top: 10px;
+		padding-left: 60px;
 	}
 	.newsletter_container
 	{
@@ -208,7 +208,11 @@
 
 @media only screen and (max-width: 880px)
 {
-	
+		.sidebar
+	{
+		margin-top: 10px;
+		padding-left: 200px;
+	}
 }
 
 /************
@@ -275,9 +279,13 @@
 11. 539px
 ************/
 
-@media only screen and (max-width: 539px)
+@media only screen and (max-width: 540px)
 {
-	
+		.sidebar
+	{
+		margin-top: 10px;
+		padding-left: 100px;
+	}
 }
 
 /************
@@ -295,14 +303,33 @@
 
 @media only screen and (max-width: 479px)
 {
-	
+
 }
 
 /************
 14. 400px
 ************/
 
-@media only screen and (max-width: 400px)
+@media only screen and (max-width: 414px)
 {
-	
+	.sidebar
+	{
+		margin-top: 10px;
+		padding-left: 40px;
+	}
+}
+/************
+14. 400px
+************/	
+@media only screen and (max-width: 280px)
+{
+	.sidebar
+	{
+		margin-top: 10px;
+		padding-left: 20px;
+	}
+	.shopping_cart
+	{
+		display: none;
+	}
 }
