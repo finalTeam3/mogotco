@@ -93,11 +93,78 @@ function checkOnlyOne(element) {
 <div class="courses">
 	<div class="container">
 		<div class="row">
-
+						<!-- Courses Sidebar -->
+			<div class="col-lg-4">
+				<div class="sidebar">
+				<div class="contact_info_title">Mentoring</div>
+					<!-- Latest Course -->
+					<div class="sidebar_section">
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
+						<div class="sidebar_latest">
+							<!-- Latest Course -->
+							<div
+								class="latest d-flex flex-row align-items-start justify-content-start">
+								<div>
+									&nbsp&nbsp&nbsp&nbsp
+									<button type="button" th:if="${ms != null}"
+										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
+										class="home_search_button"
+										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<form id="typeselectmentoring">
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_categories">
+								<ul>
+									<li><a th:href="@{/mentoring/defaultmentoring}"
+										th:text="${'all'}" th:value="${'all'}"><input
+											type="hidden" name='mname' id="mname" th:value="${'all'}"
+											th:text="${'all'}"></a></li>
+									<li th:each="mtc:${mtcatelist}"><a
+										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname},userid=${userid})}"
+										th:value="${mtc.mname}" th:text="${mtc.mname}"
+										th:style="${mtc.mname == selcatename ? 'color: #005b00;' : 'color: #000000;'}"><input
+											type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
+											th:value="${mtc.mname}"></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Type</div>
+							<div class="sidebar_categories">
+								<p>
+									<input type="checkbox" name='mentoringtype' value='lowprice'
+										th:onclick="checkOnlyOne(this)" id="lowprice"> <label
+										for="lowprice">가격순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='recentmen'
+										th:onclick="checkOnlyOne(this)" id="recentmen"> <label
+										for="recentmen">가장 빠른순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='orderreview'
+										th:onclick="checkOnlyOne(this)" id="orderreview"> <label
+										for="orderreview">별점순</label>
+								</p>
+								<p>
+									<input type="checkbox" name='mentoringtype' value='mcaringok'
+										th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
+										for="mcaringok">사후관리</label>
+								</p>
+							</div>
+						</div>
+						<input type="hidden" id='selcatename' th:value="${selcatename}">
+						<input type="hidden" id='txt' th:value="${txt}">
+					</form>
+				</div>
+			</div>
 			<!-- Courses Main Content -->
 			<div class="col-lg-8">
-
-				<div class="contact_info_title">Mentoring</div>
 				<div class="courses_search_container">
 					<form id="search_form_mentoring"
 						class="courses_search_form d-flex flex-row align-items-center justify-content-start">
@@ -217,76 +284,6 @@ function checkOnlyOne(element) {
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<!-- Courses Sidebar -->
-			<div class="col-lg-4">
-				<div class="sidebar">
-					<!-- Latest Course -->
-					<div class="sidebar_section">
-						<div style="margin-top: 50px;" th:if="${ms != null}"
-							class="sidebar_section_title">Mentoring Register</div>
-						<div class="sidebar_latest">
-							<!-- Latest Course -->
-							<div
-								class="latest d-flex flex-row align-items-start justify-content-start">
-								<div>
-									&nbsp&nbsp&nbsp&nbsp
-									<button type="button" th:if="${ms != null}"
-										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
-										class="home_search_button"
-										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<form id="typeselectmentoring">
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
-							<div class="sidebar_categories">
-								<ul>
-									<li><a th:href="@{/mentoring/defaultmentoring}"
-										th:text="${'all'}" th:value="${'all'}"><input
-											type="hidden" name='mname' id="mname" th:value="${'all'}"
-											th:text="${'all'}"></a></li>
-									<li th:each="mtc:${mtcatelist}"><a
-										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname},userid=${userid})}"
-										th:value="${mtc.mname}" th:text="${mtc.mname}"
-										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
-											type="hidden" th:text="${mtc.mname}" name='mname' id="mname"
-											th:value="${mtc.mname}"></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="sidebar_section">
-							<div class="sidebar_section_title">Type</div>
-							<div class="sidebar_categories">
-								<p>
-									<input type="checkbox" name='mentoringtype' value='lowprice'
-										th:onclick="checkOnlyOne(this)" id="lowprice"> <label
-										for="lowprice">가격순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='recentmen'
-										th:onclick="checkOnlyOne(this)" id="recentmen"> <label
-										for="recentmen">가장 빠른순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='orderreview'
-										th:onclick="checkOnlyOne(this)" id="orderreview"> <label
-										for="orderreview">별점순</label>
-								</p>
-								<p>
-									<input type="checkbox" name='mentoringtype' value='mcaringok'
-										th:onclick="checkOnlyOne(this)" id="mcaringok"> <label
-										for="mcaringok">사후관리</label>
-								</p>
-							</div>
-						</div>
-						<input type="hidden" id='selcatename' th:value="${selcatename}">
-						<input type="hidden" id='txt' th:value="${txt}">
-					</form>
 				</div>
 			</div>
 		</div>
