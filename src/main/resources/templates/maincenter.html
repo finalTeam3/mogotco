@@ -207,7 +207,7 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 col-md-6 team_col" th:each="t:${topm}">
 					<div class="team_item">
 						<div class="team_image">
-							<img  th:onclick="request([[${t.mentor_mentorid}]])" th:src="@{/images/}+${t.mentor_mentorimg}" alt="">
+							<img  th:onclick="request([[${t.mentor_mentorid}]])" th:src="@{/img/}+${t.mentor_mentorimg}" alt="">
 						</div>
 						<div class="team_body">
 							<div class="team_title">
