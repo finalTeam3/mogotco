@@ -19,6 +19,7 @@ import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
@@ -26,6 +27,7 @@ import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.PurchaseDetailService;
+import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -33,6 +35,12 @@ public class MentoringController {
 
 	@Autowired
 	MentoringService mservice;
+	
+	@Autowired
+	MentorService mentorservice;
+
+	@Autowired
+	UserService uservice;
 
 	@Autowired
 	MentoringOptionService moservice;
@@ -731,6 +739,8 @@ public class MentoringController {
 	public String mymentoringdetail(Model model, String id) {
 		List<PurchaseDetailDTO> detail = null;
 		PurchaseDetailDTO detailmember = null;
+		MentorDTO mentor = null;
+		UserDTO myuser = null;
 		try {
 			// 비대면
 			// 멘토링 정보를 불러오고
@@ -744,7 +754,11 @@ public class MentoringController {
 				// 다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			myuser = uservice.get(id);
+			mentor = mentorservice.mentorAll(id);
 			model.addAttribute("userid", id);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mentor);
 			model.addAttribute("list", detail);
 			// 화면
 			model.addAttribute("center", mentoring + "mymentoringdetail");
