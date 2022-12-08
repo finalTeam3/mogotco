@@ -122,7 +122,7 @@ function checkOnlyOne(element) {
 								<ul>
 									<li><a th:href="@{/mentoring/defaultmentoring}"
 										th:text="${'all'}" th:value="${'all'}"><input
-											type="hidden" name='mname' id="mname" th:value="${'all'}"
+											type="hidden" name='mname' id="mname" th:value="${'all'}" th:style="${selcatename == 'all' ? 'color: #005b00;' : 'color: #000000;'}"
 											th:text="${'all'}"></a></li>
 									<li th:each="mtc:${mtcatelist}"><a
 										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname},userid=${userid})}"

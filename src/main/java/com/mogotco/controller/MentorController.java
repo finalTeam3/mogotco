@@ -266,8 +266,10 @@ public class MentorController {
 		if(mentordto.getMcimg().getOriginalFilename().length() == 0) {
 			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
 				//둘다 수정 안되었을 때
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
-					mservice.modify(mtd);
+					mservice.modify(mta);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -276,7 +278,7 @@ public class MentorController {
 				//mentorimg만 수정 되었을 때
 				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 				MentorDTO mta = null;
-				mta= new MentorDTO(mentordto.getMentorid(), null, null, mtd.getMentorcom(), mtd.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
 					mservice.modify(mta);
 				} catch (Exception e) {
