@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
 <script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
 <script th:src="@{/js/contact.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+        <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+    <!-- Contact Javascript File -->
+    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{/mail/contact.js}"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
+    
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>    
 <style>
 .contact_info_location_title
 {
@@ -100,6 +130,334 @@
   }
 }
 </style>
+<style>
+body {
+    background-color: #f5f5f5;
+}
+
+#main-content {
+    max-width: 940px;
+    padding: 2em 3em;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+</style>
+
+<style>
+#div_chatbot body {
+  margin: 0;
+  padding: 0;
+   background-color: #f6f7f9;
+}
+
+#div_chatbot h1 {
+  margin-left: 25px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight:bold;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color:#769BCD;
+}
+
+#div_chatbot button {
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+  outline: 0 !important;
+  cursor: pointer;
+}
+#div_chatbot button.chatbox-open {
+  position: fixed;
+  bottom: 3rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  color: #769BCD;
+  background-color: #fff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.15);
+  border:1px solid #DCDCDC;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 16px;
+}
+#div_chatbot button.chatbox-close {
+  position: fixed;
+  bottom: 3rem;
+  right: 4rem;
+  width: 60px;
+  height: 60px;
+  color:#769BCD;
+  background-color:#fff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.15);
+  border:1px solid #DCDCDC;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  margin: 16px calc(2 * 16px + 52px) 16px 16px;
+}
+
+#div_chatbot textarea {
+  position: fixed;
+  bottom:10rem;
+  box-sizing: border-box;
+  max-width:230px;
+  width: 70%;
+  margin: 0;
+  height: calc(16px + 16px / 2);
+  padding: 0 calc(16px / 2);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: calc(16px + 16px / 2);
+  color: #888;
+  background-color: none;
+  border: 0;
+  outline: 0 !important;
+  resize: none;
+  overflow-y:scroll;
+}
+#div_chatbot textarea::-moz-placeholder {
+  color: #888;
+}
+#div_chatbot textarea:-ms-input-placeholder {
+  color: #888;
+}
+#div_chatbot textarea::placeholder {
+  color: #888;
+}
+
+#div_chatbot .chatbox-popup {
+  position: fixed;
+  display: flex;
+  box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
+  flex-direction: column;
+  display: none;
+  bottom: calc(2 * 16px + 52px);
+  right: 16px;
+  width: 100px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 16px;
+}
+#div_chatbot .chatbox-popup .chatbox-popup__header {
+  position: fixed;	
+  bottom:31.5rem;
+  right:5rem;
+  box-sizing: border-box;
+  display: flex;
+  max-width:300px;
+  width: 70%;
+  padding: 13px 16px 30px 16px;
+  color: #769BCD;
+  background-color:#fff;
+  align-items: center;
+  justify-content: space-around;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  box-shadow:0 -5px 5px -5px #769BCD, -5px 0 5px -5px #769BCD, 5px 0 5px -5px #769BCD;
+}
+
+ #btn_exit i{
+	color:#769BCD !important;
+}
+
+#div_chatbot .chatbox-popup .chatbox-popup__main {
+  max-width:300px;
+  height:320px;
+  width: 70%;
+  position: fixed;
+  right:5rem;
+  bottom:12.1rem;
+  box-sizing: border-box;
+  padding: 6px 16px;
+  line-height: calc(16px + 16px / 2);
+  color: black;
+  font-size:0.85rem;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+ 
+  text-align: center;
+  background-color:#fff;
+   box-shadow: -5px 0 5px -5px #769BCD, 5px 0 5px -5px #769BCD;
+}
+
+#div_chatroom{
+	overflow-y:scroll;
+	height:300px;
+	padding:0 5px 0 5px;
+}
+
+#div_chatroom::-webkit-scrollbar{
+	display:none;
+	width:0 !important;	
+}
+
+#div_chatbot .chatbox-popup .chatbox-popup__footer {
+  position: fixed;
+  max-width:300px;
+  width: 70%;
+  right:5rem;
+  bottom:9rem;
+  box-sizing: border-box;
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background-color:white;
+  box-shadow:0 5px 5px -5px #769BCD, -5px 0 5px -5px #769BCD, 5px 0 5px -5px #769BCD;
+}
+
+.chat_ask{
+	max-width:200px;
+	float:right;
+	margin-right:0;
+	margin-left:100px;
+	text-align:right;
+}
+
+.chat_ask .chattext{
+	background-color:#e3effd !important;
+}
+
+.chat_a{
+	float:left;
+	max-width:200px;
+	text-align:left;
+	margin-right:100px;
+	background-color: white;
+}
+
+.chat_q{
+	float:right;
+	max-width:200px;
+	text-align:right;
+	margin-right:0px;
+	background-color: white;
+}
+
+#div_chatroom .chattexta{
+	margin-bottom:10px;
+	background-color: #f6f6f6;
+	padding:8px;
+	border-radius:12px;
+}
+
+#div_chatroom .chattextq{
+	margin-bottom:10px;
+	background-color: yellow;
+	padding:8px;
+	border-radius:12px;
+}
+
+#btn_sendmessage:hover{
+	color:#769BCD;
+	cursor:pointer;
+}
+</style>
+<script>
+var stompClient = null;
+
+function setConnected(connected) {
+    $("#connect").prop("disabled", connected);
+    $("#disconnect").prop("disabled", !connected);
+    $("#send").prop("disabled", !connected);
+    if (connected) {
+        $("#conversation").show();
+    }
+    else {
+        $("#conversation").hide();
+    }
+    $("#ta_chatquestion").html("");
+}
+
+function connect(){
+	var socket = new SockJS('http://127.0.0.1/mogotco/ws');
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame){
+		setConnected(true);
+		stompClient.subscribe('/topic/public', function(message){
+			show1Message(message.body);
+		});
+	});
+}
+
+
+function disconnect(){
+	if(stompClient !== null){
+		stompClient.disconnect();
+	}
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+
+function sendMessage(){
+	var qa = $('#ta_chatquestion').val();
+	
+	
+	if(qa.trim() == ''){
+		alert('질문을 입력하세요');
+		$('#ta_chatquestion').focus();
+		return;
+		}
+	showMessage(qa);
+	stompClient.send("/app/sendMessage", {}, JSON.stringify(qa)); //서버에 보낼 메시지
+	
+}
+
+
+function showMessage(qa){
+	$('#div_chatroom').append('<div class="chat_q"><p class="chattextq">' + qa + '</p></div>');
+	$("#div_chatroom").scrollTop($("#div_chatroom")[0].scrollHeight);
+	$('#ta_chatquestion').val('');
+}
+
+function show1Message(qa){
+	$('#div_chatroom').append('<div class="chat_a"><p class="chattexta">' + qa + '</p></div>');
+	$("#div_chatroom").scrollTop($("#div_chatroom")[0].scrollHeight);
+	$('#ta_chatquestion').val('');
+}
+
+/* ChatBot */
+ 
+$(document).ready(function() {
+const chatbox = jQuery.noConflict();
+
+  $('#btn_startchat').click(function(){
+	  chatbox(".chatbox-popup, .chatbox-close").fadeIn();
+	  connect();
+	  const first = '안녕하세요 모같코입니다. "문의"라고 입력해주시면 자세히 안내 드릴게요!';
+	  $("#div_chatroom").append('<div class="chat_a"><p class="chattexta">안녕하세요 모같코입니다. "문의"라고 입력해주시면 자세히 안내 드릴게요!</p></div>');
+	  $("#div_chatroom").scrollTop($("#div_chatroom")[0].scrollHeight);
+	  $('#ta_chatquestion').val('');
+  });
+
+  $('.toclose').click(function(){
+	  chatbox(".chatbox-popup, .chatbox-close").fadeOut();
+	  disconnect();
+  });
+  
+  $('#btn_sendmessage').click(function(){
+	  sendMessage();
+  });
+  
+  $('#ta_chatquestion').keydown(function(key){
+	  if(key.keyCode == 13){
+		  sendMessage();
+	  }
+  });
+  
+ });
+</script>
+
 </head>
 
 	
@@ -151,7 +509,7 @@
 					<!-- Contact Info -->
 					<div class="col-lg-12">
 						<div class="contact_info">
-							<div class="contact_info_title">MOGOTCO 소개</div>
+							<div class="contact_info_title" style = "font-family: 'fontawesome';">MOGOTCO 소개</div>
 							<div class="contact_info_location_title">
 							MOGOTCO는 수많은 멘토진과 멘티들이 홈페이지내에서 편리하게 멘토링을 진행하고<br>
 							이로써 현대사회에서 더 큰 성장을 이룰 수 있도록 지원하는 멘토링 서비스 플랫폼입니다.
@@ -243,6 +601,86 @@
 				</div>
 			</div>
 		</div>
+			<div class="courses"></div>
+
+
+    <!-- Checkout Start -->
+
+    <!-- Checkout End -->
+
+
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+    
+<div id="main-content" class="container">
+    <div class="row">
+    
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="connect">웹소켓 연결:</label>
+                    <button id="connect" class="btn btn-default" type="submit">연결</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">해제
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+<!--        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="msg"></label>
+                    <input type="text" id="msg" class="form-control" placeholder="내용을 입력하세요....">
+                </div>
+                <button id="send" class="btn btn-default" disabled type="submit">보내기</button>
+            </form>
+        </div>  -->
+    </div>
+				
+</div>
+
+					  
+					  	<!-- Chatbot Start -->
+	<div id="div_chatbot">
+		<button class="chatbox-open" id="btn_startchat">
+			<i class="fa fa-comment fa-2x" aria-hidden="true"></i>
+		</button>
+		<button class="chatbox-close toclose">
+			<i class="fa fa-close fa-2x" aria-hidden="true"></i>
+		</button>
+
+		<section class="chatbox-popup">
+			<header class="chatbox-popup__header">
+				<aside style="flex: 3">
+					<i class="fa-regular fa-comment-dots"></i>
+				</aside>
+				<aside style="flex: 8">
+					<h1 id="h1_chatbotname">당근PT 챗봇</h1>
+				</aside>
+				<aside style="flex: 1">
+					<button id="btn_exit" class="chatbox-close-x toclose">
+						<i class="fa-solid fa-x"></i>
+					</button>
+				</aside>
+			</header>
+
+			<main class="chatbox-popup__main">
+				<div id="div_chatroom"></div>
+			</main>
+
+			<footer class="chatbox-popup__footer">
+				<aside style="flex: 13">
+					<textarea type="text" id="ta_chatquestion" placeholder="메시지를 입력하세요"
+						autofocus></textarea>
+				</aside>
+				<aside style="flex: 1; color: #888; text-align: center;">
+					<i class="fa fa-paper-plane" id="btn_sendmessage"
+						aria-hidden="true"></i>
+				</aside>
+			</footer>
+		</section>
+	</div>
 	</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b67794657ed6e950ec05402c7a55d07f"></script>
@@ -268,4 +706,31 @@ var infowindow = new kakao.maps.InfoWindow({
 
 // 인포윈도우를 지도에 표시한다
 infowindow.open(map, marker);
+//다시 지도를 찾음
+map.relayout();
+//center지정 다시 해주기
+map.setCenter(new kakao.maps.LatLng(37.503376, 127.049776));
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(37.503376, 127.049776); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+var iwContent = '<div style="padding:5px; color:#005b00; font-size:16px;">MOGOTCO 본사</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+// 인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({
+    position : iwPosition, 
+    content : iwContent 
+});
+  
+// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+infowindow.open(map, marker); 
 </script>

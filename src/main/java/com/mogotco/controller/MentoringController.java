@@ -86,7 +86,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			String txt = "null";
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
@@ -145,6 +145,7 @@ public class MentoringController {
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt,meningnum);
+				model.addAttribute("selcatename", mname);
 
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
@@ -186,7 +187,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			model.addAttribute("txt", txt);
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
@@ -231,6 +232,7 @@ public class MentoringController {
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.allmcaringoksearch(txt, 1,meningnum);
 					}
+					model.addAttribute("selcatename", mname);
 				} else {
 					// 기격
 					if (mtype.equals(lowprice)) {
@@ -301,6 +303,7 @@ public class MentoringController {
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.nallmcaringoksearch(1,meningnum);
 					}
+					model.addAttribute("selcatename", mname);
 				} else {
 					// 기격
 					if (mtype.equals(lowprice)) {
@@ -347,11 +350,12 @@ public class MentoringController {
 		HttpSession session = request.getSession(false);
 		try {// session이 있을 때 controller주소로 감
 			String null1 = "null";
+			String all = "all";
 			String encodetxt = URLEncoder.encode(txt, "UTF-8");
 			String encodemname = URLEncoder.encode(mname, "UTF-8");
 			if(txt.equals(null1)) {
 				if(mtype.equals(null1)) {
-					if(mname.equals(null1)) {
+					if(mname.equals(all)) {
 						// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
 						response.sendRedirect("/mogotco/mentoring/mentoring?userid="
 								+ userid + "&meningnum=" + meningnum);
@@ -369,7 +373,7 @@ public class MentoringController {
 				}
 			}else {
 				if(mtype.equals(null1)) {
-					if(mname.equals(null1)) {
+					if(mname.equals(all)) {
 						// mentoring/mentoring인데 검색을 했을 때(mainsearch)
 						response.sendRedirect(
 								"/mogotco/mentoring/mainsearch?txt=" + encodetxt + "&meningnum=" + meningnum + "&userid=" + userid);
@@ -412,7 +416,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			String txt = "null";
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
@@ -468,6 +472,7 @@ public class MentoringController {
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt, meningnum);
+				model.addAttribute("selcatename", mname);
 
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
@@ -510,7 +515,7 @@ public class MentoringController {
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
@@ -554,6 +559,7 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.allmcaringoksearch(txt, 1, meningnum);
 				}
+				model.addAttribute("selcatename", mname);
 			} else {
 				// 기격
 				if (mtype.equals(lowprice)) {
@@ -620,6 +626,7 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.nallmcaringoksearch(1, meningnum);
 				}
+				model.addAttribute("selcatename", mname);
 			} else {
 				// 기격
 				if (mtype.equals(lowprice)) {

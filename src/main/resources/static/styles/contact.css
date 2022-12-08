@@ -870,7 +870,7 @@ section
 }
 .contact_info_title
 {
-	font-family: 'fontawesome';
+	font-family: 'Roboto', sans-serif;
 	font-size: 36px;
 	font-weight: 700;
 	color: #384158;
@@ -878,9 +878,11 @@ section
 .contact_form_login
 {
 	padding-right: 10px;
-	width : 364px;
+	width : 25%;
 	height : 390px;
-	margin : auto auto 100px 403px;
+	margin : auto;
+	display:center;
+	
 }
 .contact_form
 {
