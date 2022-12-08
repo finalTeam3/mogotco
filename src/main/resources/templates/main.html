@@ -348,10 +348,6 @@ $(document).ready(function() {
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
                            <div class="login_button"><a th:href="@{/user/logout}">LOGOUT</a></div>
                         </div>
-                        				<!-- 메인 페이지용 버튼  -->				
-				 <a style="position:fixed;right:3%;bottom:5%" href="#" title="챗봇 테스트" id="openmodal" data-toggle="modal" data-target="#myModal">
-				<img th:src="@{/img/clovaicon.jpg}" alt="화면 고정 버튼" style="width:20%;">
-				</a> 
                      </div>
                   </div>
                </div>
@@ -439,6 +435,7 @@ $(document).ready(function() {
          </ul>
       </nav>
    </div>
+
 					  <div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog">
 					    <div class="modal-content">
@@ -466,6 +463,7 @@ $(document).ready(function() {
 					      </div>
 					    </div>
 					  </div>
+
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
 <div class="super_container"th:insert = "${center} ? ${center} : maincenter">
