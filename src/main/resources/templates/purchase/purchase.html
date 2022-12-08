@@ -192,29 +192,27 @@ function usingcoupon() {
 	          console.log(Object.keys(list[0]));
 	          var list1 = Object.keys(list[0]);
 	          var str ='<thead><tr>';
-	          str += '<th>'+ JSON.stringify(list1[2])+'</th>';//couponid
-	          str += '<th>'+ JSON.stringify(list1[3])+'</th>';//couponname
-	          str += '<th>'+ JSON.stringify(list1[4])+'</th>';//couponprice
+	          str += '<th>'+ JSON.stringify(list1[2]).replace(/\"/gi, "") + '</th>'; //couponid
+	          str += '<th>'+ JSON.stringify(list1[3]).replace(/\"/gi, "") + '</th>'; //couponname
+	          str += '<th>'+ JSON.stringify(list1[4]).replace(/\"/gi, "") + '</th>'; //couponprice
 	          str += '</tr></thead>';
 	          
 	          //body시작
-	          str += '<tbody><tr>';
 	          while(i<size){
 		          console.log(Object.values(list[i]));
 		          var list2= Object.values(list[i]);
 		          console.log(JSON.stringify(list2[2]));
-
+		          str += '<tbody><tr>';
 		          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
-		          str += '<td>'+ JSON.stringify(list2[3])+'</td>';
+		          str += '<td>'+ JSON.stringify(list2[3]).replace(/\"/gi, "") + '</td>';
 		          str += '<td>'+ JSON.stringify(list2[4])+'</td>';
-		          str += '<td>' + '<button class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button>' +'</td>';
-		          //button자리
-		          
+		          str += '<td>'+'<button class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button><br />'+'</td>';
+		          str += '</tr></tbody>';
 		          
 		          i=i+1;
 		          
 	          }
-	           str += '</tr></tbody>'
+
 	           console.log(str);
 			   $('.modal_table').append(str);
 		}
@@ -380,7 +378,6 @@ function usingcoupon() {
 	        </div>
 	        <div class="modal-body">
 	          <table class="modal_table">
-
 	          </table>
 	        </div>
 	        <div id="count" value="1"></div>
