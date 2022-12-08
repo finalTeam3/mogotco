@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.MentoringmemberDTO;
 import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
-import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
+import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
@@ -55,6 +56,9 @@ public class PurchaseController {
 	
 	@Autowired
 	UserCouponService ucservice;
+	
+	@Autowired
+	MentorService mservice;
 	
 	// 아이디값 유무 판단
 	@RequestMapping("/idcheck")
@@ -115,6 +119,8 @@ public class PurchaseController {
 	public String purchasedetail(Model model, String id) {
 		List<PurchaseDetailDTO> detail = null;
 		PurchaseDetailDTO detailmember = null;
+		UserDTO myuser = null;
+		MentorDTO mentor = null;
 		try {
 			//멘토링 정보를 불러오고
 			detail = service1.wholedetail(id);
@@ -127,8 +133,12 @@ public class PurchaseController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			myuser = service5.get(id);
+			mentor = mservice.mentorAll(id);
 			model.addAttribute("userid", id);
 			model.addAttribute("list", detail);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mentor);
 			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

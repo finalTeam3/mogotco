@@ -1,17 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/about.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/about_responsive.css}">
-<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script th:src="@{/js/about.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/contact_responsive.css}">
+<script th:src="@{/plugins/marker_with_label/marker_with_label.js}"></script>
+<script th:src="@{/js/contact.js}"></script>
+<style>
+.contact_info_location_title
+{
+	font-family: 'fontawesome';
+	margin-top: 20px;
+}
+.table
+{
+	margin: 40px 0 0;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+}
+.table tr:first-child {
+    border-top : 2px solid #333;
+}
+.table tr:last-child {
+    border-bottom : 2px solid #333;
+}
+.table th {
+    height: 56px;
+    font-weight: normal;
+}
+.table td {
+    height: 56px;
+    font-weight: normal;
+}
+.vision 
+{
+	border-top : 1px solid #333;
+	margin-top : 30px;
+	width: 100%
+}
+.vision th
+{
+	width: 15%;
+}
+.vision tr
+{
+	border-bottom: 1px solid #efefef;
+}
+.vision tr:last-child {
+    border-bottom : 0px solid #333;
+}
+.vision th img
+{
+    margin : 10px;
+}
+.contact_info_location
+{
+	margin-top : 50px;
+}
+ @media all and (max-width: 768px) {
+    
+  table, tbody, th, td, tr {
+    display: block;
+  }
+  
+  th {
+    text-align: right;
+  }
+  
+  table {
+    position: relative; 
+    padding-bottom: 0;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+  
+  thead {
+    float: left;
+    white-space: nowrap;
+  }
+  
+  tbody {
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  tr {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  th {
+    border-bottom: 1px solid #a39485;
+  }
+  
+  td {
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+</style>
 </head>
 
-
-
 	
-
 	<!-- Home -->
 
 	<div class="home">
@@ -31,313 +122,122 @@
 		</div>			
 	</div>
 
-	<!-- About -->
+	<!-- Contact -->
 
-	<div class="about">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Welcome To Unicat E-Learning</h2>
-						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu Vestibulum</p></div>
+	<div class="contact">
+		
+		<!-- Map -->
+
+		<div id = "contact_map" class="contact_map">
+
+			<!-- Kakao Map -->
+			
+			<div class="map">
+				<div id="google_map" class="google_map">
+					<div class="map_container">
+						<div id="map"></div>
 					</div>
 				</div>
 			</div>
-			<div class="row about_row">
-				
-				<!-- About Item -->
-				<div class="col-lg-4 about_col about_col_left">
-					<div class="about_item">
-						<div class="about_item_image"><img th:src="@{/images/about_1.jpg}" alt=""></div>
-						<div class="about_item_title"><a href="#">Our Stories</a></div>
-						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- About Item -->
-				<div class="col-lg-4 about_col about_col_middle">
-					<div class="about_item">
-						<div class="about_item_image"><img th:src="@{/images/about_2.jpg}" alt=""></div>
-						<div class="about_item_title"><a href="#">Our Mission</a></div>
-						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- About Item -->
-				<div class="col-lg-4 about_col about_col_right">
-					<div class="about_item">
-						<div class="about_item_image"><img th:src="@{/images/about_3.jpg}" alt=""></div>
-						<div class="about_item_title"><a href="#">Our Vision</a></div>
-						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
+			
 		</div>
-	</div>
 
-	<!-- Feature -->
+		<!-- Contact Info -->
 
-	<div class="feature">
-		<div class="feature_background" th:style="'background-image:url(' + @{/images/courses_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Why Choose Us</h2>
-						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
-					</div>
-				</div>
-			</div>
-			<div class="row feature_row">
+		<div class="contact_info_container">
+			<div class="container">
+				<div class="row">
 
-				<!-- Feature Content -->
-				<div class="col-lg-6 feature_col">
-					<div class="feature_content">
-						<!-- Accordions -->
-						<div class="accordions">
+					<!-- Contact Info -->
+					<div class="col-lg-12">
+						<div class="contact_info">
+							<div class="contact_info_title">MOGOTCO 소개</div>
+							<div class="contact_info_location_title">
+							MOGOTCO는 수많은 멘토진과 멘티들이 홈페이지내에서 편리하게 멘토링을 진행하고<br>
+							이로써 현대사회에서 더 큰 성장을 이룰 수 있도록 지원하는 멘토링 서비스 플랫폼입니다.
+							</div>
 							
-							<div class="elements_accordions">
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Award for Best School 2017</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center active"><div>You’re learning from the best.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Our degrees are recognized worldwide.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>We encourage our students to go global.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-						<!-- Accordions End -->
-					</div>
-				</div>
-
-				<!-- Feature Video -->
-				<div class="col-lg-6 feature_col">
-					<div class="feature_video d-flex flex-column align-items-center justify-content-center">
-						<div class="feature_video_background" th:style="'background-image:url(' + @{/images/video.jpg} + ')'"></div>
-						<a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
-							<img th:src="@{/images/play.png}" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Team -->
-
-	<div class="team">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">The Best Tutors in Town</h2>
-						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
-					</div>
-				</div>
-			</div>
-			<div class="row team_row">
-				
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image"><img th:src="@{/images/team_1.jpg}" alt=""></div>
-						<div class="team_body">
-							<div class="team_title"><a href="#">Jacke Masito</a></div>
-							<div class="team_subtitle">Marketing & Management</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image"><img th:src="@{/images/team_2.jpg}" alt=""></div>
-						<div class="team_body">
-							<div class="team_title"><a href="#">William James</a></div>
-							<div class="team_subtitle">Designer & Website</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image"><img th:src="@{/images/team_3.jpg}" alt=""></div>
-						<div class="team_body">
-							<div class="team_title"><a href="#">John Tyler</a></div>
-							<div class="team_subtitle">Quantum mechanics</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Team Item -->
-				<div class="col-lg-3 col-md-6 team_col">
-					<div class="team_item">
-						<div class="team_image"><img th:src="@{/images/team_4.jpg}" alt=""></div>
-						<div class="team_body">
-							<div class="team_title"><a href="#">Veronica Vahn</a></div>
-							<div class="team_subtitle">Math & Physics</div>
-							<div class="social_list">
-								<ul>
-									<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Counter -->
-
-	<div class="counter">
-		<div class="counter_background" th:style="'background-image:url(' + @{/images/counter_background.jpg} + ')'"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="counter_content">
-						<h2 class="counter_title">Register Now</h2>
-						<div class="counter_text"><p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dumy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-
-						<!-- Milestones -->
-
-						<div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between">
+							<table class = "table">
+							    <tbody>
+							    <tr>
+							        <th>설립연도</th>
+							        <td>2022년 12월</td>
+							    </tr>
+							    <tr>
+							        <th>본사 위치</th>
+							        <td>서울특별시 강남구 대치동 889-41, 404호</td>
+							    </tr>
+							    <tr>
+							        <th>주요서비스</th>
+							        <td>화상 멘토링 플랫폼</td>
+							    </tr>
+							    <tr>
+							        <th>주요사업</th>
+							        <td>커뮤니티 서비스 사업</td>
+							    </tr>
+							    <tr>
+							        <th>전체인력</th>
+							        <td>4명 (본사 기준, 2022년 기준)</td>
+							    </tr>
+							    </tbody>
+							</table>
 							
-							<!-- Milestone -->
-							<div class="milestone">
-								<div class="milestone_counter" data-end-value="15">0</div>
-								<div class="milestone_text">years</div>
+							<div class="contact_info_location_title" style = "margin-top:50px">
+							Vision and Mission
 							</div>
-
-							<!-- Milestone -->
-							<div class="milestone">
-								<div class="milestone_counter" data-end-value="120" data-sign-after="k">0</div>
-								<div class="milestone_text">years</div>
+							
+							<table class = "vision">
+							    <tbody>
+							    <tr>
+							        <th><img th:src="@{/img/avatar.png}" style = "width:100px; height:100px;"></th>
+							        <td>
+							        	<dl class = "visiontext">
+											<dt>임직원</dt>
+											<dd>다양성을 인정하고 서로 존중하며, 임직원의 능력이 최대한 발휘되도록 책임을 다하는 기업문화와 최상의 근무 환경을 조성합니다.<br>
+											모든 임직원을 능력과 성과에 따라 합리적으로 대우하며, 차별없이 평등하게 일할 수 있는 기회를 제공합니다.</dd>
+										</dl>
+									</td>
+							    </tr>
+							    <tr>
+							        <th><img th:src="@{/img/badge.png}" style = "width:100px; height:100px;"></th>
+							        <td><dl class = "visiontext">
+											<dt>미션</dt>
+											<dd>이용자의 더 큰 성장을 지원하기 위한 국내 최대의 멘토링 커뮤니티 플랫폼으로 자리 잡는 것입니다.</dd>
+										</dl></td>
+							    </tr>
+							    <tr>
+							        <th><img th:src="@{/img/hand.png}" style = "width:100px; height:100px;"></th>
+							        <td><dl class = "visiontext">
+											<dt>사회</dt>
+											<dd>기업 시민으로서 지역사회의 법규 및 사회적 가치관을 존중하며 다양한 사회공헌 활동을 통해 사회적 책임을 다합니다.</dd>
+										</dl></td>
+							    </tr>
+							    <tr>
+							        <th><img th:src="@{/img/call-center.png}" style = "width:100px; height:100px;"></th>
+							        <td><dl class = "visiontext">
+											<dt>고객</dt>
+											<dd>고객이 원하는 가치를 경영활동의 최우선 판단 기준으로 여기며, 고객에게 도움이 되는 가치를 만듭니다.<br>
+											정직함으로써 신뢰를 받을 수 있도록 노력하고 고객의 의견에 항상 귀 기울입니다.</dd>
+										</dl></td>
+							    </tr>
+							    <tr>
+							        <th><img th:src="@{/img/magnifying-glass.png}" style = "width:100px; height:100px;"></th>
+							        <td><dl class = "visiontext">
+											<dt>창조</dt>
+											<dd>새로운 환경과 상황에 적응하고 시장에 앞서 새로운 솔루션을 제공합니다.</dd>
+										</dl></td>
+							    </tr>
+							    </tbody>
+							</table>
+							
+							<div class="contact_info_location">
+								<div class="contact_info_location_title" style="display:block">Contact Us</div>
+								<ul class="location_list">
+									<li>428, Seolleung-ro, Gangnam-gu, Seoul, Republic of Korea</li>
+									<li>+(82) 010 4009 1541</li>
+									<li>mogotcomentoring@gmail.com</li>
+								</ul>
 							</div>
-
-							<!-- Milestone -->
-							<div class="milestone">
-								<div class="milestone_counter" data-end-value="670" data-sign-after="+">0</div>
-								<div class="milestone_text">years</div>
-							</div>
-
-							<!-- Milestone -->
-							<div class="milestone">
-								<div class="milestone_counter" data-end-value="320">0</div>
-								<div class="milestone_text">years</div>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="counter_form">
-				<div class="row fill_height">
-					<div class="col fill_height">
-						<form class="counter_form_content d-flex flex-column align-items-center justify-content-center" action="#">
-							<div class="counter_form_title">courses now</div>
-							<input type="text" class="counter_input" placeholder="Your Name:" required="required">
-							<input type="tel" class="counter_input" placeholder="Phone:" required="required">
-							<select name="counter_select" id="counter_select" class="counter_input counter_options">
-								<option>Choose Subject</option>
-								<option>Subject</option>
-								<option>Subject</option>
-								<option>Subject</option>
-							</select>
-							<textarea class="counter_input counter_text_input" placeholder="Message:" required="required"></textarea>
-							<button type="submit" class="counter_form_button">submit now</button>
-						</form>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<!-- Partners -->
-
-	<div class="partners">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="partners_slider_container">
-						<div class="owl-carousel owl-theme partners_slider">
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_1.png}" alt=""></div>
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_2.png}" alt=""></div>
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_3.png}" alt=""></div>
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_4.png}" alt=""></div>
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_5.png}" alt=""></div>
-
-							<!-- Partner Item -->
-							<div class="owl-item partner_item"><img th:src="@{/images/partner_6.png}" alt=""></div>
-
 						</div>
 					</div>
 				</div>
@@ -345,5 +245,54 @@
 		</div>
 	</div>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b67794657ed6e950ec05402c7a55d07f"></script>
+<script>
+var container = document.getElementById('google_map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(37.503376, 127.049776), //지도의 중심좌표.
+	level: 1 //지도의 레벨(확대, 축소 정도)
+};
 
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+//지도에 마커를 생성하고 표시한다
+var marker = new kakao.maps.Marker({
+    position: new kakao.maps.LatLng(37.503376, 127.049776), // 마커의 좌표
+    map: map // 마커를 표시할 지도 객체
+});
+
+//마커 위에 표시할 인포윈도우를 생성한다
+var infowindow = new kakao.maps.InfoWindow({
+    content : '<div style="padding:5px; color:#005b00; font-size:16px;">MOGOTCO 본사</div>' // 인포윈도우에 표시할 내용
+});
+
+// 인포윈도우를 지도에 표시한다
+infowindow.open(map, marker);
+//다시 지도를 찾음
+map.relayout();
+//center지정 다시 해주기
+map.setCenter(new kakao.maps.LatLng(37.503376, 127.049776));
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(37.503376, 127.049776); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+var iwContent = '<div style="width:150px;text-align:center;padding:6px 0; color:black;"><strong style="color:#14bdee; font-size:16px;">MOGOTCO 본사</strong><br>비대면 멘토링 입니다</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+// 인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({
+    position : iwPosition, 
+    content : iwContent 
+});
+  
+// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+infowindow.open(map, marker); 
+</script>
