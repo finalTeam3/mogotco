@@ -2,6 +2,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<style>
+.feature_icon > img{
+	width:60%;
+/* 	image-rendering: -webkit-optimize-contrast;
+	transform: translateZ(0); 
+	backface-visibility: hidden; */
+}
+</style>
 <script>
 function request(mentor_mentorid){
 		location.href='[[@{/mentor/idcheck?mentorid=}]]'+mentor_mentorid;
@@ -80,8 +88,12 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa-solid fa-people-group fa-5x"></i>
+							<!-- <i class="fa-solid fa-people-group fa-5x"></i> -->
+							<img th:src="@{/img/people3d.png}" />
 						</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>
 						<h3 class="feature_title">Excellent mentors</h3>
 						<div class="feature_text">
 							<p>Select reliable developers using business card authentication system</p>
@@ -93,8 +105,12 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa fa-user-plus fa-5x"></i>
+							<!-- <i class="fa fa-user-plus fa-5x"></i> -->
+							<img th:src="@{/img/pencil3d.png}" />
 						</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>						
+						<div>&nbsp</div>						
 						<h3 class="feature_title">Be mentor</h3>
 						<div class="feature_text">
 							<p>Any mentee can be a mentor.</p>
@@ -105,8 +121,12 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa-solid fa-video fa-5x"></i>
+							<!-- <i class="fa-solid fa-video fa-5x"></i> -->
+							<img th:src="@{/img/video3d.png}" />
 						</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>						
+						<div>&nbsp</div>						
 						<h3 class="feature_title">Video meeting</h3>
 						<div class="feature_text">
 							<p>Non-face-to-face mentoring is possible within the site</p>
@@ -118,8 +138,12 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa fa-bell fa-5x"></i>
+							<!-- <i class="fa fa-bell fa-5x"></i> -->
+							<img th:src="@{/img/timer3d.png}" />
 						</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>							
+						<div>&nbsp</div>							
 						<h3 class="feature_title">Timer</h3>
 						<div class="feature_text">
 							<p>Send a message 10 minutes before the mentoring time</p>
