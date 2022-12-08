@@ -121,7 +121,7 @@ body {
 		overflow: auto;
 		margin:auto;
 		background-color: #F5F5F5;
-		padding: 50px;
+		padding: 25px;
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	#btnsend{
@@ -130,16 +130,18 @@ body {
 	}
 	#question{
 		text-align: right;
-		font-size: small;
-		background-color: #D9E5FF;
+		font-size: 110%;
+		background-color: #F5F5F5;
+		width:100%
 	}
 	#answer{
-		font-size: small;
-		background-color: white;
+		font-size: 110%;
+		background-color: #F5F5F5;
+		width:60%;
 	}
 	#ina{
 		background: rgba(20,189,238,0.2);
-		width: 40%;
+		width: 90%;
 		padding: 10px;
 		border-radius: 10px;
 		box-shadow: 2px 2px 2px 2px #BDBDBD;
@@ -148,12 +150,13 @@ body {
 	#inq{
 		float: right;
 		background: white;
-		text-align:right;
+		text-align:center;
 		width: 40%;
-		padding: 10px;
+		padding: 1px;
 		border-radius: 10px;
 		box-shadow: 2px 2px 2px 2px #BDBDBD;
 		font-family: 'Noto Sans KR', sans-serif;
+		white-space:pre-wrap;
 	}
 	#chatinform{
 		margin-bottom: 10px;
@@ -185,7 +188,7 @@ body {
 		text-align: right;
 		margin-bottom: 0px;
 		margin-top: 10px;
-		background-color: white;
+		background-color: #F5F5F5;
 		
 	}
 	#center{
@@ -204,7 +207,12 @@ body {
     
 	}
 
-
+	.modal-body {
+		position: relative;
+		padding: 20px;
+		height: 350px;
+		overflow-y: auto;
+	}
 
 </style>
 
@@ -249,7 +257,8 @@ function disconnect() {
 // 인풋창에서 메시지를 입력 후 전송
 function sendMessage() {
     let message = $("#msg").val();
-    showMessage("보낸 메시지: " + message);
+    /* showMessage("보낸 메시지: " + message); */
+    showMessage(message);
 
     stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
 }
@@ -290,12 +299,12 @@ $(document).ready(function() {
 		sendMessage();
 	    
 	});
-/* 	$('#msg').keypress(function(event){
+ 	$('#msg').keypress(function(event){
 	     if ( event.which == 13 ) {
 	         $('#send').click();
 	         return false;
 	     } 
-	});*/
+	});
 	$('#modalclose').click(function() {
 		 disconnect();
 		});
@@ -439,8 +448,10 @@ $(document).ready(function() {
 					        <div class="modal-header">
 					          <h4 id="chatbottitle" class="modal-title"><img id="chatbotimg" th:src="@{/img/clovaicon.jpg}"></h4>
 					        </div>
-								
+							
+							<div class="modal-body">
 							<div id="me"><div id="chatinform">챗봇에게 질문하세요</div></div>
+							</div>
 							
 							<div id="btnsend">
 							<textarea id="msg" style="width:90%;" rows="3"></textarea>
