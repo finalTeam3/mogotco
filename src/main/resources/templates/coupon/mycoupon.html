@@ -150,8 +150,8 @@
 										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
-										<a th:href="@{/mentor/idcheck(mentorid=${ms.mentorid})}">멘토 정보</a>
-									</li>
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${ms.mentorid})}'|">멘토 정보</a>
+									</li> 
 									<li id="li">
 										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토 정보 수정</a>
 									</li>

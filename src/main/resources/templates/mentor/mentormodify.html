@@ -205,8 +205,8 @@ function upload() {
 										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
-										<a th:href="@{/mentor/idcheck(mentorid=${m.mentorid})}">멘토 정보</a>
-									</li>
+										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${m.mentorid})}'|">멘토 정보</a>
+									</li> 
 									<li id="li">
 										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${m.mentorid})}'|">멘토 정보 수정</a>
 									</li>
@@ -217,7 +217,7 @@ function upload() {
 										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|">멘토링 이력</a>
 									</li>
 									<li id="li">
-										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${m.mentorid})}'|">멘토링 관리</a>
+										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(id=${us.userid},mentorid=${m.mentorid})}'|">멘토링 관리</a>
 									</li>
 									<li id="li">
 										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|">내 쿠폰함</a>
@@ -226,7 +226,7 @@ function upload() {
 							</div>
 						</div>
 				</div>
-			</div>				
+			</div>
 				
 					<!-- 멘토 프로필 이미지, 명함 이미지 화면에 나오기 위해 시간이 걸림 -->
 					<div class="col-lg-8">

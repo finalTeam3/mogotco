@@ -204,8 +204,8 @@ function upload() {
 										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${u.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
-										<a th:href="@{/mentor/idcheck(mentorid=${ms.mentorid})}">멘토 정보</a>
-									</li>
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${ms.mentorid})}'|">멘토 정보</a>
+									</li> 
 									<li id="li">
 										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${u.userid},mentorid=${ms.mentorid})}'|">멘토 정보 수정</a>
 									</li>
@@ -216,7 +216,7 @@ function upload() {
 										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${u.userid})}'|">멘토링 이력</a>
 									</li>
 									<li id="li">
-										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${ms.mentorid})}'|">멘토링 관리</a>
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(id=${u.userid},mentorid=${ms.mentorid})}'|">멘토링 관리</a>
 									</li>
 									<li id="li">
 										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${u.userid})}'|">내 쿠폰함</a>

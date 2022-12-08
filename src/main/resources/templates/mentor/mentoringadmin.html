@@ -258,7 +258,8 @@
 
 		<!-- Courses -->
 
-	<div class="courses">
+	<div class="contact">
+	<div class="contact_info_container">
 		<div class="container">
 			<div class="row">
 				
@@ -287,8 +288,8 @@
 										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
-										<a th:href="@{/mentor/idcheck(mentorid=${ms.mentorid})}">멘토 정보</a>
-									</li>
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${ms.mentorid})}'|">멘토 정보</a>
+									</li> 
 									<li id="li">
 										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토 정보 수정</a>
 									</li>
@@ -324,7 +325,7 @@
 										<th scope="row">멘토링 목록</th>
 										<div th:each="mtlist:${mtlist}">
 										<th>
-											<h4><a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}" th:text="${mtlist.mentoring_mtitle}"></a></h4>
+											<a th:href="@{/mentor/mentoringadmindetail(mentoringid=${mtlist.mentoring_mentoringid})}"><h4><span th:text="${mtlist.mentoring_mtitle}"></span></h4></a>
 											<th><span class="badge badge-pill badge-dark" style="color:#FFFFFF" th:text="${mtlist.mentoring_mentoringdate}"></span></th>
 										</th>
 											<td th:text="${mtlist.mentoring_mplace}"></td>
@@ -339,6 +340,7 @@
 					</div>
 
 		</div>
+	</div>
 	</div>
 </div>
 
