@@ -188,12 +188,12 @@ public class MentorController {
 
 	// 비회원 멘토 상세 페이지
 	@RequestMapping("/nonid")
-	public String nonid(Model model, int mentorid) {
+	public String nonid(Model model, Integer mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
-		ReviewDTO review, reviewcount= null;// 해당 멘토 평균 별점, 리뷰 갯수_혜정
+		ReviewDTO review, reviewcount, starcnt = null;// 해당 멘토 평균 별점, 리뷰 갯수_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
@@ -213,7 +213,9 @@ public class MentorController {
 			// 해당 멘토의 리뷰 개수_혜정
 			reviewcount = review_service.reviewcnt(mentorid);
 			model.addAttribute("reviewcnt", reviewcount);
-			
+			// 별점 별 리뷰 갯수
+			starcnt = review_service.starcnt(mentorid);
+			model.addAttribute("starcnt", starcnt);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
