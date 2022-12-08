@@ -16,6 +16,62 @@ margin-left: 22%;
 margin-left: 1%;
 }
 </style>
+<style>
+     #ul {
+          list-style-type: none;
+          background-color: #D9D9D9;
+          width: 50%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 5% 12% 5% 12%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+     
+     @media (max-width: 768px) {
+    /* 모바일에 최적화된 예외 CSS 코드*/
+         #ul {
+          list-style-type: none;
+          background-color: #ccc;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 2% 8% 2% 8%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+}
+</style>
 <script>
 $(document).ready(function(){
 	$('#update_btn').click(function(){
@@ -124,10 +180,58 @@ function upload() {
 		<div class="contact_info_container">
 			<div class="container">
 				<div class="row">
+				
+			<div class="col-lg-4">
+				<div class="sidebar">
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+					<!-- Latest Course -->
+<!-- 					<div class="sidebar_section">
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
+						<div class="sidebar_latest">
+							Latest Course
+							<div
+								class="latest d-flex flex-row align-items-start justify-content-start">
+							</div>
+						</div>
+					</div> -->
+					<div>&nbsp</div>
+					<div>&nbsp</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title"></div>
+							<div class="sidebar_categories">
+								<ul id="ul" style="text-align: center">
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
+									</li>
+									<li id="li">
+										<a th:href="@{/mentor/idcheck(mentorid=${m.mentorid})}">멘토 정보</a>
+									</li>
+									<li id="li">
+										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${m.mentorid})}'|">멘토 정보 수정</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|">구매 이력</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|">멘토링 이력</a>
+									</li>
+									<li id="li">
+										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(mentorid=${m.mentorid})}'|">멘토링 관리</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|">내 쿠폰함</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+			</div>				
+				
 					<!-- 멘토 프로필 이미지, 명함 이미지 화면에 나오기 위해 시간이 걸림 -->
 					<div class="col-lg-8">
 						<div class="contact_form">
-							<div class="contact_info_title">Mentor Modify</div>
+							<div class="contact_info_title"><!-- Mentor Modify --></div>
 							<form class="register_form" id = "modify_form" enctype="multipart/form-data">
 								
 								<div>

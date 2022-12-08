@@ -225,11 +225,14 @@ public class MentorController {
 	@RequestMapping("/mentormodify")
 	public String mentormodify(Model model, String id, int mentorid) {
 		MentorDTO mentorall = null;
+		UserDTO user = null;
 		List<MWishcateDTO> mwclist = null;
 		try {
 			mentorall = mservice.mentorAll(id);
 			mwclist = mwservice.mwcate(mentorid);
+			user = uservice.get(id);
 			model.addAttribute("m", mentorall);
+			model.addAttribute("us", user);
 			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentormodify");
 		} catch (Exception e) {
@@ -334,9 +337,12 @@ public class MentorController {
 	@RequestMapping("/mentorregister")
 	public String mentorregister(Model model, String id) {
 		UserDTO user = null;
+		MentorDTO mdt =null;
 		try {
 			user = uservice.get(id);
+			mdt = mservice.mentorAll(id);
 			model.addAttribute("u", user);
+			model.addAttribute("ms", mdt);
 			model.addAttribute("center", mentor + "mentorregister");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -373,11 +379,17 @@ public class MentorController {
 	
 	// 멘토링 관리자 페이지
 	@RequestMapping("/mentoringadmin")
-	public String mentoringadmin(Model model, int mentorid) {
+	public String mentoringadmin(Model model, int mentorid, String id) {
 		List<MentorDTO> mtlist = null;
+		UserDTO myuser = null;
+		MentorDTO mdt = null;
 		try {
+			myuser = uservice.get(id);
+			mdt = mservice.mentorAll(id);
 			mtlist = mservice.mentoritem(mentorid);
 			model.addAttribute("mtlist", mtlist);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mdt);
 			model.addAttribute("center", mentor + "mentoringadmin");
 
 		} catch (Exception e) {
