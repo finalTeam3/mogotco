@@ -183,7 +183,7 @@ function usingcoupon() {
 		dateType:"JSON",
 		success : function(data) {
 			list = data;
-//	          $('#myModal').modal(data);
+	          $('#myModal').modal(data);
 	          console.log(list);
 	          var size = Object.keys(list).length;
 	          console.log(size);
@@ -196,12 +196,12 @@ function usingcoupon() {
 		          console.log(JSON.stringify(list1[2]));
 		          console.log(JSON.stringify(list2[2]));
 				  
-		          document.getElementById("modal_couponid").text = JSON.stringify(list1[2]);//couponid
-				  document.getElementById("modal_couponid").value = JSON.stringify(list2[2]);//couponidvalue
-				  document.getElementById("modal_couponname").text = JSON.stringify(list1[3]);//couponname
-			      document.getElementById("modal_couponname").value = JSON.stringify(list2[3]);//couponnamevalue
-				  document.getElementById("modal_couponprice").text = JSON.stringify(list1[4]);//couponprice
-				  document.getElementById("modal_couponprice").value = JSON.stringify(list2[4]);//couponpricevalue 
+		          document.getElementById("couponid").text = JSON.stringify(list1[2]);//couponid
+				  document.getElementById("cidvalue").value = JSON.stringify(list2[2]);//couponidvalue
+				  document.getElementById("couponname").text = JSON.stringify(list1[3]);//couponname
+			      document.getElementById("cnvalue").value = JSON.stringify(list2[3]);//couponnamevalue
+				  document.getElementById("couponprice").text = JSON.stringify(list1[4]);//couponprice
+				  document.getElementById("cpvalue").value = JSON.stringify(list2[4]);//couponpricevalue 
 					
 		          i=i+1;
 		          
@@ -360,7 +360,7 @@ function usingcoupon() {
 	</div>
 	
 	<!------------- Modal --------------->
-	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="myModal" role="dialog">
 	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:500px;">
 	      <!-- Modal content-->   
 	      <div class="modal-content">
@@ -372,9 +372,12 @@ function usingcoupon() {
 	        <div class="modal-body">
 	          <table class="modal_table">
 	            <tr>
-	              <td id="modal_couponid">couponid</td>
-	              <td id="modal_couponname">couponname</td>
-	              <td id="modal_couponprice">couponprice</td>
+	              <td id="couponid"></td>
+	              <td><input type="text" id="cidvalue"></input></td>
+	              <td id="couponname"></td>
+	              <td><input type="text" id="cnvalue"></input></td>
+	              <td id="couponprice"></td>
+	              <td><input type="text" id="cpvalue"></input></td>
 	              <td id="modal_usebtn"><button id="use_btn" class="btn btn-outline-primary" style="float:right;">사용하기</button></td>
 	            </tr>
 	          </table>
