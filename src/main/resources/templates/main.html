@@ -339,10 +339,6 @@ $(document).ready(function() {
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
                            <div class="login_button"><a th:href="@{/user/logout}">LOGOUT</a></div>
                         </div>
-                        				<!-- 메인 페이지용 버튼  -->				
-				 <a style="position:fixed;right:3%;bottom:5%" href="#" title="챗봇 테스트" id="openmodal" data-toggle="modal" data-target="#myModal">
-				<img th:src="@{/img/clovaicon.jpg}" alt="화면 고정 버튼" style="width:20%;">
-				</a> 
                      </div>
                   </div>
                </div>
@@ -430,31 +426,6 @@ $(document).ready(function() {
          </ul>
       </nav>
    </div>
-					  <div class="modal fade" id="myModal" role="dialog">
-					    <div class="modal-dialog">
-					    <div class="modal-content">
-					      <!-- Modal content-->
-					      <div id="modalchat">
-					      
-					        <div class="modal-header">
-					          <h4 id="chatbottitle" class="modal-title"><img id="chatbotimg" th:src="@{/img/clovaicon.jpg}"></h4>
-					        </div>
-								
-							<div id="me"><div id="chatinform">챗봇에게 질문하세요</div></div>
-							
-							<div id="btnsend">
-							<textarea id="msg" style="width:90%;" rows="3"></textarea>
-							<button id="send" disabled type="submit"><img id="sentimg" th:src="@{/img/sent.png}" ></button>
-							</div>
-							
-							<div class="modal-footer">
-							<button id="modalclose" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-							</div>
-					        
-					      </div>
-					      </div>
-					    </div>
-					  </div>
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
 <div class="super_container"th:insert = "${center} ? ${center} : maincenter">
