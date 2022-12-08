@@ -173,52 +173,64 @@
 	};
 </script>
 <script>
-function usingcoupon() {
-	var userid = '[[${session.loginuser.userid}]]';
-	
-	$.ajax({
-		type:"POST",
-		data : {'userid' : userid},
-		url:"[[@{/coupon}]]",
-		dateType:"JSON",
-		success : function(data) {
-			list = data;
-//	          $('#myModal').modal(data);
-	          console.log(list);
-	          var size = Object.keys(list).length;
-	          console.log(size);
-	          var i =0;
-	          //위에 column name
-	          console.log(Object.keys(list[0]));
-	          var list1 = Object.keys(list[0]);
-	          var str ='<thead><tr>';
-	          str += '<th>'+ JSON.stringify(list1[2]).replace(/\"/gi, "") + '</th>'; //couponid
-	          str += '<th>'+ JSON.stringify(list1[3]).replace(/\"/gi, "") + '</th>'; //couponname
-	          str += '<th>'+ JSON.stringify(list1[4]).replace(/\"/gi, "") + '</th>'; //couponprice
-	          str += '</tr></thead>';
-	          
-	          //body시작
-	          while(i<size){
-		          console.log(Object.values(list[i]));
-		          var list2= Object.values(list[i]);
-		          console.log(JSON.stringify(list2[2]));
-		          str += '<tbody><tr>';
-		          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
-		          str += '<td>'+ JSON.stringify(list2[3]).replace(/\"/gi, "") + '</td>';
-		          str += '<td>'+ JSON.stringify(list2[4])+'</td>';
-		          str += '<td>'+'<button class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button><br />'+'</td>';
-		          str += '</tr></tbody>';
+	function usingcoupon() {
+		var userid = '[[${session.loginuser.userid}]]';
+		
+		$.ajax({
+			type:"POST",
+			data : {'userid' : userid},
+			url:"[[@{/coupon}]]",
+			dateType:"JSON",
+			success : function(data) {
+				list = data;
+	//	          $('#myModal').modal(data);
+		          console.log(list);
+		          var size = Object.keys(list).length;
+		          console.log(size);
+		          var i =0;
+		          //위에 column name
+		          console.log(Object.keys(list[0]));
+		          var list1 = Object.keys(list[0]);
+		          var str ='<thead><tr>';
+		          str += '<th>'+ JSON.stringify(list1[2]).replace(/\"/gi, "") + '</th>'; //couponid
+		          str += '<th>'+ JSON.stringify(list1[3]).replace(/\"/gi, "") + '</th>'; //couponname
+		          str += '<th>'+ JSON.stringify(list1[4]).replace(/\"/gi, "") + '</th>'; //couponprice
+		          str += '</tr></thead>';
 		          
-		          i=i+1;
-		          
-	          }
-
-	           console.log(str);
-			   $('.modal_table').append(str);
-		}
-	});
-}
+		          //body시작
+		          while(i<size){
+			          console.log(Object.values(list[i]));
+			          var list2= Object.values(list[i]);
+			          
+			          var bt1 = 'id="my-button1' + i + '"';
+			          
+			          var on1 = 'onclick="usecp('+ JSON.stringify(list2[4]) + ')"';
+			          
+			          console.log(JSON.stringify(list2[2]));
+			          str += '<tbody><tr>';
+			          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
+			          str += '<td>'+ JSON.stringify(list2[3]).replace(/\"/gi, "") + '</td>';
+			          str += '<td id="couponprice">'+ JSON.stringify(list2[4])+'</td>';
+			          str += '<td>'+'<button data-dismiss="modal" type="button"' + bt1 + on1 + 'class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button>'+'</td>';
+			          str += '</tr></tbody>';
+			          
+			          i=i+1;
+			          
+		          }
+		           console.log(str);
+				   $('.modal_table').append(str);
+			}
+		});
+	}
 </script>
+  <script>
+	function usecp(couponprice) {
+		var p = Number(document.getElementById("mentoringprice").value);
+		var u = parseInt(couponprice);
+		document.getElementById("total_price1").value = p - u;
+		document.getElementById("total_price").innerHTML = p - u;
+	}
+  </script>
 </head>
 
 
@@ -368,7 +380,7 @@ function usingcoupon() {
 	
 	<!------------- Modal --------------->
 	<div class="modal fade" id="couponModal" data-backdrop="static" data-keyboard="false">
-	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:800px;">
+	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:700px;">
 	      <!-- Modal content-->   
 	      <div class="modal-content">
 	        <div class="modal-header">
