@@ -183,7 +183,7 @@ function usingcoupon() {
 		dateType:"JSON",
 		success : function(data) {
 			list = data;
-	          $('#myModal').modal();
+//	          $('#myModal').modal(data);
 	          console.log(list);
 	          var size = Object.keys(list).length;
 	          console.log(size);
@@ -203,13 +203,14 @@ function usingcoupon() {
 		          console.log(Object.values(list[i]));
 		          var list2= Object.values(list[i]);
 		          console.log(JSON.stringify(list2[2]));
-				  
+
 		          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
 		          str += '<td>'+ JSON.stringify(list2[3])+'</td>';
 		          str += '<td>'+ JSON.stringify(list2[4])+'</td>';
-		         
+		          str += '<td>' + '<button class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button>' +'</td>';
 		          //button자리
-		          		          
+		          
+		          
 		          i=i+1;
 		          
 	          }
@@ -300,7 +301,7 @@ function usingcoupon() {
 							</div>
 							<!-- 쿠폰사용버튼 -->
 							<div>
-							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#myCoupon" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
+							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#couponModal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -368,8 +369,8 @@ function usingcoupon() {
 	</div>
 	
 	<!------------- Modal --------------->
-	<div class="modal fade" id="myCoupon" data-backdrop="static" data-keyboard="false">
-	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:700px;">
+	<div class="modal fade" id="couponModal" data-backdrop="static" data-keyboard="false">
+	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:800px;">
 	      <!-- Modal content-->   
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -379,6 +380,7 @@ function usingcoupon() {
 	        </div>
 	        <div class="modal-body">
 	          <table class="modal_table">
+
 	          </table>
 	        </div>
 	        <div id="count" value="1"></div>
