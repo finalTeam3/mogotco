@@ -73,7 +73,22 @@ margin-left: 1%;
           
      }
 }
+
+     #ul li a.on {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
 </style>
+<script type="text/javascript">
+$(function(){
+	// #ul의 자식 엘리먼트(li)가 몇번째인지 확인한 후 a요소를 찾은 후 on이라는 클래스 추가
+    $('#ul').children().eq(0).find('a').addClass('on');
+
+});
+</script>
+</script>
 
 <script>
 $(document).ready(function(){

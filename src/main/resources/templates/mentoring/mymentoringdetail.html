@@ -86,7 +86,20 @@
           
      }
 }
+     #ul li a.on {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
 </style>
+<script type="text/javascript">
+$(function(){
+	// #ul의 자식 엘리먼트(li)가 몇번째인지 확인한 후 a요소를 찾은 후 on이라는 클래스 추가
+    $('#ul').children().eq(4).find('a').addClass('on');
+
+});
+</script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script
@@ -186,7 +199,7 @@
 				
 					<div class="col-lg-8">
 						<div class="contact_form">
-							<div class="contact_info_title">MyMentoringdetail</div>
+							<div class="contact_info_title"><!-- MyMentoringdetail --></div>
 							<table class="responsive-table">
 								<thead>
 									<tr>
