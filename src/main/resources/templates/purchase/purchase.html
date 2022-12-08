@@ -188,26 +188,35 @@ function usingcoupon() {
 	          var size = Object.keys(list).length;
 	          console.log(size);
 	          var i =0;
+	          //위에 column name
+	          console.log(Object.keys(list[0]));
+	          var list1 = Object.keys(list[0]);
+	          var str ='<thead><tr>';
+	          str += '<th>'+ JSON.stringify(list1[2])+'</th>';//couponid
+	          str += '<th>'+ JSON.stringify(list1[3])+'</th>';//couponname
+	          str += '<th>'+ JSON.stringify(list1[4])+'</th>';//couponprice
+	          str += '</tr></thead>';
+	          
+	          //body시작
+	          str += '<tbody><tr>';
 	          while(i<size){
-		          console.log(Object.keys(list[i]));
-		          var list1 = Object.keys(list[i]);
 		          console.log(Object.values(list[i]));
 		          var list2= Object.values(list[i]);
-		          console.log(JSON.stringify(list1[2]));
 		          console.log(JSON.stringify(list2[2]));
-				  
-		          document.getElementById("modal_couponid").text = JSON.stringify(list1[2]);//couponid
-				  document.getElementById("modal_couponid").value = JSON.stringify(list2[2]);//couponidvalue
-				  document.getElementById("modal_couponname").text = JSON.stringify(list1[3]);//couponname
-			      document.getElementById("modal_couponname").value = JSON.stringify(list2[3]);//couponnamevalue
-				  document.getElementById("modal_couponprice").text = JSON.stringify(list1[4]);//couponprice
-				  document.getElementById("modal_couponprice").value = JSON.stringify(list2[4]);//couponpricevalue 
-					
+
+		          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
+		          str += '<td>'+ JSON.stringify(list2[3])+'</td>';
+		          str += '<td>'+ JSON.stringify(list2[4])+'</td>';
+		         
+		          //button자리
+		          
+		          
 		          i=i+1;
 		          
 	          }
-	          
-
+	           str += '</tr></tbody>'
+	           console.log(str);
+			   $('.modal_table').append(str);
 		}
 	});
 }
@@ -292,7 +301,7 @@ function usingcoupon() {
 							</div>
 							<!-- 쿠폰사용버튼 -->
 							<div>
-							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#myNodal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
+							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#couponModal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -360,7 +369,7 @@ function usingcoupon() {
 	</div>
 	
 	<!------------- Modal --------------->
-	<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="couponModal" data-backdrop="static" data-keyboard="false">
 	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:500px;">
 	      <!-- Modal content-->   
 	      <div class="modal-content">
@@ -371,12 +380,7 @@ function usingcoupon() {
 	        </div>
 	        <div class="modal-body">
 	          <table class="modal_table">
-	            <tr>
-	              <td id="modal_couponid">couponid</td>
-	              <td id="modal_couponname">couponname</td>
-	              <td id="modal_couponprice">couponprice</td>
-	              <td id="modal_usebtn"><button id="use_btn" class="btn btn-outline-primary" style="float:right;">사용하기</button></td>
-	            </tr>
+
 	          </table>
 	        </div>
 	        <div id="count" value="1"></div>
