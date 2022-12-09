@@ -255,7 +255,7 @@ $(document).ready(function(){
 										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|">멘토링 이력</a>
 									</li>
 									<li id="li">
-										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentoringadmin(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토링 관리</a>
+										<a th:if="${ms != null and ms.mentorok == 1}" th:onclick="|location.href='@{/mentor/mentoringadmin(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토링 관리</a>
 									</li>
 									<li id="li">
 										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|">내 쿠폰함</a>
