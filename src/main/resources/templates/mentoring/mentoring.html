@@ -107,7 +107,7 @@ function checkOnlyOne(element) {
 								class="latest d-flex flex-row align-items-start justify-content-start">
 								<div>
 									&nbsp&nbsp&nbsp&nbsp
-									<button type="button" th:if="${ms != null}"
+									<button type="button" th:if="${ms != null and ms.mentorok == 1}"
 										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
 										class="home_search_button"
 										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
