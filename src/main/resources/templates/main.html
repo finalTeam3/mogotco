@@ -70,6 +70,247 @@ $(document).ready(function(){
 });
 	
 </script>
+<style>
+body {
+    background-color: #f5f5f5;
+}
+
+#main-content {
+    max-width: 940px;
+    padding: 2em 3em;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+</style>
+
+<style>
+	#chatbotimg{
+		width: 45px;
+		height: auto;
+	}
+	#sentimg{
+		width: 26px;
+		height: 26px;
+	}
+	#sendme{
+		width : 10%;
+		height: 66px;
+		margin: auto;
+		text-align: center;
+		float: right;
+		border: solid 1px #C9C9C9;
+		background-color: #C9C9C9;
+		border-radius: 5px;
+	}
+	#modalchat{
+		background-color: #F5F5F5;
+		
+	}
+	#chatbottitle{
+		text-align: center;
+		border-bottom: solid 1px #D1B2FF;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#me{
+		width:auto;
+		height:auto;
+		overflow: auto;
+		margin:auto;
+		background-color: #F5F5F5;
+		padding: 25px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#btnsend{
+		margin:auto;
+		text-align: center;
+	}
+	#question{
+		text-align: right;
+		font-size: 110%;
+		background-color: #F5F5F5;
+		width:100%
+	}
+	#answer{
+		font-size: 110%;
+		background-color: #F5F5F5;
+		width:60%;
+	}
+	#ina{
+		background: rgba(20,189,238,0.2);
+		width: 90%;
+		padding: 10px;
+		border-radius: 10px;
+		box-shadow: 2px 2px 2px 2px #BDBDBD;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#inq{
+		float: right;
+		background: white;
+		text-align:center;
+		width: 40%;
+		padding: 1px;
+		border-radius: 10px;
+		box-shadow: 2px 2px 2px 2px #BDBDBD;
+		font-family: 'Noto Sans KR', sans-serif;
+		white-space:pre-wrap;
+	}
+	#chatinform{
+		margin-bottom: 10px;
+		
+	    text-align: center;
+		background: white;
+		padding: 10px;
+		border-radius: 10px;
+		box-shadow: 2px 2px 2px 2px #BDBDBD;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#metext{
+		border: #D9E5FF solid 1px;
+		border-radius: 5px;
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	#answerchat{
+		width: auto;
+		height: 30px;
+		display: inline;
+	}
+	#quser{
+		width: auto;
+		height: 30px;	
+		border-radius: 50%;
+		
+	}
+	#quserimg{
+		text-align: right;
+		margin-bottom: 0px;
+		margin-top: 10px;
+		background-color: #F5F5F5;
+		
+	}
+	#center{
+	
+    min-height: 100%;
+	padding-bottom: 400px;
+	}
+	
+	#footer{
+	position: absolute;
+	left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+    
+	}
+
+	.modal-body {
+		position: relative;
+		padding: 20px;
+		height: 350px;
+		overflow-y: auto;
+	}
+
+</style>
+
+<script>
+
+var stompClient = null;
+
+function setConnected(connected) {
+    $("#connect").prop("disabled", connected);
+    $("#disconnect").prop("disabled", !connected);
+    $("#send").prop("disabled", !connected);
+    if (connected) {
+        $("#conversation").show();
+    }
+    else {
+        $("#conversation").hide();
+    }
+    $("#msg").html("");
+}
+
+// 소켓을 통해 메시지를 챗봇 컨트롤러로 전송 후 답변을 받음
+function connect() {
+    var socket = new SockJS('http://127.0.0.1/mogotco/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/public', function (message) {
+            show1Message("받은 메시지: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
+        });
+    });
+}
+
+function disconnect() {
+    if (stompClient !== null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+// 인풋창에서 메시지를 입력 후 전송
+function sendMessage() {
+    let message = $("#msg").val();
+    /* showMessage("보낸 메시지: " + message); */
+    showMessage(message);
+
+    stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
+}
+
+
+function showMessage(message) {
+    $("#me").append("<div id='question'><img id='answerchat'><div id='inq'>" + message + "</div></div>");
+}
+function show1Message(message) {
+    $("#me").append("<div id='answer'><img id='answerchat'><div id='ina'>"+message+ "</div></div>");
+}
+
+/* function showMessage(message) {
+    $("#communicate").append("<tr><td>" + message + "</td></tr><br>");
+}
+function show1Message(message){
+	$("#communicate").append("<tr><td>" + message + "</td></tr><br>");
+} */
+/*  $(function () {
+    $("form").on('submit', function (e) {
+        e.preventDefault();
+    });
+    $( "#connect" ).click(function() { connect(); });
+    $( "#disconnect" ).click(function() { disconnect(); });
+    $( "#send" ).click(function() { sendMessage(); });
+}); */ 
+
+
+
+$(document).ready(function() {
+	$("#openmodal").click(function() {
+		connect();
+		$("#me").append("<div id='answer'><img id='answerchat'><div id='ina'>안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</div></div>");
+	});
+	
+	$("#send").click(function() {
+		//$('#msg').val('');
+		sendMessage();
+	    
+	});
+ 	$('#msg').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('#send').click();
+	         return false;
+	     } 
+	});
+	$('#modalclose').click(function() {
+		 disconnect();
+		});
+});
+
+</script>
 <body>
    <!-- Header -->
 
@@ -90,7 +331,7 @@ $(document).ready(function(){
                            </li>
                            <li>
                               <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                              <div>info.mogotco@gmail.com</div>
+                              <div>mogotcomentoring@gmail.com</div>
                            </li>
                         </ul>
                         
@@ -107,7 +348,10 @@ $(document).ready(function(){
                         <div th:if = "${session.loginuser != null}" class="top_bar_login ml-auto">
                            <div class="login_button"><a th:href="@{/user/logout}">LOGOUT</a></div>
                         </div>
-                        
+                        				<!-- 메인 페이지용 버튼  -->				
+				 <a style="position:fixed;right:3%;bottom:5%" href="#" title="챗봇 테스트" id="openmodal" data-toggle="modal" data-target="#myModal">
+				<img th:src="@{/img/clovaicon.jpg}" alt="화면 고정 버튼" style="width:20%;">
+				</a> 
                      </div>
                   </div>
                </div>
@@ -196,6 +440,34 @@ $(document).ready(function(){
       </nav>
    </div>
 
+					  <div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					    <div class="modal-content">
+					      <!-- Modal content-->
+					      <div id="modalchat">
+					      
+					        <div class="modal-header">
+					          <h4 id="chatbottitle" class="modal-title"><img id="chatbotimg" th:src="@{/img/clovaicon.jpg}"></h4>
+					        </div>
+							
+							<div class="modal-body">
+							<div id="me"><div id="chatinform">챗봇에게 질문하세요</div></div>
+							</div>
+							
+							<div id="btnsend">
+							<textarea id="msg" style="width:90%;" rows="3"></textarea>
+							<button id="send" disabled type="submit"><img id="sentimg" th:src="@{/img/sent.png}" ></button>
+							</div>
+							
+							<div class="modal-footer">
+							<button id="modalclose" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+							</div>
+					        
+					      </div>
+					      </div>
+					    </div>
+					  </div>
+
 
    <!-- Maincenter ------------------------------------------------------------------------------------>
 <div class="super_container"th:insert = "${center} ? ${center} : maincenter">
@@ -244,7 +516,7 @@ $(document).ready(function(){
                            <div class="footer_title">Contact Us</div>
                            <div class="footer_contact_info">
                               <ul>
-                                 <li>Email: Info.mogotco@gmail.com</li>
+                                 <li>Email: mogotcomentoring@gmail.com</li>
                                  <li>Phone:  +(82) 010 4009 1541</li>
                                  <li>428, Seolleung-ro, Gangnam-gu, Seoul, Republic of Korea</li>
                               </ul>

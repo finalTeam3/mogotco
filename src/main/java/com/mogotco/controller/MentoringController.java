@@ -19,6 +19,7 @@ import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
+import com.mogotco.dto.UserDTO;
 import com.mogotco.frame.Util;
 import com.mogotco.mapper.MentoringMapper;
 import com.mogotco.service.MCateService;
@@ -26,6 +27,7 @@ import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.PurchaseDetailService;
+import com.mogotco.service.UserService;
 
 @Controller
 @RequestMapping("/mentoring")
@@ -33,6 +35,12 @@ public class MentoringController {
 
 	@Autowired
 	MentoringService mservice;
+	
+	@Autowired
+	MentorService mentorservice;
+
+	@Autowired
+	UserService uservice;
 
 	@Autowired
 	MentoringOptionService moservice;
@@ -78,7 +86,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			String txt = "null";
-			String mname ="all";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
@@ -137,6 +145,7 @@ public class MentoringController {
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt,meningnum);
+				model.addAttribute("selcatename", mname);
 
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
@@ -178,7 +187,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			model.addAttribute("txt", txt);
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
@@ -223,6 +232,7 @@ public class MentoringController {
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.allmcaringoksearch(txt, 1,meningnum);
 					}
+					model.addAttribute("selcatename", mname);
 				} else {
 					// 기격
 					if (mtype.equals(lowprice)) {
@@ -293,6 +303,7 @@ public class MentoringController {
 					if (mtype.equals(mcaringok)) {
 						searchlist = mtmapper.nallmcaringoksearch(1,meningnum);
 					}
+					model.addAttribute("selcatename", mname);
 				} else {
 					// 기격
 					if (mtype.equals(lowprice)) {
@@ -339,11 +350,12 @@ public class MentoringController {
 		HttpSession session = request.getSession(false);
 		try {// session이 있을 때 controller주소로 감
 			String null1 = "null";
+			String all = "all";
 			String encodetxt = URLEncoder.encode(txt, "UTF-8");
 			String encodemname = URLEncoder.encode(mname, "UTF-8");
 			if(txt.equals(null1)) {
 				if(mtype.equals(null1)) {
-					if(mname.equals(null1)) {
+					if(mname.equals(all)) {
 						// 아무것도 없고 mentoring/mentoring으로 들어갔을 때
 						response.sendRedirect("/mogotco/mentoring/mentoring?userid="
 								+ userid + "&meningnum=" + meningnum);
@@ -361,7 +373,7 @@ public class MentoringController {
 				}
 			}else {
 				if(mtype.equals(null1)) {
-					if(mname.equals(null1)) {
+					if(mname.equals(all)) {
 						// mentoring/mentoring인데 검색을 했을 때(mainsearch)
 						response.sendRedirect(
 								"/mogotco/mentoring/mainsearch?txt=" + encodetxt + "&meningnum=" + meningnum + "&userid=" + userid);
@@ -404,7 +416,7 @@ public class MentoringController {
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
 			String txt = "null";
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("txt", txt);
 			model.addAttribute("selcatename", mname);
@@ -460,6 +472,7 @@ public class MentoringController {
 			if (mname.equals(all)) {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
 				searchlist = mtmapper.mentoringsearch(txt, meningnum);
+				model.addAttribute("selcatename", mname);
 
 			} else {
 				catelist = mcateservice.get(); // 모든 카테고리 리스트 정보 넣어주기
@@ -502,7 +515,7 @@ public class MentoringController {
 			model.addAttribute("mtcatelist", catelist); // 카테고리 리스트
 			model.addAttribute("ms", ment);
 			model.addAttribute("userid", userid);
-			String mname = "null";
+			String mname = "all";
 			String mtype = "null";
 			model.addAttribute("selcatename", mname);
 			model.addAttribute("mtype", mtype);
@@ -546,6 +559,7 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.allmcaringoksearch(txt, 1, meningnum);
 				}
+				model.addAttribute("selcatename", mname);
 			} else {
 				// 기격
 				if (mtype.equals(lowprice)) {
@@ -612,6 +626,7 @@ public class MentoringController {
 				if (mtype.equals(mcaringok)) {
 					searchlist = mtmapper.nallmcaringoksearch(1, meningnum);
 				}
+				model.addAttribute("selcatename", mname);
 			} else {
 				// 기격
 				if (mtype.equals(lowprice)) {
@@ -724,6 +739,8 @@ public class MentoringController {
 	public String mymentoringdetail(Model model, String id) {
 		List<PurchaseDetailDTO> detail = null;
 		PurchaseDetailDTO detailmember = null;
+		MentorDTO mentor = null;
+		UserDTO myuser = null;
 		try {
 			// 비대면
 			// 멘토링 정보를 불러오고
@@ -737,7 +754,11 @@ public class MentoringController {
 				// 다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			myuser = uservice.get(id);
+			mentor = mentorservice.mentorAll(id);
 			model.addAttribute("userid", id);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mentor);
 			model.addAttribute("list", detail);
 			// 화면
 			model.addAttribute("center", mentoring + "mymentoringdetail");

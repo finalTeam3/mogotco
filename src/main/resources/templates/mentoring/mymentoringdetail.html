@@ -31,6 +31,75 @@
 	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.25);
 }
 </style>
+<style>
+     #ul {
+          list-style-type: none;
+          background-color: #D9D9D9;
+          width: 50%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 5% 12% 5% 12%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+     
+     @media (max-width: 768px) {
+    /* 모바일에 최적화된 예외 CSS 코드*/
+         #ul {
+          list-style-type: none;
+          background-color: #ccc;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 2% 8% 2% 8%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+}
+     #ul li a.on {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+</style>
+<script type="text/javascript">
+$(function(){
+	// #ul의 자식 엘리먼트(li)가 몇번째인지 확인한 후 a요소를 찾은 후 on이라는 클래스 추가
+    $('#ul').children().eq(4).find('a').addClass('on');
+
+});
+</script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script
@@ -80,9 +149,57 @@
 		<div class="contact_info_container">
 			<div class="container">
 				<div class="row">
+				
+			<div class="col-lg-4">
+				<div class="sidebar">
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+					<!-- Latest Course -->
+<!-- 					<div class="sidebar_section">
+						<div style="margin-top: 50px;" th:if="${ms != null}"
+							class="sidebar_section_title">Mentoring Register</div>
+						<div class="sidebar_latest">
+							Latest Course
+							<div
+								class="latest d-flex flex-row align-items-start justify-content-start">
+							</div>
+						</div>
+					</div> -->
+					<div>&nbsp</div>
+					<div>&nbsp</div>
+						<div class="sidebar_section">
+							<div class="sidebar_section_title"></div>
+							<div class="sidebar_categories">
+								<ul id="ul" style="text-align: center">
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
+									</li>
+									<li id="li">
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${ms.mentorid})}'|">멘토 정보</a>
+									</li> 
+									<li id="li">
+										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토 정보 수정</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|">구매 이력</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/mentoring/mymentoringdetail(id=${us.userid})}'|">멘토링 이력</a>
+									</li>
+									<li id="li">
+										<a th:if="${ms != null and ms.mentorok == 1}" th:onclick="|location.href='@{/mentor/mentoringadmin(id=${us.userid},mentorid=${ms.mentorid})}'|">멘토링 관리</a>
+									</li>
+									<li id="li">
+										<a th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|">내 쿠폰함</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+			</div>				
+				
 					<div class="col-lg-8">
 						<div class="contact_form">
-							<div class="contact_info_title">MyMentoringdetail</div>
+							<div class="contact_info_title"><!-- MyMentoringdetail --></div>
 							<table class="responsive-table">
 								<thead>
 									<tr>
@@ -118,33 +235,7 @@
 						</div>
 					</div>
 					<!-- Contact Info -->
-					<div class="col-lg-4">
-						<div class="contact_info">
-							<div class="contact_info_title">Contact Info</div>
-							<div class="contact_info_text">
-								<p>It is a long established fact that a reader will be
-									distracted by the readable content of a page when looking at
-									its layout. The point of using Lorem Ipsum is that it has a
-									distribution of letters.</p>
-							</div>
-							<div class="contact_info_location">
-								<div class="contact_info_location_title">New York Office</div>
-								<ul class="location_list">
-									<li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
-									<li>1-234-567-89011</li>
-									<li>info.deercreative@gmail.com</li>
-								</ul>
-							</div>
-							<div class="contact_info_location">
-								<div class="contact_info_location_title">Australia Office</div>
-								<ul class="location_list">
-									<li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
-									<li>1-234-567-89011</li>
-									<li>info.deercreative@gmail.com</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>

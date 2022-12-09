@@ -188,12 +188,12 @@ public class MentorController {
 
 	// 비회원 멘토 상세 페이지
 	@RequestMapping("/nonid")
-	public String nonid(Model model, int mentorid) {
+	public String nonid(Model model, Integer mentorid) {
 		MentorDTO mta = null;
 		MentorDTO mtlist = null;
 		List<MWishcateDTO> mwclist = null;
 		List<ReviewDTO> rlist= null; // 해당 멘토 리뷰 노출_혜정
-		ReviewDTO review, reviewcount= null;// 해당 멘토 평균 별점, 리뷰 갯수_혜정
+		ReviewDTO review, reviewcount, starcnt = null;// 해당 멘토 평균 별점, 리뷰 갯수_혜정
 		try {
 			mta = mservice.get(mentorid);
 			mtlist = mservice.mentoritem1(mentorid);
@@ -213,7 +213,9 @@ public class MentorController {
 			// 해당 멘토의 리뷰 개수_혜정
 			reviewcount = review_service.reviewcnt(mentorid);
 			model.addAttribute("reviewcnt", reviewcount);
-			
+			// 별점 별 리뷰 갯수
+			starcnt = review_service.starcnt(mentorid);
+			model.addAttribute("starcnt", starcnt);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,11 +227,14 @@ public class MentorController {
 	@RequestMapping("/mentormodify")
 	public String mentormodify(Model model, String id, int mentorid) {
 		MentorDTO mentorall = null;
+		UserDTO user = null;
 		List<MWishcateDTO> mwclist = null;
 		try {
 			mentorall = mservice.mentorAll(id);
 			mwclist = mwservice.mwcate(mentorid);
+			user = uservice.get(id);
 			model.addAttribute("m", mentorall);
+			model.addAttribute("us", user);
 			model.addAttribute("mwclist", mwclist);
 			model.addAttribute("center", mentor + "mentormodify");
 		} catch (Exception e) {
@@ -266,8 +271,10 @@ public class MentorController {
 		if(mentordto.getMcimg().getOriginalFilename().length() == 0) {
 			if(mentordto.getMpimg().getOriginalFilename().length() == 0) {
 				//둘다 수정 안되었을 때
+				MentorDTO mta = null;
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mtd.getMentorimg(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
-					mservice.modify(mtd);
+					mservice.modify(mta);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -276,7 +283,7 @@ public class MentorController {
 				//mentorimg만 수정 되었을 때
 				Util.saveMentorFile(mentordto.getMpimg(), mentordto.getMcimg(), admindir, userdir);
 				MentorDTO mta = null;
-				mta= new MentorDTO(mentordto.getMentorid(), null, null, mtd.getMentorcom(), mtd.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
+				mta= new MentorDTO(mentordto.getMentorid(), null, null, mentordto.getMentorcom(), mentordto.getMentorcon(), mentordto.getMpimg().getOriginalFilename(), mtd.getMcardimg(), 0, null, mentordto.getCancelmentoring(), mentordto.getMentorcareer(), null, mentordto.getMcardposition(), null,null,null, null, null, null, null, null, 0, 0, 0, null, 0);
 				try {
 					mservice.modify(mta);
 				} catch (Exception e) {
@@ -332,9 +339,12 @@ public class MentorController {
 	@RequestMapping("/mentorregister")
 	public String mentorregister(Model model, String id) {
 		UserDTO user = null;
+		MentorDTO mdt =null;
 		try {
 			user = uservice.get(id);
+			mdt = mservice.mentorAll(id);
 			model.addAttribute("u", user);
+			model.addAttribute("ms", mdt);
 			model.addAttribute("center", mentor + "mentorregister");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -371,11 +381,17 @@ public class MentorController {
 	
 	// 멘토링 관리자 페이지
 	@RequestMapping("/mentoringadmin")
-	public String mentoringadmin(Model model, int mentorid) {
+	public String mentoringadmin(Model model, int mentorid, String id) {
 		List<MentorDTO> mtlist = null;
+		UserDTO myuser = null;
+		MentorDTO mdt = null;
 		try {
+			myuser = uservice.get(id);
+			mdt = mservice.mentorAll(id);
 			mtlist = mservice.mentoritem(mentorid);
 			model.addAttribute("mtlist", mtlist);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mdt);
 			model.addAttribute("center", mentor + "mentoringadmin");
 
 		} catch (Exception e) {
