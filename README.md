@@ -16,7 +16,7 @@
 	배포
 7. 데이터베이스 설계
 8. 유저 플로우
-<img src="https://user-images.githubusercontent.com/83347312/206643340-0363e495-c38f-4cd9-ab9f-02414fc4b438.png" width="100%" height="100%">
+<img  src="https://user-images.githubusercontent.com/83347312/206644718-986feb6c-1378-4528-b196-8f87aa3f6894.png" width="100%" height="100%">
 
 # 프로젝트 내용
 주요기능들은 반응형 웹 화면까지 같이 보여주는
