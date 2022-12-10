@@ -9,6 +9,14 @@
 	transform: translateZ(0); 
 	backface-visibility: hidden; */
 }
+
+.feature_title{
+	font-family: 'Spoqa Han Sans Neo';
+}
+/* h2{
+	opacity:0;
+	transition: all 0.5s;
+} */
 </style>
 <script>
 function request(mentor_mentorid){
@@ -17,6 +25,22 @@ function request(mentor_mentorid){
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+  
+<script>
+/* 
+	var observer = new IntersectionObserver((e)=>{
+		e.forEach((i)=>{
+			i.target.style.opacity = 1;
+		})
+	})
+	
+	var div = document.querySelectorAll('h2')
+	observer.observe(h2[0])
+	observer.observe(h2[1])
+	observer.observe(h2[2])
+	
+	 */
+</script>
 <body>
 
 
@@ -174,7 +198,7 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>
 						<div>&nbsp</div>
 						<h3 class="feature_title">&nbsp</h3>
-						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">훌륭한 멘토들</h3>
+						<h3 class="feature_title">훌륭한 멘토들</h3>
 						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Select reliable developers using business card authentication system</p>
@@ -193,9 +217,9 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>						
 						<div>&nbsp</div>						
 						<h3 class="feature_title">&nbsp</h3>
-						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">멘토 지원</h3>
+						<h3 class="feature_title">멘토 지원</h3>
 						<div>&nbsp</div>
-						<div class="feature_text" style = "font-family: 'Spoqa Han Sans Neo';">
+						<div class="feature_text">
 							<p>Any mentee can be a mentor.</p>
 						</div>
 					</div>
@@ -211,7 +235,7 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>						
 						<div>&nbsp</div>						
 						<h3 class="feature_title">&nbsp</h3>
-						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">화상 회의</h3>
+						<h3 class="feature_title">화상 회의</h3>
 						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Non-face-to-face mentoring is possible within the site</p>
@@ -230,7 +254,7 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>							
 						<div>&nbsp</div>							
 						<h3 class="feature_title">&nbsp</h3>
-						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">Timer</h3>
+						<h3 class="feature_title">Timer</h3>
 						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Send a message 10 minutes before the mentoring time</p>
