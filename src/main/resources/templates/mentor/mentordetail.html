@@ -10,6 +10,10 @@
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 
+<!-- 반응형 웹 적용시 메뉴바 사라지는 오류 해결할 때 필요한 태그  -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/styles/courses_responsive.css}">
+
 </head>
 
 	
@@ -149,13 +153,13 @@
 									</div>
 									<br>
 									<h3 class="tab_panel_text">Mentor Contents</h3>
- 									<div class="tab_panel_content">
+ 									<div class="tab_panel_content" style="white-space:pre-wrap;">
 	 									<h4 class="tab_panel_text" th:text="${mta.mentorcon}">
 										</h4>
 									</div>
 									<br>
 									<h3 class="tab_panel_text">Mentor Career</h3>
- 									<div class="tab_panel_content">
+ 									<div class="tab_panel_content" style="white-space:pre-wrap;">
 	 									<h4 class="tab_panel_text" th:text="${mta.mentorcareer}">
 										</h4>
 									</div>
@@ -170,11 +174,11 @@
 									<!-- Rating -->
 									<div class="review_rating_container">
 										<div class="review_rating">
-											<div class="review_rating_num" th:text = "${avgrating.avgrate}">review rate</div>
+											<div class="review_rating_num" th:text = "${avgrating?.avgrate}">review rate</div>
 											
 											<div class="review_rating_stars">
 												<div class="comment_rating_avg">
-													<div name="${avgrating.rating}" class="star-ratings-fill_avg space-x-2 text-lg" th:style="${'width:'+avgrating.avgrate * 20+'%'}">
+													<div name="${avgrating.rating}" class="star-ratings-fill_avg space-x-2 text-lg" th:if="${avgrating != null}" th:style="${'width:'+avgrating.avgrate * 20+'%'}">
 														<i class="fa-solid fa-star"></i>
 														<i class="fa-solid fa-star"></i>
 														<i class="fa-solid fa-star"></i>

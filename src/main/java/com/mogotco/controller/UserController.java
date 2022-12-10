@@ -1,30 +1,26 @@
+
 package com.mogotco.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.service.KakaologinAPI;
-//import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.MentorService;
+import com.mogotco.service.UserCouponService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -35,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	UserService user_service;
+	
+	@Autowired
+	UserCouponService cservice;
 	
 	@Autowired
 	KakaologinAPI kakao_service;
@@ -78,12 +77,16 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		return "redirect:/";
 	}
 	
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		 
 		if(session != null) {
 			session.invalidate();
 		}
@@ -141,13 +144,21 @@ public class UserController {
 	
 	//회원가입기능
 	@RequestMapping("/registerimpl")
-	public String registerimpl(Model model, UserDTO user) {
+	public String registerimpl(Model model, UserDTO user, HttpSession session) {
 		try {
 			user_service.register(user);
+			
+			//coupon지급
+			UserCouponDTO coupon = null;
+			coupon = new UserCouponDTO(0, user.getUserid(), 1, null, 0);
+			cservice.register(coupon);
+			
+			session.setAttribute("loginuser", user);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//이메일 인증번호 보내기

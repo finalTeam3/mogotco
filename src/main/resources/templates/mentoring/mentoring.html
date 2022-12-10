@@ -93,10 +93,10 @@ function checkOnlyOne(element) {
 <div class="courses">
 	<div class="container">
 		<div class="row">
-						<!-- Courses Sidebar -->
+			<!-- Courses Sidebar -->
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<div class="contact_info_title">Mentoring</div>
+					<div class="contact_info_title">Mentoring</div>
 					<!-- Latest Course -->
 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -107,7 +107,7 @@ function checkOnlyOne(element) {
 								class="latest d-flex flex-row align-items-start justify-content-start">
 								<div>
 									&nbsp&nbsp&nbsp&nbsp
-									<button type="button" th:if="${ms != null}"
+									<button type="button" th:if="${ms != null and ms.mentorok == 1}"
 										th:onclick="|location.href='@{/mentoring/mentoringregister(userid=${session.loginuser.userid})}'|"
 										class="home_search_button"
 										style="width: 180px; font-weight: bold;">멘토링 등록하기</button>
@@ -123,6 +123,7 @@ function checkOnlyOne(element) {
 									<li><a th:href="@{/mentoring/defaultmentoring}"
 										th:text="${'all'}" th:value="${'all'}"><input
 											type="hidden" name='mname' id="mname" th:value="${'all'}"
+											th:style="${selcatename == 'all' ? 'color: #005b00;' : 'color: #000000;'}"
 											th:text="${'all'}"></a></li>
 									<li th:each="mtc:${mtcatelist}"><a
 										th:href="@{/mentoring/defaultmentoringCate(mname=${mtc.mname},userid=${userid})}"
@@ -170,8 +171,8 @@ function checkOnlyOne(element) {
 						class="courses_search_form d-flex flex-row align-items-center justify-content-start">
 						<input name="txt" type="text" class="courses_search_input"
 							placeholder="Search Mentorng" required="required"
-							style="width: 100%;">
-							<input type="hidden" id='userid' th:value="${userid}">
+							style="width: 100%;"> <input type="hidden" id='userid'
+							th:value="${userid}">
 						<button id="search_button1" class="courses_search_button ml-auto"
 							type="submit">search now</button>
 					</form>
@@ -215,6 +216,13 @@ function checkOnlyOne(element) {
 									<div style="display: inline; color: black;" class="course_text"
 										th:text="${mtr.mmemberidcnt}"></div>
 									<br>
+									<div style="display: inline; color: black;">
+										<span style="font-family: 'IBM Plex Sans KR', sans-serif;">
+											날짜:</span>
+									</div>
+									<div style="display: inline; color: black;" class="course_text"
+										th:text="${#dates.format(mtr.mentoringdate,'yyyy-MM-dd')}"></div>
+									<br>
 									<div class="teacher_meta_text ml-auto"
 										th:if="${mtr.date_difference >= 0 }">
 										<span class="badge badge-pill badge-primary"
@@ -247,16 +255,23 @@ function checkOnlyOne(element) {
 										class="course_footer_content d-flex flex-row align-items-center justify-content-start">
 										<div class="course_info">
 											<i class="fa fa-graduation-cap" aria-hidden="true"></i> <span
-												style="font-family: 'IBM Plex Sans KR', sans-serif;">현직:</span>
-											<span th:text="${mtr.mentor_mentorcom}">20 Student</span>
+												style="font-family: 'IBM Plex Sans KR', sans-serif;font-size:12px;">현직: </span>
+											<span style="font-size:12px;"th:text="${mtr.mentor_mentorcom}"></span>
 										</div>
+										</div>
+										<div
+										class="course_footer_content d-flex flex-row align-items-center justify-content-start">
 										<div class="course_info">
 											<i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> <span
-												style="font-family: 'IBM Plex Sans KR', sans-serif;">가격:</span>
-											<span th:text="${mtr.mentoringprice}">5 Ratings</span>
+												style="font-family: 'IBM Plex Sans KR', sans-serif;font-size:12px;">가격: </span>
+											<span style="font-size:12px;"th:text="${mtr.mentoringprice}"></span>
 										</div>
-
-
+										<div class="course_info">
+											<i class="fa-solid fa-calendar-days" aria-hidden="true"></i> <span
+												style="font-family: 'IBM Plex Sans KR', sans-serif;font-size:12px;"> </span>
+											<span style="font-size:12px;"th:text="${#dates.format(mtr.mentoringdate,'yyyy-MM-dd')}"></span>
+										</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -272,9 +287,8 @@ function checkOnlyOne(element) {
 											class="fa fa-angle-left" aria-hidden="true" id="prev_page"></i></a></li>
 								</ul>
 								<ul class="pagination_list" style="width: 600px; float: left;">
-									<li><a
-										th:text="${page}"><i
-											class="fa fa-angle-right" aria-hidden="true" id="next_page"></i></a></li>
+									<li><a th:text="${page}"><i class="fa fa-angle-right"
+											aria-hidden="true" id="next_page"></i></a></li>
 								</ul>
 								<ul class="pagination_list" style="float: right;">
 									<li><a

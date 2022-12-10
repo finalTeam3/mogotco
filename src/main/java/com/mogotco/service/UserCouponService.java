@@ -46,5 +46,9 @@ public class UserCouponService implements MyService<Integer, UserCouponDTO> {
 	public List<UserCouponDTO> userCouponAll(String userid) throws Exception{
 		return mapper.userCouponAll(userid);
 	}
+	
+	public UserCouponDTO userCouponfind(String userid, int willusecoupon) throws Exception{
+		return mapper.userCouponfind(userid,willusecoupon);
+	}
 
 }

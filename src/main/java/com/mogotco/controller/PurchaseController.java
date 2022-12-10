@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mogotco.dto.CouponDTO;
+import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.MentoringDTO;
 import com.mogotco.dto.MentoringOptionDTO;
 import com.mogotco.dto.MentoringmemberDTO;
@@ -20,6 +22,7 @@ import com.mogotco.dto.PurchaseDTO;
 import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
+import com.mogotco.service.MentorService;
 import com.mogotco.service.MentoringOptionService;
 import com.mogotco.service.MentoringService;
 import com.mogotco.service.MentoringmemberService;
@@ -55,6 +58,9 @@ public class PurchaseController {
 	
 	@Autowired
 	UserCouponService ucservice;
+	
+	@Autowired
+	MentorService mservice;
 	
 	// 아이디값 유무 판단
 	@RequestMapping("/idcheck")
@@ -115,6 +121,8 @@ public class PurchaseController {
 	public String purchasedetail(Model model, String id) {
 		List<PurchaseDetailDTO> detail = null;
 		PurchaseDetailDTO detailmember = null;
+		UserDTO myuser = null;
+		MentorDTO mentor = null;
 		try {
 			//멘토링 정보를 불러오고
 			detail = service1.wholedetail(id);
@@ -127,8 +135,12 @@ public class PurchaseController {
 				//다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
 			}
+			myuser = service5.get(id);
+			mentor = mservice.mentorAll(id);
 			model.addAttribute("userid", id);
 			model.addAttribute("list", detail);
+			model.addAttribute("us", myuser);
+			model.addAttribute("ms", mentor);
 			model.addAttribute("center", purchase+"purchasedetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -140,7 +152,7 @@ public class PurchaseController {
 
 	//구매완료페이지
 	@RequestMapping("/purchasefinish")
-	public String purchasefinish(Model model, HttpSession session, PurchaseDTO pur, int willusepoint, int mentoringprice) {
+	public String purchasefinish(Model model, HttpSession session, PurchaseDTO pur, int willusepoint, int mentoringprice, int willusecoupon) {
 		//결제완료 버튼을 눌렀을 때
 		try {
 			//구매 내용을 등록하고
@@ -158,7 +170,7 @@ public class PurchaseController {
 			PurchaseDetailDTO detail = new PurchaseDetailDTO(0,pur.getMentoringoption_mentoringoptionid(), r, 0, "x", pur.getPurdate(), 
 					pur.getPurprice(), pur.getPurpay(), pur.getPurcard(),pur.getMentoring_mtitle(), pur.getMentor_userid(), pur.getUser_mentorname(), 
 					pur.getMentoring_mentoringdate(), pur.getMentoringoption_mentoringtime(), 
-					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring(), mentoring.getMentorid(), 0, mentoring.getMentor_mentorimg());//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
+					mentoring.getMentorurl(), pur.getMentoring_mplace(), 0, mentoring.getMcaring(), mentoring.getMentorid(), 0, mentoring.getMentor_mentorimg(), null, null, 0);//membercount부분은 member부분에서 저장되기 때문에 굳이 detail에서 넣어줄 이유가 없음
 			service1.register(detail);
 			
 			//해당 mentoringoption을 불러옴
@@ -167,6 +179,14 @@ public class PurchaseController {
 			MentoringOptionDTO aftermentoringoption = new MentoringOptionDTO(pur.getMentoringoption_mentoringoptionid(), 
 						pur.getMentoring_mentoringid(), pur.getMentoringoption_mentoringtime(), beforementoringoption.getMoptionstock()-1);
 			service4.modify(aftermentoringoption);
+			
+			//coupon 삭제
+			//지금 로그인한 회원의 쿠폰 목록정보
+			UserCouponDTO beforecoupon = null;
+			beforecoupon = ucservice.userCouponfind(pur.getUserid(), willusecoupon);
+			
+			//delete
+			ucservice.remove(beforecoupon.getUsercouponid());
 			
 			//point값 수정
 			//지금 로그인된 회원 정보
