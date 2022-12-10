@@ -134,6 +134,10 @@
 	{
 		margin-bottom: 40px;
 	}
+	.course_info_item:not(:last-child)::after
+	{
+		display: none;
+	}
 	.sidebar
 	{
 		margin-top: 10px;

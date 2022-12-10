@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		ON mr.userid = mu.userid
 		INNER JOIN mcate mtc ON mt.mcateid =
 		mtc.mcateid
-		WHERE mtc.mname = #{mname} and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		WHERE mtc.mname = #{mname} and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu
-		ON mr.userid = mu.userid where DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		ON mr.userid = mu.userid where DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 
 	<!-- 멘토링 옵션을 화면에 출력하기 위한 mybatis 연동 -->
@@ -122,7 +122,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt.mentorid = mr.mentorid
 		INNER JOIN user mu
 		ON mr.userid = mu.userid
-		WHERE mt.mtitle LIKE CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		WHERE mt.mtitle LIKE CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 
 	</select>
 
@@ -138,7 +138,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and mt.mtitle LIKE
-		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 
 	</select>
 
@@ -159,7 +159,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mu.userid
 		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') GROUP BY mt.mentoringid and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY avgrate, date_difference
+		CONCAT('%',#{txt},'%') GROUP BY mt.mentoringid and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY avgrate, date_difference
 		ASC LIMIT #{meningnum},6
 
 	</select>
@@ -179,7 +179,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mu.userid
 		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY
+		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY
 		mt.mentoringprice, date_difference ASC LIMIT #{meningnum},6
 
 	</select>
@@ -216,7 +216,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE mc.mname LIKE
 		CONCAT('%',#{mname},'%') and mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 	
 	
@@ -237,7 +237,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mu.userid
 		WHERE mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY avgrate,date_difference
+		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY avgrate,date_difference
 		ASC LIMIT #{meningnum},6
 	</select>
 		<!-- 전체 , 가격순(choyunyoung add) -->
@@ -255,7 +255,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mu.userid
 		WHERE mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY
+		CONCAT('%',#{txt},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY
 		mt.mentoringprice, date_difference ASC LIMIT #{meningnum},6
 	</select>
 		<!-- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)-->
@@ -287,7 +287,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mt.mtitle
 		LIKE
-		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		CONCAT('%',#{txt},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 
 	<!-- txt없을 때 -->
@@ -306,7 +306,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mt.mentoringid=r.mentoringid
 		INNER JOIN user mu ON mr.userid =
 		mu.userid
-		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY avgrate, date_difference
+		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY avgrate, date_difference
 		ASC LIMIT #{meningnum},6
 
 	</select>
@@ -324,7 +324,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid =
 		mu.userid
-		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY
+		WHERE mc.mname LIKE CONCAT('%',#{mname},'%') and DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY
 		mt.mentoringprice, date_difference ASC LIMIT #{meningnum},6
 
 	</select>
@@ -357,7 +357,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
 		WHERE mc.mname LIKE
-		CONCAT('%',#{mname},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		CONCAT('%',#{mname},'%') and mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 	
 	
@@ -375,7 +375,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN review r ON
 		mt.mentoringid=r.mentoringid
 		INNER JOIN user mu ON mr.userid =
-		mu.userid where DATEDIFF(mt.mentoringdate,sysdate())>0 GROUP BY mt.mentoringid ORDER BY avgrate, date_difference
+		mu.userid where DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY avgrate, date_difference
 		ASC LIMIT #{meningnum},6
 	</select>
 		<!-- 전체 , 가격순(choyunyoung add) -->
@@ -390,7 +390,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN
 		mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid =
-		mu.userid GROUP BY mt.mentoringid where DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY
+		mu.userid GROUP BY mt.mentoringid where DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY
 		mt.mentoringprice, date_difference ASC LIMIT #{meningnum},6
 	</select>
 		<!-- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)-->
@@ -417,6 +417,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid = mu.userid
-		WHERE mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>0 ORDER BY date_difference ASC LIMIT #{meningnum},6
+		WHERE mt.mcaring=#{mcaring} and DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY date_difference ASC LIMIT #{meningnum},6
 	</select>
 </mapper>
