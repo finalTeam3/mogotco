@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mogotco.dto.MentorDTO;
+import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.service.KakaologinAPI;
 //import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.MentorService;
+import com.mogotco.service.UserCouponService;
 import com.mogotco.service.UserService;
 
 @Controller
@@ -36,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	UserService user_service;
+	
+	@Autowired
+	UserCouponService cservice;
 	
 	@Autowired
 	KakaologinAPI kakao_service;
@@ -142,13 +147,21 @@ public class UserController {
 	
 	//회원가입기능
 	@RequestMapping("/registerimpl")
-	public String registerimpl(Model model, UserDTO user) {
+	public String registerimpl(Model model, UserDTO user, HttpSession session) {
 		try {
 			user_service.register(user);
+			
+			//coupon지급
+			UserCouponDTO coupon = null;
+			coupon = new UserCouponDTO(0, user.getUserid(), 1, null, 0);
+			cservice.register(coupon);
+			
+			session.setAttribute("loginuser", user);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	//이메일 인증번호 보내기
