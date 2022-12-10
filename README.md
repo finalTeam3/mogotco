@@ -18,7 +18,8 @@
 ## 3. 프로젝트 기능 구현
 ## 4. 프로젝트 역할 분담
 ## 5. 프로젝트 개발 환경 및 수행 도구
-![수행도구1](https://user-images.githubusercontent.com/83347312/206869343-54ce68bb-0209-48a8-a6e8-9828f0e16d2c.png)
+<img  src="https://user-images.githubusercontent.com/83347312/206869343-54ce68bb-0209-48a8-a6e8-9828f0e16d2c.png" width="70%" height="70%">
+
 ## 6. WBS
 	착수&분석(10/24~10/29)
 	설계(10/27~10/31)
