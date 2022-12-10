@@ -487,6 +487,7 @@
 		var total_price = $('#total_price1').val();//purprice(purchase)
 		var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
 		var willusepoint = $('#willusepoint1').val();
+		var willusecoupon = $('#willusecoupon1').val();
 		var mentoringprice = $('#mentoringprice').val();
 
 		IMP.request_pay({
@@ -516,6 +517,7 @@
 							+ '&[[@{purpay=}]]' + rsp.pay_method
 							+ '&[[@{purcard=}]]' + rsp.card_name
 							+ '&[[@{willusepoint=}]]' + willusepoint
+							+ '&[[@{willusecoupon=}]]' + willusecoupon
 							+ '&[[@{mentoringprice=}]]' + mentoringprice;
 				}
 			} else {

@@ -33,8 +33,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE uc.userid = #{userid}
 	</select>
 	
-	
-	
-	
-	
+	<!-- 해당 유저와 해당 금액에 해당하는 쿠폰 불러오기 -->
+	<select id="userCouponfind"
+		resultType="UserCouponDTO">
+		select uc.usercouponid, uc.userid, uc.couponid from usercoupon uc
+		inner join user u on uc.userid=u.userid
+		inner join coupon c on uc.couponid = c.couponid
+		where uc.userid=#{userid} and c.couponprice=#{willusecoupon}
+	</select>
+		
 </mapper>
