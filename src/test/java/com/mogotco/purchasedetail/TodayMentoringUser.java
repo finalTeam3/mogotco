@@ -1,5 +1,7 @@
 package com.mogotco.purchasedetail;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,22 +10,31 @@ import com.mogotco.dto.PurchaseDetailDTO;
 import com.mogotco.service.PurchaseDetailService;
 
 @SpringBootTest
-class InsertPurchaseDetail {
+class TodayMentoringUser {
 
 	@Autowired
 	PurchaseDetailService service;
 	
 	@Test
 	void contextLoads() {
-		//id는 자동증가이므로 초기화값인 아무것들만 넣어주면됨
-		PurchaseDetailDTO purchase = new PurchaseDetailDTO(0, 202, 403,0,"x", null, 0, null, null,null,null, null, null, null, null, null, 0,0,0, 0,null, null, null, 0) ;
+		
+		List<PurchaseDetailDTO> list = null;
+		
 		try {
-			service.register(purchase);
+			list = service.todaymentoringuser();
+			System.out.println("list : " + list);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		for(PurchaseDetailDTO p:list) {
+			System.out.println(p);
+		}
+		
 	}
 
 }
+
+
+
 
