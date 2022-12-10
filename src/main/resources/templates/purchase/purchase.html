@@ -83,25 +83,29 @@
 	padding: 5px;
 }
 
-.modal-title{
- font-size: 17px;
- text-align:left;
- font-weight: bold;
+.modal-title {
+	font-size: 17px;
+	text-align: left;
+	font-weight: bold;
 }
-.modal_table{
-  width:100%;
+
+.modal_table {
+	width: 100%;
 }
-#modal_coupon{
-  width:200px;
+
+#modal_coupon {
+	width: 200px;
 }
-#modal_usebtn{
-  margin:10px;
-  text-align: right;
+
+#modal_usebtn {
+	margin: 10px;
+	text-align: right;
 }
-#use_btn{
-  margin:10px;
-  text-align: right;
-  border-radius:10px;
+
+#use_btn {
+	margin: 10px;
+	text-align: right;
+	border-radius: 10px;
 }
 </style>
 <!-- jQuery -->
@@ -111,41 +115,45 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script>	
+<script>
 	//point
 	function pointchange() {
+		var userpoint = '[[${session.loginuser.userpoint}]]';
 		var x = Number(document.getElementById("writepoint").value);
 		var u = Number(document.getElementById("userpoint").value);
 		var p = Number(document.getElementById("mentoringprice").value);
+		var w = Number(document.getElementById("totalsale").value);
 		
 		var xx = $('#writepoint').val();
+		var uu = $('#willusecoupon1').val();
 		var pp = $('#mentoringprice').val();
-		
-		//enterkey쳤을 때
-		if (event.keyCode == 13) {
-			//사용자가 양수를 입력했을 때
-			if (x > 0) {
-				//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
-				if (x > u) {
-					var msg = "사용할 포인트를 초과하였습니다.";
-					alert(msg);
-				} else {
-					// 사용할 포인트 띄우기
-					
-					document.getElementById("willusepoint").innerHTML = x;
-					document.getElementById("total_price").innerHTML = p - x;
-					var a = u - x;
-					document.getElementById("userpoint").value = a;
-					
-					//input hidden
-					$('#willusepoint1').val(x);
-					$('#total_price1').val(p-x);
-				}
 
-			} else {
-				var msg = "포인트를 입력하세요";
-				alert(msg);
-			}
+			if (event.keyCode == 13) {
+				//사용자가 양수를 입력했을 때
+				if (x > 0) {
+					//사용자가 가지고 있는 것보다 더 많은 포인트를 입력했을 때
+					if (x > u) {
+						var msg = "사용할 포인트를 초과하였습니다.";
+						alert(msg);
+					} else {
+						// 사용할 포인트 띄우기
+						var t = w+x;
+						document.getElementById("willusepoint").innerHTML = x;
+						document.getElementById("total_price").innerHTML = p-uu - x;
+						var a = userpoint - x;
+						$('#userpoint').val(a);
+
+						//input hidden
+						$('#willusepoint1').val(x);
+						$('#total_price1').val(p-uu - x);
+						$('#totalsale').val(uu+x);
+
+					}
+
+				} else {
+					var msg = "포인트를 입력하세요";
+					alert(msg);
+				}
 		}
 	};
 
@@ -154,83 +162,120 @@
 		var u = '[[${session.loginuser.userpoint}]]';
 		var p = Number(document.getElementById("mentoringprice").value);
 		var checkbox = document.getElementById('chk_use');
-		if (checkbox.checked != true) {
-			document.getElementById("writepoint").value = null;
-			document.getElementById("willusepoint").innerHTML = null;
-			document.getElementById("total_price").innerHTML = p;
-			document.getElementById("willusepoint1").value = 0;
-			document.getElementById("total_price1").value = p;
-			document.getElementById("userpoint").value = '[[${session.loginuser.userpoint}]]';
-		} else {
-			//point를 다썼을 때
-			document.getElementById("writepoint").value = u;
-			document.getElementById("willusepoint").innerHTML = u;
-			document.getElementById("willusepoint1").value = u;
-			document.getElementById("total_price").innerHTML = p - u;
-			document.getElementById("total_price1").value = p - u;
-			document.getElementById("userpoint").value = 0;
-		}
-	};
+		var w = Number(document.getElementById("totalsale").value);
+		
+		var xx = $('#writepoint').val();
+		var pp = $('#mentoringprice').val();
+		var uu = $('#willusecoupon1').val();
+
+			//쓴 구폰이 있을 때(point는 안썼을 때)
+			if (checkbox.checked != true) {
+				document.getElementById("writepoint").value = null;
+				document.getElementById("willusepoint").innerHTML = null;
+				document.getElementById("total_price").innerHTML = p-uu;
+				document.getElementById("willusepoint1").value = 0;
+				document.getElementById("total_price1").value = p-uu;
+				document.getElementById("userpoint").value = '[[${session.loginuser.userpoint}]]';
+
+			} else {
+				//point를 다썼을 때
+				document.getElementById("writepoint").value = u;
+				document.getElementById("willusepoint").innerHTML = u;
+				document.getElementById("willusepoint1").value = u;
+				document.getElementById("total_price").innerHTML = p-uu - u;
+				document.getElementById("total_price1").value = p-uu - u;
+				document.getElementById("userpoint").value = 0;
+
+			}
+		};
 </script>
 <script>
 	function usingcoupon() {
 		var userid = '[[${session.loginuser.userid}]]';
-		
-		$.ajax({
-			type:"POST",
-			data : {'userid' : userid},
-			url:"[[@{/coupon}]]",
-			dateType:"JSON",
-			success : function(data) {
-				list = data;
-	//	          $('#myModal').modal(data);
-		          console.log(list);
-		          var size = Object.keys(list).length;
-		          console.log(size);
-		          var i =0;
-		          //위에 column name
-		          console.log(Object.keys(list[0]));
-		          var list1 = Object.keys(list[0]);
-		          var str ='<thead><tr>';
-		          str += '<th>'+ JSON.stringify(list1[2]).replace(/\"/gi, "") + '</th>'; //couponid
-		          str += '<th>'+ JSON.stringify(list1[3]).replace(/\"/gi, "") + '</th>'; //couponname
-		          str += '<th>'+ JSON.stringify(list1[4]).replace(/\"/gi, "") + '</th>'; //couponprice
-		          str += '</tr></thead>';
-		          
-		          //body시작
-		          while(i<size){
-			          console.log(Object.values(list[i]));
-			          var list2= Object.values(list[i]);
-			          
-			          var bt1 = 'id="my-button1' + i + '"';
-			          
-			          var on1 = 'onclick="usecp('+ JSON.stringify(list2[4]) + ')"';
-			          
-			          console.log(JSON.stringify(list2[2]));
-			          str += '<tbody><tr>';
-			          str += '<td>'+ JSON.stringify(list2[2])+'</td>';
-			          str += '<td>'+ JSON.stringify(list2[3]).replace(/\"/gi, "") + '</td>';
-			          str += '<td id="couponprice">'+ JSON.stringify(list2[4])+'</td>';
-			          str += '<td>'+'<button data-dismiss="modal" type="button"' + bt1 + on1 + 'class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button>'+'</td>';
-			          str += '</tr></tbody>';
-			          
-			          i=i+1;
-			          
-		          }
-		           console.log(str);
-				   $('.modal_table').append(str);
-			}
-		});
+
+		$
+				.ajax({
+					type : "POST",
+					data : {
+						'userid' : userid
+					},
+					url : "[[@{/coupon}]]",
+					dateType : "JSON",
+					success : function(data) {
+						//ajax를 이용해서 받아온 couponlist들
+						list = data;
+						console.log(list);
+						//받아온 list(Object의 형태)들의 key(column명)을 뽑아냄.
+						//또한 받아온 list(Object의 형태)의 개수가 여러개 일 수 있기 때문에 후에 while문을 돌리기 위한 Object들의 개수를 길이를 측정해서 뽑아냄.
+						var size = Object.keys(list).length;
+						console.log(size);
+						var i = 0;
+						//위에 column name
+						console.log(Object.keys(list[0]));
+						//받아온 Object객체 중에서 첫번째 객체를 뽑아줌.
+						var list1 = Object.keys(list[0]);
+						//위에서 뽑은 첫번째 객체의 3,4,5번째 column명들을 뽑아줌.
+						var str = '<thead><tr>';
+						str += '<th>'
+								+ JSON.stringify(list1[2]).replace(/\"/gi, "")
+								+ '</th>'; //couponid
+						str += '<th>'
+								+ JSON.stringify(list1[3]).replace(/\"/gi, "")
+								+ '</th>'; //couponname
+						str += '<th>'
+								+ JSON.stringify(list1[4]).replace(/\"/gi, "")
+								+ '</th>'; //couponprice
+						str += '</tr></thead>';
+
+						//body시작
+						//Object의 개수가 여러개 나오기 때문에 위에서 구한 size만큼 돌려서 column의 value값들을 각각 뽑아줌.
+						while (i < size) {
+							console.log(Object.values(list[i]));
+							//받아온 list(Object의 형태)들의 value를 뽑아냄. 해당 i에 맞는 객체가 나올 것
+							var list2 = Object.values(list[i]);
+
+							var bt1 = 'id="my-button1' + i + '"';
+
+							var on1 = 'onclick="usecp('
+									+ JSON.stringify(list2[4]) + ')"';
+							//위에서 뽑은 value의 객체에서 3,4,5번째 value들을 뽑아줌
+							console.log(JSON.stringify(list2[2]));
+							str += '<tbody><tr>';
+							str += '<td>' + JSON.stringify(list2[2]) + '</td>';
+							str += '<td>'
+									+ JSON.stringify(list2[3]).replace(/\"/gi,
+											"") + '</td>';
+							str += '<td id="couponprice">'
+									+ JSON.stringify(list2[4]) + '</td>';
+							str += '<td>'
+									+ '<button data-dismiss="modal" type="button"' + bt1 + on1 + 'class="btn btn-outline-primary" style="border-radius:5px;">사용하기</button>'
+									+ '</td>';
+							str += '</tr></tbody>';
+							//while안의 조건이 끝날때까지 돌아가기 위한 장치
+							i = i + 1;
+
+						}
+						console.log(str);
+						$('.modal_table').append(str);
+					}
+				});
 	}
 </script>
-  <script>
+<script>
 	function usecp(couponprice) {
 		var p = Number(document.getElementById("mentoringprice").value);
 		var u = parseInt(couponprice);
-		document.getElementById("total_price1").value = p - u;
-		document.getElementById("total_price").innerHTML = p - u;
-	}
-  </script>
+		
+		var uu = $('#willusepoint1').val();
+		var xx = $('#writepoint').val();
+		var pp = $('#mentoringprice').val();
+		
+			document.getElementById("willusecoupon").innerHTML = u;
+			document.getElementById("total_price1").value = p - u - uu;
+			document.getElementById("total_price").innerHTML = p - u - uu;
+			$('#willusecoupon1').val(u)
+		}
+</script>
 </head>
 
 
@@ -303,7 +348,8 @@
 						<input type="hidden" id="mentoringoptionid"
 							th:value="${mto.mentoringoptionid}">
 						<div class="col-md-12">
-							<div class="custom-control custom-checkbox" style="margin-bottom:20px;">
+							<div class="custom-control custom-checkbox"
+								style="margin-bottom: 20px;">
 								<input type="checkbox" class="custom-control-input" id="shipto">
 								<label class="custom-control-label" for="shipto"
 									data-toggle="collapse" data-target="#shipping-address">Select
@@ -311,7 +357,11 @@
 							</div>
 							<!-- 쿠폰사용버튼 -->
 							<div>
-							<button type="button" id="coupon_btn" th:onclick="usingcoupon()" data-toggle="modal" data-target="#couponModal" class="comment_button trans_200" style=" color:white; width:120px; height:30px; background-color:#005b00; border-radius:10px;">쿠폰 사용하기</button>
+								<button type="button" id="coupon_btn" th:onclick="usingcoupon()"
+									data-toggle="modal" data-target="#couponModal"
+									class="comment_button trans_200"
+									style="color: white; width: 120px; height: 30px; background-color: #005b00; border-radius: 10px;">쿠폰
+									사용하기</button>
 							</div>
 						</div>
 					</div>
@@ -324,9 +374,9 @@
 						<div class="row">
 							<div class="col-md-5 form-group">
 								<!-- session에서 cust의 poinr값을 가지고옴 -->
-								<label>My Point</label><span><input
-									class="form-control" type="text" id="writepoint"
-									placeholder="포인트를 입력하여 주세요." th:onkeypress="pointchange()"><input type="checkbox"
+								<label>My Point</label><span><input class="form-control"
+									type="text" id="writepoint" placeholder="포인트를 입력하여 주세요."
+									th:onkeypress="pointchange()"><input type="checkbox"
 									id="chk_use" th:onclick="chkPoint()">포인트 전체 사용</span><input
 									class="form-control" type="text" id="userpoint"
 									th:value="${session.loginuser.userpoint}" readonly="readonly">
@@ -345,15 +395,26 @@
 							<p>Mentoring Price</p>
 							<p th:text="${pur.mentoring_mentoringprice}+${'원'}"
 								id="ordermentoring_price"></p>
-							<input type='hidden' th:value="${pur.mentoring_mentoringprice}+${'원'}"
+							<input type='hidden'
+								th:value="${pur.mentoring_mentoringprice}+${'원'}"
 								id="ordermentoring1_price1">
 						</div>
 						<div class="d-flex justify-content-between">
 							<p>Point</p>
 							<p>
-								<span id="willusepoint"></span>
+								<span id="willusepoint" th:text="${willusepoint}"></span> <input type='hidden'
+									th:value="${totalsale}" name='totalsale' id="totalsale">
 								<input type='hidden' th:value="${point}" name='point'
-								id="willusepoint1">
+									id="willusepoint1">
+							</p>
+						</div>
+						<div class="d-flex justify-content-between">
+							<p>Coupon</p>
+							<p>
+								<span id="willusecoupon" th:text="${willusecoupon}"></span> <input type='hidden'
+									th:value="${totalsale}" name='totalsale' id="totalsale">
+								 <input type='hidden'
+									th:value="${coupon}" name='willusecoupon1' id="willusecoupon1">
 							</p>
 						</div>
 					</div>
@@ -361,8 +422,8 @@
 						<div class="d-flex justify-content-between mt-2">
 							<h5>Total</h5>
 							<h5 th:text="${pur.mentoring_mentoringprice}" id="total_price"></h5>
-							<input type='hidden' th:value="${pur.mentoring_mentoringprice}" name='price'
-								id="total_price1">
+							<input type='hidden' th:value="${pur.mentoring_mentoringprice}"
+								name='price' id="total_price1">
 						</div>
 					</div>
 				</div>
@@ -377,24 +438,26 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!------------- Modal --------------->
-	<div class="modal fade" id="couponModal" data-backdrop="static" data-keyboard="false">
-	      <div class="modal-dialog modal-xl modal-dialog-centered" style="width:700px;">
-	      <!-- Modal content-->   
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <h4 class="modal-title">보유 쿠폰</h4>
-	          <button type="button" class="close" data-dismiss="modal">×</button>
-	
-	        </div>
-	        <div class="modal-body">
-	          <table class="modal_table">
-	          </table>
-	        </div>
-	        <div id="count" value="1"></div>
-	      </div>
-	    </div>
+	<div class="modal fade" id="couponModal" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog modal-xl modal-dialog-centered"
+			style="width: 700px;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">보유 쿠폰</h4>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+
+				</div>
+				<div class="modal-body">
+					<table class="modal_table">
+					</table>
+				</div>
+				<div id="count" value="1"></div>
+			</div>
+		</div>
 	</div>
 
 
@@ -424,8 +487,9 @@
 		var total_price = $('#total_price1').val();//purprice(purchase)
 		var userid = '[[${session.loginuser.userid}]]';//userid(purchase)
 		var willusepoint = $('#willusepoint1').val();
+		var willusecoupon = $('#willusecoupon1').val();
 		var mentoringprice = $('#mentoringprice').val();
-		
+
 		IMP.request_pay({
 			pg : 'html5_inicis',
 			pay_method : 'card',
@@ -453,6 +517,7 @@
 							+ '&[[@{purpay=}]]' + rsp.pay_method
 							+ '&[[@{purcard=}]]' + rsp.card_name
 							+ '&[[@{willusepoint=}]]' + willusepoint
+							+ '&[[@{willusecoupon=}]]' + willusecoupon
 							+ '&[[@{mentoringprice=}]]' + mentoringprice;
 				}
 			} else {

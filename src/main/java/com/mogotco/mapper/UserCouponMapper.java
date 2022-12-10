@@ -12,5 +12,5 @@ import com.mogotco.frame.MyMapper;
 @Mapper
 public interface UserCouponMapper extends MyMapper<Integer, UserCouponDTO> {
 	public List<UserCouponDTO> userCouponAll(String userid) throws Exception;
-
+	public UserCouponDTO userCouponfind(String userid, int willusecoupon) throws Exception;
 }
