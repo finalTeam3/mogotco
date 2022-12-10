@@ -40,19 +40,19 @@
 }
 </style>
 <style>
-button{
+.chatbot1 button{
     border:none;
     outline: none;
     cursor: pointer;
 }
-section{
+.chatbot1 section{
     max-width: 1100px;
     margin: auto;
     text-align: center;
     padding: 0 1rem;
 }
 
-.chat-btn1{
+.chatbot1 .chat-btn1{
     position: fixed;
     right:50px;
     bottom: 50px;
@@ -66,11 +66,11 @@ section{
     box-shadow: 0 5px 5px rgba(0,0,0,0.4);
 }
 
-.chat-btn1:hover, .submit:hover, #emoji-btn:hover{
+.chatbot1 .chat-btn1:hover, .submit:hover, #emoji-btn:hover{
     opacity: 1;
 }
 
-.chat-popup1{
+.chatbot1 .chat-popup1{
     display: none;
     position: fixed;
     bottom:80px;
@@ -86,29 +86,29 @@ section{
     border-radius: 10px;
 }
 
-.show{
+.chatbot1 .show{
     display: flex;
 }
 
-.chat-area1{
+.chatbot1 .chat-area1{
     height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.income-msg{
+.chatbot1 .income-msg{
     display: flex;
     align-items: center;
 }
 
-.avatar{
+.chatbot1 .avatar{
     width:45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.income-msg .msg{
+.chatbot1 .income-msg .msg{
     background-color: dodgerblue;
     color: white;
     padding:0.5rem;
@@ -117,7 +117,7 @@ section{
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-.badge{
+.chatbot1 .badge{
     position: absolute;
     width: 30px;
     height: 30px;
@@ -131,13 +131,13 @@ section{
     right: -10px;
 }
 
-.input-area{
+.chatbot1 .input-area{
     position: relative;
     display: flex;
     justify-content: center;
 }
 
-input[type="text"]{
+.chatbot1 input[type="text"]{
     width:100%;
     border: 1px solid #ccc;
     font-size: 1rem;
@@ -145,7 +145,7 @@ input[type="text"]{
     height: 2.2rem;
 }
 
-#emoji-btn1{
+.chatbot1 #emoji-btn1{
     position: absolute;
     font-size: 1.2rem;
     background: transparent;
@@ -154,7 +154,7 @@ input[type="text"]{
     opacity:0.5;
 }
 
-.submit1{
+.chatbot1 .submit1{
     padding: 0.25rem 0.5rem;
     margin-left: 0.5rem;
     background-color: green;
@@ -167,12 +167,12 @@ input[type="text"]{
 }
 
 
-.out-msg{
+.chatbot1 .out-msg{
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
-.my-msg{
+.chatbot1 .my-msg{
     display: flex;
     justify-content: flex-end;
     margin: 0.75rem;
@@ -186,7 +186,7 @@ input[type="text"]{
 
 @media (max-width:500px){
 
-    .chat-popup1{
+   .chatbot1 .chat-popup1{
         bottom: 120px;
         right:10%;
         width: 80vw;
@@ -375,29 +375,6 @@ body {
 </body>
   <!-- Maincenter finish------------------------------------------------------------------------------------>
    <!-- Footer -->
-<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
-    <section>
-
-        <button class="chat-btn1"> 
-            <i class="material-icons"> comment </i>
-        </button>
-
-        <div class="chat-popup1">
-            <div class="badge">1</div>
-            <div class="chat-area1">
-             <div class="income-msg">
-                 <img src="img/person.jpg" class="avatar" alt="">
-                 <span class="msg"> Hi, How can I help you?</span>
-             </div>   
-            </div>
-
-            <div class="input-area">
-                <input type="text">
-                <button id="emoji-btn1"> &#127773;</button>
-                <button class="submit1"> <i class="material-icons"> send</i></button>
-            </div>
-        </div>
-    </section>
    <footer class="footer">
       <div class="footer_background" th:style="'background-image:url(' + @{/images/footer_background.png} + ')'"></div>
       <div class="container">
@@ -500,6 +477,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          </div>
       </div>
    </footer>
+      <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
+    <section class="chatbot1">
+
+        <button class="chat-btn1"> 
+            <i class="material-icons"> comment </i>
+        </button>
+
+        <div class="chat-popup1">
+            <div class="badge">1</div>
+            <div class="chat-area1">
+             <div class="income-msg">
+                 <img src="img/person.jpg" class="avatar" alt="">
+                 <span class="msg"> Hi, How can I help you?</span>
+             </div>   
+            </div>
+
+            <div class="input-area">
+                <input type="text">
+                <button id="emoji-btn1"> &#127773;</button>
+                <button class="submit1"> <i class="material-icons"> send</i></button>
+            </div>
+        </div>
+    </section>
           <script>
 const popup1 = document.querySelector('.chat-popup1');
 const chatBtn1 = document.querySelector('.chat-btn1');
