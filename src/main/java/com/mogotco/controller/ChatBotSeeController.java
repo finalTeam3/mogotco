@@ -11,8 +11,7 @@ public class ChatBotSeeController {
 	
 	@RequestMapping("/chatbot")
 	public String chatbot(Model model) {
-		model.addAttribute("center", "chatbot");
-		return "main";
+		return "chatbot";
 	}
 	
 }
