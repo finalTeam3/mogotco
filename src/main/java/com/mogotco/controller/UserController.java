@@ -1,31 +1,24 @@
 
 package com.mogotco.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mogotco.dto.MentorDTO;
 import com.mogotco.dto.UserCouponDTO;
 import com.mogotco.dto.UserDTO;
 import com.mogotco.service.KakaologinAPI;
-//import com.mogotco.service.KakaologinAPI;
 import com.mogotco.service.MentorService;
 import com.mogotco.service.UserCouponService;
 import com.mogotco.service.UserService;
@@ -84,12 +77,16 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		return "redirect:/";
 	}
 	
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		 
 		if(session != null) {
 			session.invalidate();
 		}
