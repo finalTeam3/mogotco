@@ -55,5 +55,13 @@ public class PurchaseDetailService implements MyService<Integer,PurchaseDetailDT
 	public PurchaseDetailDTO groupcount(Integer mentoringoption_mentoringoptionid) throws Exception{
 		return mapper.groupcount(mentoringoption_mentoringoptionid);
 	}
+	
+	public List<PurchaseDetailDTO> getpurmentoringuser() throws Exception{
+		return mapper.getpurmentoringuser();
+	}
+	
+	public List<PurchaseDetailDTO> todaymentoringuser() throws Exception{
+		return mapper.todaymentoringuser();
+	}
 
 }
