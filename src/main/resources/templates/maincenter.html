@@ -23,13 +23,16 @@ function request(mentor_mentorid){
 	<!-- Home -->
 
 	<div class="home">
+<div class="home_slider_container">
 
 		<!-- Home Slider -->
 		<div class="owl-carousel owl-theme home_slider">
+		
 			<!-- Home Slider Item -->
+			
 			<div class="owl-item">
 				<div class="home_slider_background"
-					th:style="'background-image:url(' + @{/images/home_slider_3.jpg} + ')'"></div>
+					th:style="'background-image:url(' + @{/images/slide5.png} + ')'"></div>
 				<div class="home_slider_content">
 					<div class="container">
 						<div class="row">
@@ -61,8 +64,84 @@ function request(mentor_mentorid){
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>			
+			
+			<div class="owl-item">
+				<div class="home_slider_background"
+					th:style="'background-image:url(' + @{/images/slide11.png} + ')'"></div>
+				<div class="home_slider_content">
+					<div class="container">
+						<div class="row">
+							<div class="col text-center">
+								<div class="home_slider_title"><br><br></div>
+								<div class="home_slider_subtitle"></div>
+								<div class="home_slider_form_container">
+									<form th:action="@{/mentoring/defaultmultimainsearch}" id="search_form_mentoring3"
+										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+										<div
+											class="d-flex flex-row align-items-center justify-content-start">
+											<input type="text" class="home_search_input" name="txt"
+												placeholder="Keyword Search" required="required"> <select
+												class="dropdown_item_select home_search_input" name="mname">
+												<option value="all">전체</option>
+												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+											</select> 
+ 											<select name="mtype" class="dropdown_item_select home_search_input">
+												<option value="lowprice" selected>가격순</option>
+												<option value="orderreview">별점순</option>
+												<option value="recentmen">빠른 멘토링</option>
+												<option value="mcaringok">사후관리</option>
+											</select>
+										<button id="search_button3" type="submit" class="home_search_button">search</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+	
+			<div class="owl-item">
+				<div class="home_slider_background"
+					th:style="'background-image:url(' + @{/images/slide10.png} + ')'"></div>
+				<div class="home_slider_content">
+					<div class="container">
+						<div class="row">
+							<div class="col text-center">
+								<div class="home_slider_title"><br><br></div>
+								<div class="home_slider_subtitle"></div>
+								<div class="home_slider_form_container">
+									<form th:action="@{/mentoring/defaultmultimainsearch}" id="search_form_mentoring3"
+										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+										<div
+											class="d-flex flex-row align-items-center justify-content-start">
+											<input type="text" class="home_search_input" name="txt"
+												placeholder="Keyword Search" required="required"> <select
+												class="dropdown_item_select home_search_input" name="mname">
+												<option value="all">전체</option>
+												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+											</select> 
+ 											<select name="mtype" class="dropdown_item_select home_search_input">
+												<option value="lowprice" selected>가격순</option>
+												<option value="orderreview">별점순</option>
+												<option value="recentmen">빠른 멘토링</option>
+												<option value="mcaringok">사후관리</option>
+											</select>
+										<button id="search_button3" type="submit" class="home_search_button">search</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+			
 		</div>
+	</div>	
+		<div class="home_slider_nav home_slider_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+		<div class="home_slider_nav home_slider_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>		
 	</div>
 	<!-- Features -->
 
@@ -71,13 +150,13 @@ function request(mentor_mentorid){
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
-						<h2 class="section_title">Welcome To Mogotco</h2>
+						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">MOGOTCO에 오신것을 환영합니다</h2>
 						<div class="section_subtitle">
-							<p>Our mogotco is a mentoring site. Through our site, you can
+							<!-- <p>Our mogotco is a mentoring site. Through our site, you can
 								become a mentee and get advice and various insights through
 								meetings with mentors. In addition, you can become a mentor and
 								open mentoring to collect a certain amount of money and share
-								your experiences and insights.</p>
+								your experiences and insights.</p> -->
 						</div>
 					</div>
 				</div>
@@ -94,7 +173,9 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>
 						<div>&nbsp</div>
 						<div>&nbsp</div>
-						<h3 class="feature_title">Excellent mentors</h3>
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">훌륭한 멘토들</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Select reliable developers using business card authentication system</p>
 						</div>
@@ -111,8 +192,10 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>
 						<div>&nbsp</div>						
 						<div>&nbsp</div>						
-						<h3 class="feature_title">Be mentor</h3>
-						<div class="feature_text">
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">멘토 지원</h3>
+						<div>&nbsp</div>
+						<div class="feature_text" style = "font-family: 'Spoqa Han Sans Neo';">
 							<p>Any mentee can be a mentor.</p>
 						</div>
 					</div>
@@ -127,7 +210,9 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>
 						<div>&nbsp</div>						
 						<div>&nbsp</div>						
-						<h3 class="feature_title">Video meeting</h3>
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">화상 회의</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Non-face-to-face mentoring is possible within the site</p>
 						</div>
@@ -144,7 +229,9 @@ function request(mentor_mentorid){
 						<div>&nbsp</div>
 						<div>&nbsp</div>							
 						<div>&nbsp</div>							
-						<h3 class="feature_title">Timer</h3>
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title" style = "font-family: 'Spoqa Han Sans Neo';">Timer</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
 							<p>Send a message 10 minutes before the mentoring time</p>
 						</div>
