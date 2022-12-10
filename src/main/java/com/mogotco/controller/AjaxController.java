@@ -167,7 +167,7 @@ public class AjaxController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(clist);
+		//System.out.println(clist);
 		return clist;
 	}
 
