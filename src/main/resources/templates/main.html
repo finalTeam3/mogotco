@@ -293,18 +293,18 @@ body {
                   <div class="header_content d-flex flex-row align-items-center justify-content-start">
                      <div class="logo_container">
                         <a th:href="@{/}">
-                           <div class="logo_text" style="font-family: 'Noto Sans'; font-size:200%"><span>MOGOTCO</span></div>
+                           <div class="logo_text" style="font-family: 'sans-serif'; font-size:200%"><span>MOGOTCO</span></div>
                         </a>
                      </div>
                      <nav class="main_nav_contaner ml-auto">
                         <ul class="main_nav">
-                           <li class="active"><a th:href="@{/}">Home</a></li>
-                           <li><a th:href="@{/notice}">Notice</a></li>
-                           <li><a th:href="@{/about}">About</a></li>
-                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}">Mentoring</a></li>
-                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/defaultmentoring}">Mentoring</a></li>
-                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentor/mentorlist(userid=${session.loginuser.userid})}">Mentor</a></li>
-                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
+                           <li class="active"><a th:href="@{/}" style="font-family: 'Spoqa Han Sans Neo';">홈</a></li>
+                           <li><a th:href="@{/notice}" style="font-family: 'Spoqa Han Sans Neo';">공지사항</a></li>
+                           <li><a th:href="@{/about}" style="font-family: 'Spoqa Han Sans Neo';">소개</a></li>
+                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
+                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/defaultmentoring}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
+                           <li th:if = "${session.loginuser != null}"><a th:href="@{/mentor/mentorlist(userid=${session.loginuser.userid})}" style="font-family: 'Spoqa Han Sans Neo';">멘토</a></li>
+                           <li th:if = "${session.loginuser == null}"><a th:href="@{/mentor/mentorlist}" style="font-family: 'Spoqa Han Sans Neo';">멘토</a></li>
                         </ul>
                         <div class="search_button"><i class="fa-solid fa-magnifying-glass"aria-hidden="true"></i></div>
 

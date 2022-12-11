@@ -174,7 +174,7 @@ function request(mentor_mentorid){
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
-						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">MOGOTCO에 오신것을 환영합니다</h2>
+						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">MOGOTCO에 오신것을 환영해요!</h2>
 						<div class="section_subtitle">
 							<!-- <p>Our mogotco is a mentoring site. Through our site, you can
 								become a mentee and get advice and various insights through
@@ -268,9 +268,8 @@ function request(mentor_mentorid){
 	<!-- Popular Courses -->
 
 	<div class="courses">
-		<div class="section_background parallax-window" data-parallax="scroll"
-			th:data-image-src="@{/images/courses_background.jpg}"
-			data-speed="0.8"></div>
+		<div class="section_background parallax-window" 
+			th:style="'background-image:url('+ @{/images/courses_background.jpg} +'); background-attachment: fixed;'" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -327,7 +326,7 @@ function request(mentor_mentorid){
 
 	<div class="team">
 		<div class="team_background parallax-window" data-parallax="scroll"
-			th:data-image-src="@{/images/team_background.jpg}" data-speed="0.8"></div>
+			th:data-image-src="@{/images/team_background.png}" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
