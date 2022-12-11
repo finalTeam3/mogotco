@@ -62,7 +62,7 @@
 ## 7. 데이터베이스 설계
 ![mogotco (4)](https://user-images.githubusercontent.com/83347312/206660375-1d1bb75e-1428-46f4-99ef-5ae8baf753ad.png)
 ## 8. 유저 플로우
-<img  src="https://user-images.githubusercontent.com/83347312/206904698-059e3ac1-3150-4b3b-8458-9d5018fbf642.png" width="100%" height="100%">
+<img  src="https://user-images.githubusercontent.com/83347312/206914954-c3f9e2e1-a53b-4a32-a2e6-f3e2233507cb.png" width="100%" height="100%">
 <br/>
 <br/>
 
