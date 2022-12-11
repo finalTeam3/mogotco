@@ -1,8 +1,3 @@
-# MOGOTCO
-# 팀정보 + 시연영상
-## 팀이름 : MOGOTCO  
-  
-## 팀원
 #### 팀장 : 조윤영
 #### 팀원 : 박성훈, 박혜정, 신동준  
 
@@ -36,9 +31,9 @@
 |**팀원**|**역할**|
 |----|----|
 |조윤영|멘토링 결제기능(API,coupon,point사용), 멘토링&멘토 검색기능(메인페이지, 멘토링페이지, 멘토리스트페이지에서 카페고리별, type별, 회사별 검색), 페이징처리&scrolling|
-|박성훈|CLOVA OCR(명함 인식 서비스),CLOVA CHATBOT(문의하기), admin (전체적 페이지, 멘토 승인)|
+|박성훈|CLOVA OCR(명함 인식 서비스),CLOVA CHATBOT(문의하기), 멘토 위시리스트, admin (전체적 페이지, 멘토 승인)|
 |박혜정|회원가입, 일반로그인&소셜로그인(kakao,github)기능, 이메일 사용 기능(회원가입시 인증번호, 멘토링 알림메일, 멘토 승인 메일), 리뷰&평점 기능, Q&A및 자주하는 질문, admin (Q&A)|
-|신동준|화상회의기능(API), 멘토링 장소 지도로 보여줌(API)|
+|신동준|화상회의기능(API), 멘토링 장소 지도로 보여줌(API), 멘토링 등록 기능(날짜, 시간 선택 가능)|
 
 ## 5. 프로젝트 개발 환경 및 수행 도구
 |**협업도구**|**database&framework&개발도구**|**backend**|**frontend**|**API**|
@@ -62,7 +57,7 @@
 ## 7. 데이터베이스 설계
 ![mogotco (4)](https://user-images.githubusercontent.com/83347312/206660375-1d1bb75e-1428-46f4-99ef-5ae8baf753ad.png)
 ## 8. 유저 플로우
-<img  src="https://user-images.githubusercontent.com/83347312/206644718-986feb6c-1378-4528-b196-8f87aa3f6894.png" width="100%" height="100%">
+<img  src="https://user-images.githubusercontent.com/83347312/206904698-059e3ac1-3150-4b3b-8458-9d5018fbf642.png" width="100%" height="100%">
 <br/>
 <br/>
 
