@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
 <link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
@@ -49,6 +49,12 @@ body{
 }
 
 section{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    height: 130vh;
+    width: 100%;
     max-width: 1100px;
     margin: auto;
     text-align: center;
@@ -79,6 +85,7 @@ p{
     box-shadow: 0 5px 5px rgba(0,0,0,0.4);
 }
 
+
 .chat-btn:hover, .submit:hover, #emoji-btn:hover{
     opacity: 1;
 }
@@ -88,19 +95,40 @@ p{
     position: fixed;
     bottom:80px;
     right:120px;
-    height: 400px;
+    height: 500px;
     width: 300px;
     background-color: white;
     /* display: flex; */
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.75rem;
+    padding: 2rem;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
     border-radius: 10px;
 }
 
+.dechat-btn{
+    position: fixed;
+    right:125px;
+    bottom: 535px;
+    background: dodgerblue;
+    color: white;
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+}
+.dechat-btn:hover, .submit:hover, #emoji-btn:hover{
+    opacity: 1;
+}
+
 .show{
     display: flex;
+}
+
+.close{
+    display: none;
 }
 
 .chat-area{
@@ -128,6 +156,7 @@ p{
     border-radius: 25px;
     margin-left: 1rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    font-size: 0.75rem;
 }
 
 .badge{
@@ -184,6 +213,7 @@ input[type="text"]{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    font-size: 0.75rem;
 }
 .my-msg{
     display: flex;
@@ -194,6 +224,7 @@ input[type="text"]{
     border-radius: 25px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     word-break: break-all;
+    font-size: 0.75rem;
 }
 
 
@@ -214,22 +245,18 @@ input[type="text"]{
         <button class="chat-btn"> 
             <i class="material-icons"> comment </i>
         </button>
-
         <div class="chat-popup">
-            <div class="badge">1</div>
-            <div class="chat-area">
-             <div class="income-msg">
-                 <img src="img/person.jpg" class="avatar" alt="">
-                 <span class="msg"> Hi, How can I help you?</span>
-             </div>   
+         <button class="dechat-btn"><i class="material-icons"> comment </i></button>
+  			<div class="chat-area">
+   
             </div>
+            
 
             <div class="input-area">
                 <input type="text">
-                <button id="emoji-btn"> &#127773;</button>
                 <button class="submit"> <i class="material-icons"> send</i></button>
             </div>
-        </div>
+            </div>
     </section>
 </body>
 <script>
@@ -238,40 +265,56 @@ const chatBtn = document.querySelector('.chat-btn');
 const submitBtn = document.querySelector('.submit');
 const chatArea = document.querySelector('.chat-area');
 const inputElm = document.querySelector('input');
-const emojiBtn = document.querySelector('#emoji-btn');
-const picker = new EmojiButton();
+const dechatBtn = document.querySelector('.dechat-btn');
 
+ 
+function connect(){
+	var socket = new SockJS('http://127.0.0.1/mogotco/ws');
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame){
+		stompClient.subscribe('/topic/public', function(message){
+			showMessage3("받은 메시지: " + message.body);
+		});
+	});
+}
 
-// Emoji selection  
-window.addEventListener('DOMContentLoaded', () => {
+function disconnect(){
+	if(stompClient !== null){
+		stompClient.disconnect();
+	}
+}
 
-    picker.on('emoji', emoji => {
-      document.querySelector('input').value += emoji;
-    });
-  
-    emojiBtn.addEventListener('click', () => {
-      picker.togglePicker(emojiBtn);
-    });
-  });        
+function sendMessage(userInput){
+	
+	$('.chat-area').append('<div class="out-msg"><span class="my-msg">' + userInput + '</span></div>');
+	$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
+	var user = decodeURIComponent(userInput)
+	stompClient.send("/app/sendMessage", {}, JSON.stringify(user)); //서버에 보낼 메시지
+}
 
-//   chat button toggler 
-
+function showMessage3(answer){
+	$('.chat-area').append('<div class="income-msg"><span class="msg">' + answer + '</span></div>');
+	$('.chat-area').scrollTop($(".chat-area")[0].scrollHeight);
+	$('.chat-area').val('');
+}
+//chat button toggler 
 chatBtn.addEventListener('click', ()=>{
     popup.classList.toggle('show');
-})
+    connect();
+});
 
 // send msg 
 submitBtn.addEventListener('click', ()=>{
     let userInput = inputElm.value;
 
-    let temp = `<div class="out-msg">
-    <span class="my-msg">${userInput}</span>
-    <img src="img/me.jpg" class="avatar">
-    </div>`;
-
-    chatArea.insertAdjacentHTML("beforeend", temp);
+    sendMessage(userInput);
     inputElm.value = '';
 
-})
+});
+
+dechatBtn.addEventListener('click', ()=>{
+	popup.classList.toggle('close');
+    disconnect();
+});
 </script>
 </html>
