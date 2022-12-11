@@ -127,31 +127,24 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE purchasedetailid=#{purchasedetailid}
 	</delete>
 	
-	<!-- 멘토링 구매완료한 사람들 목록 -->
-	<select id="getpurmentoringuser" resultType="PurchaseDetailDTO">
-		SELECT purde.purchaseid, pur.purprice AS purchase_purprice, u.userid AS mentor_userid, 
-		mentoring.mentoringdate AS mentoring_mentoringdate, mentoringoption.mentoringtime AS mentoringoption_mentoringtime, 
-		purde.mentoringoptionid, purde.progresspur, mentor.mentorid AS mentor_mentorid, 
-		mentoring.mentoringid AS mentoring_mentoringid FROM purchasedetail purde
+	<!-- 멘토링 구매완료한 사람들 중 오늘 멘토링인 사람들 메일주소 -->
+	<select id="todaymentoringmail" resultType="String">
+		SELECT u.useremail AS user_useremail FROM purchasedetail purde
 		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
 		INNER JOIN mentoringoption mentoringoption ON purde.mentoringoptionid=mentoringoption.mentoringoptionid
 		INNER JOIN mentoring mentoring ON mentoringoption.mentoringid=mentoring.mentoringid
-		INNER JOIN mentor mentor ON mentoring.mentorid=mentor.mentorid
-		INNER JOIN user u ON mentor.userid=u.userid;
-	</select>
-	
-	<!-- 멘토링 구매완료한 사람들 중 오늘 멘토링인 사람들 -->
-	<select id="todaymentoringuser" resultType="PurchaseDetailDTO">
-		SELECT purde.purchaseid, pur.purprice AS purchase_purprice, pur.userid, u.useremail,
-		mentoring.mentoringdate AS mentoring_mentoringdate, DATEDIFF(mentoring.mentoringdate,sysdate()) AS date_difference,
-		purde.mentoringoptionid, purde.progresspur, mentor.mentorid AS mentor_mentorid, 
-		mentoring.mentoringid AS mentoring_mentoringid FROM purchasedetail purde
-		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
-		INNER JOIN mentoringoption mentoringoption ON purde.mentoringoptionid=mentoringoption.mentoringoptionid
-		INNER JOIN mentoring mentoring ON mentoringoption.mentoringid=mentoring.mentoringid
-		INNER JOIN mentor mentor ON mentoring.mentorid=mentor.mentorid
 		INNER JOIN user u ON pur.userid=u.userid
 		WHERE DATEDIFF(mentoring.mentoringdate,sysdate()) = 0;
+	</select>
+	
+	<!-- 멘토링 구매완료한 사람들 중 내일 멘토링인 사람들 메일주소 -->
+	<select id="tomorrowmentoringmail" resultType="String">
+		SELECT u.useremail AS user_useremail FROM purchasedetail purde
+		INNER JOIN purchase pur ON purde.purchaseid=pur.purchaseid
+		INNER JOIN mentoringoption mentoringoption ON purde.mentoringoptionid=mentoringoption.mentoringoptionid
+		INNER JOIN mentoring mentoring ON mentoringoption.mentoringid=mentoring.mentoringid
+		INNER JOIN user u ON pur.userid=u.userid
+		WHERE DATEDIFF(mentoring.mentoringdate,sysdate()) = 1;
 	</select>
 	
 </mapper>
