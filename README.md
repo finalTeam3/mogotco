@@ -55,11 +55,6 @@
 
 ## 6. WBS
 ![WBS](https://user-images.githubusercontent.com/111735748/206927107-40fc6d9b-70bd-4dcd-b57d-ee9ccdd34eea.jpg)
-	착수&분석(10/24~10/29)
-	설계(10/27~10/31)
-	개발(11/01~12/11)
-	검수(11/23~12/16)
-	배포(12/12~12/16)
 ## 7. 데이터베이스 설계
 ![mogotco (4)](https://user-images.githubusercontent.com/83347312/206660375-1d1bb75e-1428-46f4-99ef-5ae8baf753ad.png)
 ## 8. 유저 플로우
