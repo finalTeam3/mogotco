@@ -83,7 +83,7 @@
 }
 
 .chatbot1 .chat-popup{
-    display: none;
+	display: none;
     position: fixed;
     bottom:80px;
     right:120px;
@@ -101,7 +101,7 @@
     position: fixed;
     right:125px;
     bottom: 535px;
-    background: dodgerblue;
+    background: #005b00;
     color: white;
     width:40px;
     height: 40px;
@@ -113,12 +113,16 @@
 .chatbot1 .dechat-btn:hover, .submit:hover, #emoji-btn:hover{
     opacity: 1;
 }
+
 .chatbot1 .show{
     display: flex;
 }
+
 .chatbot1 .close{
     display: none;
 }
+
+
 .chatbot1 .chat-area{
     height: 80%;
     overflow-y: auto;
@@ -138,7 +142,7 @@
 }
 
 .chatbot1 .income-msg .msg{
-    background-color: dodgerblue;
+    background-color: #005b00;
     color: white;
     padding:0.5rem;
     border-radius: 25px;
@@ -167,7 +171,7 @@
     justify-content: center;
 }
 
-.chatbot1 input[type="text"]{
+.chatbot1 input[type=text]{
     width:100%;
     border: 1px solid #ccc;
     font-size: 1rem;
@@ -175,7 +179,7 @@
     height: 2.2rem;
 }
 
-.chatbot1 #emoji-btn1{
+.chatbot1 #emoji-btn{
     position: absolute;
     font-size: 1.2rem;
     background: transparent;
@@ -205,10 +209,11 @@
 }
 .chatbot1 .my-msg{
     display: flex;
+    color: white;
     justify-content: flex-end;
     margin: 0.75rem;
     padding: 0.5rem;
-    background-color: #ddd;
+    background-color: #005b00;
     border-radius: 25px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     word-break: break-all;
@@ -505,15 +510,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             <i class="material-icons"> comment </i>
         </button>
         <div class="chat-popup">
-         <button class="dechat-btn"><i class="material-icons"> comment </i></button>
+         <button class="dechat-btn"><i class="fa-solid fa-xmark"></i></button>
   			<div class="chat-area">
    
             </div>
             
 
-            <div class="input-area">
-                <input type="text">
-                <button class="submit"> <i class="material-icons"> send</i></button>
+            <div class="chatinput-area">
+            <input type="text" id=chatinput> 
+                <button class="submit"><i class="material-icons"> send</i></button>
             </div>
             </div>
     </section>
@@ -522,7 +527,7 @@ const popup = document.querySelector('.chat-popup');
 const chatBtn = document.querySelector('.chat-btn');
 const submitBtn = document.querySelector('.submit');
 const chatArea = document.querySelector('.chat-area');
-const inputElm = document.querySelector('input');
+const inputElm = document.querySelector('#chatinput');
 const dechatBtn = document.querySelector('.dechat-btn');
 
  
@@ -559,20 +564,24 @@ function showMessage3(answer){
 chatBtn.addEventListener('click', ()=>{
     popup.classList.toggle('show');
     connect();
-});
+    let temp = `<div class="income-msg"><span class="msg">안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</span>
+        </div>`;
 
+        chatArea.insertAdjacentHTML("beforeend", temp);
+});
+dechatBtn.addEventListener('click', ()=>{
+	disconnect();
+	dechatBtn.removeEventListener(popup.classList.toggle('show'))
+});
 // send msg 
-submitBtn.addEventListener('click', ()=>{
+submitBtn.onclick = function() { 
     let userInput = inputElm.value;
 
     sendMessage(userInput);
     inputElm.value = '';
 
-});
+}
 
-dechatBtn.addEventListener('click', ()=>{
-	popup.classList.toggle('close');
-    disconnect();
-});
+
 </script>
 </html>
