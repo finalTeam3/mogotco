@@ -13,7 +13,17 @@
 <!-- 반응형 웹 적용시 메뉴바 사라지는 오류 해결할 때 필요한 태그  -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/styles/courses_responsive.css}">
-
+<style>
+	.sidebar_section_title{
+		font-family:'Spoqa Han Sans Neo'; 
+	}
+	*{
+		font-family:'Spoqa Han Sans Neo'; 
+	}
+	.tab_panel_text, .tab_panel_title{
+		font-family:'Spoqa Han Sans Neo'; 
+	}
+</style>
 </head>
 
 	
@@ -57,16 +67,17 @@
 
 						<!-- Feature -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Mentor</div>
+							<div class="sidebar_section_title"></div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img th:src="@{/img/}+${mta.mentorimg}"></div>
 									<div class="teacher_title">
 										<input type="text" class="comment_input" th:value="${mta.mentorid}" style = "display:none" name="mentorid" id="mentorid">
-										<div class="teacher_name" style="float:left;"><a th:href="@{/mentor/mentoringlist(mentorid=${mta.mentorid})}" th:text="${mta.user_username}"></a></div>
-										<ul><li><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" style="width:25px;height:25px;float:left;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></li></ul>
-										<button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button>
-										
+										<div class="teacher_name" style="float:left;"><h3 th:text="${mta.user_username}" style="font-family:'Spoqa Han Sans Neo';"></h3></div>
+										<div style="width:100%; float:left;">
+										<div><button type="button" id="wishlist_btn" th:if="${session.loginuser} != null"class="comment_button trans_200" style="width:80px;height:30px;float:left;"><i class="fa-solid fa-heart"></i></button></div>
+										<div><a id="kakaotalksharingbtn"><img th:onclick="shareMessage([[${mta.mentorid}]],[[${mta.userid}]])" style="width:25px;height:25px;float:left; margin: 18px 0px 0px 20px; cursor:pointer;" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_small.png" alt="카카오톡 공유 보내기 버튼" /></a></div>
+										</div>
 										<!--  <input class="comment_input" th:value="${session.loginuser.userid}" type="hidden" name="userid" id="userid">-->
 									</div>
 								</div>
@@ -94,11 +105,12 @@
 								</div>
 							</div>
 						</div>
-						
+						<hr>
 
 						<!-- Latest Course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Latest Mentoring</div>
+						<br>
+							<div class="sidebar_section_title">최근 멘토링</div>
 							<div class="sidebar_latest">
 
 								<!-- Latest Course -->
@@ -137,28 +149,28 @@
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
 								<div class="tab active">소개</div>
-								<!-- <div class="tab">경력</div> -->
-								<div class="tab">reviews</div>
+								<div class="tab">리뷰</div>
 							</div>
 							<div class="tab_panels">
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<h3 class="tab_panel_text">Mentoring Category</h3>
+									<h3 class="tab_panel_text">멘토링 분야</h3>
 									<br>
  									<div class="tab_panel_content" th:each="mwclist:${mwclist}">
 	 									<div>
-	 									<button class="comment_button trans_200" th:text="${mwclist.mcate_mname}" style="width:110px;height:24px" ></button>
+	 									<button class="comment_button trans_200" th:text="${mwclist.mcate_mname}" style="width:110px;height:24px;float:left; margin:0px 10px 0px 0px" ></button>
 										</div>
 									</div>
-									<br>
-									<h3 class="tab_panel_text">Mentor Contents</h3>
+	 								<br>
+									<hr>
+									<h3 class="tab_panel_text">멘토 소개</h3>
  									<div class="tab_panel_content" style="white-space:pre-wrap;">
 	 									<h4 class="tab_panel_text" th:text="${mta.mentorcon}">
 										</h4>
 									</div>
-									<br>
-									<h3 class="tab_panel_text">Mentor Career</h3>
+									<hr>
+									<h3 class="tab_panel_text">주요 경력</h3>
  									<div class="tab_panel_content" style="white-space:pre-wrap;">
 	 									<h4 class="tab_panel_text" th:text="${mta.mentorcareer}">
 										</h4>
@@ -169,7 +181,7 @@
 
 								<!-- Reviews -->
 								<div class="tab_panel tab_panel_3">
-									<div class="tab_panel_title">Course Review</div>
+									<div class="tab_panel_title">멘토 리뷰</div>
 
 									<!-- Rating -->
 									<div class="review_rating_container">
@@ -271,7 +283,7 @@
 	</div>
 
 			  <!-- The Modal -->
-			  <div class="modal fade" id="myModal">
+			  <div class="modal fade" id="wishModal">
 			    <div class="modal-dialog modal-dialog-centered modal-sm">
 			      <div class="modal-content">
 
@@ -279,7 +291,8 @@
 			        <div class="modal-body text-center">
 			          <i class="fa-regular fa-circle-check fa-4x"></i>
 			          <div>&nbsp</div>
-			          <h4 class="modal-title">Add to Wishlist</h4>
+			          <h4 class="modal-title" style="font-family:'Spoqa Han Sans Neo';">위시리스트 추가</h4>
+			          <div><p style="font-family:'Spoqa Han Sans Neo';">해당 멘토를 관심 멘토로 등록하였습니다.</p></div>
 			          <div>&nbsp</div>
 			          <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
 			        </div>
@@ -298,7 +311,7 @@ $(document).ready(function(){
 				'userid':userid,
 				'mentorid':mentorid},
 			success:function(data){
-				$('#myModal').modal();
+				$('#wishModal').modal();
 			}
 		});
 		
