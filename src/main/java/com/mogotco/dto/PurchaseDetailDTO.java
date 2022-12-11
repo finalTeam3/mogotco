@@ -48,6 +48,9 @@ public class PurchaseDetailDTO {
 	private int mentoring_mentoringid;
 	private String mentor_mentorimg;
 	
-	
+	//멘토링 구매한사람 중 오늘 멘토링인 사람들
+	private String purchase_userid;
+	private String user_useremail;
+	private int date_difference;
 
 }
