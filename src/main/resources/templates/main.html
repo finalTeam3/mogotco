@@ -40,23 +40,35 @@
 }
 </style>
 <style>
+.chatbot1 *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .chatbot1 button{
     border:none;
     outline: none;
     cursor: pointer;
 }
 .chatbot1 section{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
     max-width: 1100px;
     margin: auto;
     text-align: center;
     padding: 0 1rem;
 }
 
-.chatbot1 .chat-btn1{
+.chatbot1 .chat-btn{
     position: fixed;
     right:50px;
     bottom: 50px;
-    background: dodgerblue;
+    background: #005b00;
     color: white;
     width:60px;
     height: 60px;
@@ -66,31 +78,52 @@
     box-shadow: 0 5px 5px rgba(0,0,0,0.4);
 }
 
-.chatbot1 .chat-btn1:hover, .submit:hover, #emoji-btn:hover{
+.chatbot1 .chat-btn:hover, .submit:hover, #emoji-btn:hover{
     opacity: 1;
 }
 
-.chatbot1 .chat-popup1{
-    display: none;
+.chatbot1 .chat-popup{
+	display: none;
     position: fixed;
     bottom:80px;
     right:120px;
-    height: 400px;
+    height: 500px;
     width: 300px;
     background-color: white;
     /* display: flex; */
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.75rem;
+    padding: 2rem;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
     border-radius: 10px;
+}
+.chatbot1 .dechat-btn{
+    position: fixed;
+    right:125px;
+    bottom: 535px;
+    background: #005b00;
+    color: white;
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+}
+.chatbot1 .dechat-btn:hover, .submit:hover, #emoji-btn:hover{
+    opacity: 1;
 }
 
 .chatbot1 .show{
     display: flex;
 }
 
-.chatbot1 .chat-area1{
+.chatbot1 .close{
+    display: none;
+}
+
+
+.chatbot1 .chat-area{
     height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -109,12 +142,13 @@
 }
 
 .chatbot1 .income-msg .msg{
-    background-color: dodgerblue;
+    background-color: #005b00;
     color: white;
     padding:0.5rem;
     border-radius: 25px;
     margin-left: 1rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    font-size: 0.75rem;
 }
 
 .chatbot1 .badge{
@@ -137,7 +171,7 @@
     justify-content: center;
 }
 
-.chatbot1 input[type="text"]{
+.chatbot1 input[type=text]{
     width:100%;
     border: 1px solid #ccc;
     font-size: 1rem;
@@ -145,7 +179,7 @@
     height: 2.2rem;
 }
 
-.chatbot1 #emoji-btn1{
+.chatbot1 #emoji-btn{
     position: absolute;
     font-size: 1.2rem;
     background: transparent;
@@ -154,7 +188,7 @@
     opacity:0.5;
 }
 
-.chatbot1 .submit1{
+.chatbot1 .submit{
     padding: 0.25rem 0.5rem;
     margin-left: 0.5rem;
     background-color: green;
@@ -171,22 +205,25 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    font-size: 0.75rem;
 }
 .chatbot1 .my-msg{
     display: flex;
+    color: white;
     justify-content: flex-end;
     margin: 0.75rem;
     padding: 0.5rem;
-    background-color: #ddd;
+    background-color: #005b00;
     border-radius: 25px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     word-break: break-all;
+    font-size: 0.75rem;
 }
 
 
 @media (max-width:500px){
 
-   .chatbot1 .chat-popup1{
+   .chatbot1 .chat-popup{
         bottom: 120px;
         right:10%;
         width: 80vw;
@@ -230,16 +267,6 @@ body {
     background-color: #f5f5f5;
 }
 
-#main-content {
-    max-width: 940px;
-    padding: 2em 3em;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
 </style>
 <body>
    <!-- Header -->
@@ -479,162 +506,82 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    </footer>
       <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
     <section class="chatbot1">
-
-        <button class="chat-btn1"> 
+        <button class="chat-btn"> 
             <i class="material-icons"> comment </i>
         </button>
-
-        <div class="chat-popup1">
-            <div class="badge">1</div>
-            <div class="chat-area1">
-             <div class="income-msg">
-                 <img src="img/person.jpg" class="avatar" alt="">
-                 <span class="msg"> Hi, How can I help you?</span>
-             </div>   
+        <div class="chat-popup">
+         <button class="dechat-btn"><i class="fa-solid fa-xmark"></i></button>
+  			<div class="chat-area">
+   
             </div>
+            
 
-            <div class="input-area">
-                <input type="text">
-                <button id="emoji-btn1"> &#127773;</button>
-                <button class="submit1"> <i class="material-icons"> send</i></button>
+            <div class="chatinput-area">
+            <input type="text" id=chatinput> 
+                <button class="submit"><i class="material-icons"> send</i></button>
             </div>
-        </div>
+            </div>
     </section>
-          <script>
-const popup1 = document.querySelector('.chat-popup1');
-const chatBtn1 = document.querySelector('.chat-btn1');
-const submitBtn1 = document.querySelector('.submit1');
-const chatArea1 = document.querySelector('.chat-area1');
-const inputElm1 = document.querySelector('input');
-const emojiBtn1 = document.querySelector('#emoji-btn1');
-const picker1 = new EmojiButton();
+<script>
+const popup = document.querySelector('.chat-popup');
+const chatBtn = document.querySelector('.chat-btn');
+const submitBtn = document.querySelector('.submit');
+const chatArea = document.querySelector('.chat-area');
+const inputElm = document.querySelector('#chatinput');
+const dechatBtn = document.querySelector('.dechat-btn');
 
+ 
+function connect(){
+	var socket = new SockJS('http://127.0.0.1/mogotco/ws');
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame){
+		stompClient.subscribe('/topic/public', function(message){
+			showMessage3("받은 메시지: " + message.body);
+		});
+	});
+}
 
-// Emoji selection  
-window.addEventListener('DOMContentLoaded', () => {
+function disconnect(){
+	if(stompClient !== null){
+		stompClient.disconnect();
+	}
+}
 
-    picker1.on('emoji', emoji => {
-      document.querySelector('input').value += emoji;
-    });
-  
-    emojiBtn1.addEventListener('click', () => {
-      picker.togglePicker(emojiBtn1);
-    });
-  });        
+function sendMessage(userInput){
+	
+	$('.chat-area').append('<div class="out-msg"><span class="my-msg">' + userInput + '</span></div>');
+	$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
+	var user = decodeURIComponent(userInput)
+	stompClient.send("/app/sendMessage", {}, JSON.stringify(user)); //서버에 보낼 메시지
+}
 
-//   chat button toggler 
+function showMessage3(answer){
+	$('.chat-area').append('<div class="income-msg"><span class="msg">' + answer + '</span></div>');
+	$('.chat-area').scrollTop($(".chat-area")[0].scrollHeight);
+	$('.chat-area').val('');
+}
+//chat button toggler 
+chatBtn.addEventListener('click', ()=>{
+    popup.classList.toggle('show');
+    connect();
+    let temp = `<div class="income-msg"><span class="msg">안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</span>
+        </div>`;
 
-chatBtn1.addEventListener('click', ()=>{
-    popup1.classList.toggle('show');
-})
-
+        chatArea.insertAdjacentHTML("beforeend", temp);
+});
+dechatBtn.addEventListener('click', ()=>{
+	disconnect();
+	dechatBtn.removeEventListener(popup.classList.toggle('show'))
+});
 // send msg 
-submitBtn1.addEventListener('click', ()=>{
+submitBtn.onclick = function() { 
     let userInput = inputElm.value;
 
-    let temp = `<div class="out-msg">
-    <span class="my-msg">${userInput}</span>
-    <img src="img/me.jpg" class="avatar">
-    </div>`;
+    sendMessage(userInput);
+    inputElm.value = '';
 
-    chatArea1.insertAdjacentHTML("beforeend", temp);
-    inputElm1.value = '';
-
-})
-</script>
-   <script>
-
-var stompClient = null;
-
-function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
-    $("#send").prop("disabled", !connected);
-    if (connected) {
-        $("#conversation").show();
-    }
-    else {
-        $("#conversation").hide();
-    }
-    $("#msg").html("");
 }
 
-// 소켓을 통해 메시지를 챗봇 컨트롤러로 전송 후 답변을 받음
-function connect() {
-    var socket = new SockJS('http://127.0.0.1/mogotco/ws');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/public', function (message) {
-            show1Message("받은 메시지: " + message.body); //서버에 메시지 전달 후 리턴받는 메시지
-        });
-    });
-}
-
-function disconnect() {
-    if (stompClient !== null) {
-        stompClient.disconnect();
-    }
-    setConnected(false);
-    console.log("Disconnected");
-}
-
-// 인풋창에서 메시지를 입력 후 전송
-function sendMessage() {
-    let message = $("#msg").val();
-    /* showMessage("보낸 메시지: " + message); */
-    showMessage(message);
-
-    stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //서버에 보낼 메시지
-}
-
-
-function showMessage(message) {
-    $("#me").append("<div id='question'><img id='answerchat'><div id='inq'>" + message + "</div></div>");
-}
-function show1Message(message) {
-    $("#me").append("<div id='answer'><img id='answerchat'><div id='ina'>"+message+ "</div></div>");
-}
-
-/* function showMessage(message) {
-    $("#communicate").append("<tr><td>" + message + "</td></tr><br>");
-}
-function show1Message(message){
-	$("#communicate").append("<tr><td>" + message + "</td></tr><br>");
-} */
-/*  $(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMessage(); });
-}); */ 
-
-
-
-$(document).ready(function() {
-	$("#openmodal").click(function() {
-		connect();
-		$("#me").append("<div id='answer'><img id='answerchat'><div id='ina'>안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</div></div>");
-	});
-	
-	$("#send").click(function() {
-		//$('#msg').val('');
-		sendMessage();
-	    
-	});
- 	$('#msg').keypress(function(event){
-	     if ( event.which == 13 ) {
-	         $('#send').click();
-	         return false;
-	     } 
-	});
-	$('#modalclose').click(function() {
-		 disconnect();
-		});
-});
 
 </script>
 </html>
