@@ -141,22 +141,55 @@ margin-left: 2%;
     
 $(document).ready(function(){
 	$('#mpupdate_btn').click(function(){
+		
 		$('#pwd').attr('readonly', false);  
-		$('#name').attr('readonly', false);  
+		if(pwd.readOnly == false) {
+			pwd.style.backgroundColor = '#ffffff'
+		}
+		$('#uname').attr('readonly', false);  
+		if(uname.readOnly == false) {
+			uname.style.backgroundColor = '#ffffff'
+		}
 		$('#phone').attr('readonly', false);  
-		$('#email').attr('readonly', false);  
-		$('#gender').attr('readonly', false);  
+		if(phone.readOnly == false) {
+			phone.style.backgroundColor = '#ffffff'
+		}
+		$('#email').attr('readonly', false);
+		if(email.readOnly == false) {
+			email.style.backgroundColor = '#ffffff'
+		}
+		$('#gender').attr('readonly', false);
+		if(gender.readOnly == false) {
+			gender.style.backgroundColor = '#ffffff'
+		}
 		$('#birth').attr('readonly', false);  
+		if(birth.readOnly == false) {
+			birth.style.backgroundColor = '#ffffff'
+		}
+		$('#sample6_postcode').attr('readonly', false);  
+		if(sample6_postcode.readOnly == false) {
+			sample6_postcode.style.backgroundColor = '#ffffff'
+		}
 		$('#sample6_address').attr('readonly', false);  
-		$('#sample6_detailAddress').attr('readonly', false);  
+		if(sample6_address.readOnly == false) {
+			sample6_address.style.backgroundColor = '#ffffff'
+		}
+		$('#sample6_detailAddress').attr('readonly', false); 
+		if(sample6_detailAddress.readOnly == false) {
+			sample6_detailAddress.style.backgroundColor = '#ffffff'
+		}
 		$('#sample6_extraAddress').attr('readonly', false);  
+		if(sample6_extraAddress.readOnly == false) {
+			sample6_extraAddress.style.backgroundColor = '#ffffff'
+		}
 		$('#mpupdate_btn').click(function(){
 			$('#pwd').attr('readonly', true);  
-			$('#name').attr('readonly', true);  
+			$('#uname').attr('readonly', true);  
 			$('#phone').attr('readonly', true);  
 			$('#email').attr('readonly', true);  
 			$('#gender').attr('readonly', true);  
 			$('#birth').attr('readonly', true); 
+			$('#sample6_postcode').attr('readonly', true);  
 			$('#sample6_address').attr('readonly', true);  
 			$('#sample6_detailAddress').attr('readonly', true);  
 			$('#sample6_extraAddress').attr('readonly', true); 
@@ -287,46 +320,46 @@ $(document).ready(function(){
 								
 								<div>
 									<label for = "pwd" class="form_title">Password</label>
-									<input type="Password" class="comment_input" id = "pwd" th:value = "${us.userpwd}" name = "userpwd" readonly>
+									<input type="Password" class="userid comment_input" id = "pwd" th:value = "${us.userpwd}" name = "userpwd" readonly>
 								</div>
 								
 								<div>
-									<label for = "name" class="form_title">Name</label>
-									<input type="text" class="comment_input" id = "name" th:value = "${us.username}" name = "username" readonly>
+									<label for = "uname" class="form_title">Name</label>
+									<input type="text" class="userid comment_input" id = "uname" th:value = "${us.username}" name = "username" readonly>
 								</div>
 								
 								<div>
 									<label for = "phone" class="form_title">Phone Number</label>
-									<input type="text" class="comment_input" id = "phone" th:value = "${us.usertel}" name = "usertel" readonly>
+									<input type="text" class="userid comment_input" id = "phone" th:value = "${us.usertel}" name = "usertel" readonly>
 								</div>
 								
 								<div>
 									<label for = "email" class="form_title">Email</label>
-									<input type="text" class="comment_input" id = "email" th:value = "${us.useremail}" name = "useremail" readonly>
+									<input type="text" class="userid comment_input" id = "email" th:value = "${us.useremail}" name = "useremail" readonly>
 								</div>
 								
 								<div>
 									<label for = "gender" class="form_title">Gender</label>
-									<input type="text" class="comment_input" id = "gender" th:value = "${us.usergen}" name = "usergen" readonly>
+									<input type="text" class="userid comment_input" id = "gender" th:value = "${us.usergen}" name = "usergen" readonly>
 								</div>
 								
 								<div>
 								<label for = "address" class="address_form">Address</label>
-									<input type="text" class="comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
+									<input type="text" class="userid comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
 									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-									<input type="text" class="comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
-									<input type="text" class="comment_input_detail" name = "addrdetail" th:value = "${us.addrdetail}" id="sample6_detailAddress" placeholder="상세주소" readonly>
-									<input type="text" class="comment_input_detail" name = "addrextra" th:value = "${us.addrextra}" id="sample6_extraAddress" placeholder="참고항목" readonly>
+									<input type="text" class="userid comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
+									<input type="text" class="userid comment_input_detail" name = "addrdetail" th:value = "${us.addrdetail}" id="sample6_detailAddress" placeholder="상세주소" readonly>
+									<input type="text" class="userid comment_input_detail" name = "addrextra" th:value = "${us.addrextra}" id="sample6_extraAddress" placeholder="참고항목" readonly>
 								</div>
 								
 								<div>
 									<label for = "birth" class="form_title">Birth</label>
-									<input type="text" class="comment_input" id = "birth" th:value = "${us.userbirth}" name = "userbirth" readonly>
+									<input type="text" class="userid comment_input" id = "birth" th:value = "${us.userbirth}" name = "userbirth" readonly>
 								</div>
 								
 								<div>
 									<label for = "point" class="form_title">Point</label>
-									<input type="text" class="comment_input" id = "point" th:value = "${us.userpoint}" name = "userpoint" readonly>
+									<input type="text" class="userid comment_input" id = "point" th:value = "${us.userpoint}" name = "userpoint" readonly>
 								</div>
 								
 								
