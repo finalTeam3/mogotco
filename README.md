@@ -54,6 +54,7 @@
 |Figma|
 
 ## 6. WBS
+![WBS](https://user-images.githubusercontent.com/111735748/206927107-40fc6d9b-70bd-4dcd-b57d-ee9ccdd34eea.jpg)
 	착수&분석(10/24~10/29)
 	설계(10/27~10/31)
 	개발(11/01~12/11)
