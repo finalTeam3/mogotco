@@ -225,7 +225,7 @@ $(function(){
 										<td data-title="Progress" th:text="${c.progresspur}"
 											id="progresspuresult"></td>
 										<td>
-											<button th:if="${c.mentoring_mplace} == ${'비대면'}"
+											<button th:if="${c.mentoring_mentorurl} == ${'nonface'}"
 												th:onclick="gomentoring([[${c.mentoringoptionid}]])"
 												type="submit" class="comment_button1">start</button>
 										</td>

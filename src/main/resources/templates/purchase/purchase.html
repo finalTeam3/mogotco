@@ -360,8 +360,8 @@
 								<button type="button" id="coupon_btn" th:onclick="usingcoupon()"
 									data-toggle="modal" data-target="#couponModal"
 									class="comment_button trans_200"
-									style="color: white; width: 120px; height: 30px; background-color: #005b00; border-radius: 10px;">쿠폰
-									사용하기</button>
+									style="color: black; width: 120px; height: 30px; background-color:#FFD333; border:none; border-color:#FFD333; border-radius: 10px;"><strong>쿠폰
+									사용하기</strong></button>
 							</div>
 						</div>
 					</div>
@@ -404,7 +404,7 @@
 							<p>
 								<span id="willusepoint" th:text="${willusepoint}"></span> <input type='hidden'
 									th:value="${totalsale}" name='totalsale' id="totalsale">
-								<input type='hidden' th:value="${point}" name='point'
+								<input type='hidden' th:value="${zero}" name='point'
 									id="willusepoint1">
 							</p>
 						</div>
@@ -414,7 +414,7 @@
 								<span id="willusecoupon" th:text="${willusecoupon}"></span> <input type='hidden'
 									th:value="${totalsale}" name='totalsale' id="totalsale">
 								 <input type='hidden'
-									th:value="${coupon}" name='willusecoupon1' id="willusecoupon1">
+									th:value="${zero}" name='willusecoupon1' id="willusecoupon1">
 							</p>
 						</div>
 					</div>
@@ -432,7 +432,7 @@
 						<span class="bg-secondary pr-3">Payment</span>
 					</h5>
 					<button class="btn btn-block btn-primary font-weight-bold py-3"
-						th:onclick="requestPay()">Payment</button>
+						th:onclick="requestPay()">구매하기</button>
 
 				</div>
 			</div>

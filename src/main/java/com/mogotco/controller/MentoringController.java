@@ -741,6 +741,7 @@ public class MentoringController {
 		PurchaseDetailDTO detailmember = null;
 		MentorDTO mentor = null;
 		UserDTO myuser = null;
+		String nonface = "nonface";
 		try {
 			// 비대면
 			// 멘토링 정보를 불러오고
@@ -753,6 +754,9 @@ public class MentoringController {
 				detailmember = service1.groupcount(mentoringoptionid);
 				// 다시 first객체에 setting해준다.
 				first.setMentoringmembercnt(detailmember.getMentoringmembercnt());
+				if(first.getMentoring_mplace().length() == 0) {
+					first.setMentoring_mplace(nonface);
+				}
 			}
 			myuser = uservice.get(id);
 			mentor = mentorservice.mentorAll(id);
