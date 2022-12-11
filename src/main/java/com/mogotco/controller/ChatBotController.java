@@ -34,7 +34,6 @@ public class ChatBotController {
     {
 
         URL url = new URL(apiUrl);
-
         String message =  getReqMessage(chatMessage);
         String encodeBase64String = makeSignature(message, secretKey);
 

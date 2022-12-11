@@ -18,8 +18,8 @@ public interface PurchaseDetailMapper extends MyMapper<Integer, PurchaseDetailDT
 	public List<PurchaseDetailDTO> wholedetail(String purchase_userid) throws Exception;
 	public PurchaseDetailDTO groupcount(Integer mentoringoption_mentoringoptionid) throws Exception;
 	
-	//멘토링 구매완료한 사람들 목록
-	public List<PurchaseDetailDTO> getpurmentoringuser() throws Exception;
-	//멘토링 구매완료한 사람중 오늘 멘토링인 사람ㄷ들 목록
-	public List<PurchaseDetailDTO> todaymentoringuser() throws Exception;
+	//멘토링 구매완료한 사람중 오늘 멘토링인 사람들 메일주소
+	public List<String> todaymentoringmail() throws Exception;
+	//멘토링 구매완료한 사람중 내일 멘토링인 사람들 메일주소
+	public List<String> tomorrowmentoringmail() throws Exception;
 }

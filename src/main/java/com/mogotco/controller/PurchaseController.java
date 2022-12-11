@@ -100,8 +100,14 @@ public class PurchaseController {
 	@RequestMapping("")
 	public String purchase(Model model, HttpSession session, PurchaseDTO pur) {
 		//mentoringid제외한 것
+		int i = 0;
+		String nonface = "nonface";
+		
+		if(pur.getMentoring_mplace().length() == 0) {
+			pur.setMentoring_mplace(nonface);
+		}
 		model.addAttribute("pur", pur);
-
+		model.addAttribute("zero", i);
 		//mentoringoptionid
 		MentoringOptionDTO mto = null;
 		try {
@@ -182,11 +188,13 @@ public class PurchaseController {
 			
 			//coupon 삭제
 			//지금 로그인한 회원의 쿠폰 목록정보
+			if(willusecoupon != 0) {
 			UserCouponDTO beforecoupon = null;
 			beforecoupon = ucservice.userCouponfind(pur.getUserid(), willusecoupon);
 			
 			//delete
 			ucservice.remove(beforecoupon.getUsercouponid());
+			}
 			
 			//point값 수정
 			//지금 로그인된 회원 정보
@@ -211,6 +219,11 @@ public class PurchaseController {
 			//구매 정보 뽑음
 			PurchaseDTO finish = null;
 			finish=service.purchasefinishpage(r);
+			
+			String nonface = "nonface";
+			if(finish.getMentoring_mplace().length() == 0) {
+				finish.setMentoring_mplace(nonface);
+			}
 			//model객체에 담음
 			model.addAttribute("list", finish);
 			
