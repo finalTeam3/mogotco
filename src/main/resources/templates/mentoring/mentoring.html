@@ -78,8 +78,8 @@ function checkOnlyOne(element) {
 				<div class="col">
 					<div class="breadcrumbs">
 						<ul>
-							<li><a th:href="@{/}">Home</a></li>
-							<li>Mentoring</li>
+							<li><a th:href="@{/}">홈</a></li>
+							<li>멘토링</li>
 						</ul>
 					</div>
 				</div>
@@ -96,11 +96,11 @@ function checkOnlyOne(element) {
 			<!-- Courses Sidebar -->
 			<div class="col-lg-4">
 				<div class="sidebar">
-					<div class="contact_info_title">Mentoring</div>
+					<div class="contact_info_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">멘토링</div>
 					<!-- Latest Course -->
 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
-							class="sidebar_section_title">Mentoring Register</div>
+							class="sidebar_section_title"></div>
 						<div class="sidebar_latest">
 							<!-- Latest Course -->
 							<div
@@ -117,7 +117,7 @@ function checkOnlyOne(element) {
 					</div>
 					<form id="typeselectmentoring">
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_section_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">카테고리</div>
 							<div class="sidebar_categories">
 								<ul>
 									<li><a th:href="@{/mentoring/defaultmentoring}"
@@ -135,7 +135,7 @@ function checkOnlyOne(element) {
 							</div>
 						</div>
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Type</div>
+							<div class="sidebar_section_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">필터</div>
 							<div class="sidebar_categories">
 								<p>
 									<input type="checkbox" name='mentoringtype' value='lowprice'
@@ -170,11 +170,11 @@ function checkOnlyOne(element) {
 					<form id="search_form_mentoring"
 						class="courses_search_form d-flex flex-row align-items-center justify-content-start">
 						<input name="txt" type="text" class="courses_search_input"
-							placeholder="Search Mentorng" required="required"
+							required="required"
 							style="width: 100%;"> <input type="hidden" id='userid'
 							th:value="${userid}">
 						<button id="search_button1" class="courses_search_button ml-auto"
-							type="submit">search now</button>
+							type="submit">검색</button>
 					</form>
 				</div>
 				<div class="courses_container">
@@ -317,23 +317,23 @@ Kakao.Share.sendDefault({
           '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
-        webUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+        mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+        webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
       },
     },
     buttons: [
       {
         title: 'web',
         link: {
-          mobileWebUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
-          webUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
         },
       },
       {
         title: 'app',
         link: {
-          mobileWebUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
-          webUrl: 'http://http://49.50.174.57:8080/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
+          webUrl: 'http://127.0.0.1/mogotco/mentoring/mentoringdetail?mentoringid='+mentoringid,
         },
       },
     ],

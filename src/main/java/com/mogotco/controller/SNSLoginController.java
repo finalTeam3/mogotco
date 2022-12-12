@@ -58,7 +58,7 @@ public class SNSLoginController {
 		user = user_service.get(userid);
 		
 		if (user == null) {
-			UserDTO newuser = new UserDTO(userid, null, username, null, null, null, null, 0, null, 0, null, kakaoid, null, null, null, null, null, null, null, 0);
+			UserDTO newuser = new UserDTO(userid, null, username, null, null, null, null, 0, null, 0, null, kakaoid, null, null, null, null, null, null, null,null, 0);
 			user_service.register(newuser);
 			session.setAttribute("loginuser", newuser);
 		} else {
@@ -94,7 +94,7 @@ public class SNSLoginController {
 		user = user_service.get(userid);
 		
 		if (user == null) {
-			UserDTO newuser = new UserDTO(userid, null, null, null, null, null, null, 0, null, 0, naverid, null, null, null, null, null, null, null, snsgit, 0);
+			UserDTO newuser = new UserDTO(userid, null, null, null, null, null, null, 0, null, 0, naverid, null, null, null, null, null, null, null, snsgit,null, 0);
 			user_service.register(newuser);
 			session.setAttribute("loginuser", newuser);
 		} else {

@@ -878,7 +878,7 @@ section
 .contact_form_login
 {
 	padding-right: 10px;
-	width : 25%;
+	width : 20%;
 	height : 390px;
 	margin : auto;
 	display:center;
@@ -898,7 +898,6 @@ section
 }
 .userid
 {
-	font-style : italic;
 	background-color : #d9d9d9;
 }
 .comment_input_postno
@@ -1088,7 +1087,7 @@ section
 {
 	width: 160px;
 	height: 40px;
-	background: #33c8f2;
+	background: #005b00;
 	text-transform: uppercase;
 	font-size: 16px;
 	font-weight: 500;

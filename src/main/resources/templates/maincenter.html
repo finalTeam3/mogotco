@@ -2,6 +2,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<style>
+.feature_icon > img{
+	width:60%;
+/* 	image-rendering: -webkit-optimize-contrast;
+	transform: translateZ(0); 
+	backface-visibility: hidden; */
+}
+
+.feature_title{
+	font-family: 'Spoqa Han Sans Neo';
+}
+
+</style>
 <script>
 function request(mentor_mentorid){
 		location.href='[[@{/mentor/idcheck?mentorid=}]]'+mentor_mentorid;
@@ -9,19 +22,38 @@ function request(mentor_mentorid){
 </script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
   integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+  
+<script>
+/* 
+	var observer = new IntersectionObserver((e)=>{
+		e.forEach((i)=>{
+			i.target.style.opacity = 1;
+		})
+	})
+	
+	var div = document.querySelectorAll('h2')
+	observer.observe(h2[0])
+	observer.observe(h2[1])
+	observer.observe(h2[2])
+	
+	 */
+</script>
 <body>
 
 
 	<!-- Home -->
 
 	<div class="home">
+<div class="home_slider_container">
 
 		<!-- Home Slider -->
 		<div class="owl-carousel owl-theme home_slider">
+		
 			<!-- Home Slider Item -->
+			
 			<div class="owl-item">
 				<div class="home_slider_background"
-					th:style="'background-image:url(' + @{/images/home_slider_3.jpg} + ')'"></div>
+					th:style="'background-image:url(' + @{/images/slide12.png} + ')'"></div>
 				<div class="home_slider_content">
 					<div class="container">
 						<div class="row">
@@ -34,7 +66,7 @@ function request(mentor_mentorid){
 										<div
 											class="d-flex flex-row align-items-center justify-content-start">
 											<input type="text" class="home_search_input" name="txt"
-												placeholder="Keyword Search" required="required"> <select
+												 required="required"> <select
 												class="dropdown_item_select home_search_input" name="mname">
 												<option value="all">전체</option>
 												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
@@ -45,7 +77,7 @@ function request(mentor_mentorid){
 												<option value="recentmen">빠른 멘토링</option>
 												<option value="mcaringok">사후관리</option>
 											</select>
-										<button id="search_button3" type="submit" class="home_search_button">search</button>
+										<button id="search_button3" type="submit" class="home_search_button">검색</button>
 										</div>
 									</form>
 								</div>
@@ -53,8 +85,84 @@ function request(mentor_mentorid){
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>			
+			
+			<div class="owl-item">
+				<div class="home_slider_background"
+					th:style="'background-image:url(' + @{/images/slide11.png} + ')'"></div>
+				<div class="home_slider_content">
+					<div class="container">
+						<div class="row">
+							<div class="col text-center">
+								<div class="home_slider_title"><br><br></div>
+								<div class="home_slider_subtitle"></div>
+								<div class="home_slider_form_container">
+									<form th:action="@{/mentoring/defaultmultimainsearch}" id="search_form_mentoring3"
+										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+										<div
+											class="d-flex flex-row align-items-center justify-content-start">
+											<input type="text" class="home_search_input" name="txt"
+											 required="required"> <select
+												class="dropdown_item_select home_search_input" name="mname">
+												<option value="all">전체</option>
+												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+											</select> 
+ 											<select name="mtype" class="dropdown_item_select home_search_input">
+												<option value="lowprice" selected>가격순</option>
+												<option value="orderreview">별점순</option>
+												<option value="recentmen">빠른 멘토링</option>
+												<option value="mcaringok">사후관리</option>
+											</select>
+										<button id="search_button3" type="submit" class="home_search_button">검색</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+	
+			<div class="owl-item">
+				<div class="home_slider_background"
+					th:style="'background-image:url(' + @{/images/slide10.png} + ')'"></div>
+				<div class="home_slider_content">
+					<div class="container">
+						<div class="row">
+							<div class="col text-center">
+								<div class="home_slider_title"><br><br></div>
+								<div class="home_slider_subtitle"></div>
+								<div class="home_slider_form_container">
+									<form th:action="@{/mentoring/defaultmultimainsearch}" id="search_form_mentoring3"
+										class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+										<div
+											class="d-flex flex-row align-items-center justify-content-start">
+											<input type="text" class="home_search_input" name="txt"
+												 required="required"> <select
+												class="dropdown_item_select home_search_input" name="mname">
+												<option value="all">전체</option>
+												<option th:each="mtc:${mtcatelist}" th:text="${mtc.mname}" th:value="${mtc.mname}"></option>
+											</select> 
+ 											<select name="mtype" class="dropdown_item_select home_search_input">
+												<option value="lowprice" selected>가격순</option>
+												<option value="orderreview">별점순</option>
+												<option value="recentmen">빠른 멘토링</option>
+												<option value="mcaringok">사후관리</option>
+											</select>
+										<button id="search_button3" type="submit" class="home_search_button">검색</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+			
 		</div>
+	</div>	
+		<div class="home_slider_nav home_slider_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+		<div class="home_slider_nav home_slider_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>		
 	</div>
 	<!-- Features -->
 
@@ -62,14 +170,14 @@ function request(mentor_mentorid){
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Welcome To Mogotco</h2>
+					<div class="section_title_container text-center" id="section_title_slide">
+						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">MOGOTCO에 오신것을 환영해요!</h2>
 						<div class="section_subtitle">
-							<p>Our mogotco is a mentoring site. Through our site, you can
+							<!-- <p>Our mogotco is a mentoring site. Through our site, you can
 								become a mentee and get advice and various insights through
 								meetings with mentors. In addition, you can become a mentor and
 								open mentoring to collect a certain amount of money and share
-								your experiences and insights.</p>
+								your experiences and insights.</p> -->
 						</div>
 					</div>
 				</div>
@@ -80,11 +188,17 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa-solid fa-people-group fa-5x"></i>
+							<!-- <i class="fa-solid fa-people-group fa-5x"></i> -->
+							<img th:src="@{/img/people3d.png}" />
 						</div>
-						<h3 class="feature_title">Excellent mentors</h3>
+						<div>&nbsp</div>
+						<div>&nbsp</div>
+						<div>&nbsp</div>
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title">훌륭한 멘토들</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
-							<p>Select reliable developers using business card authentication system</p>
+							<p>OCR명함 인식 서비스를 이용하여 멘토등록시 명함 인증과 승인기능을 통한 높은 신뢰성을 가진 멘토들이 있습니다.</p>
 						</div>
 					</div>
 				</div>
@@ -93,11 +207,17 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa fa-user-plus fa-5x"></i>
+							<!-- <i class="fa fa-user-plus fa-5x"></i> -->
+							<img th:src="@{/img/pencil3d.png}" />
 						</div>
-						<h3 class="feature_title">Be mentor</h3>
+						<div>&nbsp</div>
+						<div>&nbsp</div>						
+						<div>&nbsp</div>						
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title">멘토 지원</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
-							<p>Any mentee can be a mentor.</p>
+							<p>누구든 멘토 지원이 가능합니다.</p>
 						</div>
 					</div>
 				</div>
@@ -105,11 +225,17 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa-solid fa-video fa-5x"></i>
+							<!-- <i class="fa-solid fa-video fa-5x"></i> -->
+							<img th:src="@{/img/video3d.png}" />
 						</div>
-						<h3 class="feature_title">Video meeting</h3>
+						<div>&nbsp</div>
+						<div>&nbsp</div>						
+						<div>&nbsp</div>						
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title">화상 회의</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
-							<p>Non-face-to-face mentoring is possible within the site</p>
+							<p>대면 멘토링만이 아닌 비대면 멘토링도 여기서 가능합니다.</p>
 						</div>
 					</div>
 				</div>
@@ -118,11 +244,17 @@ function request(mentor_mentorid){
 				<div class="col-lg-3 feature_col">
 					<div class="feature text-center trans_400">
 						<div class="feature_icon">
-							<i class="fa fa-bell fa-5x"></i>
+							<!-- <i class="fa fa-bell fa-5x"></i> -->
+							<img th:src="@{/img/timer3d.png}" />
 						</div>
-						<h3 class="feature_title">Timer</h3>
+						<div>&nbsp</div>
+						<div>&nbsp</div>							
+						<div>&nbsp</div>							
+						<h3 class="feature_title">&nbsp</h3>
+						<h3 class="feature_title">알림</h3>
+						<div>&nbsp</div>
 						<div class="feature_text">
-							<p>Send a message 10 minutes before the mentoring time</p>
+							<p>멘토링 당일날 알림 이메일을 보내줍니다.</p>
 						</div>
 					</div>
 				</div>
@@ -133,18 +265,17 @@ function request(mentor_mentorid){
 	<!-- Popular Courses -->
 
 	<div class="courses">
-		<div class="section_background parallax-window" data-parallax="scroll"
-			th:data-image-src="@{/images/courses_background.jpg}"
-			data-speed="0.8"></div>
+		<div class="section_background parallax-window" 
+			th:style="'background-image:url('+ @{/images/courses_background.jpg} +'); background-attachment: fixed;'" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
-						<h2 class="section_title">Popular Online Courses</h2>
+						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">지금 바로 신청할 수 있는 멘토링</h2>
 						<div class="section_subtitle">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<!-- 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices
-								fermentum congue, quam velit venenatis sem</p>
+								fermentum congue, quam velit venenatis sem</p> -->
 						</div>
 					</div>
 				</div>
@@ -181,7 +312,7 @@ function request(mentor_mentorid){
 			<div class="row">
 				<div class="col">
 					<div class="courses_button trans_200">
-						<a th:href="@{/mentoring/defaultmentoring}">view all courses</a>
+						<a th:href="@{/mentoring/defaultmentoring}" style = "font-family: 'Spoqa Han Sans Neo';">더보기</a>
 					</div>
 				</div>
 			</div>
@@ -192,12 +323,12 @@ function request(mentor_mentorid){
 
 	<div class="team">
 		<div class="team_background parallax-window" data-parallax="scroll"
-			th:data-image-src="@{/images/team_background.jpg}" data-speed="0.8"></div>
+			th:data-image-src="@{/images/team_background.png}" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
-						<h2 class="section_title">The Best Tutors</h2>
+						<h2 class="section_title" style = "font-family: 'Spoqa Han Sans Neo';">인기 멘토</h2>
 					</div>
 				</div>
 			</div>
@@ -247,23 +378,23 @@ Kakao.Share.sendDefault({
           '',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-        webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+        mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+        webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
       },
     },
     buttons: [
       {
         title: 'web',
         link: {
-          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         },
       },
       {
         title: 'app',
         link: {
-          mobileWebUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
-          webUrl: 'http://49.50.174.57:8080/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          mobileWebUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
+          webUrl: 'http://127.0.0.1/mogotco/mentor/nonid?mentorid='+mentor_mentorid,
         },
       },
     ],

@@ -141,22 +141,55 @@ margin-left: 2%;
     
 $(document).ready(function(){
 	$('#mpupdate_btn').click(function(){
+		
 		$('#pwd').attr('readonly', false);  
-		$('#name').attr('readonly', false);  
+		if(pwd.readOnly == false) {
+			pwd.style.backgroundColor = '#ffffff'
+		}
+		$('#uname').attr('readonly', false);  
+		if(uname.readOnly == false) {
+			uname.style.backgroundColor = '#ffffff'
+		}
 		$('#phone').attr('readonly', false);  
-		$('#email').attr('readonly', false);  
-		$('#gender').attr('readonly', false);  
+		if(phone.readOnly == false) {
+			phone.style.backgroundColor = '#ffffff'
+		}
+		$('#email').attr('readonly', false);
+		if(email.readOnly == false) {
+			email.style.backgroundColor = '#ffffff'
+		}
+		$('#gender').attr('readonly', false);
+		if(gender.readOnly == false) {
+			gender.style.backgroundColor = '#ffffff'
+		}
 		$('#birth').attr('readonly', false);  
+		if(birth.readOnly == false) {
+			birth.style.backgroundColor = '#ffffff'
+		}
+		$('#sample6_postcode').attr('readonly', false);  
+		if(sample6_postcode.readOnly == false) {
+			sample6_postcode.style.backgroundColor = '#ffffff'
+		}
 		$('#sample6_address').attr('readonly', false);  
-		$('#sample6_detailAddress').attr('readonly', false);  
+		if(sample6_address.readOnly == false) {
+			sample6_address.style.backgroundColor = '#ffffff'
+		}
+		$('#sample6_detailAddress').attr('readonly', false); 
+		if(sample6_detailAddress.readOnly == false) {
+			sample6_detailAddress.style.backgroundColor = '#ffffff'
+		}
 		$('#sample6_extraAddress').attr('readonly', false);  
+		if(sample6_extraAddress.readOnly == false) {
+			sample6_extraAddress.style.backgroundColor = '#ffffff'
+		}
 		$('#mpupdate_btn').click(function(){
 			$('#pwd').attr('readonly', true);  
-			$('#name').attr('readonly', true);  
+			$('#uname').attr('readonly', true);  
 			$('#phone').attr('readonly', true);  
 			$('#email').attr('readonly', true);  
 			$('#gender').attr('readonly', true);  
 			$('#birth').attr('readonly', true); 
+			$('#sample6_postcode').attr('readonly', true);  
 			$('#sample6_address').attr('readonly', true);  
 			$('#sample6_detailAddress').attr('readonly', true);  
 			$('#sample6_extraAddress').attr('readonly', true); 
@@ -197,8 +230,8 @@ $(document).ready(function(){
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li>My Page</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li>마이페이지</li>
 							</ul>
 						</div>
 					</div>
@@ -221,7 +254,7 @@ $(document).ready(function(){
 						<!-- Courses Sidebar -->
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">마이페이지</div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -279,56 +312,75 @@ $(document).ready(function(){
 							<button type="button" th:onclick="|location.href='@{/coupon/mycoupon(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">내 쿠폰함</button> -->
 
 							<form id = "mypage_update_form" class="comment_form">
-
+								
+								<!-- <div>
+									<label class="form_title"> 
+										<div>
+											<img id="uploadprofile" th:src="@{/img/}+${m.mentorimg}" style="width:200px;">
+										</div>
+									<label id="pubutton" class="btn btn-dark" for="mpimg" style="width:110px;height:35px;font-size:15px;">프로필 수정</label>
+									</label>
+									<input type="file" style="display:none" name="mpimg" id="mpimg" th:onchange="previewprofile(event);">
+								</div> -->
+									
 								<div>
 									<label for = "id" class="form_title">ID</label>
 									<input type="text" class="userid comment_input" id = "id" th:value = "${us.userid}" readonly = "readonly" name = "userid">
 								</div>
 								
 								<div>
-									<label for = "pwd" class="form_title">Password</label>
-									<input type="Password" class="comment_input" id = "pwd" th:value = "${us.userpwd}" name = "userpwd" readonly>
+									<label for = "pwd" class="form_title">비밀번호</label>
+									<input type="Password" class="userid comment_input" id = "pwd" th:value = "${us.userpwd}" name = "userpwd" readonly>
 								</div>
 								
 								<div>
-									<label for = "name" class="form_title">Name</label>
-									<input type="text" class="comment_input" id = "name" th:value = "${us.username}" name = "username" readonly>
+									<label for = "uname" class="form_title">이름</label>
+									<input type="text" class="userid comment_input" id = "uname" th:value = "${us.username}" name = "username" readonly>
 								</div>
 								
 								<div>
-									<label for = "phone" class="form_title">Phone Number</label>
-									<input type="text" class="comment_input" id = "phone" th:value = "${us.usertel}" name = "usertel" readonly>
+									<label for = "phone" class="form_title">핸드폰 번호 (예: 010-0000-0000)</label>
+									<input type="text" class="userid comment_input" id = "phone" th:value = "${us.usertel}" name = "usertel" readonly>
 								</div>
 								
 								<div>
-									<label for = "email" class="form_title">Email</label>
-									<input type="text" class="comment_input" id = "email" th:value = "${us.useremail}" name = "useremail" readonly>
+									<label for = "email" class="form_title">이메일</label>
+									<input type="text" class="userid comment_input" id = "email" th:value = "${us.useremail}" name = "useremail" readonly>
 								</div>
 								
 								<div>
-									<label for = "gender" class="form_title">Gender</label>
-									<input type="text" class="comment_input" id = "gender" th:value = "${us.usergen}" name = "usergen" readonly>
+									<label for = "gender" class="form_title">성별 (예: 남 or 여)</label>
+									<input type="text" class="userid comment_input" id = "gender" th:value = "${us.usergen}" name = "usergen" readonly>
 								</div>
 								
 								<div>
-								<label for = "address" class="address_form">Address</label>
-									<input type="text" class="comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
+								<label for = "address" class="address_form">주소</label>
+									<input type="text" class="userid comment_input_postno" name = "addrnum" th:value = "${us.addrnum}" id="sample6_postcode" placeholder="우편번호" readonly>
 									<input type="button" class="comment_button_post trans_200" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-									<input type="text" class="comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
-									<input type="text" class="comment_input_detail" name = "addrdetail" th:value = "${us.addrdetail}" id="sample6_detailAddress" placeholder="상세주소" readonly>
-									<input type="text" class="comment_input_detail" name = "addrextra" th:value = "${us.addrextra}" id="sample6_extraAddress" placeholder="참고항목" readonly>
+									<input type="text" class="userid comment_input_address" name = "useraddr" th:value = "${us.useraddr}" id="sample6_address" placeholder="주소" readonly><br>
+									<input type="text" class="userid comment_input_detail" name = "addrdetail" th:value = "${us.addrdetail}" id="sample6_detailAddress" placeholder="상세주소" readonly>
+									<input type="text" class="userid comment_input_detail" name = "addrextra" th:value = "${us.addrextra}" id="sample6_extraAddress" placeholder="참고항목" readonly>
 								</div>
 								
 								<div>
-									<label for = "birth" class="form_title">Birth</label>
-									<input type="text" class="comment_input" id = "birth" th:value = "${us.userbirth}" name = "userbirth" readonly>
+									<label for = "birth" class="form_title">생년월일 (예: 1994-11-08)</label>
+									<input type="text" class="userid comment_input" id = "birth" th:value = "${us.userbirth}" name = "userbirth" readonly>
 								</div>
 								
 								<div>
-									<label for = "point" class="form_title">Point</label>
-									<input type="text" class="comment_input" id = "point" th:value = "${us.userpoint}" name = "userpoint" readonly>
+									<label for = "point" class="form_title">포인트</label>
+									<input type="text" class="userid comment_input" id = "point" th:value = "${us.userpoint}" name = "userpoint" readonly>
 								</div>
 								
+								<div>
+									<label for = "snsgit" class="form_title">Github 주소</label>
+									<input type="text" class="userid comment_input" id = "snsgit" th:value = "${us.snsgit}" name = "snsgit" readonly>
+								</div>
+								
+								<div>
+									<label for = "snsinsta" class="form_title">Instagram 주소</label>
+									<input type="text" class="userid comment_input" id = "snsinsta" th:value = "${us.snsinsta}" name = "snsinsta" readonly>
+								</div>
 								
 							</form>
 						</div>
@@ -381,7 +433,7 @@ $(document).ready(function(){
 <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-body">정말 탈퇴하고 싶으신건가요..?</div>
+      <div class="modal-body">탈퇴하시면 동일한 ID로는 재가입 하실 수 없습니다.</div>
        <div class="modal-body-btn">
 	       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	       <button type="button" id = "deleteuserok" class="btn btn-secondary"  data-dismiss="modal">YES</button>

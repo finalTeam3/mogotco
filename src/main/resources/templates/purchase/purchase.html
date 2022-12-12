@@ -286,10 +286,10 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
-								<li><a th:href="@{/mentoring/mentoringdetail}">Mentoringdetail</a></li>
-								<li>Purchase</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/mentoring/mentoring}">멘토링</a></li>
+								<li><a th:href="@{/mentoring/mentoringdetail}">멘토링 디테일</a></li>
+								<li>구매</li>
 							</ul>
 						</div>
 					</div>
@@ -308,39 +308,39 @@
 				<div class="bg-light p-30 mb-5">
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<label>Mentoring no</label> <input id="mentoringid"
+							<label>멘토링 번호</label> <input id="mentoringid"
 								class="form-control" type="text"
 								th:value="${pur.mentoring_mentoringid}" readonly="readonly">
 						</div>
 
 						<div class="col-md-6 form-group">
-							<label>Mentoring title</label> <input id="mtitle"
+							<label>멘토링 이름</label> <input id="mtitle"
 								class="form-control" type="text"
 								th:value="${pur.mentoring_mtitle}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentorid</label> <input id="mentorname"
+							<label>멘토 아이디</label> <input id="mentorname"
 								class="form-control" type="text" th:value="${pur.mentor_userid}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring date</label> <input id="mentoringdate"
+							<label>멘토링 날짜</label> <input id="mentoringdate"
 								class="form-control" type="text"
 								th:value="${pur.mentoring_mentoringdate}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring time</label> <input id="mentoringtime"
+							<label>멘토링 시간</label> <input id="mentoringtime"
 								class="form-control" type="text"
 								th:value="${pur.mentoringoption_mentoringtime}"
 								readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring place</label> <input id="mplace"
+							<label>멘토링 장소</label> <input id="mplace"
 								class="form-control" type="text"
 								th:value="${pur.mentoring_mplace}" readonly="readonly">
 						</div>
 						<div class="col-md-6 form-group">
-							<label>Mentoring Price</label> <input id="mentoringprice"
+							<label>멘토링 가격</label> <input id="mentoringprice"
 								class="form-control" type="text"
 								th:value="${pur.mentoring_mentoringprice}" readonly="readonly">
 						</div>
@@ -351,8 +351,8 @@
 								style="margin-bottom: 20px;">
 								<input type="checkbox" class="custom-control-input" id="shipto">
 								<label class="custom-control-label" for="shipto"
-									data-toggle="collapse" data-target="#shipping-address">Select
-									Point</label>
+									data-toggle="collapse" data-target="#shipping-address">
+									포인트 사용하기</label>
 							</div>
 							<!-- 쿠폰사용버튼 -->
 							<div>
@@ -373,7 +373,7 @@
 						<div class="row">
 							<div class="col-md-5 form-group">
 								<!-- session에서 cust의 poinr값을 가지고옴 -->
-								<label>My Point</label><span><input class="form-control"
+								<label>내 포인트</label><span><input class="form-control"
 									type="text" id="writepoint" placeholder="포인트를 입력하여 주세요."
 									th:onkeypress="pointchange()"><input type="checkbox"
 									id="chk_use" th:onclick="chkPoint()">포인트 전체 사용</span><input
@@ -391,7 +391,7 @@
 				<div class="bg-light p-30 mb-5">
 					<div class="border-bottom">
 						<div class="d-flex justify-content-between">
-							<p>Mentoring Price</p>
+							<p>멘토링 가격</p>
 							<p th:text="${pur.mentoring_mentoringprice}+${'원'}"
 								id="ordermentoring_price"></p>
 							<input type='hidden'
@@ -399,7 +399,7 @@
 								id="ordermentoring1_price1">
 						</div>
 						<div class="d-flex justify-content-between">
-							<p>Point</p>
+							<p>포인트</p>
 							<p>
 								<span id="willusepoint" th:text="${willusepoint}"></span> <input type='hidden'
 									th:value="${totalsale}" name='totalsale' id="totalsale">
@@ -408,7 +408,7 @@
 							</p>
 						</div>
 						<div class="d-flex justify-content-between">
-							<p>Coupon</p>
+							<p>쿠폰</p>
 							<p>
 								<span id="willusecoupon" th:text="${willusecoupon}"></span> <input type='hidden'
 									th:value="${totalsale}" name='totalsale' id="totalsale">
@@ -419,7 +419,7 @@
 					</div>
 					<div class="pt-2">
 						<div class="d-flex justify-content-between mt-2">
-							<h5>Total</h5>
+							<h5 style="font-family: 'IBM Plex Sans KR', sans-serif;">총 가격</h5>
 							<h5 th:text="${pur.mentoring_mentoringprice}" id="total_price"></h5>
 							<input type='hidden' th:value="${pur.mentoring_mentoringprice}"
 								name='price' id="total_price1">

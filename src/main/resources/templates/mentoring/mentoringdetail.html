@@ -107,9 +107,9 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
-								<li>Mentoring Detail</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/mentoring/mentoring}">멘토링</a></li>
+								<li>멘토링 디테일</li>
 							</ul>
 						</div>
 					</div>
@@ -183,8 +183,8 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
 							<div class="tabs d-flex flex-row align-items-center justify-content-start">
-								<div class="tab">mentoring info</div>
-								<div class="tab" id="kakaomap">meeting place</div>
+								<div class="tab" style="font-family: 'IBM Plex Sans KR', sans-serif; font-weight:bold;">멘토링 설명</div>
+								<div class="tab" id="kakaomap" style="font-family: 'IBM Plex Sans KR', sans-serif; font-weight:bold;">대면 장소</div>
 							</div>
 							<div class="tab_panels">
 
@@ -212,19 +212,18 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 						<!-- Feature_course -->
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Purchase</div>
 							<div>
-								<button type="submit" class="home_search_button" th:if="${mto.date_difference >= 0 }" th:onclick="purchase()" style="margin-top:20px; width:150px; font-family: 'IBM Plex Sans KR', sans-serif;">구매하기</button>
+								<button type="submit" class="home_search_button" th:if="${mto.date_difference >= 0 }" th:onclick="purchase()" style="margin-top:20px; width:150px;">구매하기</button>
 								<button type="submit" class="home_search_button" th:if="${mto.date_difference < 0 }" style="margin-top:20px; width:170px; background-color:#BFBCBB; font-family: 'IBM Plex Sans KR', sans-serif;">이미 진행된 멘토링입니다</button>
 							</div>
 							
 							<div class="sidebar_feature">
-								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px;">Mentoring Price</div>
+								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px; font-family:'IBM Plex Sans KR', sans-serif;">멘토링 가격</div>
 								<span style = "font-size:22px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;">가격 : </span>
 								<span style="display:inline-block; font-weight:bold; font-family:'IBM Plex Sans KR', sans-serif;" id="mentoring_price" class="course_price" th:text="${mto.mentoringprice}"></span>
 								<span style = "font-size:18px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;">￦</span>
 								
-								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px;">Remaining</div>
+								<div class="sidebar_section_title" style="margin-top:65px; margin-bottom:18px; font-family:'IBM Plex Sans KR', sans-serif;">남은 인원</div>
 								<div th:each="mttime:${mttime}">
 								<span style="display:inline-block; font-size:18px; font-weight:bold; color:black; font-family:'IBM Plex Sans KR', sans-serif;" 
 								id="remaining" class="course_price" th:text="${mttime.mentoringtime} + '시' + '&emsp;' + ${mttime.moptionstock} + '명'"></span>
@@ -234,7 +233,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 								<!-- Features -->
 								<div class="feature_list">
-								<div class="sidebar_section_title" style="margin-bottom:18px; margin-top:35px;">Select Time</div>
+								<div class="sidebar_section_title" style="margin-bottom:18px; margin-top:35px; font-family:'IBM Plex Sans KR', sans-serif;">시간 선택</div>
 
 									<!-- Feature -->
 									
@@ -265,7 +264,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 						<!-- Feature -->
 
 						<div class="sidebar_section">
-							<div class="sidebar_section_title" style="margin-top:180px;">Mentor</div>
+							<div class="sidebar_section_title" style="margin-top:180px; font-family:'IBM Plex Sans KR', sans-serif;">멘토 정보</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><a th:onclick="request()"><img style="cursor:pointer" th:src="@{/images/}+${mto.mentor_mentorimg}" alt=""></a></div>

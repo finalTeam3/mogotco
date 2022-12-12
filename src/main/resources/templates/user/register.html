@@ -26,7 +26,7 @@ $(document).ready(function(){
 		var pwd = $('#pwd').val();
 		var pwd2 = $('#pwd2').val();
 		if(pwd == pwd2) {
-			$('#pspan').text('Correct')
+			$('#pspan').text('비밀번호가 일치합니다. 회원가입을 진행해주세요.')
 		} else {
 			$('#pspan').text('비밀번호가 일치하지 않습니다.')
 		};
@@ -191,7 +191,7 @@ $(document).ready(function(){
 					<!-- Contact Form -->
 					<div class="col-lg-8">
 						<div class="contact_form">
-							<div class="contact_info_title">REGISTER</div>
+							<div class="contact_info_title">회원가입</div>
 							<form action="#" class="register_form" id = "register_form" name = "register_form">
 							
 								<div>
@@ -202,28 +202,28 @@ $(document).ready(function(){
 								</div>
 								
 								<div>
-									<label for = "pwd" class="form_title">Password</label>
+									<label for = "pwd" class="form_title">비밀번호</label>
 									<input type="password" class="comment_input" id = "pwd" name = "userpwd">
 								</div>
 								
 								<div>
-									<label for = "pwd2" class="form_title">Password Confirm</label>
+									<label for = "pwd2" class="form_title">비밀번호 확인</label>
 									<input type="password" class="comment_input" id = "pwd2" name = "pwd2">
 									<span id = "pspan"></span>
 								</div>
 								
 								<div>
-									<label for = "name" class="form_title">Name</label>
+									<label for = "name" class="form_title">이름</label>
 									<input type="text" class="comment_input" id = "name" name = "username">
 								</div>
 								
 								<div>
-									<label for = "phone" class="form_title">Phone Number</label>
+									<label for = "phone" class="form_title">핸드폰 번호 (예: 010-0000-0000)</label>
 									<input type="text" class="comment_input" id = "phone" name = "usertel">
 								</div>
 								
 								<div>
-									<label for = "email" class="form_title">Email</label>
+									<label for = "email" class="form_title">이메일</label>
 									<div><input type="text" class="comment_input col-lg-5" id = "email" name = "useremail">
 									<button id = "emailcheck_btn" type="button" th:onclick = "mailregexcheck()" class="comment_button_mail trans_200">인증 메일 보내기</button></div>
 									<div><span id = "espan1"></span></div>
@@ -235,12 +235,12 @@ $(document).ready(function(){
 								
 								
 								<div>
-									<label for = "gender" class="form_title">Gender</label>
+									<label for = "gender" class="form_title">성별 (예: 남 or 여)</label>
 									<input type="text" class="comment_input" id = "gender" name = "usergen">
 								</div>
 								
 								<div>
-								<label for = "address" class="address_form">Address</label>
+								<label for = "address" class="address_form">주소</label>
 								<input type="text" class="comment_input_postno" id="sample6_postcode" name = "addrnum" placeholder="우편번호">
 								<input type="button" class="comment_button_post trans_200" th:onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 								<input type="text" class="comment_input_address" name = "useraddr" id="sample6_address" placeholder="주소"><br>
@@ -249,11 +249,11 @@ $(document).ready(function(){
 								</div>
 								
 								<div>
-									<label for = "birth" class="form_title">Birth</label>
+									<label for = "birth" class="form_title">생년월일 (예: 1994-11-08)</label>
 									<input type="text" class="comment_input" id = "birth" name = "userbirth">
 								</div>
 								
-									<button id = "register_btn" class="comment_button trans_200">Register Now</button>
+									<button id = "register_btn" class="comment_button trans_200">회원가입 하기</button>
 							</form>
 							</div>
 						</div>
