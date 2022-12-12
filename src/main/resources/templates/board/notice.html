@@ -27,7 +27,50 @@
     padding-top: 0px;
     padding-bottom: 25px;
 }
+     #ul {
+          list-style-type: none;
+          background-color: #D9D9D9;
+          width: 70%;
+          padding: 0;
+          margin: 0;
+          border-radius: 2%;
+     }
+
+     #li a {
+          text-decoration: none;
+          display: block;
+          color: #000;
+          padding: 5% 12% 5% 12%;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          cursor:pointer;
+     }
+
+     #li a:hover {
+          background-color: #005B00;
+          color: #fff;
+          border-radius: 2%;
+          
+     }
+     #ul li a.on
+     {
+     background-color: #005B00;
+     color: #fff;
+     border-radius: 2%;
+     }
+ .sidebar {
+    width: 100%;
+    padding-left: 0px;
+    padding-top: 0px;
+}
 </style>
+<script type="text/javascript">
+$(function(){
+	// #ul의 자식 엘리먼트(li)가 몇번째인지 확인한 후 a요소를 찾은 후 on이라는 클래스 추가
+    $('#ul').children().eq(0).find('a').addClass('on');
+
+});
+</script>
 </head>
 
 	
@@ -41,7 +84,7 @@
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">홈</a></li>
-								<li>공지사항</li>
+								<li>고객센터</li>
 							</ul>
 						</div>
 					</div>
@@ -55,12 +98,32 @@
 	<div class="course">
 		<div class="container">
 			<div class="row">
-
+						<!-- Courses Sidebar -->
+			<div class="col-lg-3">
+				<div class="course_title">고객센터</div>
+	<div class="sidebar">
+		<div>&nbsp</div>
+			<div class="sidebar_section">
+				<div class="sidebar_section_title"></div>
+				<div class="sidebar_categories">
+					<ul id="ul" style="text-align: center">
+						<li id="li">
+							<a th:onclick="|location.href='@{/board/notice}'|">공지사항</a>
+						</li>
+						<li id="li">
+							<a th:onclick="|location.href='@{/board/faq}'|">자주 묻는 질문</a>
+						</li> 
+					</ul>
+				</div>
+			</div>
+	</div>
+			</div>
+			
 				<!-- Course -->
-				<div class="col-lg-12">
+				<div class="col-lg-9">
 					
 					<div class="course_container">
-						<div class="course_title">공지사항</div>
+						<div class="course_title" style = "font-size:25px">공지사항</div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
@@ -76,7 +139,7 @@
 												<li th:each="nt:${nt}" >
 													<div class="dropdown_item">
 														<div class="dropdown_item_title">
-														<a th:href = "@{/noticedetail(boardid=${nt.boardid})}" th:text = "${nt.boardtitle}">Lecture 1: Lorem Ipsn gravida nibh vel velit auctor aliquet.</a>
+														<a th:href = "@{/board/noticedetail(boardid=${nt.boardid})}" th:text = "${nt.boardtitle}">Lecture 1</a>
 														</div>
 													</div>
 												</li>
