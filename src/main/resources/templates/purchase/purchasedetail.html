@@ -347,7 +347,7 @@ $(function(){
 							<div class="sidebar_categories">
 								<ul id="ul" style="text-align: center">
 									<li id="li">
-										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
+										<a th:if="${ms == null}" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
 										<a th:if="${ms != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${ms.mentorid})}'|">멘토 정보</a>
