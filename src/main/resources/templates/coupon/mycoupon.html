@@ -193,16 +193,16 @@ $(function(){
 		<table class="responsive-table">
 			<thead>
 				<tr>
-					<th scope="col">CouponID</th>
-					<th scope="col">CouponName</th>
-					<th scope="col">CouponPrice</th>
+					<th scope="col">쿠폰 아이디</th>
+					<th scope="col">쿠폰 이름</th>
+					<th scope="col">쿠폰 가격</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="cp:${cp}">
 					<th scope="row" th:text="${cp.couponid}"></th>
-					<td data-title="CouponName" th:text="${cp.coupon_couponname}"></td>
-					<td data-title="CouponPrice" th:text="${cp.coupon_couponprice}"></td>
+					<td data-title="쿠폰 이름" th:text="${cp.coupon_couponname}"></td>
+					<td data-title="쿠폰 가격" th:text="${cp.coupon_couponprice}"></td>
 				</tr>
 			</tbody>
 		</table>
