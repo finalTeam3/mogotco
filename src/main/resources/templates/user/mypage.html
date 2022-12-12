@@ -182,6 +182,14 @@ $(document).ready(function(){
 		if(sample6_extraAddress.readOnly == false) {
 			sample6_extraAddress.style.backgroundColor = '#ffffff'
 		}
+		$('#snsgit').attr('readonly', false);  
+		if(snsgit.readOnly == false) {
+			snsgit.style.backgroundColor = '#ffffff'
+		}
+		$('#snsinsta').attr('readonly', false);  
+		if(snsinsta.readOnly == false) {
+			snsinsta.style.backgroundColor = '#ffffff'
+		}
 		$('#mpupdate_btn').click(function(){
 			$('#pwd').attr('readonly', true);  
 			$('#uname').attr('readonly', true);  
@@ -193,6 +201,8 @@ $(document).ready(function(){
 			$('#sample6_address').attr('readonly', true);  
 			$('#sample6_detailAddress').attr('readonly', true);  
 			$('#sample6_extraAddress').attr('readonly', true); 
+			$('#snsgit').attr('readonly', true); 
+			$('#snsinsta').attr('readonly', true); 
 			$('#mypage_update_form').attr(
 				{
 					'action':'[[@{/user/mypageupdate}]]',
