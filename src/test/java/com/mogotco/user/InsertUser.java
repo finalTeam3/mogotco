@@ -17,7 +17,7 @@ class InsertUser {
 	void contextLoads() {
 		
 		UserDTO user = new UserDTO("qkrajswl1541", "qkrajswl", "박먼지", "서울시 강북구 수유동 410-80, 201호", "010-1541-4009", "braddust@gmail.com", 
-									null, 0, null, 0, null, null, null, "남", null, null, null, null, null, 0);
+									null, 0, null, 0, null, null, null, "남", null, null, null, null, null, null, 0);
 		try {
 			service.register(user);
 			System.out.println("OK");

@@ -176,8 +176,8 @@ function upload() {
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li>MODIFY</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li>멘토 정보 수정</li>
 							</ul>
 						</div>
 					</div>
@@ -196,7 +196,7 @@ function upload() {
 				
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">마이페이지</div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -258,12 +258,12 @@ function upload() {
 								</div>
 
 								<div>
-									<label for = "mentorid" class="form_title">Mentorid</label>
+									<label for = "mentorid" class="form_title">멘토ID</label>
 									<input type="text" class="userid comment_input" th:value="${m.mentorid}" name="mentorid" id="mentorid" readonly="readonly">
 								</div>
 
 								<div>
-									<label for = "userid" class="form_title">Userid</label>
+									<label for = "userid" class="form_title">ID</label>
 									<input type="text" class="userid comment_input" th:value="${m.userid}" name="userid" id="userid" readonly="readonly">
 								</div>
 
@@ -281,7 +281,7 @@ function upload() {
 			
 													
 								<div>
-									<label class="form_title">Mentor Card
+									<label class="form_title">명함
 									<div>
 										<img id="uploadimg" th:src="@{/img/}+${m.mcardimg}" style="width:120px" />&nbsp&nbsp&nbsp&nbsp
 									<label class="btn btn-dark" for="mcimg" style="width:96px;height:31px;font-size:13px">명함 수정</label>
@@ -294,27 +294,27 @@ function upload() {
 								</div>			
 								
 								<div>
-									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<label for = "mentorcom" class="form_title">회사명<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" th:value="${m.mentorcom}" id="mentorcom" name="mentorcom">
 								</div>
 
 								<div>
-									<label for = "mcardposition" class="form_title">Mcardposition<span style="color:red"> *</span></label>
+									<label for = "mcardposition" class="form_title">부서명 & 직급<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" th:value="${m.mcardposition}" id="mcardposition" name="mcardposition">
 								</div>
 
 								<div>
-									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<label for = "mentorcon" class="form_title">소개<span style="color:red"> *</span></label>
 									<textarea class="comment_input" th:text="${m.mentorcon}" name="mentorcon" id="mentorcon"></textarea>
 								</div>
 
 								<div>
-									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<label for = "mentorcareer" class="form_title">경력사항<span style="color:red"> *</span></label>
 									<textarea class="comment_input" th:text="${m.mentorcareer}" id="mentorcareer" name="mentorcareer"></textarea>
 								</div>
 
 								<div>
-										<label for = "mwishcate" class="form_title">Category<span style="color:red"> *</span></label><br>
+										<label for = "mwishcate" class="form_title">카테고리<span style="color:red"> *</span></label><br>
 										<h4>
 										<tr th:each="mwclist:${mwclist}">
 											<th>
@@ -323,7 +323,7 @@ function upload() {
 										</tr>
 										</h4>
 										<br>
-									<label class="custom-control-label" data-toggle="collapse" data-target="#mcategory">수정하기</label>										
+									<label class="custom-control-label" data-toggle="collapse" data-target="#mcategory">카테고리 수정하기 클릭</label>										
 										<br>
 										
 										<div class="collapse" id="mcategory">
@@ -381,7 +381,7 @@ function upload() {
 								    
 								</div>
 
-								<button id = "update_btn" class="comment_button trans_200">Modify</button>
+								<button id = "update_btn" class="comment_button trans_200">수정하기</button>
 								
 							</form>
 																					

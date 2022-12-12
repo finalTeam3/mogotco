@@ -43,9 +43,9 @@
 				<div class="col">
 					<div class="breadcrumbs">
 						<ul>
-							<li><a th:href="@{/}">Home</a></li>
-							<li><a th:href="@{/mentor/mentorlist}">Mentor</a></li>
-							<li>Mentor Details</li>
+							<li><a th:href="@{/}">홈</a></li>
+							<li><a th:href="@{/mentor/mentorlist}">멘토</a></li>
+							<li>멘토 상세</li>
 						</ul>
 					</div>
 				</div>
@@ -268,14 +268,14 @@
 												<li th:if="${starcnt.star4cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star4cnt != 0.0}" th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
 												<li th:if="${starcnt.star4cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star4cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
 												
-												<li th:if="${starcnt.star3cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star3cnt != 0.0}" th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
-												<li th:if="${starcnt.star3cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star3cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star3cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star3cnt != 0.0}" th:style="'width:' + ${starcnt.star3cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar3cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star3cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star3cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar3cnt}">Star Count</span></li>
 												
-												<li th:if="${starcnt.star2cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star2cnt != 0.0}" th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
-												<li th:if="${starcnt.star2cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star2cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star2cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star2cnt != 0.0}" th:style="'width:' + ${starcnt.star2cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar2cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star2cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star2cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar2cnt}">Star Count</span></li>
 												
-												<li th:if="${starcnt.star1cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star1cnt != 0.0}" th:style="'width:' + ${starcnt.star4cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
-												<li th:if="${starcnt.star1cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star1cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar4cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star1cnt != NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star1cnt != 0.0}" th:style="'width:' + ${starcnt.star1cnt / reviewcnt.reviewcnt * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar1cnt}">Star Count</span></li>
+												<li th:if="${starcnt.star1cnt == NaN}"><span>4 Star</span><div class="review_rating_bar"><div th:if="${starcnt.star1cnt == 0.0}" th:style="'width:' + ${0.0 / 0.0 * 100} + '%'"></div></div><span class = "starcount" th:text = "${starcnt.viewstar1cnt}">Star Count</span></li>
 											</ul>
 										</div>
 										

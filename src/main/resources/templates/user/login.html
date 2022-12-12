@@ -83,7 +83,7 @@
 
 					<!-- Contact Form -->
 						<div class="contact_form_login">
-							<div class="contact_info_title">LOGIN</div>
+							<div class="contact_info_title">로그인</div>
 							<form id = "login_form" class="comment_form">
 								
 								<div>
@@ -92,12 +92,12 @@
 								</div>
 								
 								<div>
-									<label for = "pwd" class="form_title">Password</label>
-									<input type="password" class="comment_input" id = "pwd" placeholder="PASSWORD" name = "pwd">
+									<label for = "pwd" class="form_title">비밀번호</label>
+									<input type="password" class="comment_input" id = "pwd" placeholder="비밀번호" name = "pwd">
 								</div>
-								<button class="comment_button_login trans_200">LOGIN</button>
+								<button style = "font-weight: bold" class="comment_button_login trans_200">로그인</button>
 							</form>
-								<a th:href="@{/user/register}"><button class="comment_button_login trans_200">REGISTER</button></a>
+								<a th:href="@{/user/register}"><button style = "font-weight: bold" class="comment_button_login trans_200">회원가입</button></a>
 								
 								<!-- 카카오 로그인 -->
 								<a id="kakaologin_btn" href="https://kauth.kakao.com/oauth/authorize?client_id=df5e3953f8c59b9326e8bd7fdeabcdcc&redirect_uri=http://127.0.0.1/mogotco/user/kakaologin&response_type=code">
