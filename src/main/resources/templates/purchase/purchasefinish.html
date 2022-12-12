@@ -104,11 +104,11 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/mentoring/mentoring}">Mentoring</a></li>
-								<li><a th:href="@{/mentoring/mentoringdetail}">Mentoringdetail</a></li>
-								<li><a th:href="@{/purchase/purchase}">Purchase</a></li>
-								<li>Purchasefinish</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/mentoring/mentoring}">멘토링</a></li>
+								<li><a th:href="@{/mentoring/mentoringdetail}">멘토링 디테일</a></li>
+								<li><a th:href="@{/purchase/purchase}">구매</a></li>
+								<li>구매 완료</li>
 							</ul>
 						</div>
 					</div>
@@ -118,43 +118,43 @@
 	</div>
 	<!-- Checkout Start -->
 	<div class="container">
-		<h1 id="orderfinish">주문이 완료되었습니다.</h1>
+		<h1 id="orderfinish" style="font-family: 'IBM Plex Sans KR', sans-serif;">주문이 완료되었습니다.</h1>
 		<h5 class="section-title position-relative text-uppercase mb-3">
 			<span class="bg-secondary pr-3">Product</span>
 		</h5>
 		<table class="responsive-table">
 			<thead>
 				<tr>
-					<th scope="col">Mentoringtitle</th>
-					<th scope="col">Mentoringid</th>
-					<th scope="col">Mentoringdate</th>
-					<th scope="col">Mentoringtime</th>
-					<th scope="col">Mentoringplace</th>
-					<th scope="col">Purprice</th>
-					<th scope="col">Purchasedate</th>
-					<th scope="col">Purchasepay</th>
-					<th scope="col">Purchasecard</th>
+					<th scope="col">멘토링 이름</th>
+					<th scope="col">멘토링 아이디</th>
+					<th scope="col">멘토링 날짜</th>
+					<th scope="col">멘토링 시간</th>
+					<th scope="col">멘토링 장소</th>
+					<th scope="col">구매 가격</th>
+					<th scope="col">구매 날짜</th>
+					<th scope="col">구매 방식</th>
+					<th scope="col">구매 카드</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row" th:text="${list.mentoring_mtitle}"></th>
-					<td data-title="Mentoringid"
+					<td data-title="멘토링 아이디"
 						th:text="${list.mentoring_mentoringid}"></td>
-					<td data-title="Mentoringdate"
+					<td data-title="멘토링 날짜"
 						th:text="${list.mentoring_mentoringdate}"></td>
-					<td data-title="Mentoringtime"
+					<td data-title="멘토링 시간"
 						th:text="${list.mentoringoption_mentoringtime}"></td>
-					<td data-title="Mentoringplace" th:text="${list.mentoring_mplace}"></td>
-					<td data-title="Purprice" th:text="${list.purprice}"></td>
-					<td data-title="Purchasedate" th:text="${list.purdate}"></td>
-					<td data-title="Purchasepay" th:text="${list.purpay}"></td>
-					<td data-title="Purchasecard" th:text="${list.purcard}"></td>
+					<td data-title="멘토링 장소" th:text="${list.mentoring_mplace}"></td>
+					<td data-title="구매 가격" th:text="${list.purprice}"></td>
+					<td data-title="구매 날짜" th:text="${list.purdate}"></td>
+					<td data-title="구매 방식" th:text="${list.purpay}"></td>
+					<td data-title="구매 카드" th:text="${list.purcard}"></td>
 					<!-- 내 구매이력으로 갈 것인지에 대한 버튼 -->
 					<td>
 						<button th:onclick="go([[${session.loginuser.userid}]]);"
-							type="submit" class="comment_button1">Go to detail</button>
+							type="submit" class="comment_button1">구매 이력 가기</button>
 					</td>
 				</tr>
 			</tbody>
