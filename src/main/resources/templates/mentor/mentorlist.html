@@ -76,8 +76,8 @@ function checkOnlyOne(element) {
 				<div class="col">
 					<div class="breadcrumbs">
 						<ul>
-							<li><a th:href="@{/}">Home</a></li>
-							<li>Mentorlist</li>
+							<li><a th:href="@{/}">홈</a></li>
+							<li>멘토 리스트</li>
 						</ul>
 					</div>
 				</div>
@@ -95,7 +95,7 @@ function checkOnlyOne(element) {
 			<!-- Courses Main Content -->
 			<div class="col-lg-8">
 				<div class="courses_container">
-					<div class="contact_info_title">Mentorlist</div>
+					<div class="contact_info_title">멘토 리스트</div>
 					<div class="row courses_row">
 
 						<!-- Course -->
@@ -122,35 +122,6 @@ function checkOnlyOne(element) {
 							</div>
 						</div>
 					</div>
-					<div class="row pagination_row">
-						<div class="col">
-							<div
-								class="pagination_container d-flex flex-row align-items-center justify-content-start">
-								<ul class="pagination_list">
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#"><i class="fa fa-angle-right"
-											aria-hidden="true"></i></a></li>
-								</ul>
-								<div class="courses_show_container ml-auto clearfix">
-									<div class="courses_show_text">
-										Showing <span class="courses_showing">1-6</span> of <span
-											class="courses_total">26</span> results:
-									</div>
-									<div class="courses_show_content">
-										<span>Show: </span> <select id="courses_show_select"
-											class="courses_show_select">
-											<option>06</option>
-											<option>12</option>
-											<option>24</option>
-											<option>36</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 
@@ -159,7 +130,7 @@ function checkOnlyOne(element) {
 				<div class="sidebar">
 					<form id="typeselectmentoring">
 						<div class="sidebar_section">
-							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_section_title">카테고리</div>
 							<div class="sidebar_categories">
 								<ul>
 									<li><a th:href="@{/mentor/mentorlist}" th:text="${'all'}"
@@ -168,7 +139,7 @@ function checkOnlyOne(element) {
 									<li th:each="mtc:${mtcatelist}"><a
 										th:href="@{/mentor/mentoringCate(mname=${mtc.mname})}"
 										th:value="${mtc.mname}" th:text="${mtc.mname}"
-										th:style="${mtc.mname == selcatename ? 'color: #14bdee;' : 'color: #000000;'}"><input
+										th:style="${mtc.mname == selcatename ? 'color: #005b00;' : 'color: #000000;'}"><input
 											type="hidden" th:text="${mtc.mname}" name='mname'
 											th:value="${mtc.mname}"></a></li>
 								</ul>
