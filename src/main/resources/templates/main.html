@@ -100,11 +100,11 @@
 .chatbot1 .dechat-btn{
     position: fixed;
     right:125px;
-    bottom: 535px;
+    bottom: 540px;
     background: #005b00;
     color: white;
-    width:40px;
-    height: 40px;
+    width:25px;
+    height: 25px;
     border-radius: 50%;
     opacity: 0.8;
     transition: opacity 0.3s;
@@ -131,7 +131,8 @@
 
 .chatbot1 .income-msg{
     display: flex;
-    align-items: center;
+    align-items: left;
+    width:80%;
 }
 
 .chatbot1 .avatar{
@@ -145,7 +146,7 @@
     background-color: #005b00;
     color: white;
     padding:0.5rem;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-left: 1rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     font-size: 0.75rem;
@@ -168,15 +169,16 @@
 .chatbot1 .input-area{
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .chatbot1 input[type=text]{
-    width:100%;
+    width:80%;
     border: 1px solid #ccc;
     font-size: 1rem;
     border-radius: 5px;
     height: 2.2rem;
+    float:left;
 }
 
 .chatbot1 #emoji-btn{
@@ -188,10 +190,11 @@
     opacity:0.5;
 }
 
-.chatbot1 .submit{
+.chatbot1 .submitBtn{
+	position: relative;
     padding: 0.25rem 0.5rem;
-    margin-left: 0.5rem;
-    background-color: green;
+    margin-left: 0.4rem;
+    background-color: #005b00;
     color:white;
     display: flex;
     justify-content: center;
@@ -204,7 +207,7 @@
 .chatbot1 .out-msg{
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: right;
     font-size: 0.75rem;
 }
 .chatbot1 .my-msg{
@@ -214,7 +217,7 @@
     margin: 0.75rem;
     padding: 0.5rem;
     background-color: #005b00;
-    border-radius: 25px;
+    border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     word-break: break-all;
     font-size: 0.75rem;
@@ -507,7 +510,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
     <section class="chatbot1">
         <button class="chat-btn"> 
-            <i class="material-icons"> comment </i>
+            <i class="fa-sharp fa-solid fa-comment"></i>
         </button>
         <div class="chat-popup">
          <button class="dechat-btn"><i class="fa-solid fa-xmark"></i></button>
@@ -518,25 +521,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
             <div class="chatinput-area">
             <input type="text" id=chatinput> 
-                <button class="submit"><i class="material-icons"> send</i></button>
+                <button class="submitBtn"><i class="material-icons"> send</i></button>
             </div>
             </div>
     </section>
 <script>
 const popup = document.querySelector('.chat-popup');
 const chatBtn = document.querySelector('.chat-btn');
-const submitBtn = document.querySelector('.submit');
+const submitBtn = document.querySelector('.submitBtn');
 const chatArea = document.querySelector('.chat-area');
 const inputElm = document.querySelector('#chatinput');
 const dechatBtn = document.querySelector('.dechat-btn');
 
+function connect1(){
+	showMessage3("안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!");
+	connect();
+}
  
 function connect(){
 	var socket = new SockJS('http://127.0.0.1/mogotco/ws');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame){
 		stompClient.subscribe('/topic/public', function(message){
-			showMessage3("받은 메시지: " + message.body);
+				showMessage3(message.body);
 		});
 	});
 }
@@ -563,15 +570,17 @@ function showMessage3(answer){
 //chat button toggler 
 chatBtn.addEventListener('click', ()=>{
     popup.classList.toggle('show');
-    connect();
-    let temp = `<div class="income-msg"><span class="msg">안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</span>
+    connect1();
+/*     let temp = `<div class="income-msg"><span class="msg">안녕하세요 모같코입니다. '문의'라고 입력해주시면 자세히 안내 드릴게요!</span>
         </div>`;
 
-        chatArea.insertAdjacentHTML("beforeend", temp);
+        chatArea.insertAdjacentHTML("beforeend", temp); */
 });
 dechatBtn.addEventListener('click', ()=>{
 	disconnect();
-	dechatBtn.removeEventListener(popup.classList.toggle('show'))
+	$('.income-msg').text('');
+	$('.out-msg').text('');
+	dechatBtn.removeEventListener(popup.classList.toggle('show'));
 });
 // send msg 
 submitBtn.onclick = function() { 
@@ -581,6 +590,13 @@ submitBtn.onclick = function() {
     inputElm.value = '';
 
 }
+
+	$('#chatinput').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('.submitBtn').click();
+	         return false;
+	     } 
+	});
 
 
 </script>
