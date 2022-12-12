@@ -6,6 +6,28 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styles/course_responsive.css}">
 <script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
 <script th:src="@{/js/course.js}"></script>
+<style>
+.course_title
+{
+	font-family: 'fontawesome';
+	font-size: 36px;
+	font-weight: 700;
+	color: #384158;
+}
+.tab_panel
+{
+	display: none !important;
+	width: 100%;
+	height: 100%;
+	-webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+    border: solid 1px #ebebeb;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 0px;
+    padding-bottom: 25px;
+}
+</style>
 </head>
 
 	
@@ -18,8 +40,8 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li>Notice</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li>공지사항</li>
 							</ul>
 						</div>
 					</div>
@@ -38,7 +60,7 @@
 				<div class="col-lg-12">
 					
 					<div class="course_container">
-						<div class="course_title">Notice</div>
+						<div class="course_title">공지사항</div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">

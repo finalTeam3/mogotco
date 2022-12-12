@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<update id="update" parameterType="userDTO">
 		UPDATE user SET userpwd = #{userpwd}, username = #{username}, useraddr = #{useraddr}, usertel = #{usertel}, useremail = #{useremail}, 
 		withdraw = #{withdraw}, userbirth = #{userbirth}, userpoint=#{userpoint}, naverid = #{naverid}, kakaoid = #{kakaoid}, googleid = #{googleid}, 
-		usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}, snsinsta = #{snsinsta}, snsgit = #{snsgit}
+		usergen = #{usergen}, addrnum = #{addrnum}, addrdetail = #{addrdetail}, addrextra = #{addrextra}, snsinsta = #{snsinsta}, snsgit = #{snsgit}, userimg = #{userimg}
 		WHERE userid = #{userid}
 	</update>
 	

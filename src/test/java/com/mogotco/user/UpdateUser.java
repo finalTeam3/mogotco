@@ -16,7 +16,7 @@ class UpdateUser {
 	@Test
 	void contextLoads() {
 		
-		UserDTO user = new UserDTO("qkrajswl1541", "qkrgPwjd", "빵먼", "혜정이네집", "010-4009-1542", "nomail@gmail.com", null, 0, null, 0, null, null, null, null, null, null, null, null, null, 0);
+		UserDTO user = new UserDTO("qkrajswl1541", "qkrgPwjd", "빵먼", "혜정이네집", "010-4009-1542", "nomail@gmail.com", null, 0, null, 0, null, null, null, null, null, null, null, null, null, null, 0);
 		try {
 			service.modify(user);
 			System.out.println("OK");

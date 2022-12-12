@@ -16,7 +16,7 @@ class NewDeleteUser {
 	@Test
 	void contextLoads() {
 		
-		UserDTO user = new UserDTO("qkrgPwjd1541", "qkrgPwjd", "박혜정", "서울 강북구 인수봉로61길 18", "010-4009-1541", "skbsy153@gmail.com", null, 0, "1994-11-08", 3000, null, null, null, "여", "01022", "201호", "(수유동, 참하우스토리)", null, null, 0);
+		UserDTO user = new UserDTO("qkrgPwjd1541", "qkrgPwjd", "박혜정", "서울 강북구 인수봉로61길 18", "010-4009-1541", "skbsy153@gmail.com", null, 0, "1994-11-08", 3000, null, null, null, "여", "01022", "201호", "(수유동, 참하우스토리)", null, null, null, 0);
 		try {
 			service.deleteuser(user);
 			System.out.println("OK");

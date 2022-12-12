@@ -310,9 +310,9 @@ $(function(){
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/user/mypage(userid=${userid})}">Mypage</a></li>
-								<li>Purchasedetail</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/user/mypage(userid=${userid})}">마이페이지</a></li>
+								<li>구매 이력</li>
 							</ul>
 						</div>
 					</div>
@@ -328,7 +328,7 @@ $(function(){
 				
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">마이페이지</div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -379,37 +379,37 @@ $(function(){
 							<table class="responsive-table">
 								<thead>
 									<tr>
-										<th scope="col">Mentoringtitle</th>
-										<th scope="col">Purchaseid</th>
-										<th scope="col">Purchasedate</th>
-										<th scope="col">Price</th>
-										<th scope="col">Purchasepay</th>
-										<th scope="col">Purchasecard</th>
-										<th scope="col">Mentoringdate</th>
-										<th scope="col">Member</th>
-										<th scope="col">MentoringUrl</th>
-										<th scope="col">Mentoringplace</th>
-										<th scope="col">Progress</th>
+										<th scope="col">멘토링 이름</th>
+										<th scope="col">구매 번호</th>
+										<th scope="col">구매 날짜</th>
+										<th scope="col">구매 가격</th>
+										<th scope="col">구매 방법</th>
+										<th scope="col">구매 카드</th>
+										<th scope="col">멘토링 날짜</th>
+										<th scope="col">멘토링 멤버수</th>
+										<th scope="col">멘토링 방식</th>
+										<th scope="col">멘토링 장소</th>
+										<th scope="col">진행 상황</th>
 										<th scope="col"></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<th scope="row" th:text="${c.mentoring_mtitle}"></th>
-										<td data-title="Purchaseid" th:text="${c.purchaseid}"></td>
-										<td data-title="Purchasedate"
+										<td data-title="구매 번호" th:text="${c.purchaseid}"></td>
+										<td data-title="구매 날짜"
 											th:text="${#dates.format(c.purchase_purdate, 'yyyy-MM-dd')}"></td>
-										<td data-title="Price" th:text="${c.purchase_purprice}"></td>
-										<td data-title="Purchasepay" th:text="${c.purchase_purpay}"></td>
-										<td data-title="Purchasecard" th:text="${c.purchase_purcard}"></td>
-										<td data-title="Mentoringdate"
+										<td data-title="구매 가격" th:text="${c.purchase_purprice}"></td>
+										<td data-title="구매 방법" th:text="${c.purchase_purpay}"></td>
+										<td data-title="구매 카드" th:text="${c.purchase_purcard}"></td>
+										<td data-title="멘토링 날짜"
 											th:text="${#dates.format(c.mentoring_mentoringdate, 'yyyy-MM-dd')}"></td>
-										<td data-title="Member" th:text="${c.mentoringmembercnt}"></td>
-										<td data-title="MentoringUrl"
+										<td data-title="멘토링 멤버수" th:text="${c.mentoringmembercnt}"></td>
+										<td data-title="멘토링 방식"
 											th:text="${c.mentoring_mentorurl}"></td>
-										<td data-title="Mentoringplace"
+										<td data-title="멘토링 장소"
 											th:text="${c.mentoring_mplace}"></td>
-										<td data-title="Progress" th:text="${c.progresspur}"
+										<td data-title="진행 상황" th:text="${c.progresspur}"
 											id="progresspuresult"></td>
 										<td>
 											<button type="button" id="review_btn" data-toggle="modal"
