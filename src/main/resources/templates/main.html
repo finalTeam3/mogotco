@@ -334,7 +334,7 @@ body {
                      <nav class="main_nav_contaner ml-auto">
                         <ul class="main_nav">
                            <li class="active"><a th:href="@{/}" style="font-family: 'Spoqa Han Sans Neo';">홈</a></li>
-                           <li><a th:href="@{/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
+                           <li><a th:href="@{/board/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
                            <li><a th:href="@{/about}" style="font-family: 'Spoqa Han Sans Neo';">소개</a></li>
                            <li th:if = "${session.loginuser != null}"><a th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
                            <li th:if = "${session.loginuser == null}"><a th:href="@{/mentoring/defaultmentoring}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
@@ -391,7 +391,7 @@ body {
          	<li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/user/login}"><i class="fa-solid fa-user"></i></a></li>
             <li class="menu_mm"><a th:href="@{/}" style="font-family: 'Spoqa Han Sans Neo';">홈</a></li>
             <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/user/mypage(userid = ${session.loginuser.userid})}" style="font-family: 'Spoqa Han Sans Neo';">마이페이지</a></li>
-            <li class="menu_mm"><a th:href="@{/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
+            <li class="menu_mm"><a th:href="@{/board/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
             <li class="menu_mm"><a th:href="@{/about}" style="font-family: 'Spoqa Han Sans Neo';">소개</a></li>
             <li class="menu_mm"><a th:if = "${session.loginuser == null}" th:href="@{/mentoring/defaultmentoring}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
             <li class="menu_mm"><a th:if = "${session.loginuser != null}" th:href="@{/mentoring/defaultmentoring(userid=${session.loginuser.userid})}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
@@ -466,7 +466,7 @@ body {
                            <div class="footer_links_container">
                               <ul>
                                  <li><a th:href="@{/}" style="font-family: 'Spoqa Han Sans Neo';">홈</a></li>
-                                 <li><a th:href="@{/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
+                                 <li><a th:href="@{/board/notice}" style="font-family: 'Spoqa Han Sans Neo';">고객센터</a></li>
                                  <li><a th:href="@{/about}" style="font-family: 'Spoqa Han Sans Neo';">소개</a></li>
                                  <li><a th:href="@{/mentoring/defaultmentoring}" style="font-family: 'Spoqa Han Sans Neo';">멘토링</a></li>
                                  <li><a th:href="@{/mentor/mentorlist}" style="font-family: 'Spoqa Han Sans Neo';">멘토</a></li>

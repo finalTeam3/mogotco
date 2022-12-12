@@ -182,6 +182,14 @@ $(document).ready(function(){
 		if(sample6_extraAddress.readOnly == false) {
 			sample6_extraAddress.style.backgroundColor = '#ffffff'
 		}
+		$('#snsgit').attr('readonly', false);  
+		if(snsgit.readOnly == false) {
+			snsgit.style.backgroundColor = '#ffffff'
+		}
+		$('#snsinsta').attr('readonly', false);  
+		if(snsinsta.readOnly == false) {
+			snsinsta.style.backgroundColor = '#ffffff'
+		}
 		$('#mpupdate_btn').click(function(){
 			$('#pwd').attr('readonly', true);  
 			$('#uname').attr('readonly', true);  
@@ -193,6 +201,8 @@ $(document).ready(function(){
 			$('#sample6_address').attr('readonly', true);  
 			$('#sample6_detailAddress').attr('readonly', true);  
 			$('#sample6_extraAddress').attr('readonly', true); 
+			$('#snsgit').attr('readonly', true); 
+			$('#snsinsta').attr('readonly', true); 
 			$('#mypage_update_form').attr(
 				{
 					'action':'[[@{/user/mypageupdate}]]',
@@ -303,7 +313,7 @@ $(document).ready(function(){
 					<div class="col-lg-8">
 						<div class="contact_form">
 							<!-- <div class="contact_info_title">My Page</div> -->
-							<div>&nbsp</div>
+							<div>&nbsp<p>SNS를 통해 로그인하신 고객님은 정보를 입력해주세요.</p></div>
 <!-- 							<button type="button" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">멘토 등록</button>
 							<button type="button" th:if="${ms != null}" th:onclick="|location.href='@{/mentor/mentormodify(id=${us.userid},mentorid=${ms.mentorid})}'|" class="comment_button trans_200" style="width:110px;height:30px">멘토 정보 수정</button>
 							<button type="button" th:onclick="|location.href='@{/purchase/purchasedetail(id=${us.userid})}'|" class="comment_button trans_200" style="width:80px;height:30px">구매이력</button>

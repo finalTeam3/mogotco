@@ -175,8 +175,8 @@ function upload() {
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li>APPLY</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li>멘토등록하기</li>
 							</ul>
 						</div>
 					</div>
@@ -197,7 +197,7 @@ function upload() {
 
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">마이페이지</div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -267,12 +267,12 @@ function upload() {
 								</div>
 								
 								<div>
-									<label for = "userid" class="form_title">Userid</label>
+									<label for = "userid" class="form_title">ID</label>
 									<input type="text" class="userid comment_input" id = "userid" name = "userid" th:value = "${session.loginuser.userid}" readonly="readonly">
 								</div>
 
 								<div>
-									<label for = "username" class="form_title">Username</label>
+									<label for = "username" class="form_title">이름</label>
 									<input type="text" class="userid comment_input" id = "username" name = "username" th:value = "${session.loginuser.username}" readonly="readonly">
 								</div>
 
@@ -282,7 +282,7 @@ function upload() {
 								</div>
 				
 								<div>
-									<label class="form_title">Mentor Card</label>
+									<label class="form_title">명함</label>
 									<div>
 									<img id="uploadimg" th:src="@{/images/defaultcardupload.jpg}" style="width:120px">&nbsp&nbsp&nbsp&nbsp
 									<label class="btn btn-dark" for="mcimg" style="width:96px;height:31px;font-size:13px">파일 업로드</label>
@@ -294,55 +294,55 @@ function upload() {
 								</div>											
 			
 								<div>
-									<label for = "mentorcom" class="form_title">Mentorcom<span style="color:red"> *</span></label>
+									<label for = "mentorcom" class="form_title">회사명<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id = "mentorcom" name = "mentorcom">
 								</div>
 
 								<div>
-									<label for = "mcardposition" class="form_title">mcardposition<span style="color:red"> *</span></label>
+									<label for = "mcardposition" class="form_title">부서명 & 직급<span style="color:red"> *</span></label>
 									<input type="text" class="comment_input" id="mcardposition" name="mcardposition">
 								</div>
 
 								<div>
-									<label for = "mentorcon" class="form_title">Mentorcon<span style="color:red"> *</span></label>
+									<label for = "mentorcon" class="form_title">소개<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcon" name = "mentorcon"></textarea>
 								</div>
 
 								<div>
-									<label for = "mentorcareer" class="form_title">Mentorcareer<span style="color:red"> *</span></label>
+									<label for = "mentorcareer" class="form_title">경력사항<span style="color:red"> *</span></label>
 									<textarea class="comment_input" id = "mentorcareer" name = "mentorcareer"></textarea>
 								</div>
 								
 								<div>
-										<label for = "mwishcate" class="form_title">Category<span style="color:red"> *</span></label><br>
+										<label for = "mwishcate" class="form_title">카테고리<span style="color:red"> *</span></label><br>
 										<div class="form-check-inline">
 									       	<label class="form-check-label" for="web">
 									          <input type="checkbox" class="form-check-input" id="web" name="mcateid" value=10>
-									          web
+									          웹
 									        </label>
 								        </div>
 								        <div class="form-check-inline"> 
 									        <label class="form-check-label" for="secure">
 									          <input type="checkbox" class="form-check-input" id="secure" name="mcateid" value=20>
-									          secure
+									          보안
 									        </label>
 								        </div>
 									    <div class="form-check-inline">
 									      <label class="form-check-label" for="network">
 									        <input type="checkbox" class="form-check-input" id="network" name="mcateid" value=30>
-									        network
+									        네트워크
 									      </label>
 									    </div>							        
 									    <div class="form-check-inline">
 									      <label class="form-check-label" for="ds">
 									        <input type="checkbox" class="form-check-input" id="ds" name="mcateid" value=40>
-									        Data Science
+									        데이터사이언스
 									      </label>
 									    </div>
 									    <div class="form-check-inline">
 									      <label class="form-check-label" for="game">
 									        <input type="checkbox" class="form-check-input" id="game" name="mcateid" value=50>
-									        Game
+									        게임
 									      </label>
 									    </div>
 									    <div class="form-check-inline">
@@ -360,7 +360,7 @@ function upload() {
 									    <div class="form-check-inline">
 									      <label class="form-check-label" for="etc">
 									        <input type="checkbox" class="form-check-input" id="etc" name="mcateid" value=80>
-									        etc
+									        기타
 									      </label>
 								    </div>
 								    
@@ -369,7 +369,7 @@ function upload() {
 								</div>
 								
 							</form>
-								<button id = "register_btn" class="comment_button trans_200">Apply</button>
+								<button id = "register_btn" class="comment_button trans_200">등록하기</button>
 														
 						</div>
 					</div>

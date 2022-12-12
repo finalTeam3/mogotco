@@ -65,7 +65,7 @@ public class SNSLoginController {
 			session.setAttribute("loginuser", user);
 		}
 		
-		return "redirect:/";
+		return "redirect:mypage?userid="+user.getUserid();
 	}
 	
 	// 깃허브 로그인 
@@ -101,6 +101,6 @@ public class SNSLoginController {
 			session.setAttribute("loginuser", user);
 		}
 		
-		return "redirect:/";
+		return "redirect:mypage?userid="+user.getUserid();
 	}
 }
