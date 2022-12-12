@@ -33,6 +33,7 @@ public class UserDTO {
 	private String addrextra;
 	private String snsinsta;
 	private String snsgit;
+	private String userimg;
 	
 	private int mentor_mentorok;
 }
