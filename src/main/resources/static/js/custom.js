@@ -155,7 +155,8 @@ $(document).ready(function()
 				autoplay:true,
 				nav:false,
 				dots:false,
-				smartSpeed:2400
+				smartSpeed:3000,
+				autoplayHoverPause: true
 			});
 
 			if($('.home_slider_prev').length)
