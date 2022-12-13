@@ -11,6 +11,7 @@
 $(document).ready(function(){
 	var code = "";	// 이메일 인증번호 저장
 	var timer = null;
+	var check = true;
 	
 	/* 회원가입 */
 	$('#register_btn').click(function(){
@@ -48,18 +49,38 @@ $(document).ready(function(){
 		});
 	});
 	
+	/* 이메일 정규직 검증 */
+	function mailregexcheck() {
+		
+		var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');	 //정규식 작성
+		var email = document.register_form.email.value;	// 사용자가 입력한 이메일 
+		
+		if(regex.test(email)) {	// 정규식 테스트
+			$('#espan1').text('메일이 발송되었습니다. 인증번호를 입력해주세요');
+			return check=true;
+		} else {
+			$('#espan1').text('메일주소 형식을 다시 확인해서 입력해주세요');
+			return check=false;
+		}
+		
+	}
+
+	
 	/* 이메일 인증번호 보내기 */
 	$('#emailcheck_btn').click(function(){
 		mailregexcheck();	// 이메일 정규식 검증 - true
 		
+		console.log(mailregexcheck());
+		
 		var email = $('#email').val();	// 사용자가 입력한 이메일
 		
-		var count = 180;
-		timer = setInterval(function() {
-			minutes = parseInt(count / 60, 10);
-			seconds = parseInt(count % 60, 10);
-			document.getElementById("count").innerHTML = "유효시간 : " + minutes + "분" + seconds + "초";
-			--count;
+		if(check == true){
+			var count = 180;
+			timer = setInterval(function() {
+				minutes = parseInt(count / 60, 10);
+				seconds = parseInt(count % 60, 10);
+				document.getElementById("count").innerHTML = "유효시간 : " + minutes + "분" + seconds + "초";
+				--count;
 			
 			if(count < 0) {
 				$('#emailconfirm').attr('disabled', true);
@@ -76,7 +97,7 @@ $(document).ready(function(){
 				code = data;
 			}
 	   });
-		
+		}
 	});
 	
 	/* 인증번호 일치여부 검사 */
@@ -107,20 +128,6 @@ $(document).ready(function(){
 	});
 });
 	
-	/* 이메일 정규직 검증 */
-	function mailregexcheck() {
-		
-		var regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');	 //정규식 작성
-		var email = document.register_form.email.value;	// 사용자가 입력한 이메일 
-		
-		if(regex.test(email)) {	// 정규식 테스트
-			$('#espan1').text('메일이 발송되었습니다. 인증번호를 입력해주세요')
-		} else {
-			$('#espan1').text('메일주소 형식을 다시 확인해서 입력해주세요')
-		}
-		
-	}
-
 	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
