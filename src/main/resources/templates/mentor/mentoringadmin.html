@@ -257,7 +257,8 @@ $(function(){
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">Home</a></li>
-								<li>APPLY</li>
+								<li><a th:href="@{/user/mypage(userid=${us.userid})}">마이페이지</a></li>
+								<li>멘토링 관리</li>
 							</ul>
 						</div>
 					</div>
@@ -276,7 +277,7 @@ $(function(){
 				<!-- Courses Main Content -->
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">My Page</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title"><!-- My Page --></div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
