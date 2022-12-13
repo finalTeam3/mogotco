@@ -50,6 +50,7 @@
     box-sizing: border-box;
     box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    background-color: #fff;
 }
 
 .btn-select.on {
@@ -69,7 +70,7 @@
     width: 100%;
     padding: 7px 10px;
     border: none;
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
     cursor: pointer;
     text-align: left;
@@ -230,7 +231,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 								<br>
 
 								<!-- Features -->
-								<div class="feature_list">
+								<div class="feature_list" style="z-index:10;">
 								<div class="sidebar_section_title" style="margin-bottom:18px; margin-top:35px; font-family:'IBM Plex Sans KR', sans-serif;">시간 선택</div>
 
 									<!-- Feature -->
@@ -261,7 +262,7 @@ function timeChange(statusTime) { // 버튼 클릭시 함수 시작
 
 						<!-- Feature -->
 
-						<div class="sidebar_section">
+						<div class="sidebar_section" style="z-index:1;">
 							<div class="sidebar_section_title" style="margin-top:180px; font-family:'IBM Plex Sans KR', sans-serif;">멘토 정보</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
