@@ -1633,11 +1633,12 @@ section
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: -86px;
-	z-index: 5;
 }
 .team_image img
 {
 	max-width: 100%;
+    position:absolute;
+    z-index:1;
 }
 .team_body
 {
