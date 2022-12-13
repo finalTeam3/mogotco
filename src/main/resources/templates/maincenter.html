@@ -291,7 +291,7 @@ $(function(){
 
 				<!-- Course -->
 				<div class="col-lg-4 course_col" th:each="i:${imme}">
-					<div class="course">
+					<div class="course" style = "height:371px">
 						<div class="course_image">
 							<img th:src="@{/img/}+${i.mentoringimg}" alt="">
 						</div>
@@ -301,7 +301,6 @@ $(function(){
 							</h3>
 							<div class="course_teacher" th:text="${i.user_username}" style="font-family: 'IBM Plex Sans KR', sans-serif;">Mr. John Taylor</div>
 							<div class="course_text">
-								<p th:text="${i.mcontents}" style="font-family: 'IBM Plex Sans KR', sans-serif;"></p>
 							</div>
 						</div>
 						<div class="course_footer">
