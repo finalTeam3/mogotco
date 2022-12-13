@@ -584,7 +584,7 @@ function sendMessage(userInput){
 }
 
 function showMessage3(answer){
-	$('.chat-area').append('<div class="income-msg"><span class="msg">' + answer + '</span></div>');
+	$('.chat-area').append('<div class="income-msg" style="white-space:pre-wrap;"><span class="msg">' + answer + '</span></div>');
 	$('.chat-area').scrollTop($(".chat-area")[0].scrollHeight);
 	$('.chat-area').val('');
 }

@@ -68,7 +68,7 @@ public class ChatBotController {
             JSONParser jsonparser = new JSONParser();
             try {
             	// 들어온 메시지 확인
-            	System.out.println("chatmessage:"+chatMessage);
+//            	System.out.println("chatmessage:"+chatMessage);
             	
             	JSONObject json = (JSONObject)jsonparser.parse(jsonString);
             	JSONArray bubblesArray = (JSONArray)json.get("bubbles");
@@ -137,7 +137,7 @@ public class ChatBotController {
         } else {  // 에러 발생
             chatMessage = con.getResponseMessage();
         }
-		System.out.println("REsult:"+chatMessage);
+//		System.out.println("REsult:"+chatMessage);
         return chatMessage;
     }
 
