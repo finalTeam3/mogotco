@@ -77,21 +77,29 @@
 
 
 ## 4. 멘토 
-> 명함 및 사원증 회사 인증 후 등록(ocr) 및 수정 등록 
+> 명함 및 사원증 회사 인증 후 등록(OCR) 및 수정 등록 
 
-### 4.1. ajax 비동기 요청 
-  - 화면단에서 사용자가 명함 이미지를 업로드하면 파일이 formdata에 담겨지고 명함 등록하는 post 요청을 AjaxController에 비동기로 전송. 
+### 4.1 OCR 연동 프로세스
 
-### 4.2. 파일 저장 및 ocr 시스템 실행 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L121)
+- ajax 비동기 요청 
+  - 화면단에서 사용자가 명함 이미지를 업로드하면 파일이 formdata에 담겨지고 명함 등록하는 post 요청을 AjaxController에 비동기로 전송.
+
+<br>
+
+- 파일 저장 및 ocr 시스템 실행 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L121)
   - AjaxController에서는 화면단에서 넘어온 파일을 Util클래스의 메서드를 통해 사용자 페이지와 관리자 페이지에 동시에 저장. 그 후 시스템에 저장된 명함이미지를 ocrservice의 ocrresult 메서드의 파라미터로 넘겨주면 json 객체가 ajax의 url을 통해 화면단으로 반환.
 
+<br>
 
-### 4.3. ocr 실행 결과 추출 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentor/mentorregister.html#L132)
-- AjaxController에서 화면단으로 json 객체를 보내어 js의 display함수를 통해 파싱을 한 뒤 각각의 input창에 id값을 할당하여 데이터를 입력.
+- OCR 실행 결과 추출 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentor/mentorregister.html#L132)
+  - AjaxController에서 화면단으로 json 객체를 보내어 js의 display함수를 통해 파싱을 한 뒤 각각의 input창에 id값을 할당하여 데이터를 입력.
 
-### 4.4. 실제 작동 화면
+<br>
+
+### 4.2. 실제 작동 화면
 ![ocr 실제 작동 화면]()
 
+<br>
 
 ## 5. 구매 
 - import 결제 기능 ( 기능), 포인트 사용
