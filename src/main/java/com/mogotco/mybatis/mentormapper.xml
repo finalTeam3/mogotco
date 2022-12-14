@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<!-- 승인된 멘토만 보여주기 위한 -->
 	<select id="selectAll" resultType="MentorDTO">
-		SELECT * FROM mentor WHERE mentorok = 1
+		SELECT * FROM mentor WHERE mentorok = 1 ORDER BY mentorid DESC
 	</select>
 
 	<insert id="insert" parameterType="MentorDTO">
