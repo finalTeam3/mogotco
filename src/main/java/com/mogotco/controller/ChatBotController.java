@@ -25,8 +25,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatBotController {
 
-    private static String secretKey = "c2FaYm96VGVtWHNxWm1GSVRiZHF6aGdkRGh4cndoS0M=";
-    private static String apiUrl = "https://fhtjpdwz5t.apigw.ntruss.com/custom/v1/8347/286db146b52e296095a5f0a17e130971e0063aaeca7df69b23ef5894597b55ac";
+    private static String secretKey = "QVZJRktEUHJaTkVXV3paeFd4ZEFlYkdlRmduTkhaZnk=";
+    private static String apiUrl = "https://fhtjpdwz5t.apigw.ntruss.com/custom/v1/8366/a47f168cc6c43f07abb0268abadbd29cfcab9f57ea0ef2def97e78dbe5b5b802";
 
     @MessageMapping("/sendMessage")
     @SendTo("/topic/public")
@@ -68,7 +68,7 @@ public class ChatBotController {
             JSONParser jsonparser = new JSONParser();
             try {
             	// 들어온 메시지 확인
-            	System.out.println("chatmessage:"+chatMessage);
+//            	System.out.println("chatmessage:"+chatMessage);
             	
             	JSONObject json = (JSONObject)jsonparser.parse(jsonString);
             	JSONArray bubblesArray = (JSONArray)json.get("bubbles");
@@ -137,7 +137,7 @@ public class ChatBotController {
         } else {  // 에러 발생
             chatMessage = con.getResponseMessage();
         }
-		System.out.println("REsult:"+chatMessage);
+//		System.out.println("REsult:"+chatMessage);
         return chatMessage;
     }
 

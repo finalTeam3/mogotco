@@ -10,11 +10,35 @@
 <script th:src="@{/js/course.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/contact.css}">
 <style>
+.comment_button1 {
+	width: 70px;
+	height: 30px;
+	background: #005b00;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	color: #FFFFFF;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	margin-left:530px;
+}
 
+.comment_button1:hover {
+	box-shadow: 0px 5px 40px rgba(0, 0, 0, 0);
+}
 </style>
 
 <script>
+function gomentoring(mentoringoptionid) {
 
+	var c = confirm('멘토링을 시작하시겠습니까?');
+	if (c == true) {
+		location.href = '[[@{/mentoring/mentoringstart?id=}]]'
+				+ mentoringoptionid;
+	}
+};
 </script>
 </head>
 
@@ -27,9 +51,9 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{/user/mypage(userid=${session.loginuser.userid})}">Mentor</a></li>
-								<li>Mentoring Admin Details</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/user/mypage(userid=${session.loginuser.userid})}">멘토</a></li>
+								<li>멘토링 관리</li>
 							</ul>
 						</div>
 					</div>
@@ -79,10 +103,6 @@
 										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mtitle}"></span></div>
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title"><b>멘토링 내용:</b></div>
-										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mcontents}"></span></div>
-									</div>
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title"><b>멘토링 가격:</b></div>
 										<div class="teacher_meta_text ml-auto">
 										  <span th:text="${mti.mentoringprice}"></span>원
@@ -101,7 +121,7 @@
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title"><b>비대면 시 영상 url:</b></div>
+										<div class="teacher_meta_title"><b>멘토링 방식:</b></div>
 										<div class="teacher_meta_text ml-auto">
 										  <span th:text="${mti.mentorurl}" ></span>
 										 </div> 
@@ -139,7 +159,7 @@
 
 
 				<!-- Course -->
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					
 					<div class="course_container" >
 						<!-- <div class="course_title">Mentor Detail</div> -->
@@ -160,7 +180,7 @@
 
 								<!-- Reviews -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Mentoring Time</div>
+									<div class="tab_panel_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">멘토링 내용</div>
 
 									<!-- Rating -->
 <!-- 									<div class="review_rating_container">
@@ -184,12 +204,23 @@
 									
 									<!-- Comments -->
 									<div class="review_rating_container">
+											<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+												<div class="teacher_meta_title"></div>
+												<div class="teacher_meta_text ml-auto"><span style="white-space:pre-wrap;" th:text="${mti.mcontents}"></span></div>
+											</div>
+											
+											<div class="tab_panel_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">멘토링 시간</div>
 										<ul class="comments_list" th:each="molist:${molist}">
 											<li>
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_content">
+														
+														
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
 															<h4><a th:href="@{/mentor/mentoringmember(mentoringid=${molist.mentoringid}, mentoringoptionid=${molist.mentoringoptionid})}"><div th:text="${molist.mentoringtime}"></div></a></h4>
+															
+															<button th:if="${mti.mentorurl} == ${'nonface'}" th:onclick="gomentoring([[${molist.mentoringoptionid}]])" type="submit" class="comment_button1">시작하기</button>
+															
 														</div>
 													</div>
 												</div>

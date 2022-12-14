@@ -390,8 +390,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN
 		mentor mr ON mt.mentorid = mr.mentorid
 		INNER JOIN user mu ON mr.userid =
-		mu.userid GROUP BY mt.mentoringid where DATEDIFF(mt.mentoringdate,sysdate())>=0 ORDER BY
-		mt.mentoringprice, date_difference ASC LIMIT #{meningnum},6
+		mu.userid where DATEDIFF(mt.mentoringdate,sysdate())>=0 GROUP BY mt.mentoringid ORDER BY
+		mt.mentoringprice, DATEDIFF(mt.mentoringdate,sysdate()) ASC LIMIT #{meningnum},6
 	</select>
 		<!-- 전체, 가장빨리 멘토링 가능한 순(choyunyoung add)-->
 	<select id="nallrecentsearch" resultType="MentoringDTO">

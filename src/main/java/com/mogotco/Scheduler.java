@@ -56,7 +56,7 @@ public class Scheduler {
 		
 	}
 	
-	@Scheduled(cron = "1 30 6 * * *")
+	@Scheduled(cron = "1 0 8 * * *")
 	public void tomorrowalarm() {
 		
 		List<String> list = null;

@@ -10,6 +10,7 @@
 <style>
 #pubutton{
 margin-left: 22%;
+margin-top: 10%
 }
 
 #mcbutton{
@@ -94,6 +95,7 @@ $(document).ready(function(){
 			'action':'[[@{/mentor/modifyimpl}]]'
 		});
 		$('#modify_form').submit();
+		alert('멘토 정보 수정이 완료되었습니다.');
 	});
 });
 function previewprofile(event) {// 프로필 이미지 미리 보여주기
@@ -177,6 +179,7 @@ function upload() {
 						<div class="breadcrumbs">
 							<ul>
 								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/user/mypage(userid=${us.userid})}">마이페이지</a></li>
 								<li>멘토 정보 수정</li>
 							</ul>
 						</div>
@@ -196,7 +199,7 @@ function upload() {
 				
 			<div class="col-lg-4">
 				<div class="sidebar">
-				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title">마이페이지</div></a>
+				<a th:href="@{/user/mypage(userid = ${session.loginuser.userid})}"><div class="contact_info_title"><!-- 마이페이지 --></div></a>
 					<!-- Latest Course -->
 <!-- 					<div class="sidebar_section">
 						<div style="margin-top: 50px;" th:if="${ms != null}"
@@ -215,7 +218,7 @@ function upload() {
 							<div class="sidebar_categories">
 								<ul id="ul" style="text-align: center">
 									<li id="li">
-										<a th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
+										<a th:if="${m == null}" th:onclick="|location.href='@{/mentor/mentorregister(id=${us.userid})}'|">멘토 등록</a>
 									</li>
 									<li id="li">
 										<a th:if="${m != null}" th:onclick="|location.href='@{/mentor/idcheck(mentorid=${m.mentorid})}'|">멘토 정보</a>
@@ -318,7 +321,7 @@ function upload() {
 										<h4>
 										<tr th:each="mwclist:${mwclist}">
 											<th>
-											<span class="badge badge-pill badge-success" th:text="${mwclist.mcate_mname}" style="color:#FFFFFF"></span>
+											<span class="badge badge-pill badge-success" th:text="${mwclist.mcate_mname}" style="color:#FFFFFF; font-family:'Noto Sans';" ></span>
 											</th>
 										</tr>
 										</h4>

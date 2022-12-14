@@ -125,16 +125,15 @@
 		  transform: scaleY(var(--tw-scale-y));
 		}
 		#local-screen {
-		  width: 1600px;
+		  width: 1350px;
 		  margin-bottom: 1.25rem;
 		  transform: scaleY(var(--tw-scale-y));
 		}
 		
 		#remote-video {
-		  width: 450px;
+		  width: 80%; 
 		  margin-right: 0.5rem;
-		}
-		
+		}		
 		#log-list {
 		  text-align: center;
 		}
@@ -167,23 +166,23 @@
 		    <h1>MOGOTCO Mentoring Service</h1>
 		
 		    <div id="button-group">
-		      <button id="connect" class="cursor-pointer">Connect</button>
-		      <button id="disconnect" class="cursor-pointer">Disconnect</button>
+		      <button id="connect" class="cursor-pointer">멘토링 시작</button>
+		      <button id="disconnect" class="cursor-pointer">멘토링 종료</button>
 		    </div>
 		
 		    <div id="button-group">
-		      <button id="share-screen" class="cursor-not-allowed">Share Screen</button>
+		      <button id="share-screen" class="cursor-not-allowed">화면공유하기</button>
 		      <button id="unshare-screen" class="cursor-not-allowed">
-		        Unshare Screen
+		        화면공유 중지
 		      </button>
 		    </div>
 		
 		    <div id="status">Disconnected</div>
 		
 		    <div id="video-list">
-		    	<h3>Mentor</h3>
+		    	<h3>Me</h3>
 		      <ul id="local-container"></ul>
-		      <h3>Mentee</h3>
+		      <h3>Others</h3>
 		      <ul id="remote-container"></ul>
 		    </div>
 		
@@ -202,7 +201,8 @@
 		let localScreen = null;
 		let room = null;
 		let remoteParticipants = [];
-
+		
+		// 멘토링옵션아이디 값으로 멘토링 해당 시간의 방을 생성해준다.
 		const roomId = '[[${moptionid}]]';
 		const connectButton = document.querySelector('#connect');
 		const disconnectButton = document.querySelector('#disconnect');

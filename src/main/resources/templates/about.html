@@ -457,7 +457,13 @@ const chatbox = jQuery.noConflict();
   
  });
 </script>
+<script type="text/javascript">
+$(function(){
+	// #ul의 자식 엘리먼트(li)가 몇번째인지 확인한 후 a요소를 찾은 후 on이라는 클래스 추가
+    $('#mainul').children().eq(2).find('a').addClass('on');
 
+});
+</script>
 </head>
 
 	
@@ -470,8 +476,8 @@ const chatbox = jQuery.noConflict();
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li>About</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li>소개</li>
 							</ul>
 						</div>
 					</div>
@@ -628,7 +634,7 @@ var marker = new kakao.maps.Marker({
 
 //마커 위에 표시할 인포윈도우를 생성한다
 var infowindow = new kakao.maps.InfoWindow({
-    content : '<div style="padding:5px; color:#005b00; font-size:16px;">MOGOTCO 본사</div>' // 인포윈도우에 표시할 내용
+    content : '<div style="padding:5px; color:#005b00; font-size:16px;">주)상부삼조</div>' // 인포윈도우에 표시할 내용
 });
 
 // 인포윈도우를 지도에 표시한다
@@ -649,7 +655,7 @@ var marker = new kakao.maps.Marker({
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 
-var iwContent = '<div style="padding:5px; color:#005b00; font-size:16px;">MOGOTCO 본사</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px; color:#005b00; font-size:16px;">주식회사 상부삼조</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 // 인포윈도우를 생성합니다

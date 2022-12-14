@@ -149,10 +149,12 @@ $(function(){
 
 													<div class="accordion_container">
 
-														<div class="accordion d-flex flex-row align-items-center"><div th:text="${faq.boardtitle}">Question</div></div>
+														<div class="accordion d-flex flex-row align-items-center">
+															<div th:text="${faq.boardtitle}">Question</div>
+														</div>
 
 														<div class="accordion_panel">
-															<p th:text="${faq.boardcontent}">Answer</p>
+															<p th:text="${faq.boardcontent}" style="white-space:pre-wrap;">Answer</p>
 														</div>
 													</div>
 

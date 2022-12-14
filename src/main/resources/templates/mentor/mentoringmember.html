@@ -27,9 +27,9 @@
 					<div class="col">
 						<div class="breadcrumbs">
 							<ul>
-								<li><a th:href="@{/}">Home</a></li>
-								<li><a th:href="@{{/user/mypage(userid=${userid})}">Mentor</a></li>
-								<li>Mentoring Admin Details</li>
+								<li><a th:href="@{/}">홈</a></li>
+								<li><a th:href="@{/user/mypage(userid=${userid})}">멘토</a></li>
+								<li>멘토링 멤버 목록</li>
 							</ul>
 						</div>
 					</div>
@@ -64,7 +64,7 @@
 							<!-- <div class="sidebar_section_title">Mentoring admin detail</div> -->
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div ><img th:src="@{/images/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
+									<div ><img th:src="@{/img/}+${mti.mentoringimg}" alt="멘토링 대표이미지" style="width:130%"></div>
 									<div class="teacher_title">
 										<div class="teacher_name" style="float:left;"></div>
 										<ul><li><a id="kakaotalksharingbtn"></a></li></ul>
@@ -77,10 +77,6 @@
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title"><b>멘토링 제목:</b></div>
 										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mtitle}"></span></div>
-									</div>
-									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title"><b>멘토링 내용:</b></div>
-										<div class="teacher_meta_text ml-auto"><span th:text="${mti.mcontents}"></span></div>
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
 										<div class="teacher_meta_title"><b>멘토링 가격:</b></div>
@@ -101,7 +97,7 @@
 										 </div> 
 									</div>
 									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-										<div class="teacher_meta_title"><b>비대면 시 영상 url:</b></div>
+										<div class="teacher_meta_title"><b>멘토링 방식:</b></div>
 										<div class="teacher_meta_text ml-auto">
 										  <span th:text="${mti.mentorurl}" ></span>
 										 </div> 
@@ -160,7 +156,7 @@
 
 								<!-- Reviews -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Mentoring Member</div>
+									<div class="tab_panel_title" style="font-family: 'IBM Plex Sans KR', sans-serif;">멘토링 멤버 목록</div>
 
 									<!-- Rating -->
 									
@@ -171,7 +167,7 @@
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<h4><div th:text="${mmlist.userid}"></div></h4>
+															<h4><div th:text="${mmlist.userid}" style="font-family: 'IBM Plex Sans KR', sans-serif;"></div></h4>
 														</div>
 													</div>
 												</div>
