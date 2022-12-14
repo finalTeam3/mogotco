@@ -257,6 +257,7 @@ function previewprofile(event) {// 프로필 이미지 미리 보여주기
 										<input class="form-control border-0" type="date" id="mentoringdate" name="mentoringdate" placeholder="Select Date" style="width:250px; height:40px; outline:2px solid #d3d3d3; background-color:white; color:black;">
 									<!-- 오늘 날짜 이후로만 선택 가능 -->
 									<script>
+									// 오늘 날짜 부터 선택 가능하게 설정
 									var now_utc = Date.now()
 									var timeOff = new Date().getTimezoneOffset()*60000;
 									var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
