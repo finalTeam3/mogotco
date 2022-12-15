@@ -43,7 +43,7 @@
 ## 5. 프로젝트 개발 환경 및 수행 도구
 |**협업도구**|**database&framework&개발도구**|**backend**|**frontend**|**API**|
 |---|---|---|---|---|
-|구들닥스|MYSQL(8.0.17)|java(11.0.15.1)|js|CLOVA OCR|
+|구닥스|MYSQL(8.0.17)|java(11.0.15.1)|js|CLOVA OCR|
 |네이버카페|Spring Boot(2.7.4)|apache-tomcat(8.5.27)|Html5|CLOVA ChatBot|
 |ZOOM|MyBatis(2.2.2)|NCP(Naver Cloud Platform)|CSS|Import|
 |Git|Eclipse(4.18.0)||jQuery(3.2.1)|kakao I Connect API|
