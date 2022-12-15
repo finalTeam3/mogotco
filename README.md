@@ -161,7 +161,7 @@
 - import 결제 기능 ( 기능), 포인트 사용
 
 ## 6. 멘토링 진행 
-### 6.1 멘토링 진행 전 메일 알림<br><
+### 6.1 멘토링 진행 전 메일 알림<br>
 - 멘토링을 진행하기 전에 멘티가 구매한 멘토링의 날짜, 시간 정보에 맞추어 전날 아침 8시와 당일로 넘어가는 자정에 알림 메일을 보내주어 멘티가 멘토링 참여에 늦이 않도록 도와줍니다.<br><br>
 <img src="https://user-images.githubusercontent.com/80161307/207865692-a0bb8193-f4cc-4929-bc3a-1b4182ec632e.gif" width="500" height="450"><br>
 [전날 아침8시에 알림 메일이 도착한 모습]<br><br>
@@ -169,10 +169,13 @@
 [당일로 넘어가는 자정에 알림 메일이 도착한 모습]<br><br>
 
 ### 6.2 Kakao i connect API를 사용한 화상회의 멘토링 진행<br>
+> 화상회의 멘토링 소개 
 - kakao i-connect live API 를 활용한 진행방식 : 카카오에서 제공해주는 API의 자바스크립트 코드를 활용하여 해당 멘토링의 룸ID에 각각의 시간에 해당하는 멘토링옵션 아이디값을 넣어주어 해당 시간의 고유의 룸이 생기는 방식으로 수업을 진행할 수 있게 됩니다.<br><br>[📌MOGOTCO 멘토링 서비스 페이지 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringstart.html#L206)<br> [📌해당 Controller  코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L706)<br><br>
-	- 멘토링 시작 버튼을 클릭하여 상대방과 서로 화상채팅을 할 수 있고 멘토링 종료 버튼을 클릭하여 화상채팅을 종료할 수 있습니다.<br><br>
+- 멘토링 시작 버튼을 클릭하여 상대방과 서로 화상채팅을 할 수 있고 멘토링 종료 버튼을 클릭하여 화상채팅을 종료할 수 있습니다.<br><br>
 <img src="https://user-images.githubusercontent.com/80161307/207506925-4f7e3e58-5a49-43d8-ba4f-1d29f5eb2591.gif" width="500" height="450"></img><br><br>
-	- 화면공유하기 버튼을 클릭하면 자신이 원하는 화면을 선택하여 공유할 수 있고, 공유된 화면이 자신과 상대방에게 보여집니다. 그리고 상대방이 공유한 화면도 볼 수 있습니다. 화면공유 중지버튼을 클릭하면 화면 공유가 종료됩니다.<br><br>
+
+>화상회의 멘토링 추가 기능 
+- 화면공유하기 버튼을 클릭하면 자신이 원하는 화면을 선택하여 공유할 수 있고, 공유된 화면이 자신과 상대방에게 보여집니다. 그리고 상대방이 공유한 화면도 볼 수 있습니다. 화면공유 중지버튼을 클릭하면 화면 공유가 종료됩니다.<br><br>
 <img src="https://user-images.githubusercontent.com/80161307/207507068-830f3a61-c913-4680-a1c7-f91b5da03c21.gif" width="500" height="450"></img>
 <br>[멘티들이 화면을 공유한 모습]
 
