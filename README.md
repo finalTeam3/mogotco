@@ -1,15 +1,17 @@
 # MOGOTCO
-# 팀정보 + 시연영상
+<img  src="https://user-images.githubusercontent.com/83347312/207089142-e9d840c9-f774-49a1-9e94-0096fd6eea14.png" width="60%" height="100%">
+
+---
+> 팀정보 + 시연영상
 ## 팀이름 : MOGOTCO  
-  
+
 ## 팀원
-#### 팀장 : 조윤영
-#### 팀원 : 박성훈, 박혜정, 신동준  
+- 팀장 : 조윤영
+- 팀원 : 박성훈, 박혜정, 신동준  
 
 ## 시연영상
-#### url주소
-<br/>
-<br/>
+- url주소
+
 
 # 프로젝트 정보
 ## 1. 프로젝트 주제
@@ -71,14 +73,18 @@
 
 # 프로젝트 내용
 주요기능들은 반응형 웹 화면까지 같이 보여주는+ 각자 gif에 어떤 기능 보여주고 싶은지 생각해오기
-1. 회원로그인 - 로그인기능, 회원가입기능, 소셜 로그인기능, 비회원일때 멘토리스트까지만 볼 수 있는 기능, 마이페이지 기능
+## 1. 회원로그인  
+- 로그인기능, 회원가입기능, 소셜 로그인기능, 비회원일때 멘토리스트까지만 볼 수 있는 기능, 마이페이지 기능
 
-2. 멘토링 검색-전체검색기능, 상(분야별)하위 메뉴바(시간별, 대면종류별, 수강후기순, 별점 순, 사후서비스 유무), 문의하기기능
+## 2. 멘토링 검색
+- 전체검색기능, 상(분야별)하위 메뉴바(시간별, 대면종류별, 수강후기순, 별점 순, 사후서비스 유무), 문의하기기능
 멘토들은 크롤링을 통해 가지고옴
 
-3. 멘토링 상세 - 멘토링 공유, 오프라인일 경우 지도+마커 뿌려주기, 시간 선택하기<br>
-	- 해당 멘토링의 제목 옆에 있는 카카오톡 이모티콘을 클릭하여 원하는 사람에게 카카오톡으로 공유하여 정보를 제공할 수 있습니다.<br><br>
-	- 비대면 멘토링 일 시 대면 장소를 클릭하면 kakap map API를 활용하여 주소와 마커를 보여줍니다.
+## 3. 멘토링 상세
+멘토링 공유, 오프라인일 경우 지도+마커 뿌려주기, 시간 선택하기<br>
+
+- 해당 멘토링의 제목 옆에 있는 카카오톡 이모티콘을 클릭하여 원하는 사람에게 카카오톡으로 공유하여 정보를 제공할 수 있습니다.<br><br>
+- 비대면 멘토링 일 시 대면 장소를 클릭하면 kakap map API를 활용하여 주소와 마커를 보여줍니다.
 멘토링 등록시에 데이터베이스에 저장되는 주소를 kakao map API 제공 해주는 자바스크립트 코드의 지도의 주소가 출력되는 부분에  Controller에서 전달 된 데이터를 Thymeleaf를 사용하여 추가 해주어 해당 대면 멘토링의 주소가 화면에 보여지도록 합니다.<br><br>
 [📌대면 멘토링 장소 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringdetail.html#L331)<br>
 [📌해당 Controller 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L670)<br><br>
@@ -89,11 +95,40 @@
 <img src="https://user-images.githubusercontent.com/80161307/207608196-0871bfa4-8034-4f6c-a9e4-5e7ad581ddda.gif" width="500" height="400"></img>
 
 
-4. 멘토 - 명함 및 사원증 회사 인증 후 등록(ocr) 및 수정 등록 
+## 4. 멘토  
+> 명함 및 사원증 회사 인증 후 등록(ocr) 및 수정 등록 
+ 
 
-6. 구매 - import 결제 기능 ( 기능), 포인트 사용
+### 4.1 OCR 연동 프로세스
+<img width="2085" alt="ocr4" src="https://user-images.githubusercontent.com/86956783/207764586-81d4a5e6-8800-4429-9e83-820202679ac9.png">
+- ajax 비동기 요청 
 
-7. 멘토링 진행 - kako i-connect API를 사용하여 영상으로 멘토링 진행<br><br>
+  - 화면단에서 사용자가 명함 이미지를 업로드하면 파일이 formdata에 담겨지고 명함 등록하는 post 요청을 AjaxController에 비동기로 전송.
+
+<br>
+
+- 파일 저장 및 ocr 시스템 실행 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L121)
+  
+  - AjaxController에서는 화면단에서 넘어온 파일을 Util클래스의 메서드를 통해 사용자 페이지와 관리자 페이지에 동시에 저장. 그 후 시스템에 저장된 명함이미지를 OcrService의 ocrresult 메서드의 파라미터로 넘겨주면 json 객체가 ajax의 url을 통해 화면단으로 반환.
+
+<br>
+
+- OCR 실행 결과 추출 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentor/mentorregister.html#L132)
+
+  - AjaxController에서 화면단으로 json 객체를 보내어 js의 display함수를 통해 파싱을 한 뒤 각각의 input창에 id값을 할당하여 데이터를 입력.
+
+<br>
+
+### 4.2. 실제 작동 화면
+<img  src="https://user-images.githubusercontent.com/86956783/207747364-0f631d52-d692-41a8-9fd4-4df183096ccb.gif" width="70%">
+
+<br>
+
+## 5. 구매 
+- import 결제 기능 ( 기능), 포인트 사용
+
+## 6. 멘토링 진행 
+- kako i-connect API를 사용하여 영상으로 멘토링 진행<br><br>
 [![참조](https://user-images.githubusercontent.com/80161307/207393712-3f982b3d-5964-439b-8530-dddd732be71e.JPG)](https://connectlive.kakaoi.ai/ "카카오 아이커넥트 바로가기")<br>
 	- kakao i-connect live API 를 활용한 진행방식 : 카카오에서 제공해주는 API의 자바스크립트 코드를 활용하여 해당 멘토링의 룸ID에 각각의 시간에 해당하는 멘토링옵션 아이디값을 넣어주어 해당 시간의 고유의 룸이 생기는 방식으로 수업을 진행할 수 있게 됩니다.<br><br>[📌MOGOTCO 멘토링 서비스 페이지 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringstart.html#L206)<br> [📌해당 Controller  코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L706)<br><br>
 	- 멘토링 시작 버튼을 클릭하여 상대방과 서로 화상채팅을 할 수 있고 멘토링 종료 버튼을 클릭하여 화상채팅을 종료할 수 있습니다.<br><br>
@@ -102,13 +137,32 @@
 <img src="https://user-images.githubusercontent.com/80161307/207507068-830f3a61-c913-4680-a1c7-f91b5da03c21.gif" width="500" height="450"></img>
 <br>[멘티들이 화면을 공유한 모습]
 
-8. 후기 및 평점 - 리뷰쓰기 및 보는 기능 & 별점 추가
+## 7. 후기 및 평점 
+- 리뷰쓰기 및 보는 기능 & 별점 추가
 
-9. 문의하기 - 챗봇
+## 8. 문의하기 
+- 챗봇 (NCP CLOVA의 chatbot custom API)
+  - CLOVA Chatbot 빌더에서 설정한 도메인의 학습결과를 기반으로 질의 응답을 제공하는 API를 이용한 고객 문의 대응
 
-10. 관리자로그인 - 멘토 승인 기능, 멘토권한 박탈 기능, 사용자데이터분석 차트 (분야별, 온오프라인)
+### 8.1. chatbot custom API
+-  NCP CLOVA의 chatbot custom API는 CLOVA Chatbot 빌더에서 설정한 도메인의 학습결과를 기반으로 상대방의 질문에 대한 응답을 제공하는 API
+
+### 8.2. 개발 프로세스
+> - 네이버 클라우드 연동 관련 설정
+>  
+> - Chatbot 빌더를 이용하여 대화시나리오 작성한 후 인증키를 발급받고 ChatbotController에 Secret Key를 입력한 후 네이버 api 연동
+> 
+> - 웹소켓
+>   - 메세지를 주고 받기 위해 StomWebSocketConfig.java에서 웹소켓 설정한 후 화면단에서 javascript로 통해 챗봇 구현
+
+### 8.3. 실제 작동 화면
+<img  src="https://user-images.githubusercontent.com/86956783/207747686-3b6db1f8-0179-420b-b36d-5bd0205dd6dd.gif" width="70%">
+
+
+## 9. 관리자로그인 
+- 멘토 승인 기능, 멘토권한 박탈 기능, 사용자데이터분석 차트 (분야별, 온오프라인)
 <br/>
 <br/>
 
-# 트러블 슈팅
+# 트러블 슈팅💥
 각자 트러블 슈팅 올리고 싶은거 최대한 정리해서 오기 => 일단 팀적으로전체다 트러블 슈팅을 적고 나중에 포크를 해서 각자 트러블만 남겨두는 걸로!
