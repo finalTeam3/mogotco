@@ -80,7 +80,7 @@
 > 명함 및 사원증 회사 인증 후 등록(OCR) 및 수정 등록 
 
 ### 4.1 OCR 연동 프로세스
-
+<img width="2085" alt="ocr4" src="https://user-images.githubusercontent.com/86956783/207764586-81d4a5e6-8800-4429-9e83-820202679ac9.png">
 - ajax 비동기 요청 
 
   - 화면단에서 사용자가 명함 이미지를 업로드하면 파일이 formdata에 담겨지고 명함 등록하는 post 요청을 AjaxController에 비동기로 전송.
@@ -89,7 +89,7 @@
 
 - 파일 저장 및 ocr 시스템 실행 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L121)
   
-  - AjaxController에서는 화면단에서 넘어온 파일을 Util클래스의 메서드를 통해 사용자 페이지와 관리자 페이지에 동시에 저장. 그 후 시스템에 저장된 명함이미지를 ocrservice의 ocrresult 메서드의 파라미터로 넘겨주면 json 객체가 ajax의 url을 통해 화면단으로 반환.
+  - AjaxController에서는 화면단에서 넘어온 파일을 Util클래스의 메서드를 통해 사용자 페이지와 관리자 페이지에 동시에 저장. 그 후 시스템에 저장된 명함이미지를 OcrService의 ocrresult 메서드의 파라미터로 넘겨주면 json 객체가 ajax의 url을 통해 화면단으로 반환.
 
 <br>
 
@@ -139,3 +139,15 @@
 
 # 트러블 슈팅💥
 각자 트러블 슈팅 올리고 싶은거 최대한 정리해서 오기 => 일단 팀적으로전체다 트러블 슈팅을 적고 나중에 포크를 해서 각자 트러블만 남겨두는 걸로!
+
+- 박성훈
+
+
+
+<details>
+<summary>박성훈</summary>
+<div markdown="1">
+
+
+</div>
+</details>
