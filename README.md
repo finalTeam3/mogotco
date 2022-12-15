@@ -1,8 +1,6 @@
 # MOGOTCO
 <img  src="https://user-images.githubusercontent.com/83347312/207089142-e9d840c9-f774-49a1-9e94-0096fd6eea14.png" width="60%" height="100%">
 
----
-> 팀정보 + 시연영상
 ## 팀이름 : MOGOTCO  
 
 ## 팀원
@@ -119,7 +117,7 @@
 <br>
 
 ### 4.2. 실제 작동 화면
-<img  src="https://user-images.githubusercontent.com/86956783/207747364-0f631d52-d692-41a8-9fd4-4df183096ccb.gif" width="70%">
+<img  src="https://user-images.githubusercontent.com/86956783/207822347-4015fd7a-0170-45ed-af24-71f20c0fc1fd.gif" width="90%">
 
 <br>
 
@@ -155,7 +153,7 @@
 >   - 메세지를 주고 받기 위해 StomWebSocketConfig.java에서 웹소켓 설정한 후 화면단에서 javascript로 통해 챗봇 구현
 
 ### 8.3. 실제 작동 화면
-<img  src="https://user-images.githubusercontent.com/86956783/207747686-3b6db1f8-0179-420b-b36d-5bd0205dd6dd.gif" width="70%">
+<img  src="https://user-images.githubusercontent.com/86956783/207822016-45fce848-5a00-4410-b81e-d94ee1776b1f.gif" width="70%">
 
 
 ## 9. 관리자로그인 
