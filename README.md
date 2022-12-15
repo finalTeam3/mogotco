@@ -66,7 +66,43 @@
 
 # 프로젝트 내용
 주요기능들은 반응형 웹 화면까지 같이 보여주는+ 각자 gif에 어떤 기능 보여주고 싶은지 생각해오기
-1. 회원로그인 - 로그인기능, 회원가입기능, 소셜 로그인기능, 비회원일때 멘토리스트까지만 볼 수 있는 기능, 마이페이지 기능
+## 1. 로그인 및 회원가입 기능 
+### 1.1 회원가입
+> 메인기능소개
+- [AJAX] 아이디 중복 확인 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L104)
+  - 화면에서 넘겨준 ID를 AjaxController에서 중복체크 후 결과값을 화면으로 넘겨줌.
+- [jQuery] 비밀번호 일치 여부 확인 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L26)
+  - keyup 함수를 사용해 타이핑이 시작할때부터 일치 여부를 체크함
+- 본인인증기능 (이메일)
+  - [JavaScript] 메일 정규식 검증, 유효시간 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L53)
+  - [AJAX] 메일주소를 Controller로 넘겨줌 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L70)
+  - [JavaMailSender] 메일 발송 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/UserController.java#L164)
+> 실제 작동 화면
+- 아이디 중복 확인, 비밀번호 일치여부확인
+![아이디,비밀번호](https://user-images.githubusercontent.com/111735748/207771152-d426c9a8-0edd-47db-986e-1ef4ece2e127.gif)
+- 메일 인증 기능
+![이메일인증](https://user-images.githubusercontent.com/111735748/207772832-fb18b1a5-af24-4a57-97bf-89912e3797ff.gif)
+
+### 1.2 소셜로그인
+> 메인기능소개
+- [소셜 로그인 API] 카카오,깃허브 API를 호출해 인가코드를 SNS 서버로부터 받아옴 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/login.html#L103)
+- [KakaologinAPI Service] 인가코드로 Access Token을 받아오고, Access Token으로 다시 유저정보를 받아옴 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/service/KakaologinAPI.java#L19)
+- [SNSLoginController] Service가 받아온 정보를 가져와서 로그인 처리 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/SNSLoginController.java#L34)
+> 실제 작동 화면
+![소셜로그인](https://user-images.githubusercontent.com/111735748/207778285-825d5081-c64d-45d1-97b1-7f07f90bba96.gif)
+
+### 1.3 마이페이지
+> 메인기능소개
+- [JavaScript] 회원 정보 수정 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/mypage.html#L143)
+> 실제 작동 화면
+![마이페이지](https://user-images.githubusercontent.com/111735748/207809305-a8a313dc-3d16-4a1a-854b-350f0cb2480c.gif)
+
+### 1.4 비회원시 접근 가능 페이지
+> 메인기능소개
+- [Controller] 비회원 판단 후 접근가능한 경로 따로 설정 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentorController.java#L72)
+> 실제 작동 화면
+![비회원](https://user-images.githubusercontent.com/111735748/207810951-837d9423-cdee-4596-bfca-65dbaa08f097.gif)
+
 
 2. 멘토링 검색-전체검색기능, 상(분야별)하위 메뉴바(시간별, 대면종류별, 수강후기순, 별점 순, 사후서비스 유무), 문의하기기능
 멘토들은 크롤링을 통해 가지고옴
