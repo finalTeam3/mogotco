@@ -249,3 +249,70 @@
 </ul>
 <div>
 </details>
+
+
+<details>
+<summary>박성훈</summary>
+<div markdown="1">
+
+
+### OCR연동을 위해 Ajax로 이미지를 업로드하는 과정에서 FormData 관련 문제
+- 해당 프로젝트에서는 멘토의 신뢰성을 검증하기 위한 방법 중 하나로 OCR 기술을 통해 명함 내의 직급, 회사명 데이터를 인식하여 추출하는 방식을 사용.
+- 이를 위해 화면단에서 명함 이미지만 Formdata객체에 담아서 AjaxController로 보내는 과정에서 ajax 내의 success함수가 실행되지 않는 문제가 발생
+  
+<details>
+<summary>기존 코드</summary>
+<div markdown="1">
+
+```javascript
+	$.ajax({
+		type : "POST",
+		url : "/ocrresult",
+		processData : false,
+		contentType : false,
+	 	data: formData,
+		success : function(data) {
+			display(data);
+		}
+	});
+```
+
+</div>
+</details>
+
+> 타임리프 경로 처리와 FormData 사용법 미숙으로 인한 문제였으며 button의 onclick 속성을 th 걸었기때문에 ajax에서 전송시 작성하는 url에도 그에 맞는 형식으로 작성하고 button의 type 속성을 정의해주고 ajax로 다시 받을 dataType을 정의하여 해결. [참고자료](https://myeongdev.tistory.com/48)
+
+<details>
+<summary>개선 코드</summary>
+<div markdown="1">
+
+```javascript
+$.ajax({
+		type : "POST",
+		url : "[[@{/ocrresult}]]",
+		processData : false,
+		contentType : false,
+	 	data: formData,
+	 	dataType : "JSON",
+	 	success: function(obj) {
+			display(obj);	
+	 	}
+	});
+```
+
+</div>
+</details>
+<br>
+
+
+### 데이터 insert 작업 중 발생한 쿼리 오류
+- 개발을 거의 마무리 한 후 데이터를 추가로 insert하기 위한 작업 중 문제가 발생.
+- 해당 프로젝트에는 멘토가 승인된 멘토와 승인되지 않은 멘토로 분류가 되는데 사용자 페이지에서 멘토 신청단계를 완료하면 우선 승인되지 않은 멘토로 분류가 됨.
+- 이 때 승인 되지 않은 멘토는 관리자에 의해 승인처리가 되기 때문에 신청단계에서는 관리자 데이터가 insert되지 않도록 input창을 만들고 value값을 넣지 않음.
+- 당연히 null값이 들어갔을거라고 생각했고 db에도 데이터가 안 들어간게 보여서 그대로 넘어갔지만 mentor 테이블에 미승인 멘토 데이터를 insert하는 과정에서 관리자 데이터 null값을 넣어서 Null not allowed 에러가 발생.
+> 관리자 칼럼은 NOT NULL로 정의되어 있었고, inset문에 null대신 ''(빈 문자열 또는 공백)을 넣어 해결함. 
+
+- 기본적으로 ''을 입력하면 null 처리하는 ORACLE과 달리 My SQL은 null은 null대로 ''은 공백대로 처리되기 때문에 DB마다 NULL 처리에 있어서 약간의 차이가 있으므로 확인해야 함.
+
+</div>
+</details>
