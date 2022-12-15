@@ -206,3 +206,29 @@
 
 # 트러블 슈팅💥
 각자 트러블 슈팅 올리고 싶은거 최대한 정리해서 오기 => 일단 팀적으로전체다 트러블 슈팅을 적고 나중에 포크를 해서 각자 트러블만 남겨두는 걸로!
+1. 메일 알람 기능
+- 문제 : Only no-arg methods may be annotated with @Scheduled 에러 발생
+- 해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈
+
+2. 마이페이지 탈퇴 기능
+- 문제 : 탈퇴버튼 클릭시 modal을 사용했는데 confirm이 아니라 true 값을 전달하려면 confirm, cancel 기능을 코딩해야 함
+- 해결 : 코딩을 전부 해야하나 했는데 버튼에 id를 부여해 해당 버튼을 눌렀을 때 기능이 작동하게 함
+<details>
+<summary>박혜정</summary>
+<div markdown="1">
+1. 메일 알람 기능
+<ul>
+<li>문제 : 멘토링 날짜가 다가왔을 때 알려줄 수 있는 기능을 넣고 싶음</li>
+<li>해결 : 배웠던 Scheduler를 사용해 매일 정해진 시간에 멘토링 날짜가 다가온 사람들에게 메일을 보내줄 수 있다면 좋을 것 같다고 생각함</li>
+  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
+  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+</ul>
+2. 마이페이지 탈퇴 기능
+<ul>
+<li>문제 : 탈퇴 버튼을 누르면 modal이 떠야 하는데 안 뜸</li>
+<li>해결 : 기존에 정보수정 버튼을 누르면 modal이 뜨게 만들어둔 상태였기 때문에 기존 modal 때문이라고 생각했는데 출력값을 찍다보니 modal이 뜨기 전 기능이 실행되어 창이 이동되어 modal을 만날 수 없었던 것이라 함수를 추가해 기능 실행 전에 뜨게 함</li>
+    <ul><li>문제 발생 : confirm이 아니라 true 값을 전달하려면 confirm, cancel 기능을 코딩해야 함</li>
+    <li>해결 : 코딩을 전부 해야하나 했는데 버튼에 id를 부여해 해당 버튼을 눌렀을 때 기능이 작동하게 함</li></ul>
+</ul>
+<div>
+</details>
