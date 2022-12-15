@@ -109,8 +109,17 @@
 ![비회원](https://user-images.githubusercontent.com/111735748/207810951-837d9423-cdee-4596-bfca-65dbaa08f097.gif)
 
 ## 2. 멘토링 검색
-- 전체검색기능, 상(분야별)하위 메뉴바(시간별, 대면종류별, 수강후기순, 별점 순, 사후서비스 유무), 문의하기기능
-멘토들은 크롤링을 통해 가지고옴
+### 2.1 검색 기능(카테고리별, 필터별, 텍스트별)
+> 메인 기능 소개
+- [Controller] 카테고리, 필터, 텍스트의 유무를 check하는 class를 만들어 유저가 원하는 검색에 가까워지도록 만들어줌. 각각의 default controller를 만들어준 다음 멘토링 페이지 안에서 각각의 조건에 맞게 순환됨.[📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L71)
+- [SQL]멘토링의 검색과 관련된 query문을 정적으로 뽑음.(동적이 아닌 정적으로 뽑은 이유는 전체 검색도 하나의 controller로 동작하게 만들어주고 싶었기 때문.)[📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringmapper.xml#L17)
+> 실제 작동 화면
+
+### 2.2 페이징 처리
+> 메인 기능 소개
+- [SQL]LIMIT를 사용하여 한 페이지당 6개의 멘토링이 검색되도록 설정. [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringmapper.xml#L17)
+- [Controller] 검색에서 사용하였던 controller함수를 이용하여 뿌려줌. [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L3467)
+> 실제 작동 화면
 
 ## 3. 멘토링 상세
 ### 3.1 멘토링 공유 기능
@@ -163,7 +172,24 @@
 <br>
 
 ## 5. 구매 
-- import 결제 기능 ( 기능), 포인트 사용
+### 5.1 포인트 사용
+> 메인 기능 소개
+- [JAVASCRIPT] session의 user정보를 통해 user의 point를 불러온 후 javascript를 통해 input창에 user이 쓰고 싶은 point에 따라 총 가격에 바로 반영되도록 함. [📌코드확인 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L120)
+> 실제 작동 화면
+
+### 5.2 쿠폰 사용
+> 메인 기능 소개
+- [AJAX] session의 user의 보유 coupon여부를 ajax를 통해서 '쿠폰 사용하기'를 클릭했을 때 가져오도록 함. [📌코드확인 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L193)
+> 실제 작동 화면
+
+### 5.3 결제 기능
+> 메인 기능 소개
+- [Controller] 비회원으로 멘토링 상세 페이지까지 볼 수 있고 구매는 로그인 이후에 가능하도록 설정. 따라서 user의 session정보 유무를 판단해줌. [📌코드확인 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/PurchaseController.java#L66)
+- [iamport API] 실제 구매와 같은 환경을 구현해보기 위해 kg이니시스에서 제공해준 구매 api를 사용함. javascript를 이용해서 함수를 구현. [📌코드확인 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L466)
+> 실제 작동 화면
+
+- [Controller] 구매 성공 후 sql에 필요한 정보들을 넣고 point및, 쿠폰, 멘토링의 멤버수의 변화를 controller를 통해서 구현. [📌코드확인 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L466)
+> 실제 작동 화면
 
 ## 6. 멘토링 진행 
 ### 6.1 멘토링 진행 전 메일 알림<br>
@@ -222,7 +248,6 @@
 <br/>
 
 # 트러블 슈팅💥
-각자 트러블 슈팅 올리고 싶은거 최대한 정리해서 오기 => 일단 팀적으로전체다 트러블 슈팅을 적고 나중에 포크를 해서 각자 트러블만 남겨두는 걸로!
 1. 메일 알람 기능
 - 문제 : Only no-arg methods may be annotated with @Scheduled 에러 발생
 - 해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈
@@ -230,6 +255,50 @@
 2. 마이페이지 탈퇴 기능
 - 문제 : 탈퇴버튼 클릭시 modal을 사용했는데 confirm이 아니라 true 값을 전달하려면 confirm, cancel 기능을 코딩해야 함
 - 해결 : 코딩을 전부 해야하나 했는데 버튼에 id를 부여해 해당 버튼을 눌렀을 때 기능이 작동하게 함
+<details>
+<summary>조윤영</summary>
+<div markdown="1">
+
+
+
+
+
+> 타임리프 경로 처리와 FormData 사용법 미숙으로 인한 문제였으며 button의 onclick 속성을 th 걸었기때문에 ajax에서 전송시 작성하는 url에도 그에 맞는 형식으로 작성하고 button의 type 속성을 정의해주고 ajax로 다시 받을 dataType을 정의하여 해결. [참고자료](https://myeongdev.tistory.com/48)
+
+<details>
+<summary>개선 코드</summary>
+<div markdown="1">
+
+```javascript
+$.ajax({
+		type : "POST",
+		url : "[[@{/ocrresult}]]",
+		processData : false,
+		contentType : false,
+	 	data: formData,
+	 	dataType : "JSON",
+	 	success: function(obj) {
+			display(obj);	
+	 	}
+	});
+```
+
+</div>
+</details>
+<br>
+
+
+### 데이터 insert 작업 중 발생한 쿼리 오류
+- 개발을 거의 마무리 한 후 데이터를 추가로 insert하기 위한 작업 중 문제가 발생.
+- 해당 프로젝트에는 멘토가 승인된 멘토와 승인되지 않은 멘토로 분류가 되는데 사용자 페이지에서 멘토 신청단계를 완료하면 우선 승인되지 않은 멘토로 분류가 됨.
+- 이 때 승인 되지 않은 멘토는 관리자에 의해 승인처리가 되기 때문에 신청단계에서는 관리자 데이터가 insert되지 않도록 input창을 만들고 value값을 넣지 않음.
+- 당연히 null값이 들어갔을거라고 생각했고 db에도 데이터가 안 들어간게 보여서 그대로 넘어갔지만 mentor 테이블에 미승인 멘토 데이터를 insert하는 과정에서 관리자 데이터 null값을 넣어서 Null not allowed 에러가 발생.
+> 관리자 칼럼은 NOT NULL로 정의되어 있었고, inset문에 null대신 ''(빈 문자열 또는 공백)을 넣어 해결함. 
+
+- 기본적으로 ''을 입력하면 null 처리하는 ORACLE과 달리 My SQL은 null은 null대로 ''은 공백대로 처리되기 때문에 DB마다 NULL 처리에 있어서 약간의 차이가 있으므로 확인해야 함.
+
+</div>
+</details>
 <details>
 <summary>박혜정</summary>
 <div markdown="1">
