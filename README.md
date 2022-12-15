@@ -114,6 +114,7 @@
 
 ## 3. 멘토링 상세
 ### 3.1 오프라인일 경우 지도+마커 뿌려주기<br>
+>대면 멘토링을 진행을 위한 주소 확인
 - 해당 멘토링의 제목 옆에 있는 카카오톡 이모티콘을 클릭하여 원하는 사람에게 카카오톡으로 공유하여 정보를 제공할 수 있습니다.<br><br>
 - 비대면 멘토링 일 시 대면 장소를 클릭하면 kakap map API를 활용하여 주소와 마커를 보여줍니다.
 멘토링 등록시에 데이터베이스에 저장되는 주소를 kakao map API 제공 해주는 자바스크립트 코드의 지도의 주소가 출력되는 부분에  Controller에서 전달 된 데이터를 Thymeleaf를 사용하여 추가 해주어 해당 대면 멘토링의 주소가 화면에 보여지도록 합니다.<br><br>
@@ -122,6 +123,7 @@
 <img src="https://user-images.githubusercontent.com/80161307/207608178-e8814250-3b57-4ab2-9f74-d2981b80b9f6.gif" width="500" height="450"></img>
 
 ### 3.2 시간 선택하기<br>
+> 남은 인원을 확인하며 시간 선택
 - Controller를 통해 받아온 데이터들을 Thymeleaf를 사용하여 시간별로 남은 인원을 화면에서 확인할 수 있게 하였습니다. 또, Thymeleaf 조건문을 활용하여 시간별  구매 가능한 멘토링 인원이 남아 있다면 원하는 시간을 선택할 수 있고, 없다면 해당 시간 버튼이 사라지게 하였습니다.<br><br>
   [📌인원, 시간 선택버튼 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringdetail.html#L242)<br>
   [📌해당 Controller 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L670)<br><br>
@@ -169,7 +171,7 @@
 [당일로 넘어가는 자정에 알림 메일이 도착한 모습]<br><br>
 
 ### 6.2 Kakao i connect API를 사용한 화상회의 멘토링 진행<br>
-> 화상회의 멘토링 소개 
+> 화상회의 멘토링 진행 
 - kakao i-connect live API 를 활용한 진행방식 : 카카오에서 제공해주는 API의 자바스크립트 코드를 활용하여 해당 멘토링의 룸ID에 각각의 시간에 해당하는 멘토링옵션 아이디값을 넣어주어 해당 시간의 고유의 룸이 생기는 방식으로 수업을 진행할 수 있게 됩니다.<br><br>[📌MOGOTCO 멘토링 서비스 페이지 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringstart.html#L206)<br> [📌해당 Controller  코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L706)<br><br>
 - 멘토링 시작 버튼을 클릭하여 상대방과 서로 화상채팅을 할 수 있고 멘토링 종료 버튼을 클릭하여 화상채팅을 종료할 수 있습니다.<br><br>
 <img src="https://user-images.githubusercontent.com/80161307/207506925-4f7e3e58-5a49-43d8-ba4f-1d29f5eb2591.gif" width="500" height="450"></img><br><br>
