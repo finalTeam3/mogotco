@@ -100,7 +100,7 @@
 <br>
 
 ### 4.2. 실제 작동 화면
-![ocr 실제 작동 화면](https://user-images.githubusercontent.com/86956783/207747364-0f631d52-d692-41a8-9fd4-4df183096ccb.gif)
+<img  src="https://user-images.githubusercontent.com/86956783/207747364-0f631d52-d692-41a8-9fd4-4df183096ccb.gif" width="70%">
 
 <br>
 
@@ -129,7 +129,7 @@
 >   - 메세지를 주고 받기 위해 StomWebSocketConfig.java에서 웹소켓 설정한 후 화면단에서 javascript로 통해 챗봇 구현
 
 ### 8.3. 실제 작동 화면
-![챗봇 실제 작동 화면](https://user-images.githubusercontent.com/86956783/207747686-3b6db1f8-0179-420b-b36d-5bd0205dd6dd.gif)
+<img  src="https://user-images.githubusercontent.com/86956783/207747686-3b6db1f8-0179-420b-b36d-5bd0205dd6dd.gif" width="70%">
 
 
 ## 9.  관리자로그인 
