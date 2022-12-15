@@ -48,7 +48,7 @@
 |ZOOM|MyBatis(2.2.2)|NCP(Naver Cloud Platform)|CSS|Import|
 |Git|Eclipse(4.18.0)||jQuery(3.2.1)|kakao I Connect API|
 |GitHub|JUnit(5.8.2)||AJAX|kakao map|
-|Gather Town|Spring Boot Maile Sender(2.7.5)||thymeleaf(3.0.15)|github login API|
+|Gather Town|Spring Boot Mail Sender(2.7.5)||thymeleaf(3.0.15)|github login API|
 |Erd Cloud|||BootStrap(4)|kakao login API
 |Notion||||kakao 공유하기|
 |Figma|
