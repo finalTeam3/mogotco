@@ -73,7 +73,7 @@
 
 3. 멘토링 상세 - 멘토링 공유, 오프라인일 경우 지도+마커 뿌려주기, 시간 선택하기<br>
 	- 해당 멘토링의 제목 옆에 있는 카카오톡 이모티콘을 클릭하여 원하는 사람에게 카카오톡으로 공유하여 정보를 제공할 수 있습니다.<br><br>
-	- 비대면 멘토링 일 시 대면 장소를 클릭하면 kakap map API를 활용하여 주소와 마커를 보여줍니다.`
+	- 비대면 멘토링 일 시 대면 장소를 클릭하면 kakap map API를 활용하여 주소와 마커를 보여줍니다.
 멘토링 등록시에 데이터베이스에 저장되는 주소를 kakao map API 제공 해주는 자바스크립트 코드의 지도의 주소가 출력되는 부분에  Controller에서 전달 된 데이터를 Thymeleaf를 사용하여 추가 해주어 해당 대면 멘토링의 주소가 화면에 보여지도록 합니다.<br><br>
 [📌대면 멘토링 장소 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringdetail.html#L331)<br>
 [📌해당 Controller 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L670)<br><br>
