@@ -33,8 +33,8 @@ public class SNSLoginController {
 	@RequestMapping("/kakaologin")
 	public Object kakaologin(Model model, String code, HttpSession session) throws Exception {
 		
-		// 카카오 api를 호출하여 인가 코드를 받아옴
-		model.addAttribute("center", dir+"kakaologin");
+		// 테스트 페이지
+//		model.addAttribute("center", dir+"kakaologin");
 //		System.out.println("code inga controller = " + code);
 		
 		// 받아온 인가코드를 다시 보내 엑세스 토큰을 받아옴
@@ -72,8 +72,8 @@ public class SNSLoginController {
 	@RequestMapping("/githublogin")
 	public String githublogin(Model model, String code, HttpSession session) throws Exception {
 		
-		// 깃허브 api를 호출하여 인가 코드를 받아옴
-		model.addAttribute("center", dir+"githublogin");
+		// 테스트 페이지
+//		model.addAttribute("center", dir+"githublogin");
 //		System.out.println("code inga controller = " + code);
 		
 		// 받아온 인가코드를 다시 보내 엑세스 토큰을 받아옴
