@@ -133,11 +133,22 @@
 <img src="https://user-images.githubusercontent.com/80161307/207507068-830f3a61-c913-4680-a1c7-f91b5da03c21.gif" width="500" height="450"></img>
 <br>[멘티들이 화면을 공유한 모습]
 
-8. 후기 및 평점 - 리뷰쓰기 및 보는 기능 & 별점 추가
+## 7. 후기 및 평점
+### 7.1 멘토링 후기 및 평점 남기기
+> 메인기능소개
+- [AJAX, CSS] 리뷰 작성 후 데이터 넘기기 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchasedetail.html#L287)
+> 실제 작동 화면
+![리뷰](https://user-images.githubusercontent.com/111735748/207826741-e06826bf-a948-4f3d-ba5b-c959e2d11140.gif)
+
 
 9. 문의하기 - 챗봇
 
-10. 관리자로그인 - 멘토 승인 기능, 멘토권한 박탈 기능, 사용자데이터분석 차트 (분야별, 온오프라인)
+## 10. 관리자페이지
+### 10.1 멘토 승인시 알림 기능
+> 메인기능소개
+- [JavaMailSender] 멘토 승인시 알림 메일 발송 [📌코드 확인](https://github.com/finalTeam3/mogotcoadmin/blob/master/src/main/java/com/mogotcoadmin/controller/MentorController.java#L103)
+> 실제 작동 화면
+![관리자](https://user-images.githubusercontent.com/111735748/207832595-864baa7a-0a1a-4633-af9c-7d356cbd2db1.gif)
 <br/>
 <br/>
 
