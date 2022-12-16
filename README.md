@@ -384,3 +384,24 @@ $.ajax({
 
 </div>
 </details>
+
+<summary>신동준</summary>
+<div markdown="1">
+1. 화상회의 기능
+<ul>
+<li>문제 : 카카오 아이커넥트 지속적인 접속 실패</li>
+<li>해결 : API에 대한 자바 스크립트 코드를 모두 넣어줬음에도 불구하고 계속 발급받은 아이디와 비밀번호로 접속이 불가능한 오류가 발생했다. 스크립트문을 header태그 부분에 넣어준 것이 문제였다. body 태그의 가장 끝에 넣어주니 문제가 해결 되었다. (DOM의 구조가 완료된 시점에서 실행)</li>
+</ul>
+
+2. 멘토링 등록 기능
+<ul>
+<li>문제 : 멘토링 등록에서 멘토링, 멘토링옵션에 해당하는 데이터 동시 insert</li>
+<li>해결 : [Controller 해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L713)와 같이 Controller에서 [mservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringmapper.xml#L83), [moservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringoptionmapper.xml#L17)를 활용하여 해결하였다.</li>
+
+3. 멘토링 등록 버튼
+<ul>
+<li>문제 : 멘토 승인시 보이는 등록 버튼을 만들기 위한 컨트롤러 에서의 userid 전달 문제</li>
+<li>해결 : 토링 페이지에서 유저의 정보를 받아오기 위한 기준인 userid를 Controller에서 받아올 수 가 없었다. 메인 페이지 session의 userid를 가지고 페이지로 이동하는 경로와 비 로그인시의 경로로 타임리프 조건을 활용하여 두가지로 나누어 해결하였다.</li>
+
+<div>
+</details>
