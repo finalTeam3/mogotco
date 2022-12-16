@@ -93,7 +93,7 @@
 - [KakaologinAPI Service] 인가코드로 Access Token을 받아오고, Access Token으로 다시 유저정보를 받아옴 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/service/KakaologinAPI.java#L19)
 - [SNSLoginController] Service가 받아온 정보를 가져와서 로그인 처리 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/SNSLoginController.java#L34)
 > 실제 작동 화면
-<img src="https://user-images.githubusercontent.com/111735748/207778285-825d5081-c64d-45d1-97b1-7f07f90bba96.gif" width="80%")
+<img src="https://user-images.githubusercontent.com/111735748/207778285-825d5081-c64d-45d1-97b1-7f07f90bba96.gif" width="80%">
 
 ### 1.3 마이페이지
 > 메인기능소개
