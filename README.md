@@ -387,7 +387,6 @@ $.ajax({
 
 <details>
 <summary>신동준</summary>
-<br>
 <div markdown="1">
 > 화상회의 기능
 - 문제 : 카카오 아이커넥트 지속적인 접속 실패
