@@ -398,7 +398,7 @@ $.ajax({
 2. 멘토링 등록 기능
 <ul>
 <li>문제 : 멘토링 등록에서 멘토링, 멘토링옵션에 해당하는 데이터 동시 insert</li>
-<li>해결 : Controller 해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L713)와 같이 Controller에서 [mservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringmapper.xml#L83), [moservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringoptionmapper.xml#L17)를 활용하여 해결하였다.</li>
+<li>해결 : [Controller 해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L713) 와 같이 Controller에서 [mservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringmapper.xml#L83) , [moservice.register](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/mybatis/mentoringoptionmapper.xml#L17) 를 활용하여 해결하였다.</li>
 </ul>
 
 3. 멘토링 등록 버튼
