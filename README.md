@@ -61,7 +61,7 @@
 <img width="3168" alt="모같코(MOGOTCO) (7)" src="https://user-images.githubusercontent.com/83347312/207788876-74d05230-a318-488b-b6b9-3a6e92bc2678.png" width="100%" height="80%">
 
 ## 7. WBS
-![WBS](https://user-images.githubusercontent.com/111735748/207835627-f960fa03-4f05-4ec5-b071-2571cc13fdd8.jpg)
+![WBS](https://user-images.githubusercontent.com/111735748/207998698-202243b4-7c9a-4430-93c4-21591ac3f9c1.png)
 
 ## 8. 데이터베이스 설계
 ![mogotco (4)](https://user-images.githubusercontent.com/83347312/206660375-1d1bb75e-1428-46f4-99ef-5ae8baf753ad.png)
