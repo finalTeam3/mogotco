@@ -385,6 +385,7 @@ $.ajax({
 </div>
 </details>
 
+<details>
 <summary>신동준</summary>
 <div markdown="1">
 1. 화상회의 기능
