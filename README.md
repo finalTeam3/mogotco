@@ -254,47 +254,36 @@
 2. 마이페이지 탈퇴 기능
 - 문제 : 탈퇴버튼 클릭시 modal을 사용했는데 confirm이 아니라 true 값을 전달하려면 confirm, cancel 기능을 코딩해야 함
 - 해결 : 코딩을 전부 해야하나 했는데 버튼에 id를 부여해 해당 버튼을 눌렀을 때 기능이 작동하게 함
+
 <details>
 <summary>조윤영</summary>
 <div markdown="1">
-
-
-
-
-
-> 타임리프 경로 처리와 FormData 사용법 미숙으로 인한 문제였으며 button의 onclick 속성을 th 걸었기때문에 ajax에서 전송시 작성하는 url에도 그에 맞는 형식으로 작성하고 button의 type 속성을 정의해주고 ajax로 다시 받을 dataType을 정의하여 해결. [참고자료](https://myeongdev.tistory.com/48)
-
-<details>
-<summary>개선 코드</summary>
-<div markdown="1">
-
-```javascript
-$.ajax({
-		type : "POST",
-		url : "[[@{/ocrresult}]]",
-		processData : false,
-		contentType : false,
-	 	data: formData,
-	 	dataType : "JSON",
-	 	success: function(obj) {
-			display(obj);	
-	 	}
-	});
-```
-
-</div>
-</details>
-<br>
-
-
-### 데이터 insert 작업 중 발생한 쿼리 오류
-- 개발을 거의 마무리 한 후 데이터를 추가로 insert하기 위한 작업 중 문제가 발생.
-- 해당 프로젝트에는 멘토가 승인된 멘토와 승인되지 않은 멘토로 분류가 되는데 사용자 페이지에서 멘토 신청단계를 완료하면 우선 승인되지 않은 멘토로 분류가 됨.
-- 이 때 승인 되지 않은 멘토는 관리자에 의해 승인처리가 되기 때문에 신청단계에서는 관리자 데이터가 insert되지 않도록 input창을 만들고 value값을 넣지 않음.
-- 당연히 null값이 들어갔을거라고 생각했고 db에도 데이터가 안 들어간게 보여서 그대로 넘어갔지만 mentor 테이블에 미승인 멘토 데이터를 insert하는 과정에서 관리자 데이터 null값을 넣어서 Null not allowed 에러가 발생.
-> 관리자 칼럼은 NOT NULL로 정의되어 있었고, inset문에 null대신 ''(빈 문자열 또는 공백)을 넣어 해결함. 
-
-- 기본적으로 ''을 입력하면 null 처리하는 ORACLE과 달리 My SQL은 null은 null대로 ''은 공백대로 처리되기 때문에 DB마다 NULL 처리에 있어서 약간의 차이가 있으므로 확인해야 함.
+1. 구매 기능
+<ul>
+<li>문제 : 결제는 되는 상황이지만 결제후의 정보들이 데이터베이스로 저장되지 않음.</li>
+<li>해결 : callback함수 부분에 결제 후 받아온 객체 정보와 구매 페이지에 있는 정보들을 끌고와서 location.href로 controller주소로 보내주었음. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L464)</li>
+</ul>
+2. point 기능
+<ul>
+<li>문제 : 분명히 html화면에서는 포인트가 잘 나오고 값이 빠진것도 보이는데 막상 결제로 넘어가면 포인트가 적용되지 않은 원래 멘토링 가격으로 값이 빠지는 것이었다. 즉 포인트 적용이 안된것이었음.</li>
+<li>해결 : 아래 코드와 같이 html text로 나오는 부분 따로, input값을 넣어주는 부분 따로 해서(hidden으로 뿌려줌) val()값으로 뿌려주었다. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L118)</li>
+  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
+  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+</ul>
+3. 쿠폰 기능
+<ul>
+<li>문제 : 멘토링 날짜가 다가왔을 때 알려줄 수 있는 기능을 넣고 싶음</li>
+<li>해결 : 배웠던 Scheduler를 사용해 매일 정해진 시간에 멘토링 날짜가 다가온 사람들에게 메일을 보내줄 수 있다면 좋을 것 같다고 생각함</li>
+  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
+  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+</ul>
+4. 검색 기능
+<ul>
+<li>문제 : 멘토링 날짜가 다가왔을 때 알려줄 수 있는 기능을 넣고 싶음</li>
+<li>해결 : 배웠던 Scheduler를 사용해 매일 정해진 시간에 멘토링 날짜가 다가온 사람들에게 메일을 보내줄 수 있다면 좋을 것 같다고 생각함</li>
+  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
+  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+</ul>
 
 </div>
 </details>
