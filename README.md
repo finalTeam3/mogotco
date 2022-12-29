@@ -261,12 +261,12 @@
 1. 구매 기능
 <ul>
 <li>문제 : 결제는 되는 상황이지만 결제후의 정보들이 데이터베이스로 저장되지 않음.</li>
-<li>해결 : callback함수 부분에 결제 후 받아온 객체 정보와 구매 페이지에 있는 정보들을 끌고와서 location.href로 controller주소로 보내주었음. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L464)</li>
+<li>해결 : callback함수 부분에 결제 후 받아온 객체 정보와 구매 페이지에 있는 정보들을 끌고와서 location.href로 controller주소로 보내주었음. [해결 코드 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L464)</li>
 </ul>
 2. point 기능
 <ul>
 <li>문제 : 분명히 html화면에서는 포인트가 잘 나오고 값이 빠진것도 보이는데 막상 결제로 넘어가면 포인트가 적용되지 않은 원래 멘토링 가격으로 값이 빠지는 것이었다. 즉 포인트 적용이 안된것이었음.</li>
-<li>해결 : 아래 코드와 같이 html text로 나오는 부분 따로, input값을 넣어주는 부분 따로 해서(hidden으로 뿌려줌) val()값으로 뿌려주었다. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L118)</li>
+<li>해결 : 아래 코드와 같이 html text로 나오는 부분 따로, input값을 넣어주는 부분 따로 해서(hidden으로 뿌려줌) val()값으로 뿌려주었다. [해결 코드 ](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L118)</li>
   <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
   <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
 </ul>
