@@ -273,10 +273,10 @@
 </ul>
 3. 쿠폰 기능
 <ul>
-<li>문제 : 멘토링 날짜가 다가왔을 때 알려줄 수 있는 기능을 넣고 싶음</li>
-<li>해결 : 배웠던 Scheduler를 사용해 매일 정해진 시간에 멘토링 날짜가 다가온 사람들에게 메일을 보내줄 수 있다면 좋을 것 같다고 생각함</li>
-  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
-  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+<li>문제 : purchase를 할 때 user의 coupon정보를 바로 불러올 수가 없음. 따라서 이를 purchase화면에서 coupon button을 눌렀을 때 ajax로 데이터를 가져오는 것으로 방법을 정하였다. 이때 ajax통신이 제대로 되지 않았었음.</li>
+<li>해결 : ajax controller에 보내줄 data 값을 url을 이용해서 붙여주지 않고 아래와 같이 data를 따로 넣어서 보내주었다.</li>
+  <ul><li>문제발생 : ajax controller을 이용해서 data를 Object의 형태로 받아오고 이 data들에서 우리가 쓸 column값들을 뽑아주는 작업이 제대로 되지 않았었음.</li>
+  <li>해결 : 코드의 주석으로 대체하겠다.[해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L192)</li></ul>
 </ul>
 4. 검색 기능
 <ul>
