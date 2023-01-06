@@ -255,6 +255,14 @@
 - 문제 : 탈퇴버튼 클릭시 modal을 사용했는데 confirm이 아니라 true 값을 전달하려면 confirm, cancel 기능을 코딩해야 함
 - 해결 : 코딩을 전부 해야하나 했는데 버튼에 id를 부여해 해당 버튼을 눌렀을 때 기능이 작동하게 함
 
+3. point & coupon 기능
+- 문제 : 사용하려는 point의 값과 coupon의 값들을 받아서 total price를 같이 계산하는 곳에 다양한 문제들이 있었음. 
+- 해결 : point나 coupon에 사용에 따른 가격 변화를 hidden으로 저장해둔 다음에 값이 변화할때마다 hidden의 값을 가져와서 값의 변화를 해결함 [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L118) 
+
+4. 검색 기능(검색기능에 대한 더 자세한 트러블 슈팅은 [yyboom](https://github.com/yyboom/mogotco) 참고
+- 문제 : 카테고리를 선택하고 검색어를 입력하고 type과 페이징 처리까지 같이 하니 어는 순간 특정한 이벤트에 따른 페이지의 순환이 잘 되지 않았음. 검색, 클릭에 따른 원하는 멘토링 아이템이 제대로 나오지 않음.
+- 해결 : pagaingcheck controller를 이용하여 현재 사용자가 어떤 카테고리를 클릭했는지, 텍스트를 입력했는지, 어떤 type을 골랐는지에 따라서 판단하여 각각 해당 controller에 보내주는 방식으로 해결하였음. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoring.html#L130)
+
 <details>
 <summary>조윤영</summary>
 <div markdown="1">
@@ -278,12 +286,12 @@
   <ul><li>문제발생 : ajax controller을 이용해서 data를 Object의 형태로 받아오고 이 data들에서 우리가 쓸 column값들을 뽑아주는 작업이 제대로 되지 않았었음.</li>
   <li>해결 : 코드의 주석으로 대체하겠다.[해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L192)</li></ul>
 </ul>
-4. 검색 기능
+4. 검색 기능(검색기능에 대한 더 자세한 트러블 슈팅은 [yyboom](https://github.com/yyboom/mogotco) 참고
 <ul>
-<li>문제 : 멘토링 날짜가 다가왔을 때 알려줄 수 있는 기능을 넣고 싶음</li>
-<li>해결 : 배웠던 Scheduler를 사용해 매일 정해진 시간에 멘토링 날짜가 다가온 사람들에게 메일을 보내줄 수 있다면 좋을 것 같다고 생각함</li>
-  <ul><li>문제발생 : Only no-arg methods may be annotated with @Scheduled 에러 발생</li>
-  <li>해결 : Scheduler가 parameter를 전달하지 않고 동작하기 때문에 발생한 에러, parameter를 전달하지 않고 단순히 함수만 정해진 시간에 실행하게 바꿈</li></ul>
+<li>문제 : 처음에 멘토링 상품이 있는 페이지를 볼 때 처음부터 특정 카테고리의 상품들이 보여지는 현상이 발생함.</li>
+<li>해결 : 전체 상품을 꺼내오는 query문을 작성해준 후 멘토링 리스트가 있는 페이지를 처음 들어갈때는 전체 상품이 배열되게끔 바꿔주었다. 이때 전체와 카테고리를 구분하는 변수로 [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoring.html#L130)</li>
+  <ul><li>문제발생 : 카테고리를 선택하고 검색어를 입력하고 type과 페이징 처리까지 같이 하니 어는 순간 특정한 이벤트에 따른 페이지의 순환이 잘 되지 않았음. 검색, 클릭에 따른 원하는 멘토링 아이템이 제대로 나오지 않음.</li>
+  <li>해결 : pagaingcheck controller를 이용하여 현재 사용자가 어떤 카테고리를 클릭했는지, 텍스트를 입력했는지, 어떤 type을 골랐는지에 따라서 판단하여 각각 해당 controller에 보내주는 방식으로 해결하였음. [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoring.html#L130)</li></ul>
 </ul>
 
 </div>
