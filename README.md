@@ -286,7 +286,7 @@
   <ul><li>문제발생 : ajax controller을 이용해서 data를 Object의 형태로 받아오고 이 data들에서 우리가 쓸 column값들을 뽑아주는 작업이 제대로 되지 않았었음.</li>
   <li>해결 : 코드의 주석으로 대체하겠다.[해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/purchase/purchase.html#L192)</li></ul>
 </ul>
-4. 검색 기능(검색기능에 대한 더 자세한 트러블 슈팅은 [yyboom](https://github.com/yyboom/mogotco) 참고
+4. 검색 기능(검색기능에 대한 더 자세한 트러블 슈팅은 [yyboom](https://github.com/yyboom/mogotco) 참고)
 <ul>
 <li>문제 : 처음에 멘토링 상품이 있는 페이지를 볼 때 처음부터 특정 카테고리의 상품들이 보여지는 현상이 발생함.</li>
 <li>해결 : 전체 상품을 꺼내오는 query문을 작성해준 후 멘토링 리스트가 있는 페이지를 처음 들어갈때는 전체 상품이 배열되게끔 바꿔주었다. 이때 전체와 카테고리를 구분하는 변수로 [해결 코드](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoring.html#L130)</li>
