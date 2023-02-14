@@ -75,23 +75,35 @@
 ## 1. 로그인 및 회원가입 기능 
 ### 1.1 회원가입
 > 메인기능소개
-- [AJAX] 아이디 중복 확인 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L104)
-  - 화면에서 넘겨준 ID를 AjaxController에서 중복체크 후 결과값을 화면으로 넘겨줌.
-- [jQuery] 비밀번호 일치 여부 확인 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L26)
-  - keyup 함수를 사용해 타이핑이 시작할때부터 일치 여부를 체크함
-- 본인인증기능 (이메일)
-  - [JavaScript] 메일 정규식 검증, 유효시간 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L53)
-  - [AJAX] 메일주소를 Controller로 넘겨줌 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L70)
-  - [JavaMailSender] 메일 발송 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/UserController.java#L164)
-> 실제 작동 화면
+- 아이디 중복 확인
+    - [JavaScript] register.html [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L37)
+    - AjaxController.java [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/AjaxController.java#L104)
+
+![아이디 중복 확인](https://user-images.githubusercontent.com/111735748/218775070-78503f77-da69-4878-98b6-df629045ce3e.png)
+- 비밀번호 일치 여부 확인
+    - [JavaScript] register.html [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L26)
+
+![비밀번호 일치 여부 확인](https://user-images.githubusercontent.com/111735748/218775443-6fc26799-b12d-46f0-908f-11c9ade0c23f.png)
+- 메일 인증 기능 (주요 기능)
+
+![이메일 정규식, 인증번호](https://user-images.githubusercontent.com/111735748/218778595-1f4618ce-15e5-4aab-b6d6-f886b685ea78.png)
+![인증번호 일치 여부 확인](https://user-images.githubusercontent.com/111735748/218789829-1f6a8e1c-83fc-4fe0-ae22-5a571ab3660f.png)
+  - [JavaScript] register.html (정규식 검사) [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L53)
+  - [JavaScript] register.html (인증번호 발송) [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L70)
+  - [JavaScript] register.html (인증번호 일치 여부 확인) [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/register.html#L104)
+  - UserController.java [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/UserController.java#L162)
+  
+> 주요 기능 실제 작동 화면
 - 메일 인증 기능
 ![이메일인증](https://user-images.githubusercontent.com/111735748/207772832-fb18b1a5-af24-4a57-97bf-89912e3797ff.gif)
 
 ### 1.2 소셜로그인
 > 메인기능소개
-- [소셜 로그인 API] 카카오,깃허브 API를 호출해 인가코드를 SNS 서버로부터 받아옴 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/login.html#L103)
-- [KakaologinAPI Service] 인가코드로 Access Token을 받아오고, Access Token으로 다시 유저정보를 받아옴 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/service/KakaologinAPI.java#L19)
-- [SNSLoginController] Service가 받아온 정보를 가져와서 로그인 처리 [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/SNSLoginController.java#L34)
+
+![소셜로그인](https://user-images.githubusercontent.com/111735748/218779139-2b6a532b-3832-44de-a485-c4c82efb8fb2.png)
+- [소셜 로그인 API] login.html [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/user/login.html#L103)
+- KakaologinAPI.java [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/service/KakaologinAPI.java#L19)
+- SNSLoginController.java [📌코드 확인](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/SNSLoginController.java#L34)
 > 실제 작동 화면
 <img src="https://user-images.githubusercontent.com/111735748/207778285-825d5081-c64d-45d1-97b1-7f07f90bba96.gif" width="80%">
 
