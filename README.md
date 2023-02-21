@@ -213,7 +213,7 @@
 
 ### 6.2 Kakao i connect API를 사용한 화상회의 멘토링 진행<br>
 > 화상회의 멘토링 진행 
-- 카카오에서 제공해주는 API의 자바스크립트에서 룸id가 생성되는 코드에 해당 멘토링의 멘토링 옵션에 들어가있는 각각의 시간의 고유한 멘토링옵션 아이디값을 컨트롤러에서 데이터를 받아와 넣어주면 해당 시간의 고유의 룸이 생성되어 해당 멘토링의 시간을 구매한 멘티만이 멘토링에 참여할 수 있도록 진행됩니다.<br><br>[📌MOGOTCO 멘토링 서비스 페이지 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringstart.html#L206)<br> [📌해당 Controller  코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L706)<br><br>
+- 카카오에서 제공해주는 API의 코드에 룸id가 생성되는 코드에 해당 멘토링의 멘토링 옵션에 들어가있는 각각의 시간의 고유한 멘토링옵션 아이디값을 컨트롤러에서 데이터를 받아와 넣어주면 해당 시간의 고유의 룸이 생성되어 해당 멘토링의 시간을 구매한 멘티만이 멘토링에 참여할 수 있도록 진행됩니다.<br><br>[📌MOGOTCO 멘토링 서비스 페이지 코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/resources/templates/mentoring/mentoringstart.html#L206)<br> [📌해당 Controller  코드 바로가기](https://github.com/finalTeam3/mogotco/blob/master/src/main/java/com/mogotco/controller/MentoringController.java#L706)<br><br>
 - 멘토링 시작 버튼을 클릭하여 상대방과 서로 화상채팅을 할 수 있고 멘토링 종료 버튼을 클릭하여 화상채팅을 종료할 수 있습니다.<br><br>
 <img src="https://user-images.githubusercontent.com/80161307/207506925-4f7e3e58-5a49-43d8-ba4f-1d29f5eb2591.gif" width="500" height="450"></img><br><br>
 
